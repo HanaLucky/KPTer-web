@@ -1,0 +1,14 @@
+.facebook {
+  border: solid #EEF3F6 20px;
+  border-radius: 8px;
+  max-width: 540px;
+  margin: auto;
+}
+.li-center {
+  display: inline-block;
+  margin:0 auto;
+  text-align:left;
+}
+#kpter-description {
+  background-color: rgba(0,0,0,0.4);
+}
