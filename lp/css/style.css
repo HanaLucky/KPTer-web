@@ -10,5 +10,7 @@
   text-align:left;
 }
 #kpter-description {
+  z-index: 2;
+  content: "";
   background-color: rgba(0,0,0,0.4);
 }
