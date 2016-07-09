@@ -1,3 +1,4 @@
+
 (function($) {
     "use strict"; // Start of use strict
 
@@ -44,6 +45,11 @@
         scale: 0.3,
         distance: '0px'
     }, 300);
+    sr.reveal('.sr-text', {
+        origin: 'bottom',
+        duration: 1000,
+        delay: 200
+    }, 100);
 
     // Initialize and Configure Magnific Popup Lightbox Plugin
     $('.popup-gallery').magnificPopup({
