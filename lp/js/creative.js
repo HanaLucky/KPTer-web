@@ -45,16 +45,22 @@
         scale: 0.3,
         distance: '0px'
     }, 300);
-    sr.reveal('.sr-text', {
+    sr.reveal('.sr-about-kpter-imgs', {
+        origin: 'top',
+        duration: 1000,
+        delay: 200
+    }, 600);
+    sr.reveal('.sr-about-kpter-text', {
+        origin: 'top',
+        duration: 1000,
+        delay: 200
+    }, 100);
+    sr.reveal('.sr-about-kpt-text', {
         origin: 'bottom',
         duration: 1000,
         delay: 200
     }, 100);
-    sr.reveal('.sr-text2', {
-        origin: 'bottom',
-        duration: 1000,
-        delay: 200
-    }, 100);
+    
     // Initialize and Configure Magnific Popup Lightbox Plugin
     $('.popup-gallery').magnificPopup({
         delegate: 'a',
