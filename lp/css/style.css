@@ -14,3 +14,9 @@
   content: "";
   background-color: rgba(0,0,0,0.4);
 }
+
+div.resizeimage {
+   max-width: 350px; /* 最大幅 */
+   min-width: 240px; /* 最小幅 */
+}
+div.resizeimage img { width: 100%; }
