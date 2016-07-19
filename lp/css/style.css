@@ -20,3 +20,7 @@ div.resizeimage {
    min-width: 240px; /* 最小幅 */
 }
 div.resizeimage img { width: 100%; }
+
+.fb_iframe_widget > span {
+  vertical-align: baseline !important;
+}
