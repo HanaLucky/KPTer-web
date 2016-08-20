@@ -1,0 +1,11 @@
+/Users/Kaori/.rbenv/versions/2.2.2/bin/ruby -r ./siteconf20160820-74332-uf25s9.rb extconf.rb
+creating Makefile
+
+make "DESTDIR=" clean
+
+make "DESTDIR="
+compiling websocket_mask.c
+linking shared-object websocket_mask.bundle
+
+make "DESTDIR=" install
+/usr/bin/install -c -m 0755 websocket_mask.bundle ./.gem.20160820-74332-ym2zgo
