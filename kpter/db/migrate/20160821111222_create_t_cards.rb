@@ -5,6 +5,7 @@ class CreateTCards < ActiveRecord::Migration[5.0]
       t.string :title
       t.string :detail
       t.string :status
+      t.references :user, foreing_key: true
       t.integer :x
       t.integer :y
       t.integer :order

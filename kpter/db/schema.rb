@@ -64,12 +64,14 @@ ActiveRecord::Schema.define(version: 20160821111234) do
     t.string   "title"
     t.string   "detail"
     t.string   "status"
+    t.integer  "user_id"
     t.integer  "x"
     t.integer  "y"
     t.integer  "order"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["board_id"], name: "index_t_cards_on_board_id", using: :btree
+    t.index ["user_id"], name: "index_t_cards_on_user_id", using: :btree
   end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
