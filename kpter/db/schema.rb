@@ -12,65 +12,67 @@
 
 ActiveRecord::Schema.define(version: 20160821111234) do
 
-  create_table "boards", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer  "community_id"
-    t.string   "title"
+  create_table "boards", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", comment: "ボード" do |t|
+    t.integer  "community_id", null: false, comment: "コミュニティID"
+    t.string   "name",         null: false, comment: "ボード名"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
     t.index ["community_id"], name: "index_boards_on_community_id", using: :btree
   end
 
-  create_table "communities", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+  create_table "communities", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", comment: "コミュニティ" do |t|
+    t.string   "name",       limit: 16, null: false, comment: "コミュニティ名"
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
   end
 
-  create_table "community_users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer  "community_id"
-    t.integer  "user_id"
+  create_table "community_users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", comment: "コミュニティ：ユーザー関連" do |t|
+    t.integer  "community_id", null: false, comment: "コミュニティID"
+    t.integer  "user_id",      null: false, comment: "ユーザーID"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
     t.index ["community_id"], name: "index_community_users_on_community_id", using: :btree
     t.index ["user_id"], name: "index_community_users_on_user_id", using: :btree
   end
 
-  create_table "kp_cards", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer  "board_id"
-    t.string   "title"
-    t.string   "detail"
-    t.string   "type"
-    t.integer  "x"
-    t.integer  "y"
-    t.integer  "order"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+  create_table "kp_cards", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", comment: "KPカード" do |t|
+    t.integer  "board_id",                           null: false, comment: "ボードID"
+    t.string   "title",                                           comment: "タイトル"
+    t.string   "detail",     limit: 512,                          comment: "詳細"
+    t.string   "card_type",  limit: 16,              null: false, comment: "カード種別¥tkeep, problem"
+    t.integer  "x",                      default: 0, null: false, comment: "X座標"
+    t.integer  "y",                      default: 0, null: false, comment: "Y座標"
+    t.integer  "order",                  default: 0,              comment: "重ね順"
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
     t.index ["board_id"], name: "index_kp_cards_on_board_id", using: :btree
+    t.index ["card_type"], name: "index_kp_cards_on_card_type", using: :btree
   end
 
-  create_table "memos", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer  "board_id"
-    t.text     "contents",   limit: 65535
-    t.integer  "x"
-    t.integer  "y"
-    t.integer  "order"
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+  create_table "memos", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", comment: "メモ" do |t|
+    t.integer  "board_id",                             null: false, comment: "ボードID"
+    t.text     "contents",   limit: 65535,                          comment: "内容"
+    t.integer  "x",                        default: 0, null: false, comment: "X座標"
+    t.integer  "y",                        default: 0, null: false, comment: "Y座標"
+    t.integer  "order",                    default: 0,              comment: "重ね順"
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
     t.index ["board_id"], name: "index_memos_on_board_id", using: :btree
   end
 
-  create_table "t_cards", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer  "board_id"
-    t.string   "title"
-    t.string   "detail"
-    t.string   "status"
-    t.integer  "user_id"
-    t.integer  "x"
-    t.integer  "y"
-    t.integer  "order"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+  create_table "t_cards", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", comment: "Tカード" do |t|
+    t.integer  "board_id",                                null: false, comment: "ボードID"
+    t.string   "title",                                                comment: "タイトル"
+    t.string   "detail",     limit: 512,                               comment: "詳細"
+    t.integer  "user_id",                                              comment: "担当者"
+    t.string   "status",     limit: 16,  default: "open", null: false, comment: "ステータス¥topen, done"
+    t.integer  "x",                      default: 0,      null: false, comment: "X座標"
+    t.integer  "y",                      default: 0,      null: false, comment: "Y座標"
+    t.integer  "order",                  default: 0,                   comment: "重ね順"
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
     t.index ["board_id"], name: "index_t_cards_on_board_id", using: :btree
+    t.index ["status"], name: "index_t_cards_on_status", using: :btree
     t.index ["user_id"], name: "index_t_cards_on_user_id", using: :btree
   end
 
