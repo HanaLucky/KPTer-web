@@ -61,17 +61,17 @@ ActiveRecord::Schema.define(version: 20160821111234) do
   end
 
   create_table "t_cards", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", comment: "Tカード" do |t|
-    t.integer  "board_id",                                 null: false, comment: "ボードID"
-    t.string   "title",                                                 comment: "タイトル"
-    t.string   "detail",      limit: 512,                               comment: "詳細"
-    t.integer  "user_id",                                               comment: "担当者"
-    t.date     "deadline_on",                                           comment: "期限"
-    t.string   "status",      limit: 16,  default: "open", null: false, comment: "ステータス¥topen, done"
-    t.integer  "x",                       default: 0,      null: false, comment: "X座標"
-    t.integer  "y",                       default: 0,      null: false, comment: "Y座標"
-    t.integer  "order",                   default: 0,                   comment: "重ね順"
-    t.datetime "created_at",                               null: false
-    t.datetime "updated_at",                               null: false
+    t.integer  "board_id",                                null: false, comment: "ボードID"
+    t.string   "title",                                                comment: "タイトル"
+    t.string   "detail",     limit: 512,                               comment: "詳細"
+    t.integer  "user_id",                                              comment: "担当者"
+    t.date     "deadline",                                             comment: "期限"
+    t.string   "status",     limit: 16,  default: "open", null: false, comment: "ステータス¥topen, done"
+    t.integer  "x",                      default: 0,      null: false, comment: "X 座標"
+    t.integer  "y",                      default: 0,      null: false, comment: "Y座標"
+    t.integer  "order",                  default: 0,                   comment: "重ね順"
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
     t.index ["board_id"], name: "index_t_cards_on_board_id", using: :btree
     t.index ["status"], name: "index_t_cards_on_status", using: :btree
     t.index ["user_id"], name: "index_t_cards_on_user_id", using: :btree
