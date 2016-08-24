@@ -67,7 +67,7 @@ ActiveRecord::Schema.define(version: 20160821111234) do
     t.integer  "user_id",                                              comment: "担当者"
     t.date     "deadline",                                             comment: "期限"
     t.string   "status",     limit: 16,  default: "open", null: false, comment: "ステータス¥topen, done"
-    t.integer  "x",                      default: 0,      null: false, comment: "X 座標"
+    t.integer  "x",                      default: 0,      null: false, comment: "X座標"
     t.integer  "y",                      default: 0,      null: false, comment: "Y座標"
     t.integer  "order",                  default: 0,                   comment: "重ね順"
     t.datetime "created_at",                              null: false
