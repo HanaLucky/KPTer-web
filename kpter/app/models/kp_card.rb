@@ -1,4 +1,4 @@
 class KpCard < ApplicationRecord
-  enum card_type: { keep: "keep", problem: "problem" }
+  enum card_type: { keep: "Keep", problem: "Problem" }
   belongs_to :board
 end

@@ -1,4 +1,4 @@
 class TCard < ApplicationRecord
-  enum status: { open: "open", done: "done" }
+  enum status: { open: "Open", closed: "Closed" }
   belongs_to :board
 end
