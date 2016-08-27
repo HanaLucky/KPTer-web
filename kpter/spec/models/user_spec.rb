@@ -44,7 +44,10 @@ RSpec.describe User, type: :model do
       it "OpenなstatusのTCardが取得できること" do
       end
 
-      it "TCardの期限日昇順でBoardが取得できること" do
+      it "期限日昇順でTCardが取得できること" do
+      end
+
+      it "id昇順でTCardが取得できること" do
       end
 
     end
@@ -69,21 +72,10 @@ RSpec.describe User, type: :model do
       it "CloseなstatusのTCardが取得できること" do
       end
 
-      it "TCardの期限日降順でBoardが取得できること" do
+      it "期限日昇順でTCardが取得できること" do
       end
 
-    end
-
-  end
-
-  describe "Userに紐付いた画像を登録／変更する。" do
-
-    context "正常系" do
-
-      it "画像が存在すること" do
-      end
-
-      it "登録した画像であること" do
+      it "id昇順でTCardが取得できること" do
       end
 
     end
