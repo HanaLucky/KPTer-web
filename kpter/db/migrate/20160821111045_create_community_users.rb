@@ -6,5 +6,6 @@ class CreateCommunityUsers < ActiveRecord::Migration[5.0]
 
       t.timestamps
     end
+    add_index :community_users, [:community_id, :user_id], unique: true
   end
 end
