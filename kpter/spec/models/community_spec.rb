@@ -5,40 +5,29 @@ require 'rails_helper'
 # コミュニティ内のユーザー数は、コミュニティ内のユーザーを全員取得した結果の件数とし、別途メソッドは作成しない。
 # TODO: コミュニティ招待用URLの発行の実現方法
 RSpec.describe Community, type: :model do
-  describe "コミュニティを新規に作成する" do
-    it "登録されること" do
-    end
-  end
-
-  describe "コミュニティを更新する" do
-    it "更新されること" do
-    end
-  end
-
-  describe "コミュニティを削除する" do
-    it "削除されること" do
-    end
-  end
-
   describe "コミュニティ内にボードをつくる" do
-    it "コミュニティIDに紐づくボードが登録されること" do
+    it "作成されたボードのコミュニティIDが引数に渡したものと一致すること" do
     end
   end
 
-  describe "コミュニティ内のボードを全て取得する" do
-    it "コミュニティIDに紐づくボードが全て取得できること" do
+  describe "コミュニティに関連する情報を取得する" do
+    it "指定したコミュニティIDに紐づくコミュニティが取得できること" do
     end
-  end
-
-  describe "コミュニティ内のt_cardsを全て取得する" do
     it "コミュニティに紐づくボードが取得できること" do
     end
-    it "ボードに紐づくt_cardsが全て取得できること" do
+    it "ボードに紐づくt_cardsが取得できること" do
+    end
+  end
+
+  describe "コミュニティに紐づくt_cardsを取得する" do
+    it "t_cardsの数がinputで入れたデータの数に一致すること" do
     end
   end
 
   describe "コミュニティ内にユーザーを参加させる" do
-    it "コミュニティID, ユーザーIDに紐づくコミュニティ・ユーザー関連テーブルが登録されること" do
+    it "コミュニティ・ユーザー関連テーブルに登録したコミュニティIDが引数に指定したIDと一致すること" do
+    end
+    it "コミュニティ・ユーザー関連テーブルに登録したユーザーIDが引数に指定したIDと一致すること" do
     end
   end
 
@@ -46,6 +35,7 @@ RSpec.describe Community, type: :model do
     it "コミュニティID, ユーザーIDに紐づくコミュニティ・ユーザー関連テーブルが削除されること" do
     end
   end
+
   describe "コミュニティ内のユーザーを全員取得する" do
     it "コミュニティIDに紐づくコミュニティ・ユーザー関連テーブルが取得できること" do
     end
