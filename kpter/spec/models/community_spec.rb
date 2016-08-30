@@ -11,45 +11,18 @@ RSpec.describe Community, type: :model do
   end
 
   describe "コミュニティに関連する情報を取得する" do
-    context "コミュニティ、ボード、Tカードが存在する場合" do
-      it "指定したコミュニティIDに紐づくコミュニティが取得できること" do
-      end
-      it "コミュニティに紐づくボードが取得できること" do
-      end
-      it "ボードに紐づくt_cardsが取得できること" do
-      end
+    it "指定したコミュニティIDに紐づくコミュニティが取得できること" do
     end
-    context "コミュニティ、ボードが存在し、Tカードが存在しない場合" do
-      it "指定したコミュニティIDに紐づくコミュニティが取得できること" do
-      end
-      it "コミュニティに紐づくボードが取得できること" do
-      end
-      it "ボードに紐づくt_cardsがnilであること" do
-      end
+    it "コミュニティに紐づくボードが取得できること" do
     end
-    context "コミュニティが存在し、ボード、Tカードが存在しない場合" do
-      it "指定したコミュニティIDに紐づくコミュニティが取得できること" do
-      end
-      it "コミュニティに紐づくボードがnilであること" do
-      end
-    end
-    context "コミュニティ、ボード、Tカードが存在しない場合" do
-      it "コミュニティがnilであること" do
-      end
+    it "ボードに紐づくt_cardsが取得できること" do
     end
   end
 
   describe "コミュニティに紐づくt_cardsを取得する" do
-    context "Tカードが１つ以上存在する場合" do
-      it "t_cardsの数がinputで入れたデータの数に一致すること" do
-      end
-    end
-    context "Tカードが存在しない場合" do
-      it "nilが返却されること" do
-      end
+    it "t_cardsの数がinputで入れたデータの数に一致すること" do
     end
   end
-
 
   describe "コミュニティ内に既に参加済みかどうかチェックする" do
     context "参加済みの場合" do
@@ -72,7 +45,7 @@ RSpec.describe Community, type: :model do
     context "既に参加している場合" do
       it "エラーメッセージが設定されること" do
       end
-      it "コミュニティ・ユーザー関連テーブルに登録したユーザーIDが存在しないこと" do
+      it "コミュニティ・ユーザー関連テーブルに登録されていないこと" do
       end
     end
   end
@@ -84,15 +57,9 @@ RSpec.describe Community, type: :model do
   end
 
   describe "コミュニティ内のユーザーを全員取得する" do
-    context "コミュニティ内にユーザーが１人以上いる場合" do
-      it "コミュニティIDに紐づくコミュニティ・ユーザー関連テーブルが取得できること" do
-      end
-      it "コミュニティ・ユーザー関連テーブルのユーザーIDに紐づくユーザーが取得できること" do
-      end
+    it "コミュニティIDに紐づくコミュニティ・ユーザー関連テーブルが取得できること" do
     end
-    context "コミュニティ内にユーザーが存在しない場合" do
-      it "nilが返却されること" do
-      end
+    it "コミュニティ・ユーザー関連テーブルのユーザーIDに紐づくユーザーが取得できること" do
     end
   end
 end
