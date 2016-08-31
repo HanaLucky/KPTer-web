@@ -31,6 +31,7 @@ ActiveRecord::Schema.define(version: 20160821111234) do
     t.integer  "user_id",      null: false, comment: "ユーザーID"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+    t.index ["community_id", "user_id"], name: "index_community_users_on_community_id_and_user_id", unique: true, using: :btree
     t.index ["community_id"], name: "index_community_users_on_community_id", using: :btree
     t.index ["user_id"], name: "index_community_users_on_user_id", using: :btree
   end
