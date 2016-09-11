@@ -5,22 +5,52 @@ require 'rails_helper'
 # コミュニティ内のユーザー数は、コミュニティ内のユーザーを全員取得した結果の件数とし、別途メソッドは作成しない。
 # TODO: コミュニティ招待用URLの発行の実現方法
 RSpec.describe Community, type: :model do
-  describe "コミュニティ内にボードをつくる" do
-    it "作成されたボードのコミュニティIDが引数に渡したものと一致すること" do
+  before :all do
+    # CommunityモデルのSpecで利用するテストデーター作成
+    # データー概要
+    # 1.コミュニティにBOARD_NUM個のボードを作成。
+    # 2. それぞれのボードにTCARD_NUM個のt_cardを作成。
+    # 3コミュニティが複数のパターンを想定した検証ではないので、コミュニティは１個
+    BOARD_NUM = 3
+    TCARD_NUM = 2
+
+    @community = Community.create(name: "community name")
+    for i in 1..BOARD_NUM do
+      @board = Board.create(name: "board_" +i.to_s, community_id: @community.id)
+      for j in 1..TCARD_NUM do
+        TCard.create(
+          board_id: @board.id,
+          title: "TCard_" + j.to_s,
+          status: TCard.statuses[:open],
+          deadline: "2016/9/20",
+          x: 120,
+          y: 240,
+          order: j
+        )
+      end
     end
   end
 
-  describe "コミュニティに関連する情報を取得する" do
-    it "指定したコミュニティIDに紐づくコミュニティが取得できること" do
-    end
+  describe "コミュニティ内のボードを取得する" do
     it "コミュニティに紐づくボードが取得できること" do
+      @boards = Community.find_boards(@community.id)
+      expect(@boards).to be_present
     end
-    it "ボードに紐づくt_cardsが取得できること" do
+    it "コミュニティに紐づくボードの数が一致すること" do
+      @boards = Community.find_boards(@community.id)
+      expect(@boards.length).to eq(BOARD_NUM)
     end
   end
 
   describe "コミュニティに紐づくt_cardsを取得する" do
-    it "t_cardsの数がinputで入れたデータの数に一致すること" do
+    before :all do
+      @t_cards = Community.find_t_cards(@community.id)
+    end
+    it "コミュニティに紐づくt_cardsが取得できること" do
+      expect(@t_cards).to be_present
+    end
+    it "コミュニティに紐づくt_cardsが取得できること" do
+      expect(@t_cards).to eq(TCARD_NUM)
     end
   end
 
