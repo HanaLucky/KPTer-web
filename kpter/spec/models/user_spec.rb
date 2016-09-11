@@ -8,7 +8,7 @@ RSpec.describe User, type: :model do
 
       before do
         @user = User.find(1)
-        @communities = @user.find_communitys
+        @communities = @user.find_communities
       end
 
       it "Userに紐付いたCommunityが取得できること" do
