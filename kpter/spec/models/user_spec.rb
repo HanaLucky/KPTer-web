@@ -6,16 +6,17 @@ RSpec.describe User, type: :model do
 
     context "正常系" do
 
-      it "Userが取得できること" do
+      before do
+        @user = User.find(1)
+        @communities = @user.find_communities
       end
 
-      it "Userに関連するCommunityUserが取得できること" do
-      end
-
-      it "CommunityUserに関連するCommunityが取得できること" do
+      it "Userに紐付いたCommunityが取得できること" do
+        expect(@communities).to be_present
       end
 
       it "CommunityのIDの降順で取得できること" do
+        expect(@communities).to be_desc = -> (community) { community.id }
       end
 
     end
@@ -26,56 +27,46 @@ RSpec.describe User, type: :model do
 
     context "引数なし" do
 
-      it "Userが取得できること" do
+      before do
+        @user = User.find(1)
+        @t_cards = @user.find_tcards
       end
 
-      it "Userに関連するCommunityUserが取得できること" do
-      end
-
-      it "CommunityUserに関連するCommunityが取得できること" do
-      end
-
-      it "Community関連するBoardが取得できること" do
-      end
-
-      it "Board関連するTCardが取得できること" do
+      it "Userに紐づくTCardが取得できること" do
+        expect(@t_cards).to be_present
       end
 
       it "OpenなstatusのTCardが取得できること" do
+        expect(@t_cards).to be_all -> t_card {
+          t_card == "Open"
+        }
       end
 
       it "期限日昇順でTCardが取得できること" do
-      end
-
-      it "id昇順でTCardが取得できること" do
+        expect(@t_cards).to be_asc = -> (t_card) { t_card.deadline }
       end
 
     end
 
     context "引数両方" do
 
-      it "Userが取得できること" do
+      before do
+        @user = User.find(1)
+        @t_cards = @user.find_tcards
       end
 
-      it "Userに関連するCommunityUserが取得できること" do
-      end
-
-      it "CommunityUserに関連するCommunityが取得できること" do
-      end
-
-      it "Community関連するBoardが取得できること" do
-      end
-
-      it "Board関連するTCardが取得できること" do
+      it "Userに紐づくTCardが取得できること" do
+        expect(@t_cards).to be_present
       end
 
       it "CloseなstatusのTCardが取得できること" do
+        expect(@t_cards).to be_all -> t_card {
+          t_card == "Closed"
+        }
       end
 
       it "期限日昇順でTCardが取得できること" do
-      end
-
-      it "id昇順でTCardが取得できること" do
+        expect(@t_cards).to be_asc = -> (t_card) { t_card.deadline }
       end
 
     end
