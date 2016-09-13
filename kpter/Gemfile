@@ -24,7 +24,8 @@ gem 'jbuilder', '~> 2.5'
 # authorize user
 gem 'devise'
 gem 'omniauth-twitter'
-
+# Enumerize. Read more: https://github.com/brainspec/enumerize
+gem 'enumerize'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
