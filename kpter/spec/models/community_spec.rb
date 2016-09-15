@@ -13,13 +13,12 @@ RSpec.describe Community, type: :model do
       for i in 1..BOARD_NUM do
         @board = Board.create(name: "board_#{i.to_s}", community_id: @community.id)
       end
+      @boards = Community.find_boards(@community.id)
     end
     it "コミュニティに紐づくボードが取得できること" do
-      @boards = Community.find_boards(@community.id)
       expect(@boards).to be_present
     end
     it "コミュニティに紐づくボードの数が一致すること" do
-      @boards = Community.find_boards(@community.id)
       expect(@boards.length).to eq(BOARD_NUM)
     end
   end
@@ -114,11 +113,11 @@ RSpec.describe Community, type: :model do
       @user = FactoryGirl.create(:user)
       # コミュニティに参加させる
       @community.join(@user)
-    end
-    it "コミュニティID, ユーザーIDに紐づくコミュニティ・ユーザー関連テーブルが削除されること" do
       # 脱退する
       @community.withdrawal(@user)
       count = CommunityUser.where(community_id: @community.id, user_id: @user.id).count
+    end
+    it "コミュニティID, ユーザーIDに紐づくコミュニティ・ユーザー関連テーブルが削除されること" do
       expect(count).to eq(0)
     end
     # 既に除名済みかどうかのチェックは不要
