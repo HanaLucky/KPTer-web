@@ -1,4 +1,5 @@
 class KpCard < ApplicationRecord
-  enum card_type: { keep: "Keep", problem: "Problem" }
+  extend Enumerize
+  enumerize :card_type, in: [:keep, :problem]
   belongs_to :board
 end

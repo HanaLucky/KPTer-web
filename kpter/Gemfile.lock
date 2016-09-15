@@ -63,6 +63,8 @@ GEM
       responders
       warden (~> 1.2.3)
     diff-lcs (1.2.5)
+    enumerize (2.0.0)
+      activesupport (>= 3.2)
     erubis (2.7.0)
     execjs (2.7.0)
     factory_girl (4.7.0)
@@ -234,6 +236,7 @@ DEPENDENCIES
   byebug
   coffee-rails (~> 4.2)
   devise
+  enumerize
   factory_girl_rails
   faker
   jbuilder (~> 2.5)
@@ -257,4 +260,4 @@ DEPENDENCIES
   web-console
 
 BUNDLED WITH
-   1.12.5
+   1.13.0
