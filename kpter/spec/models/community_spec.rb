@@ -38,7 +38,7 @@ RSpec.describe Community, type: :model do
           TCard.create(
             board_id: @board.id,
             title: "TCard_.#{j.to_s}",
-            status: TCard.statuses[:open],
+            status: TCard.status.open,
             deadline: "2016/9/20",
             x: 120,
             y: 240,
