@@ -41,6 +41,9 @@ GEM
     arel (7.1.1)
     bcrypt (3.1.11)
     builder (3.2.2)
+    bullet (5.4.0)
+      activesupport (>= 3.0.0)
+      uniform_notifier (~> 1.10.0)
     byebug (9.0.5)
     choice (0.2.0)
     coderay (1.1.1)
@@ -60,6 +63,8 @@ GEM
       responders
       warden (~> 1.2.3)
     diff-lcs (1.2.5)
+    enumerize (2.0.0)
+      activesupport (>= 3.2)
     erubis (2.7.0)
     execjs (2.7.0)
     factory_girl (4.7.0)
@@ -211,6 +216,7 @@ GEM
       thread_safe (~> 0.1)
     uglifier (3.0.1)
       execjs (>= 0.3.0, < 3)
+    uniform_notifier (1.10.0)
     warden (1.2.6)
       rack (>= 1.0)
     web-console (3.3.1)
@@ -226,9 +232,11 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  bullet
   byebug
   coffee-rails (~> 4.2)
   devise
+  enumerize
   factory_girl_rails
   faker
   jbuilder (~> 2.5)
@@ -252,4 +260,4 @@ DEPENDENCIES
   web-console
 
 BUNDLED WITH
-   1.12.5
+   1.13.0

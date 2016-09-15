@@ -21,3 +21,12 @@
 
 en:
   hello: "Hello world"
+  enumerize:
+    kp_card:
+      card_type:
+        keep: "Keep"
+        problem: "Problem"
+    t_card:
+      status:
+        open: "Open"
+        closed: "Closed"
