@@ -13,13 +13,13 @@ RSpec.describe Community, type: :model do
       for i in 1..BOARD_NUM do
         @board = Board.create(name: "board_#{i.to_s}", community_id: @community.id)
       end
-      @boards = Community.find_boards(@community.id)
+      @boards = @community.find_boards
     end
     it "コミュニティに紐づくボードが取得できること" do
       expect(@boards).to be_present
     end
-    it "コミュニティに紐づくボードの数が一致すること" do
-      expect(@boards.length).to eq(BOARD_NUM)
+    it "作成された順であること(IDの降順)" do
+      expect(@boards).to be_desc -> (board) { board.id }
     end
   end
 
