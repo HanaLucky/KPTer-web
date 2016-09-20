@@ -115,7 +115,7 @@ RSpec.describe Community, type: :model do
       expect(@closed_tcards).to be_asc -> (t_card) { t_card.deadline }
     end
   end
-  
+
   describe "コミュニティ内に既に参加済みかどうかチェックする" do
     before :all do
       # コミュニティに１ユーザー参加させる
@@ -170,18 +170,19 @@ RSpec.describe Community, type: :model do
     end
   end
 
-  describe "コミュニティ内からユーザーが脱退する" do
+  describe "コミュニティ内からユーザーを脱退させる" do
     before :all do
       @community = Community.create(name: "community name")
       @user = FactoryGirl.create(:user)
       # コミュニティに参加させる
-      @community.join(@user)
+      @community_user = CommunityUser.create(community_id: @community.id, user_id: @user.id)
       # 脱退する
-      @community.withdrawal(@user)
-      count = CommunityUser.where(community_id: @community.id, user_id: @user.id).count
+      @community.withdraw(@user)
+
+      @community_user = CommunityUser.where(community_id: @community.id, user_id: @user.id)
     end
     it "コミュニティID, ユーザーIDに紐づくコミュニティ・ユーザー関連テーブルが削除されること" do
-      expect(count).to eq(0)
+      expect(@community_user.empty?).to be true
     end
     # 既に除名済みかどうかのチェックは不要
   end

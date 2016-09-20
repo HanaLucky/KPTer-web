@@ -20,4 +20,9 @@ class Community < ApplicationRecord
     .sort_by!{ |v| [v[:deadline], v[:id]]}    # 期限日の近い順 (同じ期限日内ではIDの昇順)
   end
 
+  def withdraw(user)
+    @community_user = CommunityUser.find_by(community_id: self.id, user_id: user.id)
+    @community_user.destroy
+  end
+  
 end
