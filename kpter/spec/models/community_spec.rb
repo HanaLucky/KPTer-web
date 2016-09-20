@@ -25,34 +25,97 @@ RSpec.describe Community, type: :model do
 
   describe "コミュニティに紐づくt_cardsを取得する" do
     before :all do
-      # 1コミュニティにボード３つ。それぞれのボードに３つのt_cardを作成
-      BOARD_NUM = 3.freeze
-      TCARD_NUM = 2.freeze
 
       @community = Community.create(name: "community name")
 
-      for i in 1..BOARD_NUM do
-        @board = Board.create(name: "board_#{i.to_s}", community_id: @community.id)
-        for j in 1..TCARD_NUM do
-          TCard.create(
-            board_id: @board.id,
-            title: "TCard_.#{j.to_s}",
-            status: TCard.status.open,
-            deadline: "2016/9/20",
-            x: 120,
-            y: 240,
-            order: j
-          )
-        end
-      end
-      @t_cards = Community.find_tcards(@community.id)
+      @board1 = Board.create(name: "board_1", community_id: @community.id)
+      @t_card1_1 = TCard.create(
+        board_id: @board1.id,
+        title: "TCard_1_1",
+        status: TCard.status.open,
+        deadline: "2016/9/20",
+        x: 120,
+        y: 240,
+        order: 1
+      )
+      @t_card1_2 = TCard.create(
+        board_id: @board1.id,
+        title: "TCard_1_2",
+        status: TCard.status.closed,
+        deadline: "2016/9/22",
+        x: 120,
+        y: 240,
+        order: 1
+      )
+      @board2 = Board.create(name: "board_2", community_id: @community.id)
+      @t_card2_1 = TCard.create(
+        board_id: @board2.id,
+        title: "TCard_2_1",
+        status: TCard.status.open,
+        deadline: "2016/1/23",
+        x: 120,
+        y: 240,
+        order: 1
+      )
+      @t_card2_2 = TCard.create(
+        board_id: @board2.id,
+        title: "TCard_2_2",
+        status: TCard.status.open,
+        deadline: "2016/12/22",
+        x: 120,
+        y: 240,
+        order: 2
+      )
+
+      @board3 = Board.create(name: "board_3", community_id: @community.id)
+      @t_card3_1 = TCard.create(
+        board_id: @board3.id,
+        title: "TCard_3_1",
+        status: TCard.status.open,
+        deadline: "2016/9/20",
+        x: 120,
+        y: 240,
+        order: 1
+      )
+      @t_card3_2 = TCard.create(
+        board_id: @board3.id,
+        title: "TCard_3_2",
+        status: TCard.status.open,
+        deadline: "2016/9/23",
+        x: 120,
+        y: 240,
+        order: 2
+      )
+      @t_card3_3 = TCard.create(
+        board_id: @board3.id,
+        title: "TCard_3_3",
+        status: TCard.status.closed,
+        deadline: "2016/9/29",
+        x: 120,
+        y: 240,
+        order: 3
+      )
+      @open_tcards = @community.find_tcards
+      @closed_tcards = @community.find_tcards(TCard.status.closed)
     end
-    it "コミュニティに紐づくt_cardsが取得できること" do
-      expect(@t_cards).to be_present
-      expect(@t_cards.length).to eq(TCARD_NUM)
+
+    it "コミュニティ内の全ボードから、Openのカードのみ取得できること" do
+      expect(@open_tcards).to be_all -> t_card {
+        t_card.status == TCard.status.open
+      }
+    end
+    it "コミュニティ内の全ボードから、Closedのカードのみ取得できること" do
+      expect(@closed_tcards).to be_all -> t_card {
+        t_card.status == TCard.status.closed
+      }
+    end
+
+    it "並び順が期限日の昇順であること" do
+      expect(@open_tcards).to be_asc -> (t_card) { t_card.deadline }
+      expect(@closed_tcards).to be_asc -> (t_card) { t_card.deadline }
     end
   end
-
+  
   describe "コミュニティ内に既に参加済みかどうかチェックする" do
     before :all do
       # コミュニティに１ユーザー参加させる
