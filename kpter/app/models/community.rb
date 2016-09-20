@@ -24,5 +24,14 @@ class Community < ApplicationRecord
     @community_user = CommunityUser.find_by(community_id: self.id, user_id: user.id)
     @community_user.destroy
   end
-  
+
+  def find_users
+    Community
+    .joins(:community_users => :user)
+    .includes(:community_users => :user)
+    .where(id: self.id)
+    .map{ |community| community.community_users}.flatten
+    .sort_by!{ |v| v[:id] }    # 参加した順(IDの昇順)
+    .map{ |cu| cu.user}
+  end
 end
