@@ -116,60 +116,6 @@ RSpec.describe Community, type: :model do
     end
   end
 
-  describe "コミュニティ内に既に参加済みかどうかチェックする" do
-    before :all do
-      # コミュニティに１ユーザー参加させる
-      @community = Community.create(name: "community name")
-      @joined_user = FactoryGirl.create(:user)
-      @community_user = CommunityUser.create(
-        community_id: @community.id,
-        user_id: @joined_user.id
-      )
-      # コミュニティに属さないユーザを作成する
-      @unjoined_user = FactoryGirl.create(:user)
-    end
-    context "参加済みの場合" do
-      it "trueが返却されること" do
-        expect(@community.joined(@joined_user)).to be_true
-      end
-    end
-    context "参加していない場合" do
-      it "falseが返却されること" do
-        expect(@community.joined(@unjoined_user)).to be_false
-      end
-    end
-  end
-
-  describe "コミュニティ内にユーザーを参加させる" do
-    before :all do
-      @community = Community.create(name: "community name")
-      @user = FactoryGirl.create(:user)
-      # コミュニティに参加させる
-      @community.join(@user)
-      @community_user = CommunityUser.find_by(community_id: @community.id, user_id: @user.id)
-    end
-    context "まだ参加していないコミュニティに参加する場合" do
-      it "コミュニティ・ユーザー関連テーブルに登録したコミュニティIDが引数に指定したIDと一致すること" do
-        expect(@community_user).to be_present
-        expect(@community_user.community_id).to eq(@community.id)
-      end
-      it "コミュニティ・ユーザー関連テーブルに登録したユーザーIDが引数に指定したIDと一致すること" do
-        expect(@community_user.user_id).to eq(@user.id)
-      end
-    end
-    context "既に参加しているコミュニティに参加する場合" do
-      it "エラーメッセージが設定されること" do
-        # 再度、同じコミュニティに参加させてエラーを発生させる
-        @community.join(@user)
-        @community.should have(1).errors_on(:user_id)
-      end
-      it "コミュニティ・ユーザー関連テーブルに２重に登録されていないこと" do
-        count = CommunityUser.where(community_id: @community.id, user_id: @user.id).count
-        expect(count).to eq(1)
-      end
-    end
-  end
-
   describe "コミュニティ内からユーザーを脱退させる" do
     before :all do
       @community = Community.create(name: "community name")
