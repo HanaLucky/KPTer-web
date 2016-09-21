@@ -22,6 +22,9 @@ class Community < ApplicationRecord
 
   def withdraw(user)
     @community_user = CommunityUser.find_by(community_id: self.id, user_id: user.id)
+    if @community_user.nil? then
+      return
+    end
     @community_user.destroy
   end
 

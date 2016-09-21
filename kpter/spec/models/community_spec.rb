@@ -3,13 +3,12 @@ require 'rails_helper'
 # コミュニティ内のボード件数は、コミュニティ内のボードを全て取得した結果の件数とし、別途メソッドは作成しない。
 # コミュニティ内のTryカード件数は、コミュニティ内のt_cardsを全て取得した結果の件数とし、別途メソッドは作成しない。
 # コミュニティ内のユーザー数は、コミュニティ内のユーザーを全員取得した結果の件数とし、別途メソッドは作成しない。
-# TODO: コミュニティ招待用URLの発行の実現方法
 RSpec.describe Community, type: :model do
   describe "コミュニティ内のボードを取得する" do
     before :all do
       # １コミュニティにボード３つ作成
-      BOARD_NUM = 3.freeze
       @community = Community.create(name: "community name")
+      BOARD_NUM = 3.freeze
       for i in 1..BOARD_NUM do
         @board = Board.create(name: "board_#{i.to_s}", community_id: @community.id)
       end
@@ -124,13 +123,19 @@ RSpec.describe Community, type: :model do
       @community_user = CommunityUser.create(community_id: @community.id, user_id: @user.id)
       # 脱退する
       @community.withdraw(@user)
-
       @community_user = CommunityUser.where(community_id: @community.id, user_id: @user.id)
+
     end
-    it "コミュニティID, ユーザーIDに紐づくコミュニティ・ユーザー関連テーブルが削除されること" do
-      expect(@community_user.empty?).to be true
+    context "コミュニティに参加しているユーザーが退会する場合" do
+      it "コミュニティID, ユーザーIDに紐づくコミュニティ・ユーザー関連テーブルが削除されること" do
+        expect(@community_user.empty?).to be true
+      end
     end
-    # 既に除名済みかどうかのチェックは不要
+    context "コミュニティに参加していないユーザーが退会する場合" do
+      it "エラーが発生しないこと" do
+        @community.withdraw(@user)
+      end
+    end
   end
 
   describe "コミュニティ内のユーザーを全員取得する" do
