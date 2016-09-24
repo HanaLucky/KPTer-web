@@ -6,7 +6,7 @@ RSpec.describe User, type: :model do
 
     context "正常系" do
 
-      before do
+      before :all do
         @user = FactoryGirl.create(:user)
         @community = Community.create(
           name: "test_community"
@@ -40,7 +40,7 @@ RSpec.describe User, type: :model do
 
   describe "Userに紐付いたTCardを引数があれば、statusで絞込、期限でソートして取得します。" do
 
-    before do
+    before :all do
       @user = FactoryGirl.create(:user)
       @community = Community.create(
         name: "test_community"
@@ -93,8 +93,8 @@ RSpec.describe User, type: :model do
 
     context "引数なし" do
 
-      before do
-        @open_tcards = User.find_tcards_with_user_id(user_id: @user.id, status: TCard.status.open)
+      before :all do
+        @open_tcards = User.find_tcards_with_user_id(@user.id, TCard.status.open)
       end
 
       it "Userに紐づくTCardが取得できること" do
@@ -115,8 +115,8 @@ RSpec.describe User, type: :model do
 
     context "引数両方" do
 
-      before do
-        @closed_tcards = User.find_tcards_with_user_id(user_id: @user.id, status: TCard.status.closed)
+      before :all do
+        @closed_tcards = User.find_tcards_with_user_id(@user.id, TCard.status.closed)
       end
 
       it "Userに紐づくTCardが取得できること" do
@@ -131,6 +131,79 @@ RSpec.describe User, type: :model do
 
       it "期限日昇順でTCardが取得できること" do
         expect(@closed_tcards).to be_asc -> (t_card) { t_card.deadline }
+      end
+
+    end
+
+  end
+
+  describe "コミュニティ内に既に参加済みかどうかチェックする" do
+
+    before :all do
+      # コミュニティに１ユーザー参加させる
+      @community = Community.create(name: "community name")
+      @joining_user = FactoryGirl.create(:user)
+      @community_user = CommunityUser.create(
+        community_id: @community.id,
+        user_id: @joining_user.id
+      )
+      # コミュニティに属さないユーザを作成する
+      @unjoining_user = FactoryGirl.create(:user)
+    end
+
+    context "参加済みの場合" do
+
+      it "trueが返却されること" do
+        expect(@joining_user.joining?(@community)).to be_truthy
+      end
+
+    end
+
+    context "参加していない場合" do
+
+      it "falseが返却されること" do
+        expect(@unjoining_user.joining?(@community)).to be_falsey
+      end
+
+    end
+
+  end
+
+  describe "ユーザーが特定のコミュニティに参加する" do
+
+    before :all do
+      @community = Community.create(name: "community name")
+      @user = FactoryGirl.create(:user)
+      # コミュニティに参加させる
+      @user.join_in(@community)
+      @community_user = CommunityUser.find_by(community_id: @community.id, user_id: @user.id)
+    end
+
+    context "まだ参加していないコミュニティに参加する場合" do
+
+      it "コミュニティ・ユーザー関連テーブルに登録したコミュニティIDが引数に指定したIDと一致すること" do
+        expect(@community_user).to be_present
+        expect(@community_user.community_id).to eq(@community.id)
+      end
+
+      it "コミュニティ・ユーザー関連テーブルに登録したユーザーIDが引数に指定したIDと一致すること" do
+        expect(@community_user.user_id).to eq(@user.id)
+      end
+
+    end
+
+    context "既に参加しているコミュニティに参加する場合" do
+
+      it "エラーメッセージが設定されること" do
+        # 再度、同じコミュニティに参加させてエラーを発生させる
+        cu = @user.join_in(@community)
+        cu.valid?
+        expect(cu.errors[:user_id]).to include(I18n.t('activerecord.errors.models.user.attributes.user_id.taken'))
+      end
+
+      it "コミュニティ・ユーザー関連テーブルに２重に登録されていないこと" do
+        count = CommunityUser.where(community_id: @community.id, user_id: @user.id).count
+        expect(count).to eq(1)
       end
 
     end
