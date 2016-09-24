@@ -140,38 +140,30 @@ RSpec.describe Community, type: :model do
 
   describe "コミュニティ内のユーザーを全員取得する" do
     before :all do
-      @community = Community.create(name: "community name")
-      # user_1, 2, 3, 4, 5があらわれた
-      @user_1 = FactoryGirl.create(:user)
-      @user_2 = FactoryGirl.create(:user)
-      @user_3 = FactoryGirl.create(:user)
-      @user_4 = FactoryGirl.create(:user)
-      @user_5 = FactoryGirl.create(:user)
+      # community_1に5ユーザーがあらわれた
+      @community_1 = Community.create(name: "community_1")
+      @user_1_1 = FactoryGirl.create(:user)
+      @user_1_2 = FactoryGirl.create(:user)
+      @user_1_3 = FactoryGirl.create(:user)
+      @user_1_4 = FactoryGirl.create(:user)
+      @user_1_5 = FactoryGirl.create(:user)
+      # 4, 2, 1, 5, 3の順でコミュニティに参加した
+      @users = [@user_1_4, @user_1_2, @user_1_1, @user_1_5, @user_1_3]
+      @users.each{ |user|
+        CommunityUser.create(community_id: @community_1.id, user_id: user.id)
+      }
 
-      # user_4, 2, 1, 5, 3の順でコミュニティに参加した
-      CommunityUser.create(community_id: @community.id, user_id: @user_4.id)
-      CommunityUser.create(community_id: @community.id, user_id: @user_2.id)
-      CommunityUser.create(community_id: @community.id, user_id: @user_1.id)
-      CommunityUser.create(community_id: @community.id, user_id: @user_5.id)
-      CommunityUser.create(community_id: @community.id, user_id: @user_3.id)
+      # community_2に1ユーザーがあらわれた（ダミーデータ）
+      @community_2 = Community.create(name: "community_2")
+      @user_2_1 = FactoryGirl.create(:user)
+      CommunityUser.create(community_id: @community_2.id, user_id: @user_2_1.id)
 
-      @joining_users = @community.find_users
+      # community_1のユーザーを全員取得する
+      @joining_users = @community_1.find_users
 
     end
-    it "コミュニティ内のユーザーが全員取得できていること" do
-      expect(@joining_users.count()).to eq(5)
-      expect(@joining_users.find(id: @user_1.id)).to be_present
-      expect(@joining_users.find(id: @user_2.id)).to be_present
-      expect(@joining_users.find(id: @user_3.id)).to be_present
-      expect(@joining_users.find(id: @user_4.id)).to be_present
-      expect(@joining_users.find(id: @user_5.id)).to be_present
-    end
-    it "並び順が参加した順(IDの昇順)になっている" do
-      expect(@joining_users[0].id).to eq(@user_4.id)
-      expect(@joining_users[1].id).to eq(@user_2.id)
-      expect(@joining_users[2].id).to eq(@user_1.id)
-      expect(@joining_users[3].id).to eq(@user_5.id)
-      expect(@joining_users[4].id).to eq(@user_3.id)
+    it "コミュニティ内のユーザーが参加した順に取得できていること" do
+      expect(@joining_users).to eq(@users)
     end
   end
 end
