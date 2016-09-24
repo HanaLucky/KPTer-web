@@ -30,3 +30,10 @@ en:
       status:
         open: "Open"
         closed: "Closed"
+  activerecord:
+    errors:
+      models:
+        user:
+          attributes:
+            user_id:
+              taken: "Are you sure that you want to join this community AGAIN??"
