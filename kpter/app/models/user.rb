@@ -18,11 +18,11 @@ class User < ApplicationRecord
     def find_tcards_with_user_id(user_id, status = TCard.status.open)
       User.joins([:community_users => [ :community => [ :boards => [ :t_cards ]]]])
         .includes([:community_users => [ :community => [ :boards => [ :t_cards ]]]])
-        .order("communities.id DESC")
         .where("t_cards.status = ?", status)
         .where(id: user_id)
         .map { |u| u.community_users.map { |cu| cu.community.boards.map { |b| b.t_cards } }}
         .flatten
+        .sort_by!{ |t| [t[:deadline], t[:id]]}
     end
   end
 
