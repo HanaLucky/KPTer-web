@@ -10,8 +10,8 @@ Rails.application.routes.draw do
 
   get 'index' => 'welcome#index'
 
-  get 'mypage' => 'mypage#show'
-  
+  get 'mypage' => 'mypages#show'
+
   resources :communities, :only => [:new, :create, :show, :edit, :update, :destroy] do
     resources :boards, :only => [:new, :create, :show, :edit, :update, :destroy]
   end
