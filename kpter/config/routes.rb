@@ -7,8 +7,14 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
   root 'welcome#index'
-  
+
   get 'index' => 'welcome#index'
+
+  get 'mypage' => 'mypage#show'
+  
+  resources :communities, :only => [:new, :create, :show, :edit, :update, :destroy] do
+    resources :boards, :only => [:new, :create, :show, :edit, :update, :destroy]
+  end
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
