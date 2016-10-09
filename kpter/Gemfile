@@ -29,9 +29,9 @@ gem 'enumerize'
 
 # Railsでlessを使えるようにする。Bootstrapがlessで書かれているため
 gem 'less-rails'
-# Bootstrapの本体
-gem 'twitter-bootstrap-rails'
-gem 'font-awesome-rails'
+# bootstrap_sb_admin_base_v2. Read more: https://github.com/dreamingechoes/bootstrap_sb_admin_base_v2
+gem 'bootstrap_sb_admin_base_v2'
+
 
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
