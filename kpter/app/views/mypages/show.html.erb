@@ -399,7 +399,6 @@
                           <% @communities.each do |community| %>
                             <a href="<%= url_for :controller => :communities, :action => :show, :id => community.id %>" class="list-group-item">
                                 <i class="fa fa-comment fa-fw"></i> <%= community.name %>
-                                </span>
                             </a>
                           <% end %>
                         </div>
