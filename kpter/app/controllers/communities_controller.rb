@@ -5,6 +5,6 @@ class CommunitiesController < ApplicationController
     @community = Community.find(params[:id])
     @boards = @community.find_boards
     @tasks = @community.find_tcards
-
+    @attendees = @community.find_users
   end
 end
