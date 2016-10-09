@@ -353,7 +353,7 @@
                             </div>
                         </div>
                     </div>
-                    <a href="#">
+                    <a href="#community_list">
                         <div class="panel-footer">
                             <span class="pull-left">View Details</span>
                             <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -386,7 +386,7 @@
             </div>
         </div>
         <!-- /.row -->
-        <div class="row">
+        <div class="row" id="community_list">
             <!-- /.col-lg-12 -->
             <div class="col-lg-12">
                 <div class="panel panel-default">
@@ -397,7 +397,7 @@
                     <div class="panel-body">
                         <div class="list-group">
                           <% @communities.each do |community| %>
-                            <a href="#" class="list-group-item">
+                            <a href="<%= url_for :controller => :communities, :action => :show, :id => community.id %>" class="list-group-item">
                                 <i class="fa fa-comment fa-fw"></i> <%= community.name %>
                                 </span>
                             </a>
