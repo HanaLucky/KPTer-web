@@ -9,8 +9,6 @@ class MypagesController < ApplicationController
       @t_card = TCard.find(params[:id])
       # statusの値をひっくり返す
       @t_card.status = @t_card.status.open? ? TCard.status.closed : TCard.status.open
-      p "*********"
-      p @t_card.status
       @t_card.save
   end
 
