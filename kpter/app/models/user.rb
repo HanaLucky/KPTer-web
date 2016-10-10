@@ -10,7 +10,7 @@ class User < ApplicationRecord
     def find_communities_with_user_id(user_id)
       User.includes([{ :community_users => :community }])
         .references(:community_users).order("communities.id DESC")
-        .where(id: user_id)
+        .where("community_users.user_id = ?", user_id)
         .map { |u| u.community_users.map { |cu| cu.community }}
         .flatten
     end
@@ -19,7 +19,7 @@ class User < ApplicationRecord
       User.joins([:community_users => [ :community => [ :boards => [ :t_cards ]]]])
         .includes([:community_users => [ :community => [ :boards => [ :t_cards ]]]])
         .where("t_cards.status = ?", status)
-        .where(id: user_id)
+        .where("t_cards.user_id = ?", user_id)
         .map { |u| u.community_users.map { |cu| cu.community.boards.map { |b| b.t_cards } }}
         .flatten
         .sort_by!{ |t| [t[:deadline], t[:id]]}

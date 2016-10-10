@@ -16,6 +16,9 @@ Rails.application.routes.draw do
     resources :boards, :only => [:new, :create, :show, :edit, :update, :destroy]
   end
 
+  post 'mypage/tasks/:id/toggle' => 'mypages#toggle'
+  post 'mypage/refresh_tasks' => 'mypages#refresh_tasks'
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
