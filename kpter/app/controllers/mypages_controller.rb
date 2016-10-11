@@ -6,10 +6,7 @@ class MypagesController < ApplicationController
 
   def toggle
       render nothing: true
-      @t_card = TCard.find(params[:id])
-      # statusの値をひっくり返す
-      @t_card.status = @t_card.status.open? ? TCard.status.closed : TCard.status.open
-      @t_card.save
+      TCard.update_status(params[:id])
   end
 
   def refresh_tasks
