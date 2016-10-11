@@ -375,7 +375,7 @@
                             </div>
                         </div>
                     </div>
-                    <a href="#">
+                    <a href="#my_tasks">
                         <div class="panel-footer">
                             <span class="pull-left">View Details</span>
                             <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -406,134 +406,27 @@
                     <!-- /.panel-body -->
                 </div>
                 <!-- /.panel -->
-                <div class="panel panel-default">
+                  <div class="panel panel-default" id="my_tasks">
                     <div class="panel-heading">
-                        <i class="fa fa-bar-chart-o fa-fw"></i> Donut Chart Example
-                    </div>
-                    <div class="panel-body">
-                        <div id="morris-donut-chart"></div>
-                        <a href="#" class="btn btn-default btn-block">View Details</a>
-                    </div>
-                    <!-- /.panel-body -->
-                </div>
-                <!-- /.panel -->
-                <div class="chat-panel panel panel-default">
-                    <div class="panel-heading">
-                        <i class="fa fa-comments fa-fw"></i> Chat
-                        <div class="btn-group pull-right">
-                            <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
-                                <i class="fa fa-chevron-down"></i>
-                            </button>
-                            <ul class="dropdown-menu slidedown">
-                                <li>
-                                    <a href="#">
-                                        <i class="fa fa-refresh fa-fw"></i> Refresh
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <i class="fa fa-check-circle fa-fw"></i> Available
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <i class="fa fa-times fa-fw"></i> Busy
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <i class="fa fa-clock-o fa-fw"></i> Away
-                                    </a>
-                                </li>
-                                <li class="divider"></li>
-                                <li>
-                                    <a href="#">
-                                        <i class="fa fa-sign-out fa-fw"></i> Sign Out
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
+                        My Tasks
                     </div>
                     <!-- /.panel-heading -->
                     <div class="panel-body">
-                        <ul class="chat">
-                            <li class="left clearfix">
-                                <span class="chat-img pull-left">
-                                    <img src="http://placehold.it/50/55C1E7/fff" alt="User Avatar" class="img-circle" />
-                                </span>
-                                <div class="chat-body clearfix">
-                                    <div class="header">
-                                        <strong class="primary-font">Jack Sparrow</strong>
-                                        <small class="pull-right text-muted">
-                                            <i class="fa fa-clock-o fa-fw"></i> 12 mins ago
-                                        </small>
-                                    </div>
-                                    <p>
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales.
-                                    </p>
-                                </div>
-                            </li>
-                            <li class="right clearfix">
-                                <span class="chat-img pull-right">
-                                    <img src="http://placehold.it/50/FA6F57/fff" alt="User Avatar" class="img-circle" />
-                                </span>
-                                <div class="chat-body clearfix">
-                                    <div class="header">
-                                        <small class=" text-muted">
-                                            <i class="fa fa-clock-o fa-fw"></i> 13 mins ago</small>
-                                        <strong class="pull-right primary-font">Bhaumik Patel</strong>
-                                    </div>
-                                    <p>
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales.
-                                    </p>
-                                </div>
-                            </li>
-                            <li class="left clearfix">
-                                <span class="chat-img pull-left">
-                                    <img src="http://placehold.it/50/55C1E7/fff" alt="User Avatar" class="img-circle" />
-                                </span>
-                                <div class="chat-body clearfix">
-                                    <div class="header">
-                                        <strong class="primary-font">Jack Sparrow</strong>
-                                        <small class="pull-right text-muted">
-                                            <i class="fa fa-clock-o fa-fw"></i> 14 mins ago</small>
-                                    </div>
-                                    <p>
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales.
-                                    </p>
-                                </div>
-                            </li>
-                            <li class="right clearfix">
-                                <span class="chat-img pull-right">
-                                    <img src="http://placehold.it/50/FA6F57/fff" alt="User Avatar" class="img-circle" />
-                                </span>
-                                <div class="chat-body clearfix">
-                                    <div class="header">
-                                        <small class=" text-muted">
-                                            <i class="fa fa-clock-o fa-fw"></i> 15 mins ago</small>
-                                        <strong class="pull-right primary-font">Bhaumik Patel</strong>
-                                    </div>
-                                    <p>
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales.
-                                    </p>
-                                </div>
-                            </li>
-                        </ul>
+                      <div class="col-sm-6"></div>
+                      <div class="col-sm-6"><div id="dataTables-example_filter" class="dataTables_filter">
+                        <div class="btn-group" role="group" aria-label="..." style="display:inline-flex">
+                          <%= button_to "Open", { action: :refresh_tasks, status: TCard.status.open }, { class: "btn btn-primary", id: "open-btn", remote: true } %>
+                          <%= button_to "Closed", { action: :refresh_tasks, status: TCard.status.closed }, { class: "btn btn-default", id: "close-btn", remote: true } %>
+                        </div>
+                      </div></div>
+                        <div id="dataTables-example_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer"><div class="row"><div class="col-sm-12">
+                          <div id="t_cards-table"><%= render :partial => "tasks", :locals => { t_cards: @t_cards } %></div>
+                        </div></div>
+                        <div class="row"><div class="col-sm-6"><div class="dataTables_info" id="dataTables-example_info" role="status" aria-live="polite">Showing 1 to 10 of 57 entries</div></div><div class="col-sm-6"><div class="dataTables_paginate paging_simple_numbers" id="dataTables-example_paginate"><ul class="pagination"><li class="paginate_button previous disabled" aria-controls="dataTables-example" tabindex="0" id="dataTables-example_previous"><a href="#">Previous</a></li><li class="paginate_button active" aria-controls="dataTables-example" tabindex="0"><a href="#">1</a></li><li class="paginate_button " aria-controls="dataTables-example" tabindex="0"><a href="#">2</a></li><li class="paginate_button " aria-controls="dataTables-example" tabindex="0"><a href="#">3</a></li><li class="paginate_button " aria-controls="dataTables-example" tabindex="0"><a href="#">4</a></li><li class="paginate_button " aria-controls="dataTables-example" tabindex="0"><a href="#">5</a></li><li class="paginate_button " aria-controls="dataTables-example" tabindex="0"><a href="#">6</a></li><li class="paginate_button next" aria-controls="dataTables-example" tabindex="0" id="dataTables-example_next"><a href="#">Next</a></li></ul></div></div></div></div>
+                        <!-- /.table-responsive -->
                     </div>
                     <!-- /.panel-body -->
-                    <div class="panel-footer">
-                        <div class="input-group">
-                            <input id="btn-input" type="text" class="form-control input-sm" placeholder="Type your message here..." />
-                            <span class="input-group-btn">
-                                <button class="btn btn-warning btn-sm" id="btn-chat">
-                                    Send
-                                </button>
-                            </span>
-                        </div>
-                    </div>
-                    <!-- /.panel-footer -->
                 </div>
-                <!-- /.panel .chat-panel -->
             </div>
             <!-- /.col-lg-4 -->
         </div>
@@ -543,3 +436,17 @@
 
 </div>
 <!-- /#wrapper -->
+
+<!-- jqueryの機能を使ってチェックボックスの制御を行う -->
+<script type="text/javascript">
+    $(function() {
+        $("#open-btn").click(function() {
+            $(this).removeClass('btn-default').addClass('btn-primary');
+            $("#close-btn").removeClass('btn-primary').addClass('btn-default');
+        });
+        $("#close-btn").click(function() {
+            $(this).removeClass('btn-default').addClass('btn-primary');
+            $("#open-btn").removeClass('btn-primary').addClass('btn-default');
+        });
+    });
+</script>
