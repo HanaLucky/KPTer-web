@@ -6,7 +6,7 @@
 # 1日 =>　yyyy/mm/dd
 Time::DATE_FORMATS[:distance] = lambda {|date|
   seconds = (Time.now - date).round;
-  days    = seconds / (60 * 60 * 24); return I18n.t("datetime.distance_in_original_words.over_x_day", {year: "#{date.year}", month: "#{date.month}", day: "#{date.day}"}) if days > 0;
+  days    = seconds / (60 * 60 * 24); return I18n.t("datetime.distance_in_original_words.over_x_day", {year: "#{date.year}", month: date.strftime("%b"), day: "#{date.day}"}) if days > 0;
   hours   = seconds / (60 * 60);      return I18n.t("datetime.distance_in_original_words.within_x_24_hours.one") if hours == 1;
   hours   = seconds / (60 * 60);      return I18n.t("datetime.distance_in_original_words.within_x_24_hours.other", {hours: "#{hours}"}) if hours > 1;
   minutes = seconds / 60;             return I18n.t("datetime.distance_in_original_words.within_1_hour.one") if  minutes == 1;
