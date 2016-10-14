@@ -350,7 +350,7 @@
                                 <i class="fa fa-columns fa-5x"></i>
                             </div>
                             <div class="col-xs-9 text-right">
-                              <div class="huge"><%= @boards.length %></div>
+                              <div class="huge"><%= @all_boards.length %></div>
                                 <div>Boards</div>
                             </div>
                         </div>
@@ -418,15 +418,11 @@
               </div>
               <div class="panel-body">
                   <div class="list-group">
-                    <% @boards.each do |board| %>
-                      <a href="<%= url_for([@community, board]) %>" class="list-group-item">
-                          <%= board.name %>
-                          <span class="pull-right text-muted small"><em><%= board.created_at.to_s(:distance) %></em>
-                          </span>
-                      </a>
-                    <% end %>
+                    <div id="boards">
+                      <%= render :partial => 'boards', :locals => {boards: @boards, community: @community} %>
+                    </div>
                   </div>
-                  <!-- <a href="#" class="btn btn-default btn-block">View All Alerts</a> -->
+                  <%= link_to_next_page @boards, 'View more', :remote => true, :id => :view_more, class: 'btn btn-default btn-block' %>
               </div>
             </div>
           </div>
