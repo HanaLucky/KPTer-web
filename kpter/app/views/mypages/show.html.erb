@@ -370,7 +370,7 @@
                                 <i class="fa fa-tasks fa-5x"></i>
                             </div>
                             <div class="col-xs-9 text-right">
-                                <div class="huge"><%= @t_cards.length %></div>
+                                <div class="huge"><%= @all_tcards.length %></div>
                                 <div>Your Open Tasks</div>
                             </div>
                         </div>
@@ -415,15 +415,13 @@
                       <div class="col-sm-6"></div>
                       <div class="col-sm-6"><div id="dataTables-example_filter" class="dataTables_filter">
                         <div class="btn-group" role="group" aria-label="..." style="display:inline-flex">
-                          <%= button_to "Open", { action: :refresh_tasks, status: TCard.status.open }, { class: "btn btn-primary", id: "open-btn", remote: true } %>
-                          <%= button_to "Closed", { action: :refresh_tasks, status: TCard.status.closed }, { class: "btn btn-default", id: "close-btn", remote: true } %>
+                          <%= link_to "Open", { action: "refresh_tasks", method: :get, status: TCard.status.open, remote: true }, { class: "btn btn-primary", id: "open-btn" } %>
+                          <%= link_to "Close", { action: "refresh_tasks", method: :get, status: TCard.status.closed, remote: true }, { class: "btn btn-default", id: "close-btn" } %>
                         </div>
                       </div></div>
-                        <div id="dataTables-example_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer"><div class="row"><div class="col-sm-12">
+
                           <div id="t_cards-table"><%= render :partial => "tasks", :locals => { t_cards: @t_cards } %></div>
-                        </div></div>
-                        <div class="row"><div class="col-sm-6"><div class="dataTables_info" id="dataTables-example_info" role="status" aria-live="polite">Showing 1 to 10 of 57 entries</div></div><div class="col-sm-6"><div class="dataTables_paginate paging_simple_numbers" id="dataTables-example_paginate"><ul class="pagination"><li class="paginate_button previous disabled" aria-controls="dataTables-example" tabindex="0" id="dataTables-example_previous"><a href="#">Previous</a></li><li class="paginate_button active" aria-controls="dataTables-example" tabindex="0"><a href="#">1</a></li><li class="paginate_button " aria-controls="dataTables-example" tabindex="0"><a href="#">2</a></li><li class="paginate_button " aria-controls="dataTables-example" tabindex="0"><a href="#">3</a></li><li class="paginate_button " aria-controls="dataTables-example" tabindex="0"><a href="#">4</a></li><li class="paginate_button " aria-controls="dataTables-example" tabindex="0"><a href="#">5</a></li><li class="paginate_button " aria-controls="dataTables-example" tabindex="0"><a href="#">6</a></li><li class="paginate_button next" aria-controls="dataTables-example" tabindex="0" id="dataTables-example_next"><a href="#">Next</a></li></ul></div></div></div></div>
-                        <!-- /.table-responsive -->
+
                     </div>
                     <!-- /.panel-body -->
                 </div>
