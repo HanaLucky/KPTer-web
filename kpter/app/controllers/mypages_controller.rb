@@ -12,7 +12,6 @@ class MypagesController < ApplicationController
 
   def refresh_tasks
     @all_tcards = User.find_tcards_with_user_id(current_user.id, params[:status])
-    p  params[:status]
     @t_cards = Kaminari.paginate_array(@all_tcards).page(params[:page])
   end
 
