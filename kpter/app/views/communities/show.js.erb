@@ -1,2 +1,2 @@
-$("#boards").append("<%= escape_javascript(render( :partial => 'boards', :locals => {boards: @boards, community: @community})) %>");
-$("#view_more").replaceWith("<%= escape_javascript(link_to_next_page @boards, 'View more', :remote => true, :id => :view_more, class: 'btn btn-default btn-block') %>");
+$("#board-list").append("<%= escape_javascript(render( :partial => 'boards', :locals => {boards: @boards, community: @community})) %>");
+$("#view-more").replaceWith("<%= escape_javascript(link_to_next_page @boards, 'View more', :remote => true, :id => :'view-more', class: 'btn btn-default btn-block') %>");

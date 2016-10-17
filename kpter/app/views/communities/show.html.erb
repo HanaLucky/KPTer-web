@@ -342,7 +342,7 @@
         </div>
         <!-- /.row -->
         <div class="row">
-            <div class="col-lg-3 col-md-6">
+            <div class="col-lg-4 col-md-6">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
                         <div class="row">
@@ -364,7 +364,7 @@
                     </a>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-6">
+            <div class="col-lg-4 col-md-6">
                 <div class="panel panel-green">
                     <div class="panel-heading">
                         <div class="row">
@@ -386,7 +386,7 @@
                     </a>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-6">
+            <div class="col-lg-4 col-md-6">
                 <div class="panel panel-yellow">
                     <div class="panel-heading">
                         <div class="row">
@@ -411,18 +411,18 @@
         </div>
         <!-- /.row -->
         <div class="row">
-          <div class="col-lg-4">
+          <div class="col-lg-12">
             <div class="panel panel-default">
               <div class="panel-heading">
                   <i class="fa fa-columns fa-fw"></i> Boards
               </div>
               <div class="panel-body">
                   <div class="list-group">
-                    <div id="boards">
+                    <div id="board-list">
                       <%= render :partial => 'boards', :locals => {boards: @boards, community: @community} %>
                     </div>
                   </div>
-                  <%= link_to_next_page @boards, 'View more', :remote => true, :id => :view_more, class: 'btn btn-default btn-block' %>
+                  <%= link_to_next_page @boards, 'View more', :remote => true, :id => :'view-more', class: 'btn btn-default btn-block' %>
               </div>
             </div>
           </div>
