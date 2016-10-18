@@ -37,3 +37,13 @@ en:
           attributes:
             user_id:
               taken: "Are you sure that you want to join this community AGAIN??"
+  datetime:
+    distance_in_original_words:
+      over_x_day: "%{month} %{day}, %{year}"
+      within_x_24_hours:
+        one: "1 hour ago"
+        other: "%{hours} hours ago"
+      within_1_hour:
+        one: "1 minute ago"
+        other: "%{minutes} minutes ago"
+      within_1_minute: "a few seconds ago"
