@@ -18,6 +18,7 @@ Rails.application.routes.draw do
 
   post 'mypage/tasks/:id/toggle' => 'mypages#toggle'
   get 'mypage/refresh_tasks' => 'mypages#refresh_tasks'
+  post 'mypage/create_community' => 'mypages#create_community'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
