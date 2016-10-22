@@ -261,7 +261,7 @@
                     <div class="panel-heading">
                         <div class="row">
                             <div class="col-xs-3">
-                                <i class="fa fa-tasks fa-5x"></i>
+                                <i class="fa fa-check-square-o fa-5x"></i>
                             </div>
                             <div class="col-xs-9 text-right">
                                 <div class="huge"><%= @all_tcards.length %></div>
@@ -269,7 +269,7 @@
                             </div>
                         </div>
                     </div>
-                    <a href="#my_tasks">
+                    <a href="#tasks">
                         <div class="panel-footer">
                             <span class="pull-left">View Details</span>
                             <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -300,25 +300,27 @@
                     <!-- /.panel-body -->
                 </div>
                 <!-- /.panel -->
-                  <div class="panel panel-default" id="my_tasks">
-                    <div class="panel-heading">
-                        My Tasks
-                    </div>
-                    <!-- /.panel-heading -->
-                    <div class="panel-body">
-                      <div class="col-sm-6"></div>
-                      <div class="col-sm-6"><div id="dataTables-example_filter" class="dataTables_filter">
-                        <div class="btn-group" role="group" aria-label="..." style="display:inline-flex">
-                          <%= link_to "Open", { action: "refresh_tasks", method: :get, status: TCard.status.open, remote: true }, { class: "btn btn-primary", id: "open-btn" } %>
-                          <%= link_to "Close", { action: "refresh_tasks", method: :get, status: TCard.status.closed, remote: true }, { class: "btn btn-default", id: "close-btn" } %>
-                        </div>
-                      </div></div>
-
-                          <div id="t_cards-table"><%= render :partial => "tasks", :locals => { t_cards: @t_cards } %></div>
-
-                    </div>
-                    <!-- /.panel-body -->
+            </div>
+            <div class="col-lg-12" id="tasks">
+              <!-- /.tasks-list -->
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <i class="fa fa-check-square-o fa-fw"></i> Tasks
                 </div>
+                <!-- /.panel-heading -->
+                <div class="panel-body">
+                  <div class="dataTables_filter">
+                    <div class="btn-group" role="group" aria-label="..." style="display:inline-flex">
+                      <%= link_to "Open", { action: "refresh_tasks", method: :get, status: TCard.status.open, remote: true }, { class: "btn btn-primary", id: "open-btn" } %>
+                      <%= link_to "Close", { action: "refresh_tasks", method: :get, status: TCard.status.closed, remote: true }, { class: "btn btn-default", id: "close-btn" } %>
+                    </div>
+                  </div>
+                  <div id="t_cards-table">
+                    <%= render :partial => "tasks", :locals => { t_cards: @t_cards, url: "mypage" } %>
+                  </div>
+                </div>
+              </div>
+              <!-- /.panel-body -->
             </div>
             <!-- /.col-lg-4 -->
         </div>
@@ -328,17 +330,3 @@
 
 </div>
 <!-- /#wrapper -->
-
-<!-- jqueryの機能を使ってチェックボックスの制御を行う -->
-<script type="text/javascript">
-    $(function() {
-        $("#open-btn").click(function() {
-            $(this).removeClass('btn-default').addClass('btn-primary');
-            $("#close-btn").removeClass('btn-primary').addClass('btn-default');
-        });
-        $("#close-btn").click(function() {
-            $(this).removeClass('btn-default').addClass('btn-primary');
-            $("#open-btn").removeClass('btn-primary').addClass('btn-default');
-        });
-    });
-</script>
