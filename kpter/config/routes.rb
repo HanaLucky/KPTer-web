@@ -16,6 +16,9 @@ Rails.application.routes.draw do
     resources :boards, :only => [:new, :create, :show, :edit, :update, :destroy]
   end
 
+  post 'communities/:id/tasks/:t_card_id/toggle' => 'communities#toggle'
+  get 'communities/:id/refresh_tasks' => 'communities#refresh_tasks'
+
   post 'mypage/tasks/:id/toggle' => 'mypages#toggle'
   get 'mypage/refresh_tasks' => 'mypages#refresh_tasks'
   post 'mypage/create_community' => 'mypages#create_community'
