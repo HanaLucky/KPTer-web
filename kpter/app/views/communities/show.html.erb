@@ -1,7 +1,4 @@
-<%= javascript_include_tag 'communities/show' %>
-
 <div id="wrapper">
-
     <!-- Navigation -->
     <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
         <div class="navbar-header">
@@ -435,22 +432,25 @@
               </div>
               <!-- /.panel-heading -->
               <div class="panel-body">
-                  <div class="dataTables_filter">
-                    <div class="btn-group" role="group" aria-label="..." style="display:inline-flex">
-                      <%= link_to "Open", { action: "refresh_tasks", method: :get, status: TCard.status.open, remote: true }, { class: "btn btn-primary", id: "open-btn" } %>
-                      <%= link_to "Close", { action: "refresh_tasks", method: :get, status: TCard.status.closed, remote: true }, { class: "btn btn-default", id: "close-btn" } %>
-                    </div>
-                  </div>
-                  <div id="t_cards-table">
-                    <%= render :partial => "tasks", :locals => { t_cards: @t_cards, url: "#{@community.id}" } %>
+                <div class="dataTables_filter">
+                  <div class="btn-group" role="group" aria-label="..." style="display:inline-flex">
+                    <%= link_to "Open", { action: "refresh_tasks", method: :get, status: TCard.status.open, remote: true }, { class: "btn btn-primary", id: "open-btn" } %>
+                    <%= link_to "Close", { action: "refresh_tasks", method: :get, status: TCard.status.closed, remote: true }, { class: "btn btn-default", id: "close-btn" } %>
                   </div>
                 </div>
+                <div id="t_cards-table">
+                  <%= render :partial => "tasks", :locals => { t_cards: @t_cards, url: @community.id } %>
+                </div>
               </div>
-              <!-- /.panel-body -->
             </div>
+            <!-- /.panel-body -->
+          </div>
+          <div class="col-lg-12" id="attendees">
+            <%= render :partial => "attendees", :locals => { attendees: @attendees } %>
           </div>
         </div>
-        <!-- /.row -->
+      </div>
+      <!-- /.row -->
     </div>
     <!-- /#page-wrapper -->
 </div>
