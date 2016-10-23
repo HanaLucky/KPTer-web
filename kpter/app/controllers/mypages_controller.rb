@@ -32,7 +32,8 @@ class MypagesController < ApplicationController
             format.html { render :show }
           end
         else
-          format.html { render :show }
+          @error_messages = @community.errors.full_messages
+          format.html { redirect_to :back, alert: @community.errors.full_messages }
         end
       end
     end

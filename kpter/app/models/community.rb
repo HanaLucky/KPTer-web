@@ -2,6 +2,8 @@ class Community < ApplicationRecord
   has_many :community_users
   has_many :boards
 
+  validates_length_of :name, in: 0..32
+
   def find_boards
     Community
     .includes(:boards)
