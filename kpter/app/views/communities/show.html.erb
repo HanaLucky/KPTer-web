@@ -439,7 +439,7 @@
                   </div>
                 </div>
                 <div id="t_cards-table">
-                  <%= render :partial => "tasks", :locals => { t_cards: @t_cards, url: "#{@community.id}" } %>
+                  <%= render :partial => "tasks", :locals => { t_cards: @t_cards, url: @community.id } %>
                 </div>
               </div>
             </div>
