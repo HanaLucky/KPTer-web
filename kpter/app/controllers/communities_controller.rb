@@ -2,6 +2,7 @@ class CommunitiesController < ApplicationController
   def show
     # TODO: コミュニティページ表示中にコミュニティから除名させられた場合の処理
     # https://github.com/HanaLucky/KPTer-web/issues/96
+    @communities = User.find_communities_with_user_id(current_user.id)
     @community = Community.find(params[:id])
     @all_boards = @community.find_boards
     @boards = Kaminari.paginate_array(@all_boards).page(params[:page]).per(5)
