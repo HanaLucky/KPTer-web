@@ -16,7 +16,7 @@
                 <!-- /.nav-second-level -->
             </li>
             <li class="sidebar-search">
-              <%= form_tag("/communities/#{current_community.id}/boards", :method	=> :post) do |f| %>
+              <%= form_tag("/communities/#{current_community.id}/boards", :method => :post) do |f| %>
                 <div class="input-group">
                   <%= text_field :board, :name, class: "form-control", placeholder: "Board Name" %>
                   <span class="input-group-btn">
