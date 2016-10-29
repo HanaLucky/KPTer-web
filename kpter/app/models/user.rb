@@ -24,6 +24,16 @@ class User < ApplicationRecord
         .flatten
         .sort_by!{ |t| [t[:deadline], t[:id]]}
     end
+
+    def find_all_tcards_with_user_id(user_id)
+      User.joins([:community_users => [ :community => [ :boards => [ :t_cards ]]]])
+        .includes([:community_users => [ :community => [ :boards => [ :t_cards ]]]])
+        .where("t_cards.user_id = ?", user_id)
+        .map { |u| u.community_users.map { |cu| cu.community.boards.map { |b| b.t_cards } }}
+        .flatten
+        .sort_by!{ |t| [t[:deadline], t[:id]]}
+    end
+
   end
 
   def joining?(community)

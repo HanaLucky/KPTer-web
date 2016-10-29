@@ -222,13 +222,23 @@
             <!-- /.dropdown -->
         </ul>
         <!-- /.navbar-top-links -->
-        <%= render :partial => "side_column", :locals => { communities: @communities, new_community: @communities } %>
+        <%= render :partial => "side_column", :locals => { communities: @communities } %>
     </nav>
 
     <div id="page-wrapper">
         <div class="row">
-            <div class="col-lg-12">
-                <h1 class="page-header">Mypage</h1>
+            <div class="col-lg-12 top5">
+              <% if flash[:notice] %>
+                <div class="alert alert-success">
+                  <%= flash[:notice] %>
+                </div>
+              <% end %>
+              <% if flash[:alert] %>
+                <div class="alert alert-danger">
+                  <%= flash[:alert] %>
+                </div>
+              <% end %>
+              <h1 class="page-header">Mypage</h1>
             </div>
             <!-- /.col-lg-12 -->
         </div>

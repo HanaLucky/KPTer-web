@@ -65,12 +65,14 @@ RSpec.describe User, type: :model do
       @t_card_open = TCard.create(
         board_id: @board.id,
         title: "test_try_card1",
+        user_id: @user.id,
         detail: "default status (open)",
         status: TCard.status.open
       )
 
       @t_card_open2 = TCard.create(
         board_id: @board.id,
+        user_id: @user.id,
         title: "test_try_card2",
         detail: "default status (open)",
         status: TCard.status.open
@@ -78,23 +80,24 @@ RSpec.describe User, type: :model do
 
       @t_card_close = TCard.create(
         board_id: @board.id,
+        user_id: @user.id,
         title: "test_try_card3",
         detail: "closed status",
         status: TCard.status.closed
       )
       @t_card_close2 = TCard.create(
         board_id: @board.id,
+        user_id: @user.id,
         title: "test_try_card4",
         detail: "closed status",
         status: TCard.status.closed
       )
-
     end
 
     context "引数なし" do
 
       before :all do
-        @open_tcards = User.find_tcards_with_user_id(@user.id, TCard.status.open)
+        @open_tcards = User.find_tcards_with_user_id(@user.id)
       end
 
       it "Userに紐づくTCardが取得できること" do
@@ -131,6 +134,81 @@ RSpec.describe User, type: :model do
 
       it "期限日昇順でTCardが取得できること" do
         expect(@closed_tcards).to be_asc -> (t_card) { t_card.deadline }
+      end
+
+    end
+
+  end
+
+  describe "Userに紐付いたTCardを引数があれば、期限でソートして取得します。" do
+
+    before :all do
+      @user = FactoryGirl.create(:user)
+      @community = Community.create(
+        name: "test_community"
+      )
+      @community2 = Community.create(
+        name: "test_community2"
+      )
+      @cu = CommunityUser.create(
+        user_id: @user.id,
+        community_id: @community.id
+      )
+      @cu2 = CommunityUser.create(
+        user_id: @user.id,
+        community_id: @community2.id
+      )
+
+      @board = Board.create(
+        community_id: @community.id,
+        name: "test_board_name"
+      )
+
+      @t_card_open = TCard.create(
+        board_id: @board.id,
+        user_id: @user.id,
+        title: "test_try_card1",
+        detail: "default status (open)",
+        status: TCard.status.open
+      )
+
+      @t_card_open2 = TCard.create(
+        board_id: @board.id,
+        user_id: @user.id,
+        title: "test_try_card2",
+        detail: "default status (open)",
+        status: TCard.status.open
+      )
+
+      @t_card_close = TCard.create(
+        board_id: @board.id,
+        user_id: @user.id,
+        title: "test_try_card3",
+        detail: "closed status",
+        status: TCard.status.closed
+      )
+      @t_card_close2 = TCard.create(
+        board_id: @board.id,
+        user_id: @user.id,
+        title: "test_try_card4",
+        detail: "closed status",
+        status: TCard.status.closed
+      )
+
+    end
+
+    context "正常系" do
+
+      before :all do
+        @open_tcards = User.find_all_tcards_with_user_id(@user.id)
+      end
+
+      it "Userに紐づくTCardが取得できること" do
+        expect(@open_tcards).to be_present
+      end
+
+      it "期限日昇順でTCardが取得できること" do
+        expect(@open_tcards).to be_asc -> (t_card) { t_card.deadline }
       end
 
     end
