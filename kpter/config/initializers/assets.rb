@@ -12,3 +12,4 @@ Rails.application.config.assets.version = '1.0'
 Rails.application.config.assets.precompile += %w( communities/show.js )
 Rails.application.config.assets.precompile += %w( dataTablesSetting.js )
 Rails.application.config.assets.precompile += %w( tasksTable.js )
+Rails.application.config.assets.precompile += %w( communities.css )
