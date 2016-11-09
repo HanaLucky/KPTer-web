@@ -31,9 +31,10 @@ gem 'enumerize'
 gem 'less-rails'
 # bootstrap_sb_admin_base_v2. Read more: https://github.com/dreamingechoes/bootstrap_sb_admin_base_v2
 gem 'bootstrap_sb_admin_base_v2'
+# bootstrap editable tails. Read more: https://github.com/bootstrap-ruby/bootstrap-editable-rails
+gem 'bootstrap-editable-rails'
 
 gem 'kaminari'
-
 
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'

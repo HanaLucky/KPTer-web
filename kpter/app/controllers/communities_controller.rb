@@ -23,4 +23,17 @@ class CommunitiesController < ApplicationController
     @all_tcards = @community.find_tcards(status)
     @t_cards = Kaminari.paginate_array(@all_tcards).page(params[:page])
   end
+
+  def update
+    @community = Community.find(params[:id])
+
+    respond_to do |format|
+      if @community.update_attributes(name: params[:community][:name])
+        format.html { redirect_to @community, notice: 'Community name was successfully updated.' }
+        format.json { head :no_content } # 204 No Content
+      else
+        format.json { render json: {message: @community.errors.full_messages.first}, status: :unprocessable_entity }
+      end
+    end
+  end
 end
