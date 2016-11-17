@@ -20,6 +20,11 @@
                 <li>
                     <a class="page-scroll" href="#contact">Contact</a>
                 </li>
+                <% unless user_signed_in? %>
+                <li>
+                    <a class="page-scroll" href="/users/sign_in"><span class="fa fa-user fa-fw"></span>Login</a>
+                </li>
+                <% end %>
             </ul>
         </div>
         <!-- /.navbar-collapse -->
