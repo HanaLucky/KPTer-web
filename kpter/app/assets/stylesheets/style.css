@@ -1,3 +1,4 @@
+.top0 { margin-top:0px; }
 .top5 { margin-top:5px; }
 .top7 { margin-top:7px; }
 .top10 { margin-top:10px; }
@@ -30,4 +31,25 @@ div.resizeimage img { width: 100%; }
 
 .fb_iframe_widget > span {
   vertical-align: baseline !important;
+}
+
+
+.navbar-default {
+  border-color: rgba(34, 34, 34, 0.05);
+  font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+  -webkit-transition: all 0.35s;
+  -moz-transition: all 0.35s;
+  transition: all 0.35s;
+}
+
+.header-text {
+  font-family: 'Open Sans', Arial;
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 13px;
+  padding: 15px 15px;
+}
+
+.title {
+  font-size: 20px;
 }
