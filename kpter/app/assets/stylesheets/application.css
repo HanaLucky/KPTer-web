@@ -17,4 +17,5 @@
  *= require attendees
  *= require style
  *= require bootstrap-editable
+ *= require devise_bootstrap_views
  */
