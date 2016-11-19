@@ -28,7 +28,7 @@ gem 'devise-bootstrap-views'
 gem 'devise-i18n'
 gem 'devise-i18n-views'
 
-# Enumerize. Read more: https://github.com/brainspec/enumerizegi
+# Enumerize. Read more: https://github.com/brainspec/enumerize
 gem 'enumerize'
 
 # Railsでlessを使えるようにする。Bootstrapがlessで書かれているため
