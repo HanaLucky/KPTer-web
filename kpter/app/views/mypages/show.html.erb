@@ -72,6 +72,9 @@
                 </div>
                 <!-- /.panel-heading -->
                 <div class="panel-body">
+                  <% if @communities.empty? then %>
+                    No entries found
+                  <% else %>
                     <div class="list-group">
                       <% @communities.each do |community| %>
                         <a href="<%= url_for :controller => :communities, :action => :show, :id => community.id %>" class="list-group-item">
@@ -79,6 +82,7 @@
                         </a>
                       <% end %>
                     </div>
+                  <% end %>
                 </div>
                 <!-- /.panel-body -->
             </div>
