@@ -22,11 +22,14 @@
                 </li>
                 <% unless user_signed_in? %>
                   <li>
-                      <a class="page-scroll" href="<%= url_for new_user_session_path %>"><span class="fa fa-sign-in"></span>Login</a>
+                      <a class="page-scroll" href="<%= url_for new_user_session_path %>"><span class="fa fa-sign-in fa-fw"></span>Login</a>
                   </li>
                 <% else %>
                   <li>
                       <a class="page-scroll header-text" href="<%= url_for :controller => :mypages, :action => :show  %>"><span class="fa fa-user fa-fw"></span>Mypage</a>
+                  </li>
+                  <li>
+                    <a class="page-scroll header-text" href="<%= url_for destroy_user_session_path %>"><span class="fa fa-sign-out fa-fw"></span>Logout</a>
                   </li>
                 <% end %>
             </ul>
