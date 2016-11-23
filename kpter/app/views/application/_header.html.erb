@@ -7,12 +7,6 @@
     <!-- /.navbar-header -->
 
     <ul class="nav navbar-nav navbar-right">
-        <li>
-            <a class="page-scroll header-text" href="#about">ABOUT KPTer</a>
-        </li>
-        <li>
-            <a class="page-scroll header-text" href="#services">About KPT</a>
-        </li>
         <% unless user_signed_in? %>
           <li>
               <a class="page-scroll header-text" href="<%= url_for new_user_session_path %>"><span class="fa fa-sign-in"></span>Login</a>
