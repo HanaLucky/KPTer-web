@@ -4,3 +4,4 @@
 //= require dataTables/dataTables.responsive.js
 //= require bootstrap-editable
 //= require bootstrap-editable-rails
+//= require common
