@@ -28,6 +28,9 @@
                   <li>
                       <a class="page-scroll header-text" href="<%= url_for :controller => :mypages, :action => :show  %>"><span class="fa fa-user fa-fw"></span>Mypage</a>
                   </li>
+                  <li>
+                    <a class="page-scroll header-text" href="<%= url_for destroy_user_session_path %>"><span class="fa fa-sign-out"></span>Logout</a>
+                  </li>
                 <% end %>
             </ul>
         </div>
