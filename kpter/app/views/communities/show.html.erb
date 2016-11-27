@@ -99,12 +99,16 @@
               <i class="fa fa-columns fa-fw"></i> Boards
           </div>
           <div class="panel-body">
+            <% if @boards.empty? then %>
+              No entries found
+            <% else %>
               <div class="list-group">
                 <div id="board-list">
                   <%= render :partial => 'boards', :locals => {boards: @boards, community: @community} %>
                 </div>
               </div>
               <%= link_to_next_page @boards, 'View more', :remote => true, :id => :'view-more', class: 'btn btn-default btn-block' %>
+          <% end %>
           </div>
         </div>
       </div>
