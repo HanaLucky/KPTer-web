@@ -25,6 +25,7 @@ RSpec.describe Community, type: :model do
   describe "コミュニティに紐づくt_cardsを取得する" do
     before :all do
 
+      @user = FactoryGirl.create(:user)
       @community = Community.create(name: "community name")
 
       @board1 = Board.create(name: "board_1", community_id: @community.id)
@@ -93,6 +94,34 @@ RSpec.describe Community, type: :model do
         x: 120,
         y: 240,
         order: 3
+      )
+      @tcard_assignee1 = TcardAssignee.create(
+        t_card_id: @t_card1_1.id,
+        user_id: @user.id
+      )
+      @tcard_assignee2 = TcardAssignee.create(
+        t_card_id: @t_card1_2.id,
+        user_id: @user.id
+      )
+      @tcard_assignee3 = TcardAssignee.create(
+        t_card_id: @t_card2_1.id,
+        user_id: @user.id
+      )
+      @tcard_assignee4 = TcardAssignee.create(
+        t_card_id: @t_card2_2.id,
+        user_id: @user.id
+      )
+      @tcard_assignee5 = TcardAssignee.create(
+        t_card_id: @t_card3_1.id,
+        user_id: @user.id
+      )
+      @tcard_assignee6 = TcardAssignee.create(
+        t_card_id: @t_card3_2.id,
+        user_id: @user.id
+      )
+      @tcard_assignee7 = TcardAssignee.create(
+        t_card_id: @t_card3_3.id,
+        user_id: @user.id
       )
       @open_tcards = @community.find_tcards
       @closed_tcards = @community.find_tcards(TCard.status.closed)
