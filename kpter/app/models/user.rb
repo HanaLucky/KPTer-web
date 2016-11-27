@@ -6,7 +6,7 @@ class User < ApplicationRecord
          :confirmable, :omniauthable
   has_many :community_users
   has_many :tcard_assignees
-  has_many :t_cards, :through => :tcard_assignees
+  has_many :t_card, :through => :tcard_assignees
 
   class << self
     def find_communities_with_user_id(user_id)
@@ -18,20 +18,20 @@ class User < ApplicationRecord
     end
 
     def find_tcards_with_user_id(user_id, status = TCard.status.open)
-      User.joins([:community_users => [ :community => [ :boards => [ :t_cards ]]]])
-        .includes([:community_users => [ :community => [ :boards => [ :t_cards ]]]])
+      User.joins([:tcard_assignees => :t_card])
+        .includes([:tcard_assignees => :t_card])
+        .where("tcard_assignees.user_id = ?", user_id)
         .where("t_cards.status = ?", status)
-        .where("t_cards.user_id = ?", user_id)
-        .map { |u| u.community_users.map { |cu| cu.community.boards.map { |b| b.t_cards } }}
+        .map { |u| u.tcard_assignees.map{ |ta| ta.t_card } }
         .flatten
         .sort_by!{ |t| [t[:deadline], t[:id]]}
     end
 
     def find_all_tcards_with_user_id(user_id)
-      User.joins([:community_users => [ :community => [ :boards => [ :t_cards ]]]])
-        .includes([:community_users => [ :community => [ :boards => [ :t_cards ]]]])
-        .where("t_cards.user_id = ?", user_id)
-        .map { |u| u.community_users.map { |cu| cu.community.boards.map { |b| b.t_cards } }}
+      User.joins([:tcard_assignees => :t_card])
+        .includes([:tcard_assignees => :t_card])
+        .where("tcard_assignees.user_id = ?", user_id)
+        .map { |u| u.tcard_assignees.map{ |ta| ta.t_card } }
         .flatten
         .sort_by!{ |t| [t[:deadline], t[:id]]}
     end

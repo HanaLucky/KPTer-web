@@ -65,14 +65,12 @@ RSpec.describe User, type: :model do
       @t_card_open = TCard.create(
         board_id: @board.id,
         title: "test_try_card1",
-        user_id: @user.id,
         detail: "default status (open)",
         status: TCard.status.open
       )
 
       @t_card_open2 = TCard.create(
         board_id: @board.id,
-        user_id: @user.id,
         title: "test_try_card2",
         detail: "default status (open)",
         status: TCard.status.open
@@ -80,17 +78,32 @@ RSpec.describe User, type: :model do
 
       @t_card_close = TCard.create(
         board_id: @board.id,
-        user_id: @user.id,
         title: "test_try_card3",
         detail: "closed status",
         status: TCard.status.closed
       )
       @t_card_close2 = TCard.create(
         board_id: @board.id,
-        user_id: @user.id,
         title: "test_try_card4",
         detail: "closed status",
         status: TCard.status.closed
+      )
+
+      @tcard_assignee1 = TcardAssignee.create(
+        t_card_id: @t_card_open.id,
+        user_id: @user.id
+      )
+      @tcard_assignee2 = TcardAssignee.create(
+        t_card_id: @t_card_open2.id,
+        user_id: @user.id
+      )
+      @tcard_assignee3 = TcardAssignee.create(
+        t_card_id: @t_card_close.id,
+        user_id: @user.id
+      )
+      @tcard_assignee4 = TcardAssignee.create(
+        t_card_id: @t_card_close2.id,
+        user_id: @user.id
       )
     end
 
@@ -166,7 +179,6 @@ RSpec.describe User, type: :model do
 
       @t_card_open = TCard.create(
         board_id: @board.id,
-        user_id: @user.id,
         title: "test_try_card1",
         detail: "default status (open)",
         status: TCard.status.open
@@ -174,7 +186,6 @@ RSpec.describe User, type: :model do
 
       @t_card_open2 = TCard.create(
         board_id: @board.id,
-        user_id: @user.id,
         title: "test_try_card2",
         detail: "default status (open)",
         status: TCard.status.open
@@ -182,17 +193,32 @@ RSpec.describe User, type: :model do
 
       @t_card_close = TCard.create(
         board_id: @board.id,
-        user_id: @user.id,
         title: "test_try_card3",
         detail: "closed status",
         status: TCard.status.closed
       )
       @t_card_close2 = TCard.create(
         board_id: @board.id,
-        user_id: @user.id,
         title: "test_try_card4",
         detail: "closed status",
         status: TCard.status.closed
+      )
+
+      @tcard_assignee1 = TcardAssignee.create(
+        t_card_id: @t_card_open.id,
+        user_id: @user.id
+      )
+      @tcard_assignee2 = TcardAssignee.create(
+        t_card_id: @t_card_open2.id,
+        user_id: @user.id
+      )
+      @tcard_assignee3 = TcardAssignee.create(
+        t_card_id: @t_card_close.id,
+        user_id: @user.id
+      )
+      @tcard_assignee4 = TcardAssignee.create(
+        t_card_id: @t_card_close2.id,
+        user_id: @user.id
       )
 
     end
