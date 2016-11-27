@@ -2,6 +2,8 @@ class TCard < ApplicationRecord
   extend Enumerize
   enumerize :status, in: [:open, :closed], default: :open
   belongs_to :board
+  has_one :tcard_assignee
+  has_one :user, :through => :tcard_assignee
 
   class << self
     def update_status(t_card_id)

@@ -4,7 +4,6 @@ class CreateTCards < ActiveRecord::Migration[5.0]
       t.references :board, foreign_key: true, null: false, comment: "ボードID"
       t.string :title, comment: "タイトル"
       t.string :detail, limit: 512, comment: "詳細"
-      t.references :user, foreing_key: true, comment: "担当者"
       t.date :deadline, comment: "期限"
       t.string :status, limit: 16, null: false, default: TCard.status.open, comment: "ステータス"
       t.integer :x, null: false, default: 0, comment: "X座標"

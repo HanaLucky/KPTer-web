@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160821111234) do
+ActiveRecord::Schema.define(version: 20161127051758) do
 
   create_table "boards", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", comment: "ボード" do |t|
     t.integer  "community_id", null: false, comment: "コミュニティID"
@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(version: 20160821111234) do
   end
 
   create_table "communities", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", comment: "コミュニティ" do |t|
-    t.string   "name",       limit: 16, null: false, comment: "コミュニティ名"
+    t.string   "name",       limit: 32, null: false, comment: "コミュニティ名"
     t.datetime "created_at",            null: false
     t.datetime "updated_at",            null: false
   end
@@ -65,7 +65,6 @@ ActiveRecord::Schema.define(version: 20160821111234) do
     t.integer  "board_id",                                null: false, comment: "ボードID"
     t.string   "title",                                                comment: "タイトル"
     t.string   "detail",     limit: 512,                               comment: "詳細"
-    t.integer  "user_id",                                              comment: "担当者"
     t.date     "deadline",                                             comment: "期限"
     t.string   "status",     limit: 16,  default: "open", null: false, comment: "ステータス"
     t.integer  "x",                      default: 0,      null: false, comment: "X座標"
@@ -75,7 +74,15 @@ ActiveRecord::Schema.define(version: 20160821111234) do
     t.datetime "updated_at",                              null: false
     t.index ["board_id"], name: "index_t_cards_on_board_id", using: :btree
     t.index ["status"], name: "index_t_cards_on_status", using: :btree
-    t.index ["user_id"], name: "index_t_cards_on_user_id", using: :btree
+  end
+
+  create_table "tcard_assignees", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", comment: "Tカード担当者" do |t|
+    t.integer  "user_id",                 comment: "ユーザーID"
+    t.integer  "t_card_id",               comment: "TカードID"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["t_card_id"], name: "index_tcard_assignees_on_t_card_id", using: :btree
+    t.index ["user_id"], name: "index_tcard_assignees_on_user_id", using: :btree
   end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -108,4 +115,6 @@ ActiveRecord::Schema.define(version: 20160821111234) do
   add_foreign_key "kp_cards", "boards"
   add_foreign_key "memos", "boards"
   add_foreign_key "t_cards", "boards"
+  add_foreign_key "tcard_assignees", "t_cards"
+  add_foreign_key "tcard_assignees", "users"
 end

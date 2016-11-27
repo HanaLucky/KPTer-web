@@ -5,6 +5,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable,
          :confirmable, :omniauthable
   has_many :community_users
+  has_many :tcard_assignees
+  has_many :t_cards, :through => :tcard_assignees
 
   class << self
     def find_communities_with_user_id(user_id)
