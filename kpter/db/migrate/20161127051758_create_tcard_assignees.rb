@@ -6,5 +6,6 @@ class CreateTcardAssignees < ActiveRecord::Migration[5.0]
 
       t.timestamps
     end
+    add_index :tcard_assignees, [:user_id, :t_card_id], unique: true
   end
 end
