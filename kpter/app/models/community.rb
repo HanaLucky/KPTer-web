@@ -15,11 +15,11 @@ class Community < ApplicationRecord
 
   def find_tcards(status=TCard.status.open)
     Community
-    .joins([:boards => [:t_cards => [:tcard_assignee => :user]]])
     .includes([:boards => [:t_cards => [:tcard_assignee => :user]]])
+    .references(:tcard_assignee => :user)
     .where('communities.id = ? and t_cards.status = ?', self.id, status)
     .map{ |community| community.boards.map{ |board| board.t_cards }}.flatten
-    .sort_by!{ |v| [v[:deadline], v[:id]]}    # 期限日の近い順 (同じ期限日内ではIDの昇順)
+    .sort_by!{ |v| [v[:deadline].nil? ? Date.new(9999, 12, 31) : v[:deadline], v[:id]]}  # 期限日の近い順 (同じ期限日内ではIDの昇順。未設定の場合(nil)は常に最後尾)
   end
 
   def withdraw(user)
