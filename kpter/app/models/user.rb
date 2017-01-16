@@ -24,7 +24,7 @@ class User < ApplicationRecord
         .where("t_cards.status = ?", status)
         .map { |u| u.tcard_assignees.map{ |ta| ta.t_card } }
         .flatten
-        .sort_by!{ |t| [t[:deadline], t[:id]]}
+        .sort_by!{ |t| [t[:deadline].nil? ? Date.new(9999, 12, 31) : t[:deadline], t[:id]]}  # 期限日の近い順 (同じ期限日内ではIDの昇順。未設定の場合(nil)は常に最後尾)
     end
 
     def find_all_tcards_with_user_id(user_id)

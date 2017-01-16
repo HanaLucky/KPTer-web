@@ -65,6 +65,7 @@ ActiveRecord::Schema.define(version: 20161127051758) do
     t.integer  "board_id",                                null: false, comment: "ボードID"
     t.string   "title",                                                comment: "タイトル"
     t.string   "detail",     limit: 512,                               comment: "詳細"
+    t.integer  "user_id",                                              comment: "担当者"
     t.date     "deadline",                                             comment: "期限"
     t.string   "status",     limit: 16,  default: "open", null: false, comment: "ステータス"
     t.integer  "x",                      default: 0,      null: false, comment: "X座標"
@@ -74,6 +75,7 @@ ActiveRecord::Schema.define(version: 20161127051758) do
     t.datetime "updated_at",                              null: false
     t.index ["board_id"], name: "index_t_cards_on_board_id", using: :btree
     t.index ["status"], name: "index_t_cards_on_status", using: :btree
+    t.index ["user_id"], name: "index_t_cards_on_user_id", using: :btree
   end
 
   create_table "tcard_assignees", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", comment: "Tカード担当者" do |t|
