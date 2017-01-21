@@ -29,3 +29,4 @@ Rails.application.config.assets.precompile += %w( welcome/magnific-popup/jquery.
 
 # Communitiesページ用CSS
 Rails.application.config.assets.precompile += %w( communities.css )
+Rails.application.config.assets.precompile += %w( invite_other.css )

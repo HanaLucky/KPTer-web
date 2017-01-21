@@ -12,4 +12,38 @@ $(function() {
       alert(res.message);
     }
   });
+
+  /**
+   * コミュニティ招待のモーダル表示、非表示にする
+   */
+  $('.end_action_invite').click(function() {
+    $('body').append('<div class="modal-overlay"></div>');
+    $('.modal-overlay').fadeIn(200);
+    var modal = '.modal_invite_other';
+    modalResize();
+    $(modal).fadeIn(200);
+
+    $('.modal-overlay, .modal-close').off().click(function(){
+      $(modal).fadeOut(200);
+      $('.modal-overlay').fadeOut(200, function(){
+          // オーバーレイを削除
+        $('.modal-overlay').remove();
+      });
+    });
+
+    $(window).on('resize', function(){
+      modalResize();
+    });
+
+    function modalResize(){
+      // ウィンドウの横幅、高さを取得
+      var w = $(window).width();
+      var h = $(window).height();
+      // モーダルコンテンツの表示位置を取得
+      var x = (w - $(modal).outerWidth(true)) / 2;
+      var y = (h - $(modal).outerHeight(true)) / 2;
+      // モーダルコンテンツの表示位置を設定
+      $(modal).css({'left': x + 'px','top': y + 'px'});
+    }
+  });
 });
