@@ -41,7 +41,4 @@ Rails.application.configure do
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = { :address => "localhost", :port => 1025 }
   config.action_mailer.default_url_options = { host: '192.168.33.60', port: 3000 }
-
-  # to pick which React.js build (development, production, with or without add-ons) to serve in each environment by adding a config
-  config.react.variant = :development
 end
