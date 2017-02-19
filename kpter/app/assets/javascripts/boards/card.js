@@ -3,7 +3,6 @@ $(function() {
   // カードを作成
   var button = $('.btn');
   button.click(function(){
-    console.log('createCard');
     $boardWrap = $('#boardWrap');
     $boardWrap.append('<div class="cardBox rounded ' + $(this).data('type').toString() + '" data-id=""></div>')
 
