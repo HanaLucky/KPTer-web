@@ -1,0 +1,70 @@
+#boardWrap {
+  width: 2628px;
+  height: 1952px;
+  background-color: snow;
+}
+
+.kBtn {
+  background-color: lightseagreen;
+  color: snow;
+}
+.pBtn{
+  background-color: palevioletred;
+  color: snow;
+}
+.tBtn{
+  background-color: yellowgreen;
+  color: snow;
+}
+
+.cardBox {
+  position: relative;
+  font-family: "Mplus 1p";
+  -webkit-user-modify: read-write-plaintext-only;
+  font-size: x-large;
+  width: 200px;
+  height: 200px;
+  left: 10%;
+  top: 20%;
+	vertical-align: middle;
+	text-align: center;
+  z-index: 1100;
+  padding: 0.5em 0.5em;
+  box-shadow: 0 4px 5px rgba(0, 0, 0, 0.2);
+}
+
+.cardBox.rounded {
+  -moz-border-radius: 5px 5px 5px 5px;
+  border-radius: 5px 5px 5px 5px;
+}
+
+.textBox {
+  position: absolute;
+  -webkit-user-modify: read-write-plaintext-only;
+  width: 200px;
+  height: 200px;
+  margin: auto;
+  z-index: 1200;
+}
+
+.keep {
+  background-color: powderblue;
+}
+.problem {
+  background-color: pink;
+}
+.try {
+  background-color: yellowgreen;
+}
+
+.trashCanImg {
+  width: 152px;
+  height: 230px;
+}
+
+#trashCan {
+  position: fixed;
+  bottom: 15px;
+  right: 15px;
+  z-index: 1000;
+}
