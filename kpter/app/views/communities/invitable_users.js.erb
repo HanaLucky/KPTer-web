@@ -1,0 +1,3 @@
+$(function () {
+  $('#modal_invite_other').html('<%= j(render(:partial => 'invitable_users', :locals => { invitable_users: @invitable_users, community: @community})) %>')
+});

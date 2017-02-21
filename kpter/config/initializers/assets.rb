@@ -12,7 +12,7 @@ Rails.application.config.assets.version = '1.0'
 Rails.application.config.assets.precompile += %w( communities/show.js )
 Rails.application.config.assets.precompile += %w( dataTablesSetting.js )
 Rails.application.config.assets.precompile += %w( tasksTable.js )
-Rails.application.config.assets.precompile += %w( communities/invite_other.js )
+Rails.application.config.assets.precompile += %w( communities/invitable_users.js )
 
 # Welcome/index.html.erb用CSS
 Rails.application.config.assets.precompile += %w( welcome/creative.css )

@@ -9,7 +9,6 @@ class CommunitiesController < ApplicationController
     @all_tcards = @community.find_tcards
     @t_cards = Kaminari.paginate_array(@all_tcards).page(params[:page]).per(10)
     @attendees = @community.find_users
-    @invitable_users = User.find_invitable_users(@community)
   end
 
   def toggle
@@ -36,5 +35,10 @@ class CommunitiesController < ApplicationController
         format.json { render json: {message: @community.errors.full_messages.first}, status: :unprocessable_entity }
       end
     end
+  end
+
+  def invitable_users
+    @community = Community.find(params[:id])
+    @invitable_users = User.find_invitable_users(@community)
   end
 end
