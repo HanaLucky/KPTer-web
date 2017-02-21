@@ -1,48 +1,51 @@
 <%= javascript_include_tag 'communities/invitable_users' %>
-  <div class="modal-dialog">
-    <div class="modal-content">
-        <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-            <h4 class="modal-title" id="myModalLabel">Invite others to <%= community.name %></h4>
-        </div>
-        <div class="modal-body">
-            <div class="search-container form-group input-group">
-              <span class="input-group-addon icon">
-                <i class="fa fa-search" aria-hidden="true"></i>
-              </span>
-              <input type="text" class="form-control" placeholder="Username">
-            </div>
-
-            <div class="invite-container">
-              <table class="invite-table table table-hover">
-                <tbody>
-                  <% if invitable_users.nil? %>
-                    <tr>
-                      <td>No Data Available</td>
-                    </tr>
-                  <% else %>
-                    <% invitable_users.each do |user| %>
-                      <tr>
-                        <td class="col-xs-1 col-ms-1 col-md-1 col-lg-1 text-center"><input type="checkbox"></td>
-                        <td class="col-xs-1 col-ms-1 col-md-1 col-lg-1 text-center">
-                          <%#　if attendee.profile_image.blank? %>
-                          <%#　プロフィール画像が未登録の場合、app/assets/images/noimages/の画像を表示 %>
-                          <img src="<%= asset_path "noimages/profile_#{user.id % 3}.png" %>" alt="<%= user.username %>" title="<%= user.username %>" class="cbImgPict cbThumbPict img-thumbnail img-circle">
-                          <%# else　%>
-                          <%# TODO show user's profile image %>
-                          <%# end　%>
-                        </td>
-                        <td class="col-xs-10 col-ms-10 col-md-10 col-lg-10 text-left"><%= user.username %></td>
-                      </tr>
-                    <% end %>
-                  <% end %>
-                </tbody>
-              </table>
-            </div>
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Invite</button>
-        </div>
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h4 class="modal-title" id="myModalLabel">Invite others to <%= community.name %></h4>
     </div>
+    <%= form_for community, :url => {:action => 'invite'}, :method => :post do |f| %>
+      <div class="modal-body">
+        <div class="search-container form-group input-group">
+          <span class="input-group-addon icon">
+            <i class="fa fa-search" aria-hidden="true"></i>
+          </span>
+          <input type="text" class="form-control" placeholder="Username">
+        </div>
+        <div class="invite-container">
+          <table class="invite-table table table-hover">
+            <tbody>
+              <% if invitable_users.nil? %>
+                <tr>
+                  <td>No Data Available</td>
+                </tr>
+              <% else %>
+                <% invitable_users.each do |user| %>
+                  <tr>
+                    <td class="col-xs-1 col-ms-1 col-md-1 col-lg-1 text-center">
+                      <%= f.check_box :user_ids, { multiple: true, checked: user[:checked], disabled: user[:disabled], include_hidden: false }, user[:id] %>
+                    </td>
+                    <td class="col-xs-1 col-ms-1 col-md-1 col-lg-1 text-center">
+                      <%#　if attendee.profile_image.blank? %>
+                      <%#　プロフィール画像が未登録の場合、app/assets/images/noimages/の画像を表示 %>
+                      <img src="<%= asset_path "noimages/profile_#{user.id % 3}.png" %>" alt="<%= user.username %>" title="<%= user.username %>" class="cbImgPict cbThumbPict img-thumbnail img-circle">
+                      <%# else　%>
+                      <%# TODO show user's profile image %>
+                      <%# end　%>
+                    </td>
+                    <td class="col-xs-10 col-ms-10 col-md-10 col-lg-10 text-left"><%= user.username %></td>
+                  </tr>
+                <% end %>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <%= submit_tag "Invite", class: "btn btn-primary" %>
+      </div>
+    <% end %>
   </div>
+</div>

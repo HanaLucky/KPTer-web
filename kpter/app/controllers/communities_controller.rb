@@ -41,4 +41,15 @@ class CommunitiesController < ApplicationController
     @community = Community.find(params[:id])
     @invitable_users = User.find_invitable_users(@community)
   end
+
+  def invite
+    @users = User.where(id: params[:community][:user_ids])
+    @community = Community.find(params[:id])
+    @users.each{ |user|
+      if !user.joining?(@community)
+        user.join_in(@community)
+      end
+    }
+    redirect_to :action => :show
+  end
 end
