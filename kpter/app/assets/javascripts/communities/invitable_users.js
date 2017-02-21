@@ -5,4 +5,11 @@ $(function() {
       $(':checkbox', this).trigger('click');
     }
   });
+
+  // ユーザー名絞り込みセッティング
+  // see. http://listjs.com/
+  var options = {
+    valueNames: [ 'username' ],
+  };
+  var userList = new List('users', options);
 });
