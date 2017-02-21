@@ -36,6 +36,16 @@ class User < ApplicationRecord
         .sort_by!{ |t| [t[:deadline], t[:id]]}
     end
 
+    def find_invitable_users(community)
+      User.where("id NOT IN ( SELECT
+            users.id
+        FROM
+            users
+		INNER JOIN community_users ON
+			users.id = community_users.user_id
+      and community_users.community_id = ?
+		) ", community.id)
+    end
   end
 
   def joining?(community)
@@ -48,5 +58,4 @@ class User < ApplicationRecord
       user_id: self.id
     )
   end
-
 end
