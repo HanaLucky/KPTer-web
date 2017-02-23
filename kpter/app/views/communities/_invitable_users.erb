@@ -1,4 +1,6 @@
 <%= javascript_include_tag 'communities/invitable_users' %>
+<%= javascript_include_tag 'list' %>
+
 <div class="modal-dialog">
   <div class="modal-content">
     <div class="modal-header">
@@ -6,16 +8,16 @@
         <h4 class="modal-title" id="myModalLabel">Invite others to <%= community.name %></h4>
     </div>
     <%= form_for community, :url => {:action => 'invite'}, :method => :post do |f| %>
-      <div class="modal-body">
+      <div id="users" class="modal-body">
         <div class="search-container form-group input-group">
           <span class="input-group-addon icon">
             <i class="fa fa-search" aria-hidden="true"></i>
           </span>
-          <input type="text" class="form-control" placeholder="Username">
+          <input type="text" class="form-control search" placeholder="Username">
         </div>
         <div class="invite-container">
           <table class="invite-table table table-hover">
-            <tbody>
+            <tbody class="list">
               <% if invitable_users.nil? %>
                 <tr>
                   <td>No Data Available</td>
@@ -34,7 +36,7 @@
                       <%# TODO show user's profile image %>
                       <%# end　%>
                     </td>
-                    <td class="col-xs-10 col-ms-10 col-md-10 col-lg-10 text-left"><%= user.username %></td>
+                    <td class="col-xs-10 col-ms-10 col-md-10 col-lg-10 text-left username"><%= user.username %></td>
                   </tr>
                 <% end %>
               <% end %>
