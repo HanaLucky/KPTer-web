@@ -36,6 +36,21 @@ class User < ApplicationRecord
         .sort_by!{ |t| [t[:deadline], t[:id]]}
     end
 
+    def find_invitable_users(community)
+      User.where("
+      id NOT IN (
+        SELECT
+          users.id
+        FROM
+          users
+		      INNER JOIN community_users ON
+			       users.id = community_users.user_id
+             and community_users.community_id = ?
+		  )
+      AND confirmed_at IS NOT NULL", community.id)
+      .order("users.id")
+      # XXX 自分が追加する確率、頻度が高いユーザーを上にだす。同じ部屋に入っている部屋数。個人チャット数。などなど。
+    end
   end
 
   def joining?(community)
@@ -48,5 +63,4 @@ class User < ApplicationRecord
       user_id: self.id
     )
   end
-
 end

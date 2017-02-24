@@ -12,6 +12,8 @@ Rails.application.config.assets.version = '1.0'
 Rails.application.config.assets.precompile += %w( communities/show.js )
 Rails.application.config.assets.precompile += %w( dataTablesSetting.js )
 Rails.application.config.assets.precompile += %w( tasksTable.js )
+Rails.application.config.assets.precompile += %w( communities/invitable_users.js )
+Rails.application.config.assets.precompile += %w( list.js )
 
 # Welcome/index.html.erb用CSS
 Rails.application.config.assets.precompile += %w( welcome/creative.css )
@@ -30,6 +32,7 @@ Rails.application.config.assets.precompile += %w( welcome/magnific-popup/jquery.
 
 # Communitiesページ用CSS
 Rails.application.config.assets.precompile += %w( communities.css )
+Rails.application.config.assets.precompile += %w( invite_other.css )
 
 # Boardsページ用JS
 Rails.application.config.assets.precompile += %w( boards/card.js )

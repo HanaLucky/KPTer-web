@@ -18,6 +18,8 @@ Rails.application.routes.draw do
 
   post 'communities/:id/tasks/:t_card_id/toggle' => 'communities#toggle'
   get 'communities/:id/refresh_tasks' => 'communities#refresh_tasks'
+  get 'communities/:id/invitable_users' => 'communities#invitable_users'
+  post 'communities/:id/invite' => 'communities#invite'
 
   post 'mypage/tasks/:id/toggle' => 'mypages#toggle'
   get 'mypage/refresh_tasks' => 'mypages#refresh_tasks'
