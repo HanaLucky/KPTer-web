@@ -1,7 +1,6 @@
 class MypagesController < ApplicationController
-  before_filter :store_location
   before_filter :authenticate_user!
-  
+
   def show
     @communities = User.find_communities_with_user_id(current_user.id)
     @all_tcards = User.find_tcards_with_user_id(current_user.id)
