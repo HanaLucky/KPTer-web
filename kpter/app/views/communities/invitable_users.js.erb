@@ -1,3 +1,12 @@
 $(function () {
   $('#modal_invite_other').html('<%= j(render(:partial => 'invitable_users', :locals => { invitable_users: @invitable_users, community: @community})) %>')
+
+  // 招待するユーザーが一人も選択されていない場合は、Inviteボタンを非活性にする
+  $('.invitable-user-check').click(function(){
+    if ($('.invitable-user-check:checked').length > 0) {
+      $('.invite-button').prop("disabled", false);
+    } else {
+      $('.invite-button').prop("disabled", true);
+    }
+  });
 });

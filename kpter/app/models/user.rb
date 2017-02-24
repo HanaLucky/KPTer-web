@@ -46,7 +46,8 @@ class User < ApplicationRecord
 		      INNER JOIN community_users ON
 			       users.id = community_users.user_id
              and community_users.community_id = ?
-		  ) ", community.id)
+		  )
+      AND confirmed_at IS NOT NULL", community.id)
       .order("users.id")
       # XXX 自分が追加する確率、頻度が高いユーザーを上にだす。同じ部屋に入っている部屋数。個人チャット数。などなど。
     end

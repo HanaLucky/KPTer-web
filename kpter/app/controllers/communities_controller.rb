@@ -43,6 +43,13 @@ class CommunitiesController < ApplicationController
   end
 
   def invite
+
+    # XXX paramsのvalidateはどこでやるべき？
+    if params[:community].nil?
+      # フロントJSで未選択の場合はボタンdisableにするが、それでもユーザー未指定でリクエストされた場合は、画面をリフレッシュする(chatwork理論)
+      redirect_to :action => :show and return
+    end
+
     @users = User.where(id: params[:community][:user_ids])
     @community = Community.find(params[:id])
     @users.each{ |user|
@@ -52,4 +59,5 @@ class CommunitiesController < ApplicationController
     }
     redirect_to :action => :show
   end
+
 end
