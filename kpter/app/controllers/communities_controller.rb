@@ -53,7 +53,7 @@ class CommunitiesController < ApplicationController
     @users = User.where(id: params[:community][:user_ids])
     @community = Community.find(params[:id])
     @users.each{ |user|
-      if !user.joining?(@community)
+      unless user.joining?(@community)
         user.join_in(@community)
       end
     }
