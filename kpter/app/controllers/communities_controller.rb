@@ -1,4 +1,7 @@
 class CommunitiesController < ApplicationController
+  before_filter :store_location
+  before_filter :authenticate_user!
+  
   def show
     # TODO: コミュニティページ表示中にコミュニティから除名させられた場合の処理
     # https://github.com/HanaLucky/KPTer-web/issues/96
