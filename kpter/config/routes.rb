@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, controllers: { registrations: 'users/registrations' }
   get 'welcome/index'
-
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -9,7 +8,7 @@ Rails.application.routes.draw do
   root 'welcome#index'
 
   get 'index' => 'welcome#index'
-
+  get 'confirm' => 'confirm#show'
   get 'mypage' => 'mypages#show'
 
   resources :communities, :only => [:new, :create, :show, :edit, :update, :destroy] do
