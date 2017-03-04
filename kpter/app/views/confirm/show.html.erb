@@ -1,0 +1,29 @@
+<%= stylesheet_link_tag 'confirm', media: 'all'%>
+<div class="panel panel-default devise-bs">
+  <div class="panel-body">
+    <div class="text-center">
+      <h1>Completed send authenticate mail</h1>
+      <p class="text-danger"><i class="fa fa-exclamation-circle" aria-hidden="true"></i> Registration is not completed yet.</p>
+      <p class="lead">Please access the URL described in the mail and perform the registration completion procedure.</p>
+      <ol class="steps">
+        <li>
+          <%= image_tag("confirm_step_1.png") %><br>
+          Check your mail.
+        </li>
+        <li>
+          <%= image_tag("confirm_step_2.png") %><br>
+          Click on link, please.
+        </li>
+        <li>
+          <%= image_tag("confirm_step_3.png") %><br>
+          Completed regist.
+        </li>
+      </ol>
+
+      <!-- TODO ドメインごとにリンクを切り替える -->
+      <div class="mail">
+        <a href="https://mail.google.com/mail/" target="_blank" class="btn btn-outline btn-default btn-lg btn-outline-override" role="button">Check Gmail</a>
+      </div>
+    </div>
+  </div>
+</div>
