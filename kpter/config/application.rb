@@ -9,6 +9,7 @@ require "action_controller/railtie"
 require "action_mailer/railtie"
 require "action_view/railtie"
 require "sprockets/railtie"
+require 'action_cable/engine'
 # require "rails/test_unit/railtie"
 
 # Require the gems listed in Gemfile, including any gems
@@ -38,5 +39,10 @@ module Kpter
     config.autoload_paths = %W(#{config.root}/app/forms)
     config.autoload_paths = %W(#{config.root}/app/services)
     config.autoload_paths = %W(#{config.root}/app/lib)
+
+    # TODO 本番設定も記載する
+    # redis
+    config.session_store :redis_store, servers: 'redis://localhost:6379/0', expire_in: 1.day
+
   end
 end
