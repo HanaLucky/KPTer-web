@@ -35,7 +35,10 @@ Rails.application.config.assets.precompile += %w( communities.css )
 Rails.application.config.assets.precompile += %w( invite_other.css )
 
 # Boardsページ用JS
+Rails.application.config.assets.precompile += %w( cable.js )
+Rails.application.config.assets.precompile += %w( channels/board.coffee )
 Rails.application.config.assets.precompile += %w( boards/card.js )
+
 # Boardsページ用CSS
 Rails.application.config.assets.precompile += %w( boards/style.css )
 Rails.application.config.assets.precompile += %w( boards/default.css )

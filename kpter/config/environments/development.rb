@@ -40,5 +40,9 @@ Rails.application.configure do
   # config.action_view.raise_on_missing_translations = true
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = { :address => "localhost", :port => 1025 }
-  config.action_mailer.default_url_options = { host: '192.168.33.60', port: 3000 }
+  config.action_mailer.default_url_options = { host: '192.168.33.100', port: 3000 }
+
+  # TODO 本番環境の設定も記述する
+  # Action Cable
+  config.action_cable.disable_request_forgery_protection = true
 end
