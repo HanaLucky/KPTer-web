@@ -41,4 +41,11 @@ Rails.application.configure do
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = { :address => "localhost", :port => 1025 }
   config.action_mailer.default_url_options = { host: '192.168.33.60', port: 3000 }
+
+  # whitelist
+  config.web_console.whitelisted_ips = '0.0.0.0/0'
+  
+  # disables logging of assets requests. Set to true by default in development.rb.
+  # ref. http://edgeguides.rubyonrails.org/configuring.html (search with 'config.assets.quiet')
+  config.assets.quiet = true
 end
