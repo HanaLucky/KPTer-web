@@ -8,21 +8,24 @@
       <ol class="steps">
         <li>
           <%= image_tag("confirm_step_1.png") %><br>
-          Check your mail.
+          <strong>Step 1:</strong> Check your mail.
         </li>
         <li>
           <%= image_tag("confirm_step_2.png") %><br>
-          Click on link, please.
+          <strong>Step 2:</strong> Click on link, please.
         </li>
         <li>
           <%= image_tag("confirm_step_3.png") %><br>
-          Completed regist.
+          <strong>Step 3:</strong> Completed regist.
         </li>
       </ol>
 
-      <!-- TODO ドメインごとにリンクを切り替える -->
       <div class="mail">
-        <a href="https://mail.google.com/mail/" target="_blank" class="btn btn-outline btn-default btn-lg btn-outline-override" role="button">Check Gmail</a>
+        <% if @email.end_with?("@gmail.com") %>
+          <a href="https://mail.google.com/mail/" target="_blank" class="btn btn-outline btn-default btn-lg btn-outline-override" role="button">Check Gmail</a>
+        <% elsif @email.end_with?("@yahoo.co.jp") %>
+          <a href="https://mail.yahoo.co.jp" target="_blank" class="btn btn-outline btn-default btn-lg btn-outline-override" role="button">Check Yahoo! Mail</a>
+        <% end %>
       </div>
     </div>
   </div>

@@ -56,6 +56,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def after_inactive_sign_up_path_for(resource)
     # 仮登録画面からきたかどうかのフラグ。confirm画面で、フラグ判定し除去する。
     session[:route_from_inactive_sign_up] = 1
+    session[:regist_email] = resource.email
     confirm_path
   end
 end
