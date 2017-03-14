@@ -44,7 +44,7 @@ Rails.application.configure do
 
   # whitelist
   config.web_console.whitelisted_ips = '0.0.0.0/0'
-  
+
   # disables logging of assets requests. Set to true by default in development.rb.
   # ref. http://edgeguides.rubyonrails.org/configuring.html (search with 'config.assets.quiet')
   config.assets.quiet = true

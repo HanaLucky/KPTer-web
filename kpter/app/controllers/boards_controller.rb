@@ -8,5 +8,6 @@ class BoardsController < ApplicationController
   def show
     # TODO: 仮実装。直接リンクで自分が所属しているコミュニティ以外のボードが見れないようにする？
     @board = Board.find(params[:id])
+    #.includes(:boards).references(:boards)
   end
 end

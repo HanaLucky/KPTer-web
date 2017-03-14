@@ -1,0 +1,5 @@
+# TODO 本番環境の設定も記述する
+development:
+  url: redis://localhost:6379/2
+test:
+  url: redis://localhost:6379/3

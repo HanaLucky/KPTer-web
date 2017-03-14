@@ -25,6 +25,8 @@ Rails.application.routes.draw do
   get 'mypage/refresh_tasks' => 'mypages#refresh_tasks'
   post 'mypage/create_community' => 'mypages#create_community'
 
+  mount ActionCable.server => '/cable'
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
