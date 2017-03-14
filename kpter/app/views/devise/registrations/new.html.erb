@@ -19,6 +19,9 @@
       </div>
       <%= f.submit t('.sign_up', :default => "Sign up"), class: "btn btn-primary" %>
     <% end %>
+    <div>
+      <p class="text-muted"><i class="fa fa-envelope-o" aria-hidden="true"></i> An authentication mail will be sent.</p>
+    </div>
   </div>
 </div>
 <%= render "devise/shared/links" %>

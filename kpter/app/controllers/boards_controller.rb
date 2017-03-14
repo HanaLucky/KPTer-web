@@ -1,5 +1,5 @@
 class BoardsController < ApplicationController
-  before_filter :authenticate_user!
+  before_action :authenticate_user!
 
   def create
     @board = Board.create(name: params[:board][:name], community_id: params[:community_id])

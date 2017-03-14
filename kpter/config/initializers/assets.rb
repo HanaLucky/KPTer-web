@@ -30,6 +30,9 @@ Rails.application.config.assets.precompile += %w( welcome/bootstrap/js/bootstrap
 Rails.application.config.assets.precompile += %w( welcome/scrollreveal/scrollreveal.min.js )
 Rails.application.config.assets.precompile += %w( welcome/magnific-popup/jquery.magnific-popup.min.js )
 
+# confirm/show.html.erb/用CSS
+Rails.application.config.assets.precompile += %w( confirm.css )
+
 # Communitiesページ用CSS
 Rails.application.config.assets.precompile += %w( communities.css )
 Rails.application.config.assets.precompile += %w( invite_other.css )
