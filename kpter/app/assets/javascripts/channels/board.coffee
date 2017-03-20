@@ -6,7 +6,8 @@ App.board = App.cable.subscriptions.create "BoardChannel",
     # Called when the subscription has been terminated by the server
 
   received: (data) ->
-    alert data['title']
+    alert data['x']
+    $('#boardWrap').append data['message']
 
-  create_card: (title) ->
-    @perform 'create_card', title: title
+  create_tcard: (board_id, title, x, y) ->
+    @perform 'create_tcard', board_id: board_id, title: title, x: x, y: y

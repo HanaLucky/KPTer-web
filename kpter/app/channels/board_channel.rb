@@ -7,7 +7,11 @@ class BoardChannel < ApplicationCable::Channel
     # Any cleanup needed when channel is unsubscribed
   end
 
-  def create_card(data)
-    ActionCable.server.broadcast 'board_channel', title: data['title']
+  def create_tcard(data)
+    p "******title*******"
+    p data['title']
+    p "***board-id***"
+    p data['board_id']
+    TCard.create! title: data['title'], board_id: data['board_id'], x: data['x'], y: data['y']
   end
 end
