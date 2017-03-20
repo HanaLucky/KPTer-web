@@ -33,7 +33,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.0]
       ## omniauth-twitter
       t.string  :provider
       t.string  :uid
-      t.string  :username, default: "anonymous"
+      t.string  :username, null: false
 
       t.timestamps null: false
     end
