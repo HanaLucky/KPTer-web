@@ -25,6 +25,10 @@ Rails.application.routes.draw do
   post 'mypage/create_community' => 'mypages#create_community'
 
   mount ActionCable.server => '/cable'
+  
+  if Rails.env.development?
+    mount LetterOpenerWeb::Engine, at: "/letter_opener"
+  end
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
