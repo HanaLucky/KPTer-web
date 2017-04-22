@@ -40,7 +40,7 @@ Rails.application.configure do
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
   config.action_mailer.delivery_method = :letter_opener_web
-  config.action_mailer.default_url_options = { host: Socket.getifaddrs.select{|x| x.name == "eth3" and x.addr.ipv4?}.first.addr.ip_address, port: 3000 }
+  config.action_mailer.default_url_options = { host: 192.168.33.60, port: 3000 }
 
   # whitelist
   config.web_console.whitelisted_ips = '0.0.0.0/0'
