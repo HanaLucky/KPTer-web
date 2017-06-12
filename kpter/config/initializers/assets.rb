@@ -46,3 +46,12 @@ Rails.application.config.assets.precompile += %w( boards/card.js )
 Rails.application.config.assets.precompile += %w( boards/style.css )
 Rails.application.config.assets.precompile += %w( boards/default.css )
 Rails.application.config.assets.precompile += %w( boards/component.css )
+
+# user/new, user/edit
+Rails.application.config.assets.precompile += %w( cropperjs/1.0.0-rc.2/cropper.css )
+Rails.application.config.assets.precompile += %w( cropperjs/1.0.0-rc.2/cropper.js )
+Rails.application.config.assets.precompile += %w( fine-uploader/5.14.3/fine-uploader.core.js )
+Rails.application.config.assets.precompile += %w( fine-uploader/5.14.3/fine-uploader.core.js.map )
+Rails.application.config.assets.precompile += %w( cropperjs/0.8.1/cropper.js )
+Rails.application.config.assets.precompile += %w( users/edit.js )
+Rails.application.config.assets.precompile += %w( users/edit.css )

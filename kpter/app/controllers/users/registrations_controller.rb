@@ -22,9 +22,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # DELETE /resource
-  # def destroy
-  #   super
-  # end
+  def destroy
+    # 担当者名を外す
+    # いろいろな繋がりを消す
+    resource
+
+    super
+  end
 
   # GET /resource/cancel
   # Forces the session data which is usually expired after sign
@@ -34,6 +38,18 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # def cancel
   #   super
   # end
+
+  # avatar image upload
+  def upload
+    if current_user.update_attributes(avatar: params[:qqfile])
+      flash.keep[:notice] = t 'devise.registrations.update_avatar_image'
+    else
+      # XXX いまひとつ
+      flash.keep[:alert] = current_user.errors.full_messages
+    end
+    # tokenリフレッシュするのに成功してもエラーでもレンダリングしなおすため、success固定で返す
+    render json: {success: true}
+  end
 
   protected
 
@@ -51,6 +67,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # def after_sign_up_path_for(resource)
   #   super(resource)
   # end
+
+  # The path used after edit user.
+  # see. https://github.com/plataformatec/devise/wiki/How-To:-Customize-the-redirect-after-a-user-edits-their-profile
+  def after_update_path_for(resource)
+    edit_user_registration_path
+  end
 
   # The path used after sign up for inactive accounts.
   def after_inactive_sign_up_path_for(resource)
