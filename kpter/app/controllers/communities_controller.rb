@@ -45,10 +45,9 @@ class CommunitiesController < ApplicationController
   end
 
   def invite
-
-    # XXX paramsのvalidateはどこでやるべき？
     if params[:community].nil?
       # フロントJSで未選択の場合はボタンdisableにするが、それでもユーザー未指定でリクエストされた場合は、画面をリフレッシュする(chatwork理論)
+      errors.add(:avator, t('commynity.invite.failure'))
       redirect_to :action => :show and return
     end
 
@@ -59,6 +58,8 @@ class CommunitiesController < ApplicationController
         user.join_in(@community)
       end
     }
+    
+    flash[:notice] = t('commynity.invite.success', users: @users.map(&:username).join(', '))
     redirect_to :action => :show
   end
 
