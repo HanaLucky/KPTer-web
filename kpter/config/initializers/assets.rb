@@ -55,3 +55,6 @@ Rails.application.config.assets.precompile += %w( fine-uploader/5.14.3/fine-uplo
 Rails.application.config.assets.precompile += %w( cropperjs/0.8.1/cropper.js )
 Rails.application.config.assets.precompile += %w( users/edit.js )
 Rails.application.config.assets.precompile += %w( users/edit.css )
+
+# debugger用CSS
+Rails.application.config.assets.precompile += %w( debugger.css )
