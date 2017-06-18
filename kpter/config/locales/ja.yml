@@ -37,6 +37,10 @@ ja:
           attributes:
             user_id:
               taken: "え、もう入ってるのに？"
+  commynity:
+    invite:
+      success: "%{users}を招待しました"
+      failure: "招待できませんでした"
   datetime:
     distance_in_original_words:
       over_x_day: "%{year}年%{month}月%{day}日"

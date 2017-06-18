@@ -14,12 +14,7 @@
               <div class="cbUserListRowColumn cbUserListRowCol1">
                 <div class="cbUserListFieldLine cbUserListFL_avatar">
                   <span class="cbListFieldCont cbUserListFC_avatar">
-                    <%#　if attendee.profile_image.blank? %>
-                    <%#　プロフィール画像が未登録の場合、app/assets/images/noimages/の画像を表示 %>
-                    <img src="<%= asset_path "noimages/profile_#{attendee.id % 3}.png" %>" alt="<%= attendee.username %>" title="<%= attendee.username %>" class="cbImgPict cbThumbPict img-thumbnail img-circle">
-                    <%# else　%>
-                    <%# TODO show user's profile image %>
-                    <%# end　%>
+                    <%= image_tag(avatar_url(attendee), :class => "cbImgPict cbThumbPict img-thumbnail img-circle", :alt => "#{attendee.username}") %>
                   </span>
                 </div>
                 <div class="cbUserListFieldLine cbUserListFL_formatname">

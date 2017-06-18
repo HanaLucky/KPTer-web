@@ -1,0 +1,16 @@
+/* Limit image width to avoid overflow the container */
+img {
+  max-width: 100%;
+}
+.img-avatar {
+  width: 100%;
+  margin: 0 0 5px 0;
+}
+.avatar-image-container {
+  margin: auto;
+}
+// override .modal-body in bootstrap
+.modal-body {
+  position: relative;
+  padding: 0 !important;
+}

@@ -29,12 +29,7 @@
                       <%= f.check_box :user_ids, { multiple: true, checked: user[:checked], disabled: user[:disabled], include_hidden: false, class: 'invitable-user-check'}, user[:id] %>
                     </td>
                     <td class="col-xs-1 col-ms-1 col-md-1 col-lg-1 text-center">
-                      <%#　if attendee.profile_image.blank? %>
-                      <%#　プロフィール画像が未登録の場合、app/assets/images/noimages/の画像を表示 %>
-                      <img src="<%= asset_path "noimages/profile_#{user.id % 3}.png" %>" alt="<%= user.username %>" title="<%= user.username %>" class="cbImgPict cbThumbPict img-thumbnail img-circle">
-                      <%# else　%>
-                      <%# TODO show user's profile image %>
-                      <%# end　%>
+                      <%= image_tag(avatar_url(user), :class => "cbImgPict cbThumbPict img-thumbnail img-circle", :alt => "#{user.username}") %>
                     </td>
                     <td class="col-xs-10 col-ms-10 col-md-10 col-lg-10 text-left username"><%= user.username %></td>
                   </tr>

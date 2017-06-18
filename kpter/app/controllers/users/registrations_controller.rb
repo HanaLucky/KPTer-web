@@ -21,9 +21,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
   #   super
   # end
 
+  # see. https://github.com/HanaLucky/KPTer-web/issues/183
   # DELETE /resource
   # def destroy
-  #   super
+  #  super
   # end
 
   # GET /resource/cancel
@@ -34,6 +35,18 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # def cancel
   #   super
   # end
+
+  # avatar image upload
+  def upload
+    if current_user.update_attributes(avatar: params[:qqfile])
+      flash.keep[:notice] = t 'devise.registrations.update_avatar_image'
+    else
+      # XXX いまひとつ
+      flash.keep[:alert] = current_user.errors.full_messages
+    end
+    # tokenリフレッシュするのに成功してもエラーでもレンダリングしなおすため、success固定で返す
+    render json: {success: true}
+  end
 
   protected
 
@@ -51,6 +64,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # def after_sign_up_path_for(resource)
   #   super(resource)
   # end
+
+  # The path used after edit user.
+  # see. https://github.com/plataformatec/devise/wiki/How-To:-Customize-the-redirect-after-a-user-edits-their-profile
+  def after_update_path_for(resource)
+    edit_user_registration_path
+  end
 
   # The path used after sign up for inactive accounts.
   def after_inactive_sign_up_path_for(resource)
