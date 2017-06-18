@@ -4,6 +4,7 @@ class TCard < ApplicationRecord
   belongs_to :board
   has_one :tcard_assignee
   has_one :user, :through => :tcard_assignee
+  after_create_commit { CardBroadcastJob.perform_later self }
 
   class << self
     def update_status(t_card_id)

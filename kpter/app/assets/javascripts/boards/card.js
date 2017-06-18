@@ -1,12 +1,21 @@
 $(function() {
 
+  $('.cardBox').draggable();
+  
   // カードを作成
   var button = $('.btn');
   button.click(function(){
     $boardWrap = $('#boardWrap');
-    $boardWrap.append('<div class="cardBox rounded ' + $(this).data('type').toString() + '" data-id=""></div>')
+    var board_id = $('[name=board_id]').val();
+    var type = $(this).data('type').toString();
+    var title = $(this).data('title');
+    var off = $(this).offset()
 
-    $('.cardBox').draggable();
+    if (type === 'keep' || type === 'problem') {
+      App.board.create_kpcard(type, title, board_id, off.left, off.top)
+    } else if (type === 'try') {
+      App.board.create_tcard(title, board_id, off.left, off.top)
+    }
   });
 
   // ゴミ箱へドロップ可能にする
