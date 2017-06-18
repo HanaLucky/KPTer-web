@@ -1,5 +1,12 @@
 Rails.application.routes.draw do
-  devise_for :users, controllers: { registrations: 'users/registrations' }
+  devise_for :users, controllers: {
+    registrations: 'users/registrations'
+  }
+
+  devise_scope :user do
+    post "users/upload", to: "users/registrations#upload", as: "upload_registration"
+  end
+
   get 'welcome/index'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
@@ -26,6 +33,10 @@ Rails.application.routes.draw do
 
   mount ActionCable.server => '/cable'
   
+  if Rails.env.development?
+    mount LetterOpenerWeb::Engine, at: "/letter_opener"
+  end
+
   if Rails.env.development?
     mount LetterOpenerWeb::Engine, at: "/letter_opener"
   end

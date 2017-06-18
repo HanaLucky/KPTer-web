@@ -4,10 +4,12 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
          :confirmable, :omniauthable
+  mount_uploader :avatar, AvatarUploader
   has_many :community_users
   has_many :tcard_assignees
   has_many :t_card, :through => :tcard_assignees
   validates :username, presence: true
+  validate :avatar_size
 
   class << self
     def find_communities_with_user_id(user_id)
@@ -34,7 +36,7 @@ class User < ApplicationRecord
         .where("tcard_assignees.user_id = ?", user_id)
         .map { |u| u.tcard_assignees.map{ |ta| ta.t_card } }
         .flatten
-        .sort_by!{ |t| [t[:deadline], t[:id]]}
+        .sort_by!{ |t| [t[:deadline].nil? ? Date.new(9999, 12, 31) : t[:deadline], t[:id]]}
     end
 
     def find_invitable_users(community)
@@ -64,4 +66,12 @@ class User < ApplicationRecord
       user_id: self.id
     )
   end
+
+  private
+    # validate of upload image size
+    def avatar_size
+      if avatar.size > 5.megabytes
+        errors.add(:avator, I18n.t('errors.messages.exceeded_limit_size', limit_size: "5MB"))
+      end
+    end
 end
