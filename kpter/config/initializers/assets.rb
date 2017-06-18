@@ -46,3 +46,5 @@ Rails.application.config.assets.precompile += %w( boards/card.js )
 Rails.application.config.assets.precompile += %w( boards/style.css )
 Rails.application.config.assets.precompile += %w( boards/default.css )
 Rails.application.config.assets.precompile += %w( boards/component.css )
+
+Rails.application.config.assets.precompile += %w( debugger.css )
