@@ -16,7 +16,11 @@
   <button class="btn btn-6 btn-6a" data-type="keep">Keep</button>
   <button class="btn btn-6 btn-6a" data-type="problem">Problem</button>
   <button class="btn btn-6 btn-6a" data-type="try">Try</button>
-  <div id="boardWrap" class="wrap"></div>
+  <div id="boardWrap" class="wrap">
+    <% @board.kp_cards.each do |kpcard| %>
+      <div class="cardBox rounded <%= kpcard.card_type %>" id="<%= kpcard.id %>"><%= kpcard.title %></div>
+    <% end %>
+  </div>
   <p id="trashCan" style="display: block;"><%= image_tag("trashCan.png", :class => "trashCanImg") %></p>
   <input type="hidden" name="board_id" value="<%= @board.id %>">
 </div>
