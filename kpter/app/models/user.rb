@@ -34,7 +34,7 @@ class User < ApplicationRecord
         .where("tcard_assignees.user_id = ?", user_id)
         .map { |u| u.tcard_assignees.map{ |ta| ta.t_card } }
         .flatten
-        .sort_by!{ |t| [t[:deadline], t[:id]]}
+        .sort_by!{ |t| [t[:deadline].nil? ? Date.new(9999, 12, 31) : t[:deadline], t[:id]]}
     end
 
     def find_invitable_users(community)
