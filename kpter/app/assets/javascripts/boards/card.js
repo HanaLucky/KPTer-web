@@ -1,5 +1,7 @@
 $(function() {
 
+  $('.cardBox').draggable();
+  
   // カードを作成
   var button = $('.btn');
   button.click(function(){
