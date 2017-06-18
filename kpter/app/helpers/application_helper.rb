@@ -2,7 +2,7 @@ module ApplicationHelper
 
   # avatar image url
   def avatar_url(user)
-    unless user.nil?
+    unless user
       if user.avatar.file.nil?
         url = asset_path("noimages/profile_#{user.id % 3}.png")
       else

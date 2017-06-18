@@ -21,14 +21,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
   #   super
   # end
 
+  # see. https://github.com/HanaLucky/KPTer-web/issues/183
   # DELETE /resource
-  def destroy
-    # 担当者名を外す
-    # いろいろな繋がりを消す
-    resource
-
-    super
-  end
+  # def destroy
+  #  super
+  # end
 
   # GET /resource/cancel
   # Forces the session data which is usually expired after sign
