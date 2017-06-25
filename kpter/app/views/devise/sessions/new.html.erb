@@ -30,7 +30,7 @@
             <label for="user_remember_me" class="label"><%= t('.remember_me', :default => "Remember me") %></label>
           </div>
           <% end %>
-          <%= button_tag t('.sign_in', type: 'button', :default => "Sign in"), class: 'btn btn-primary waves-effect waves-light' %>
+          <%= button_tag t('.sign_in', :default => "Sign in"), class: 'btn btn-primary waves-effect waves-light' %>
         <% end %>
       </div>
       <%= render "devise/shared/links" %>

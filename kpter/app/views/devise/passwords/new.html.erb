@@ -17,7 +17,7 @@
             <%= f.email_field :email, class: "validate", autofocus: true, required: true %>
             <%= f.label :email %>
           </div>
-          <%= button_tag t('.send_me_reset_password_instructions', type: 'button', :default => "Send me reset password instructions"), class: 'btn btn-primary waves-effect waves-light' %>
+          <%= button_tag t('.send_me_reset_password_instructions', :default => "Send me reset password instructions"), class: 'btn btn-primary waves-effect waves-light' %>
         <% end %>
       </div>
       <%= render "devise/shared/links" %>
