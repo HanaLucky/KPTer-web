@@ -29,9 +29,9 @@
                       <%= f.check_box :user_ids, { multiple: true, checked: user[:checked], disabled: user[:disabled], include_hidden: false, class: 'invitable-user-check'}, user[:id] %>
                     </td>
                     <td class="col-xs-1 col-ms-1 col-md-1 col-lg-1 text-center">
-                      <%= image_tag(avatar_url(user), :class => "cbImgPict cbThumbPict img-thumbnail img-circle", :alt => "#{user.username}") %>
+                      <%= image_tag(avatar_url(user), :class => "cbImgPict cbThumbPict img-thumbnail img-circle", :alt => "#{user.nickname}") %>
                     </td>
-                    <td class="col-xs-10 col-ms-10 col-md-10 col-lg-10 text-left username"><%= user.username %></td>
+                    <td class="col-xs-10 col-ms-10 col-md-10 col-lg-10 text-left nickname"><%= user.nickname %></td>
                   </tr>
                 <% end %>
               <% end %>

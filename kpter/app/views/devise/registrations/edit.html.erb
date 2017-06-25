@@ -15,7 +15,7 @@
         <label class="col-lg-3 control-label">Avatar</label>
         <div class="col-lg-8">
           <div class="text-center">
-            <%= image_tag(avatar_url(current_user), :class => "img-avatar img-thumbnail rounded float-left", :alt => "#{current_user.username}") %>
+            <%= image_tag(avatar_url(current_user), :class => "img-avatar img-thumbnail rounded float-left", :alt => "#{current_user.nickname}") %>
             <button class="btn btn-primary btn-block" id="btn-file-uploader">Upload new picture</button>
           </div>
         </div>
@@ -32,9 +32,9 @@
           </div>
         </div>
         <div class="form-group">
-          <%= f.label :username, class: 'col-lg-3 control-label'%>
+          <%= f.label :nickname, class: 'col-lg-3 control-label'%>
           <div class="col-lg-8">
-            <%= f.text_field :username, autofocus: true, class: "form-control", required: true %>
+            <%= f.text_field :nickname, autofocus: true, class: "form-control", required: true %>
           </div>
         </div>
         <div class="form-group">

@@ -8,7 +8,7 @@ class User < ApplicationRecord
   has_many :community_users
   has_many :tcard_assignees
   has_many :t_card, :through => :tcard_assignees
-  validates :username, presence: true
+  validates :nickname, presence: true
   validate :avatar_size
 
   class << self

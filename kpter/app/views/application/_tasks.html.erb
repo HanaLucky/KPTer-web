@@ -21,7 +21,7 @@
           <% if t_card.tcard_assignee.nil? %>
             <td></td>
           <% else %>
-            <td><%= t_card.tcard_assignee.user.username %></td>
+            <td><%= t_card.tcard_assignee.user.nickname %></td>
           <% end %>
         <% end %>
         <td><%= t_card.deadline %></td>
