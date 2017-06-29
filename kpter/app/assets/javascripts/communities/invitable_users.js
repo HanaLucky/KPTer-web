@@ -9,7 +9,7 @@ $(function() {
   // ユーザー名絞り込みセッティング
   // see. http://listjs.com/
   var options = {
-    valueNames: [ 'username' ],
+    valueNames: [ 'nickname' ],
   };
   var userList = new List('users', options);
 });

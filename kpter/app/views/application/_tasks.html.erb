@@ -26,15 +26,12 @@
         <% end %>
         <td><%= t_card.deadline %></td>
         <td align="center">
-
-
           <div class="checkbox rkmd-checkbox checkbox-rotate checkbox-ripple">
             <label class="input-checkbox checkbox-lightBlue">
               <%= check_box_tag '', '', t_card.status.closed?, { 'data-id' => t_card.id, 'data-url' => url, :onclick=>"$.post($(this).data('url')+ '/tasks/' + $(this).data('id') + '/toggle/');" } %>
               <span class="checkbox"></span>
             </label>
           </div>
-
         </td>
       </tr>
     <% end %>

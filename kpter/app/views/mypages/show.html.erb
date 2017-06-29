@@ -81,9 +81,9 @@
       <div class="panel panel-default">
         <div class="panel-heading"> <i class="fa fa-check-square-o fa-fw"></i> Tasks </div>
         <!-- /.panel-heading -->
-        <div class="panel-body">
-          <div class="dataTables_filter">
-            <div class="btn-group btn-group-sm" role="group">
+          <div class="panel-body">
+            <div class="dataTables_filter">
+              <div class="btn-group btn-group-sm" role="group">
                 <%= link_to "Open", { action: "refresh_tasks", method: :get, status: TCard.status.open, remote: true }, { class: "btn btn-primary waves-effect", id: "open-btn" } %>
                 <%= link_to "Close", { action: "refresh_tasks", method: :get, status: TCard.status.closed, remote: true }, { class: "btn btn-flat waves-effect", id: "close-btn" } %>
               </div>

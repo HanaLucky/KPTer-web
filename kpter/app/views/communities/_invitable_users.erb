@@ -1,11 +1,12 @@
 <%= javascript_include_tag 'communities/invitable_users' %>
 <%= javascript_include_tag 'list' %>
-
 <div class="modal-dialog">
   <div class="modal-content">
     <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-        <h4 class="modal-title" id="myModalLabel">Invite others to <%= community.name %></h4>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <h4 class="modal-title w-100" id="myModalLabel">Invite others to <%= community.name %></h4>
     </div>
     <%= form_for community, :url => {:action => 'invite'}, :method => :post do |f| %>
       <div id="users" class="modal-body">
@@ -13,7 +14,7 @@
           <span class="input-group-addon icon">
             <i class="fa fa-search" aria-hidden="true"></i>
           </span>
-          <input type="text" class="form-control search" placeholder="Username">
+          <input type="text" class="form-control search" placeholder="Search">
         </div>
         <div class="invite-container">
           <table class="invite-table table table-hover">
@@ -26,7 +27,12 @@
                 <% invitable_users.each do |user| %>
                   <tr>
                     <td class="col-xs-1 col-ms-1 col-md-1 col-lg-1 text-center">
-                      <%= f.check_box :user_ids, { multiple: true, checked: user[:checked], disabled: user[:disabled], include_hidden: false, class: 'invitable-user-check'}, user[:id] %>
+                      <div class="checkbox rkmd-checkbox checkbox-rotate checkbox-ripple">
+                        <label class="input-checkbox checkbox-lightBlue">
+                          <%= f.check_box :user_ids, { multiple: true, checked: user[:checked], disabled: user[:disabled], include_hidden: false, class: 'invitable-user-check'}, user[:id] %>
+                          <span class="checkbox"></span>
+                        </label>
+                      </div>
                     </td>
                     <td class="col-xs-1 col-ms-1 col-md-1 col-lg-1 text-center">
                       <%= image_tag(avatar_url(user), :class => "cbImgPict cbThumbPict img-thumbnail img-circle", :alt => "#{user.nickname}") %>

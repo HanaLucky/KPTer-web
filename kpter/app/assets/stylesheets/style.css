@@ -54,3 +54,10 @@ div.resizeimage img { width: 100%; }
 .title {
   font-size: 20px;
 }
+
+/* modal開いている時、背景固定 */
+body.modal-open {
+  overflow: hidden;
+  position:fixed;
+  width: 100%;
+}
