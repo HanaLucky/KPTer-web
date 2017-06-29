@@ -39,6 +39,22 @@
 .modal-footer .btn + .btn {
   margin: 10px !important;
 }
+
+.table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
+  vertical-align: initial !important;
+}
+
+.form-inline .radio, .form-inline .checkbox {
+  display: initial !important;
+}
+
+.btn-group .btn {
+  margin: initial;
+}
+
+.btn-group .btn + .btn, .btn-group .btn + .btn-group {
+  margin-left: initial;
+}
 /* -----------------------------------------------------
   Material Design Checkbox
   CodePen URL: https://codepen.io/rkchauhan/pen/ONJEYL
