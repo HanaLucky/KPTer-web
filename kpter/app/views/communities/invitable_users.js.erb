@@ -1,12 +1,30 @@
 $(function () {
+  
   $('#modal_invite_other').html('<%= j(render(:partial => 'invitable_users', :locals => { invitable_users: @invitable_users, community: @community})) %>')
 
-  // 招待するユーザーが一人も選択されていない場合は、Inviteボタンを非活性にする
-  $('.invitable-user-check').click(function(){
+  // レコードクリックでチェックON/OFFできるようにする
+  $('.invite-table tr').click(function(event) {
+    var $checkbox = $(this).find('.invitable-user-check');
+    var isChecked = $checkbox.prop('checked');
+    if (isChecked) {
+      $checkbox.removeProp('checked');
+    } else {
+      $checkbox.prop('checked', 'checked');
+    }
+
+    // 招待するユーザーが一人も選択されていない場合は、Inviteボタンを非活性にする
     if ($('.invitable-user-check:checked').length > 0) {
       $('.invite-button').prop("disabled", false);
     } else {
       $('.invite-button').prop("disabled", true);
     }
   });
+
+  // setting of narrowed down of users  see. http://listjs.com/
+  var userList = new List('users', {
+    valueNames: [ 'nickname' ],
+  });
+
+  // setting of material design. see. app/assets/javascript/mdb_style.js
+  initialize_md_style();
 });

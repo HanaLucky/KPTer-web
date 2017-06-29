@@ -3,16 +3,37 @@
   color: #777 !important;
 }
 
+.navbar .navbar-brand {
+  height: 50px !important;
+  line-height: initial !important;
+}
+
 /* mdb.cssと競合している部分を解消 */
 .navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
-  color: #333 !important;
+  color: #f8f8f8 !important;
   background-color: transparent !important;
+}
+
+.navbar .navbar-toggle {
+    border-color: #f8f8f8 !important;
+}
+
+.navbar-default .navbar-toggle:focus, .navbar-default .navbar-toggle:hover {
+  background-color: #ddd !important;
+}
+
+.navbar-default .navbar-toggle .icon-bar {
+  background-color: #888 !important;
 }
 
 /* ラベルが少し右に寄るのを打ち消す */
 /* mdb.cssと競合している部分を解消 */
 .input-field label {
-  left: initial;
+  left: 0 !important;
+}
+
+.personal-info .input-field label {
+  left: initial !important;
 }
 
 /* https://material.io/guidelines/components/text-fields.html#text-fields-layout */
@@ -58,6 +79,86 @@
 
 .btn-group .btn + .btn, .btn-group .btn + .btn-group {
   margin-left: initial;
+}
+
+.list-group.z-depth-1 {
+    border-radius: 4px;
+}
+
+a {
+  color: #337ab7 !important;
+}
+.pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus {
+  color: #fff !important;
+}
+
+a.list-group-item:hover, button.list-group-item:hover, a.list-group-item:focus {
+  color: #555 !important;
+}
+
+a.list-group-item, button.list-group-item {
+  color: #555 !important;
+}
+.btn:hover, .btn:focus, .btn.focus {
+  color: #333 !important;
+}
+
+.btn-primary {
+  color: #fff !important;
+}
+.btn-primary:hover, .btn-primary:focus {
+  color: #fff !important;
+}
+.btn-default {
+  color: #fff !important;
+}
+.btn-default:hover, .btn-default:focus {
+  color: #fff !important;
+}
+
+.panel-green a:hover {
+  color: #3d8b3d !important;
+}
+.panel-green > a:hover {
+  color: #3d8b3d !important;
+}
+.panel-green a {
+  color: #5cb85c !important;
+}
+
+.panel-yellow a:hover {
+    color: #df8a13 !important;
+}
+.panel-yellow > a:hover {
+    color: #df8a13 !important;
+}
+.panel-yellow a {
+    color: #f0ad4e !important;
+}
+
+a:hover {
+    color: #23527c !important;
+}
+
+.fixed-action-btn {
+    position: fixed;
+    right: 23px;
+    bottom: 23px;
+    padding-top: 15px;
+    margin-bottom: 0;
+    z-index: 998;
+}
+
+.fixed-action-btn ul {
+    left: 0;
+    right: 0;
+    text-align: center;
+    position: absolute;
+    bottom: 64px;
+    margin: 0;
+}
+.btn-sm, .btn-group-sm > .btn {
+  padding: 5px 22px;
 }
 /* -----------------------------------------------------
   Material Design Checkbox
@@ -134,7 +235,7 @@ body {
   margin: 0;
   padding: 0;
   color: #646360;
-  font-size: 16px;
+  font-size: 14px;
   font-family: 'Roboto', sans-serif;
   background-color: #fafafa;
 }

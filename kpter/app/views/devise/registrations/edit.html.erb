@@ -11,11 +11,11 @@
     <!-- left column -->
     <div class="col-md-4 col-sm-6 col-xs-12">
       <div class="form-group">
-        <label class="col-lg-3 control-label">Avatar</label>
+        <label class="col-lg-5 control-label">Avatar</label>
         <div class="col-lg-8">
           <div class="text-center">
             <%= image_tag(avatar_url(current_user), :class => "img-avatar img-thumbnail rounded float-left", :alt => "#{current_user.nickname}") %>
-            <button class="btn btn-primary btn-block waves-effect waves-light" id="btn-file-uploader">Upload new picture</button>
+            <a class="btn btn-primary btn-block waves-effect waves-light" id="btn-file-uploader">Upload new picture</a>
           </div>
         </div>
       </div>
@@ -78,7 +78,7 @@
 </div>
 
 <!-- /#page-wrapper -->
-<div class="modal fade" id="modal-upload-avator" tabindex="-1" role="dialog" aria-labelledby="modal-upload-avator-label" aria-hidden="true" style="display: none;">
+<div class="modal fade" id="modal-upload-avator" tabindex="-1" role="dialog" aria-labelledby="modal-upload-avator-label" aria-hidden="true">
   <%= render :partial => 'upload_avator', locals: {user: current_user} %>
 </div>
 

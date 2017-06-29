@@ -6,3 +6,16 @@
   src: url('../assets/glyphicons-halflings-regular.eot');
   src: url('../assets/glyphicons-halflings-regular.eot?#iefix') format("embedded-opentype"), url('../assets/glyphicons-halflings-regular.woff2') format("woff2"), url('../assets/glyphicons-halflings-regular.woff') format("woff"), url('../assets/glyphicons-halflings-regular.ttf') format("truetype"), url('../assets/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format("svg");
 }
+.action-ul ul {
+  margin-left:0;
+  padding:0;
+  list-style-type:none;
+  li {
+    cursor:pointer;
+    display:inline-block;
+    margin: 0 10px 0 0;
+    .fa-li {
+      position: static;
+    }
+  }
+}

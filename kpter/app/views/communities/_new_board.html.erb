@@ -8,17 +8,15 @@
     </div>
     <div class="modal-body">
       <%= form_tag("/communities/#{current_community.id}/boards", :method => :post) do |f| %>
-        <div class="md-form">
-          <label for="form42">Board name</label>
-          <%= text_field :board, :name, class: "orm-control validate", required: true, placeholder: "Board Name" %>
+        <div class="input-field col">
+          <label for="board_name">Board name</label>
+          <%= text_field :board, :name, class: "form-control validate", required: true, autofocus: true, placeholder: "Board name"%>
         </div>
-        <div class="text-center">
-          <button class="btn btn-primary waves-effect waves-light">Submit</button>
+        <div class="text-right">
+          <button class="btn btn-default waves-effect waves-light" data-dismiss="modal">Cancel</button>
+          <button class="btn btn-primary waves-effect waves-light">Create Board</button>
         </div>
       <% end %>
-    </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-default waves-effect waves-light" data-dismiss="modal">Close</button>
     </div>
   </div>
 </div>

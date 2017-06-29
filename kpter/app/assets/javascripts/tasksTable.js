@@ -9,4 +9,7 @@ $(function() {
     });
     // data-table setting
     setDataTables('dataTables-tasks');
+
+    // material design setting
+    initialize_md_style();
 });

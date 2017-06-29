@@ -1,3 +1,10 @@
+body {
+  font-family: 'Roboto', 'Hiragino Kaku Gothic ProN', sans-serif !important;
+}
+.navbar-default {
+  font-family: 'Roboto', 'Hiragino Kaku Gothic ProN', sans-serif !important;
+}
+
 .top0 { margin-top:0px; }
 .top1 { margin-top:1px; }
 .top5 { margin-top:5px; }
@@ -34,20 +41,19 @@ div.resizeimage img { width: 100%; }
   vertical-align: baseline !important;
 }
 
-
 .navbar-default {
   border-color: rgba(34, 34, 34, 0.05);
-  font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+  font-family: 'Roboto', 'Hiragino Kaku Gothic ProN', sans-serif !important;
   -webkit-transition: all 0.35s;
   -moz-transition: all 0.35s;
   transition: all 0.35s;
 }
 
 .header-text {
-  font-family: 'Open Sans', Arial;
+  font-family: 'Roboto', 'Hiragino Kaku Gothic ProN', sans-serif !important;
   text-transform: uppercase;
-  font-weight: 700;
-  font-size: 13px;
+  font-weight: 500;
+  font-size: 14px;
   padding: 15px 15px;
 }
 
@@ -60,4 +66,12 @@ body.modal-open {
   overflow: hidden;
   position:fixed;
   width: 100%;
+}
+
+.navbar .navbar-brand {
+  color: #22B9B6 !important;
+}
+
+.dataTables_filter_action {
+  margin: 0 0 10px 0;
 }

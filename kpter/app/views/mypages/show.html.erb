@@ -57,7 +57,9 @@
     <!-- /.col-lg-12 -->
     <div class="col-lg-12">
       <div class="panel panel-default">
-        <div class="panel-heading"> <i class="fa fa-comments fa-fw"></i> Communities </div>
+        <div class="panel-heading">
+          <i class="fa fa-comments fa-fw"></i> Communities
+        </div>
         <!-- /.panel-heading -->
         <div class="panel-body">
           <% if @communities.empty? then %>
@@ -66,7 +68,7 @@
             <div class="list-group">
               <% @communities.each do |community| %>
                 <a href="<%= url_for :controller => :communities, :action => :show, :id => community.id %>" class="list-group-item">
-                  <i class="fa fa-comment fa-fw"></i> <%= community.name %>
+                  <i class="fa fa-comment fa-fw"></i><%= community.name %>
                 </a>
               <% end %>
             </div>
@@ -88,9 +90,9 @@
                 <%= link_to "Close", { action: "refresh_tasks", method: :get, status: TCard.status.closed, remote: true }, { class: "btn btn-flat waves-effect", id: "close-btn" } %>
               </div>
             </div>
-          </div>
-          <div id="t_cards-table">
-            <%= render :partial => "tasks", :locals => { t_cards: @t_cards, visible_assignee: false, url: "mypage" } %>
+            <div id="t_cards-table">
+              <%= render :partial => "tasks", :locals => { t_cards: @t_cards, visible_assignee: false, url: "mypage" } %>
+            </div>
           </div>
         </div>
       </div>
@@ -103,7 +105,7 @@
 
 <!-- form of new community modal -->
 <div class="modal fade modal-ext" id="modal-new-community" tabindex="-1" role="dialog" aria-labelledby="modal-new-community" aria-hidden="true">
-  <%= render :partial => 'new_community' %>
+  <%= render :partial => 'shared/new_community' %>
 </div>
 
 <%= javascript_include_tag 'mdb/3.4.1/mdb' %>

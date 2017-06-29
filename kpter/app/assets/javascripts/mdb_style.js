@@ -17,9 +17,19 @@
   * jQuery - https://jquery.com
 -------------------------------------------------------- */
 $(document).ready(function() {
+  initialize_md_style();
+});
+
+// マテリアルデザインのアニメーションを動作させるために必要な初期設定を呼び出す
+var initialize_md_style = function() {
+  _initialize_checkbox();
+}
+
+// checkboxを初期化(private　紳士協定)
+var _initialize_checkbox = function(){
   $('.checkbox-ripple').rkmd_checkboxRipple();
   change_checkbox_color();
-});
+};
 
 (function($) {
 

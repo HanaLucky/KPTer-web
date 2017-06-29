@@ -1,7 +1,7 @@
 $(function() {
   // read more. https://vitalets.github.io/x-editable/index.html
   $('#community-name').editable({
-    tpl: '<input type="text" maxlength=32 style="width:450px;">',
+    tpl: '<input type="text" maxlength=32 style="width:450px;font-size: 2.92rem;">',
     success: function(response, newValue) {
         // 左サイドナビのコミュニティ名を書き換える
         $('#navi-communities li .active').html('<i class="fa fa-comment fa-fw"></i>' + escapeHTML(newValue));
