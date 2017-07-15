@@ -6,7 +6,7 @@
         <ul class="nav nav-second-level" id="navi-communities">
           <% communities.each do |community| %>
             <li>
-              <a href="<%= url_for :controller => :communities, :action => :show, :id => community.id %>"><i class="fa fa-comment fa-fw"></i><%= community.name %></a>
+              <a href="<%= url_for :controller => :communities, :action => :show, :id => community.id %>"><i class="fa fa-comment fa-fw"></i> <%= community.name %></a>
             </li>
           <% end %>
         </ul>
