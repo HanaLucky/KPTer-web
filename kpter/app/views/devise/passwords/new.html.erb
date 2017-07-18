@@ -1,17 +1,29 @@
-<%= bootstrap_devise_error_messages! %>
-<div class="panel panel-default devise-bs">
-  <div class="panel-heading">
-    <h4><%= t('.forgot_your_password', :default => 'Forgot your password?') %></h4>
-  </div>
-  <div class="panel-body">
-    <%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post, role: "form" }) do |f| %>
-      <div class="form-group">
-        <%= f.label :email %>
-        <%= f.email_field :email, autofocus: true, class: "form-control" %>
-      </div>
+<%= stylesheet_link_tag 'mdb/3.4.1/mdb', media: 'all' %>
+<%= stylesheet_link_tag 'mdb_style', media: 'all' %>
 
-      <%= f.submit t('.send_me_reset_password_instructions', :default => "Send me reset password instructions"), class: "btn btn-primary" %>
-    <% end %>
+<div class="panel-heading">
+  <h4 class="text-center">
+    <%= t('.forgot_your_password', :default => 'Forgot your password?') %>
+  </h4>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <%= bootstrap_devise_error_messages! %>
+      <%= render 'shared/error_messages'%>
+      <div class="card-panel">
+        <%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post, role: "form" }) do |f| %>
+          <div class="input-field col">
+            <%= f.email_field :email, class: "validate", autofocus: true, required: true %>
+            <%= f.label :email %>
+          </div>
+          <%= button_tag t('.send_me_reset_password_instructions', :default => "Send me reset password instructions"), class: 'btn btn-primary waves-effect waves-light' %>
+        <% end %>
+      </div>
+      <%= render "devise/shared/links" %>
+    </div>
   </div>
 </div>
-<%= render "devise/shared/links" %>
+
+<%= javascript_include_tag 'mdb/3.4.1/mdb' %>
+<%= javascript_include_tag 'mdb_style' %>

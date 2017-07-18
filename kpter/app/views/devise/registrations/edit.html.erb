@@ -1,8 +1,7 @@
 <%= stylesheet_link_tag 'cropperjs/1.0.0-rc.2/cropper', media: 'all' %>
 <%= stylesheet_link_tag 'users/edit', media: 'all' %>
-<%= javascript_include_tag 'cropperjs/1.0.0-rc.2/cropper' %>
-<%= javascript_include_tag 'users/edit.js' %>
-<%= javascript_include_tag 'fine-uploader/5.14.3/fine-uploader.core' %>
+<%= stylesheet_link_tag 'mdb/3.4.1/mdb', media: 'all' %>
+<%= stylesheet_link_tag 'mdb_style', media: 'all' %>
 
 <div class="container">
   <h3>Personal info</h3>
@@ -12,11 +11,11 @@
     <!-- left column -->
     <div class="col-md-4 col-sm-6 col-xs-12">
       <div class="form-group">
-        <label class="col-lg-3 control-label">Avatar</label>
+        <label class="col-lg-5 control-label">Avatar</label>
         <div class="col-lg-8">
           <div class="text-center">
-            <%= image_tag(avatar_url(current_user), :class => "img-avatar img-thumbnail rounded float-left", :alt => "#{current_user.username}") %>
-            <button class="btn btn-primary btn-block" id="btn-file-uploader">Upload new picture</button>
+            <%= image_tag(avatar_url(current_user), :class => "img-avatar img-thumbnail rounded float-left", :alt => "#{current_user.nickname}") %>
+            <a class="btn btn-primary btn-block waves-effect waves-light" id="btn-file-uploader">Upload new picture</a>
           </div>
         </div>
       </div>
@@ -26,43 +25,42 @@
 
       <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, class: 'form-horizontal'}) do |f| %>
         <div class="form-group">
-          <%= f.label :email, class: 'col-lg-3 control-label'%>
-          <div class="col-lg-8">
-            <%= f.email_field :email, autofocus: true, class: "form-control", :required => true %>
+          <div class="input-field col col-lg-8">
+            <%= f.label :email, class: "required" %>
+            <%= f.email_field :email, autofocus: true, class: "form-control validate", :required => true %>
           </div>
         </div>
         <div class="form-group">
-          <%= f.label :username, class: 'col-lg-3 control-label'%>
-          <div class="col-lg-8">
-            <%= f.text_field :username, autofocus: true, class: "form-control", required: true %>
+          <div class="input-field col col-lg-8">
+          <%= f.label :nickname, class: "required" %>
+          <%= f.text_field :nickname, autofocus: true, class: "form-control validate", required: true %>
           </div>
         </div>
         <div class="form-group">
-          <%= f.label :password, class: 'col-lg-3 control-label'%>
-          <div class="col-lg-8">
-            <%= f.password_field :password, :autocomplete => "off", class: "form-control" %>
-            <i>(<%= t('.leave_blank_if_you_don_t_want_to_change_it', :default => "leave blank if you don't want to change it") %>)</i>
+          <div class="input-field col col-lg-8">
+            <%= f.label :password %>
+            <%= f.password_field :password, :autocomplete => "off", class: "form-control validate" %>
+            <p class="help-block"><small><%= t('.leave_blank_if_you_don_t_want_to_change_it', :default => "leave blank if you don't want to change it") %></small></p>
           </div>
         </div>
         <div class="form-group">
-          <%= f.label :password_confirmation, class: 'col-lg-3 control-label'%>
-          <div class="col-lg-8">
-            <%= f.password_field :password_confirmation, class: "form-control" %>
+          <div class="input-field col col-lg-8">
+            <%= f.label :password_confirmation %>
+            <%= f.password_field :password_confirmation, class: "form-control validate" %>
           </div>
         </div>
         <div class="form-group">
-          <%= f.label :current_password, class: 'col-lg-3 control-label'%>
-          <div class="col-lg-8">
-            <%= f.password_field :current_password, class: "form-control", :required => true %>
-            <i>(<%= t('.we_need_your_current_password_to_confirm_your_changes', :default => 'we need your current password to confirm your changes') %>)</i>
+          <div class="input-field col col-lg-8">
+            <%= f.label :current_password, class: "required" %>
+            <%= f.password_field :current_password, class: "form-control validate", :required => true %>
+            <p class="help-block"><small><%= t('.we_need_your_current_password_to_confirm_your_changes', :default => 'we need your current password to confirm your changes') %></small></p>
+            <p class="help-block"><small>* Required</small></p>
           </div>
         </div>
         <div class="form-group">
-          <label class="col-lg-3 control-label"></label>
           <div class="col-lg-8">
-            <%= f.submit t('.update', :default => "Update"), class: "btn btn-primary" %>
-            <span></span>
-            <%= link_to 'Cancel', mypage_path, class: 'btn btn-default' %>
+            <%= button_tag t('.update', :default => "Update"), class: 'btn btn-primary waves-effect waves-light' %>
+            <%= link_to 'Cancel', mypage_path, class: 'btn btn-default waves-effect waves-light' %>
           </div>
         </div>
         <%# https://github.com/HanaLucky/KPTer-web/issues/183 %>
@@ -80,6 +78,12 @@
 </div>
 
 <!-- /#page-wrapper -->
-<div class="modal fade" id="modal-upload-avator" tabindex="-1" role="dialog" aria-labelledby="modal-upload-avator-label" aria-hidden="true" style="display: none;">
+<div class="modal fade" id="modal-upload-avator" tabindex="-1" role="dialog" aria-labelledby="modal-upload-avator-label" aria-hidden="true">
   <%= render :partial => 'upload_avator', locals: {user: current_user} %>
 </div>
+
+<%= javascript_include_tag 'cropperjs/1.0.0-rc.2/cropper' %>
+<%= javascript_include_tag 'users/edit.js' %>
+<%= javascript_include_tag 'fine-uploader/5.14.3/fine-uploader.core' %>
+<%= javascript_include_tag 'mdb/3.4.1/mdb' %>
+<%= javascript_include_tag 'mdb_style' %>

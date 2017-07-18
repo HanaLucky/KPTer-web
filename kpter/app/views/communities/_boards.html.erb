@@ -1,6 +1,6 @@
 <% boards.each do |board| %>
-  <a href="<%= url_for([community, board]) %>" class="list-group-item fa fa-columns">
-      <%= board.name %>
+  <a href="<%= url_for([community, board]) %>" class="list-group-item">
+      <i class="fa fa-columns fa-fw"></i><%= board.name %>
       <span class="pull-right text-muted small"><em><%= board.created_at.to_s(:distance) %></em>
       </span>
   </a>

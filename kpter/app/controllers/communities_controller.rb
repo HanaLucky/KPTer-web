@@ -59,7 +59,7 @@ class CommunitiesController < ApplicationController
       end
     }
     
-    flash[:notice] = t('commynity.invite.success', users: @users.map(&:username).join(', '))
+    flash[:notice] = t('commynity.invite.success', users: @users.map(&:nickname).join(', '))
     redirect_to :action => :show
   end
 

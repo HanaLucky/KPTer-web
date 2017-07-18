@@ -1,7 +1,7 @@
 <%= javascript_include_tag 'dataTablesSetting' %>
 <%= javascript_include_tag 'tasksTable' %>
 
-<table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-tasks">
+<table width="100%" class="table table-striped" id="dataTables-tasks">
   <thead>
     <tr>
       <th class="col-xs-8 col-ms-8 col-md-8 col-lg-8">Task</th>
@@ -21,11 +21,18 @@
           <% if t_card.tcard_assignee.nil? %>
             <td></td>
           <% else %>
-            <td><%= t_card.tcard_assignee.user.username %></td>
+            <td><%= t_card.tcard_assignee.user.nickname %></td>
           <% end %>
         <% end %>
         <td><%= t_card.deadline %></td>
-        <td align="center"><%= check_box_tag '', '', t_card.status.closed?, { 'data-id' => t_card.id, 'data-url' => url, :onclick=>"$.post($(this).data('url')+ '/tasks/' + $(this).data('id') + '/toggle/');" } %></td>
+        <td align="center">
+          <div class="checkbox rkmd-checkbox checkbox-rotate checkbox-ripple">
+            <label class="input-checkbox checkbox-lightBlue">
+              <%= check_box_tag '', '', t_card.status.closed?, { 'data-id' => t_card.id, 'data-url' => url, :onclick=>"$.post($(this).data('url')+ '/tasks/' + $(this).data('id') + '/toggle/');" } %>
+              <span class="checkbox"></span>
+            </label>
+          </div>
+        </td>
       </tr>
     <% end %>
   </tbody>

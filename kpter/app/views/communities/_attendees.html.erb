@@ -14,12 +14,12 @@
               <div class="cbUserListRowColumn cbUserListRowCol1">
                 <div class="cbUserListFieldLine cbUserListFL_avatar">
                   <span class="cbListFieldCont cbUserListFC_avatar">
-                    <%= image_tag(avatar_url(attendee), :class => "cbImgPict cbThumbPict img-thumbnail img-circle", :alt => "#{attendee.username}") %>
+                    <%= image_tag(avatar_url(attendee), :class => "cbImgPict cbThumbPict img-thumbnail img-circle", :alt => "#{attendee.nickname}") %>
                   </span>
                 </div>
                 <div class="cbUserListFieldLine cbUserListFL_formatname">
                   <span class="cbListFieldCont cbUserListFC_formatname">
-                    <%= attendee.username %>
+                    <%= attendee.nickname %>
                   </span>
                 </div>
               </div>

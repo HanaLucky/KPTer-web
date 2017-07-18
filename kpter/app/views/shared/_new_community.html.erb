@@ -1,0 +1,22 @@
+<div class="modal-dialog" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <h4 class="modal-title w-100" id="myModalLabel">CREATE NEW COMMUNITY</h4>
+    </div>
+    <div class="modal-body">
+      <%= form_tag('/mypage/create_community') do |f| %>
+        <div class="input-field col">
+          <label for="community_name">Community name</label>
+          <%= text_field :community, :name, value: "", class: "form-control validate", required: true, placeholder: "Community name" %>
+        </div>
+        <div class="text-right">
+          <button class="btn btn-default waves-effect waves-light" data-dismiss="modal">Cancel</button>
+          <button class="btn btn-primary waves-effect waves-light">Create Community</button>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

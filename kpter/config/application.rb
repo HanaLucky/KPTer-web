@@ -44,5 +44,8 @@ module Kpter
     # redis
     config.session_store :redis_store, servers: 'redis://localhost:6379/0', expire_in: 1.day
 
+    # form_for が勝手に出力する<div class="field_with_errors"></div>を制御し、デザイン崩れを防止する
+    # see. http://guides.rubyonrails.org/configuring.html#configuring-action-view
+    config.action_view.field_error_proc = Proc.new { |html_tag, instance| %Q(#{html_tag}).html_safe }
   end
 end

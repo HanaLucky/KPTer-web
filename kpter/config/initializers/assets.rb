@@ -12,7 +12,6 @@ Rails.application.config.assets.version = '1.0'
 Rails.application.config.assets.precompile += %w( communities/show.js )
 Rails.application.config.assets.precompile += %w( dataTablesSetting.js )
 Rails.application.config.assets.precompile += %w( tasksTable.js )
-Rails.application.config.assets.precompile += %w( communities/invitable_users.js )
 Rails.application.config.assets.precompile += %w( list.js )
 
 # Welcome/index.html.erb用CSS
@@ -47,7 +46,13 @@ Rails.application.config.assets.precompile += %w( boards/style.css )
 Rails.application.config.assets.precompile += %w( boards/default.css )
 Rails.application.config.assets.precompile += %w( boards/component.css )
 
-# user/new, user/edit
+# bootstrap material design 3. see. https://mdbootstrap.com/mdb3/
+Rails.application.config.assets.precompile += %w( mdb/3.4.1/mdb.css )
+Rails.application.config.assets.precompile += %w( mdb/3.4.1/mdb.js )
+Rails.application.config.assets.precompile += %w( mdb_style.css )
+Rails.application.config.assets.precompile += %w( mdb_style.js )
+
+# users
 Rails.application.config.assets.precompile += %w( cropperjs/1.0.0-rc.2/cropper.css )
 Rails.application.config.assets.precompile += %w( cropperjs/1.0.0-rc.2/cropper.js )
 Rails.application.config.assets.precompile += %w( fine-uploader/5.14.3/fine-uploader.core.js )
