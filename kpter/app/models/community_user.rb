@@ -1,4 +1,6 @@
 class CommunityUser < ApplicationRecord
+  extend Enumerize
+  enumerize :status, in: [:inviting, :joining], default: :inviting
   belongs_to :community
   belongs_to :user
 
