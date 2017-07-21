@@ -827,3 +827,20 @@ footer {
     .ripple { background-color: $btn_brown !important; }
   }
 }
+
+.btn-rounded {
+    -webkit-border-radius: 10em;
+    -moz-border-radius: 10em;
+    -ms-border-radius: 10em;
+    -o-border-radius: 10em;
+    border-radius: 10em;
+}
+
+.btn-info:focus, .btn-info:hover {
+  background-color: #4abde8 !important;
+  color: #fff !important;
+}
+
+.btn-info {
+  color: #fff !important;
+}

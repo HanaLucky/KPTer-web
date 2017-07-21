@@ -38,9 +38,11 @@ en:
             user_id:
               taken: "Are you sure that you want to join this community AGAIN??"
   commynity:
-    invite:
-      success: "invited %{users} in this community."
+    invitation:
+      success: "invited %{users} to this community."
       failure: "Could not join in this community."
+      accept: "You joined in this community!"
+      decline: "declined an invitation."
   datetime:
     distance_in_original_words:
       over_x_day: "%{month} %{day}, %{year}"
