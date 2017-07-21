@@ -29,7 +29,11 @@ class MypagesController < ApplicationController
     respond_to do |format|
       ActiveRecord::Base.transaction do
         if @community.save
-          @community_user = CommunityUser.new(user_id: current_user.id, community_id: @community.id)
+          @community_user = CommunityUser.new(
+            user_id: current_user.id,
+            community_id: @community.id,
+            status: CommunityUser.status.joining
+            )
           if @community_user.save
             format.html { redirect_to @community, notice: 'Community was successfully created.' }
             format.json { render :show, status: :created, location: @community }

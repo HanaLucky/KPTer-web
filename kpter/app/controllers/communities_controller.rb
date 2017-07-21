@@ -14,8 +14,8 @@ class CommunitiesController < ApplicationController
   end
 
   def toggle
-      render nothing: true
-      TCard.update_status(params[:t_card_id])
+    render nothing: true
+    TCard.update_status(params[:t_card_id])
   end
 
   def refresh_tasks
@@ -47,7 +47,7 @@ class CommunitiesController < ApplicationController
   def invite
     if params[:community].nil?
       # フロントJSで未選択の場合はボタンdisableにするが、それでもユーザー未指定でリクエストされた場合は、画面をリフレッシュする(chatwork理論)
-      errors.add(:avator, t('commynity.invite.failure'))
+      errors.add(:avator, t('commynity.invitation.failure'))
       redirect_to :action => :show and return
     end
 
@@ -55,12 +55,26 @@ class CommunitiesController < ApplicationController
     @community = Community.find(params[:id])
     @users.each{ |user|
       unless user.joining?(@community)
-        user.join_in(@community)
+        user.invited(@community)
       end
     }
-    
-    flash[:notice] = t('commynity.invite.success', users: @users.map(&:nickname).join(', '))
+
+    flash[:notice] = t('commynity.invitation.success', users: @users.map(&:nickname).join(', '))
     redirect_to :action => :show
+  end
+
+  def accept
+    community = Community.find(params[:id])
+    current_user.join_in(community)
+    flash[:notice] = t('commynity.invitation.accept')
+    redirect_to :action => :show
+  end
+
+  def decline
+    community = Community.find(params[:id])
+    current_user.decline(community)
+    flash[:notice] = t('commynity.invitation.decline')
+    redirect_to :controller => :mypages, :action => :show
   end
 
 end

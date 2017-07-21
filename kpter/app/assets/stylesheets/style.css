@@ -75,3 +75,7 @@ body.modal-open {
 .dataTables_filter_action {
   margin: 0 0 10px 0;
 }
+
+.form-inline {
+  display: inline-flex;
+}

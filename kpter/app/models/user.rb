@@ -57,14 +57,35 @@ class User < ApplicationRecord
   end
 
   def joining?(community)
-    CommunityUser.where("user_id = ? and community_id = ?", id, community.id).present?
+    CommunityUser.find_by(
+      user_id: self.id,
+      community_id: community.id,
+      status: CommunityUser.status.joining
+    ).present?
+  end
+
+  def invited(community)
+    CommunityUser.create(
+      community_id: community.id,
+      user_id: self.id,
+      status: CommunityUser.status.inviting
+    )
   end
 
   def join_in(community)
-    CommunityUser.create(
+    community_user = CommunityUser.find_by(
       community_id: community.id,
-      user_id: self.id
+      user_id: self.id,
     )
+    community_user.update(status: CommunityUser.status.joining)
+  end
+
+  def decline(community)
+    community_user = CommunityUser.find_by(
+      community_id: community.id,
+      user_id: self.id,
+    )
+    community_user.destroy
   end
 
   private
