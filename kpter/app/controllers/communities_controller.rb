@@ -1,5 +1,7 @@
 class CommunitiesController < ApplicationController
   before_action :authenticate_user!
+  before_action :exists_community?
+  before_action :allowed_to_display?
 
   def show
     # TODO: コミュニティページ表示中にコミュニティから除名させられた場合の処理
@@ -77,4 +79,19 @@ class CommunitiesController < ApplicationController
     redirect_to :controller => :mypages, :action => :show
   end
 
+  private
+    def exists_community?
+      unless Community.exists?(params[:id])
+        flash[:alert] = t('commynity.errors.not_allowed')
+        redirect_to :controller => :mypages, :action => :show
+      end
+    end
+
+    def allowed_to_display?
+      community = Community.find(params[:id])
+      unless current_user.allowed_to_display?(community)
+        flash[:alert] = t('commynity.errors.not_allowed')
+        redirect_to :controller => :mypages, :action => :show
+      end
+    end
 end

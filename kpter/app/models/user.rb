@@ -88,6 +88,13 @@ class User < ApplicationRecord
     community_user.destroy
   end
 
+  def allowed_to_display?(community)
+    CommunityUser.exists?(
+      community_id: community.id,
+      user_id: self.id
+    )
+  end
+
   private
     # validate of upload image size
     def avatar_size
