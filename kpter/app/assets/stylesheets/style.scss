@@ -25,6 +25,7 @@ body {
   margin:0 auto;
   text-align:left;
 }
+
 #kpter-description {
   z-index: 2;
   content: "";
@@ -78,4 +79,37 @@ body.modal-open {
 
 .form-inline {
   display: inline-flex;
+}
+
+
+.new-text {
+  font-weight: 600;
+}
+
+.community-name {
+  width: 90%;
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
+  vertical-align: middle;
+}
+
+.circle {
+  background-color: #ff8c00;
+  border: 1px solid #ff8c00;
+  border-radius: 9px;
+  box-sizing: border-box;
+  display: block;
+  height: .6em;
+  min-width: .6em;
+  padding: 0 .15em;
+  position: relative;
+  text-align: center;
+  width: auto;
+  float: right;
+  margin: 6px 0;
+
 }

@@ -14,10 +14,11 @@ class User < ApplicationRecord
   class << self
     def find_communities_with_user_id(user_id)
       User.includes([{ :community_users => :community }])
-        .references(:community_users).order("communities.id DESC")
+        .references(:community_users)
         .where("community_users.user_id = ?", user_id)
-        .map { |u| u.community_users.map { |cu| cu.community }}
+        .map { |u| u.community_users }
         .flatten
+        .sort_by!{ |v| [v[:status], v[:updated_at]] }
     end
 
     def find_tcards_with_user_id(user_id, status = TCard.status.open)

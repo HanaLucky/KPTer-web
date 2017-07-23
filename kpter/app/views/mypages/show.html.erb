@@ -66,9 +66,9 @@
             No entries found
           <% else %>
             <div class="list-group">
-              <% @communities.each do |community| %>
-                <a href="<%= url_for :controller => :communities, :action => :show, :id => community.id %>" class="list-group-item">
-                  <i class="fa fa-comment fa-fw"></i><%= community.name %>
+              <% @communities.each do |cu| %>
+                <a href="<%= url_for :controller => :communities, :action => :show, :id => cu.community.id %>" class="list-group-item  <% if cu.status.inviting? %>new-text<% end %>">
+                  <span class="community-name"><i class="fa fa-comment fa-fw"></i> <%= cu.community.name %></span><% if cu.status.inviting? %><span class="circle"></span><% end %>
                 </a>
               <% end %>
             </div>

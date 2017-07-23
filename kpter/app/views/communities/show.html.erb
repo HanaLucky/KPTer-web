@@ -9,6 +9,11 @@
   <%= render :partial => 'inviting' %>
 <% end %>
 
+<!-- form of new community modal -->
+<div class="modal fade modal-ext" id="modal-new-community" tabindex="-1" role="dialog" aria-labelledby="modal-new-community" aria-hidden="true">
+  <%= render :partial => 'shared/new_community' %>
+</div>
+
 <%= javascript_include_tag 'mdb/3.4.1/mdb' %>
 <%= javascript_include_tag 'mdb_style' %>
 <%= javascript_include_tag 'communities/show' %>
