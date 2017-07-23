@@ -36,7 +36,6 @@ class Community < ApplicationRecord
     .includes(:community_users => :user)
     .where(id: self.id)
     .map{ |community| community.community_users}.flatten
-    .sort_by!{ |v| v[:id] }    # 参加した順(IDの昇順)
-    .map{ |cu| cu.user}
+    .sort_by!{ |v| [v[:status].reverse, v[:updated_at]] }    # 参加した順(IDの昇順)
   end
 end
