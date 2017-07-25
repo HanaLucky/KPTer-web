@@ -79,6 +79,12 @@ class CommunitiesController < ApplicationController
     redirect_to :controller => :mypages, :action => :show
   end
 
+  def leave
+    community = Community.find(params[:id])
+    current_user.leave(community)
+    redirect_to :controller => :mypages, :action => :show
+  end
+
   private
     def exists_community?
       unless Community.exists?(params[:id])

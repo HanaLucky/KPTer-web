@@ -17,10 +17,13 @@
       <div class="col-lg-12">
         <div class="action-ul">
           <ul class="fa-ul">
-            <li> <a role="button" class="end_action_invite" data-toggle="modal" data-target="#modal_invite_other"></a>
+            <li> <a role="button" data-toggle="modal" data-target="#modal_invite_other"></a>
               <%= link_to community_path(@community) + '/invitable_users', {:remote => true,  'data-toggle' =>  "modal", 'data-target' => '#modal_invite_other'} do %>
                 <i class="fa-li fa fa-user-plus" aria-hidden="true"></i>Invite others to this community
               <% end %>
+            </li>
+            <li>
+              <a role="button" data-toggle="modal" data-target="#modal_leave"><i class="fa-li fa fa-sign-out" aria-hidden="true"></i>Leave</a>
             </li>
           </ul>
         </div>
@@ -144,11 +147,16 @@
 <!-- /#page-wrapper -->
 
 <!-- form of invite other -->
-<div class="modal fade" id="modal_invite_other" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+<div class="modal fade" id="modal_invite_other" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <%= render :partial => 'invitable_users', :locals => {invitable_users: @invitable_users, community: @community} %>
 </div>
 
 <!-- form of new community modal -->
 <div class="modal fade modal-ext" id="modal-new-board" tabindex="-1" role="dialog" aria-labelledby="modal-new-board" aria-hidden="true">
   <%= render :partial => 'new_board', locals: {current_community: @community}%>
+</div>
+
+<!-- form of leave -->
+<div class="modal fade" id="modal_leave" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <%= render :partial => 'leave', :locals => {current_community: @community} %>
 </div>
