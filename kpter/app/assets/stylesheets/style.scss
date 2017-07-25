@@ -111,5 +111,19 @@ body.modal-open {
   width: auto;
   float: right;
   margin: 6px 0;
+}
 
+.modal-description-container {
+  padding: 10px 15px;
+  .description {
+    font-size: 16px;
+    line-height: 25px;
+    font-weight: 300;
+    margin: 0 0 15px 0;
+  }
+  .notice {
+    margin: 0 0 5px 10px;
+    font-weight: 300;
+    color: #777;
+  }
 }

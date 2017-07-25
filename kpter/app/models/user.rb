@@ -89,6 +89,31 @@ class User < ApplicationRecord
     community_user.destroy
   end
 
+  def leave(community)
+    # leave community - delete from community_users entity
+    community_user = CommunityUser.find_by(
+      community_id: community.id,
+      user_id: self.id,
+    )
+    community_user.destroy
+
+    # remove the charge - update t_cards entity, delete from tcard_assignees entity
+    assigned_tasks_in_community = Community
+      .includes([:boards => [:t_cards => [:tcard_assignee => :user]]])
+      .references(:tcard_assignee => :user)
+      .where('communities.id = ? and t_cards.user_id = ?', community.id, self.id)
+      .map{ |community| community.boards.map{ |board| board.t_cards }}.flatten
+
+    assigned_tasks_in_community.each do | t_card |
+      t_card.update_attributes(user_id: nil)
+      tcard_assignee = TcardAssignee.find_by(
+        t_card_id: t_card.id,
+        user_id: self.id
+      )
+      tcard_assignee.destroy
+    end
+  end
+
   def allowed_to_display?(community)
     CommunityUser.exists?(
       community_id: community.id,
