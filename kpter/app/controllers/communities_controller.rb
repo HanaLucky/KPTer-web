@@ -85,6 +85,12 @@ class CommunitiesController < ApplicationController
     redirect_to :controller => :mypages, :action => :show
   end
 
+  def destroy
+    community = Community.find(params[:id])
+    community.rest_in_place
+    redirect_to :controller => :mypages, :action => :show
+  end
+
   private
     def exists_community?
       unless Community.exists?(params[:id])
