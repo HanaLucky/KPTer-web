@@ -110,7 +110,7 @@ class User < ApplicationRecord
         t_card_id: t_card.id,
         user_id: self.id
       )
-      tcard_assignee.destroy
+      tcard_assignee.destroy unless tcard_assignee.nil?
     end
   end
 
