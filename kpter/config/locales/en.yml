@@ -43,6 +43,8 @@ en:
       failure: "Could not join in this community."
       accept: "You joined in this community!"
       decline: "declined an invitation."
+    leave: "You have left the community."
+    destroyed: "Community was successfully deleted."
     errors:
       not_allowed: "The community does not exists or is not allowed to display."
   datetime:

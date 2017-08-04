@@ -5,3 +5,4 @@
 //= require bootstrap-editable
 //= require bootstrap-editable-rails
 //= require common
+//= require toastr

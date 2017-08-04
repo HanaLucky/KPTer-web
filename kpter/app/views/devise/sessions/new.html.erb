@@ -9,10 +9,9 @@
 <div class="container">
   <div class="row">
     <div class="col-md-6 col-md-offset-3">
-      <%= bootstrap_devise_error_messages! %>
-      <%= render 'shared/error_messages'%>
       <div class="card-panel">
         <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { role: "form" }) do |f| %>
+          <%= render 'shared/error_messages', object: f.object %>
           <div class="input-field col">
             <%= f.email_field :email, class: "validate", required: true %>
             <%= f.label :email %>

@@ -1,0 +1,15 @@
+<% if flash[:notice] %>
+  <script>
+    toastr.success('<%= flash[:notice] %>')
+  </script>
+<% end %>
+<% if flash[:alert] %>
+  <script>
+    toastr.options = {
+      "closeButton": true,
+      "timeOut": "0",
+      "extendedTimeOut": "0",
+    }
+    toastr.warning('<%= flash[:alert] %>')
+  </script>
+<% end %>
