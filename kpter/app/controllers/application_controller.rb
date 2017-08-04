@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :store_location, :configure_permitted_parameters, if: :devise_controller?
   after_action :store_location
+  rescue_from ActiveRecord::RecordNotFound, with: :render_404
 
   def store_location
     # store last url - this is needed for post-login redirect to whatever the user last visited.
@@ -25,10 +26,14 @@ class ApplicationController < ActionController::Base
   end
 
   protected
+    def configure_permitted_parameters
+      # see. https://github.com/plataformatec/devise#strong-parameters
+      devise_parameter_sanitizer.permit(:sign_up, keys: [:nickname])
+      devise_parameter_sanitizer.permit(:account_update, keys: [:nickname])
+    end
 
-  def configure_permitted_parameters
-    # see. https://github.com/plataformatec/devise#strong-parameters
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:nickname])
-    devise_parameter_sanitizer.permit(:account_update, keys: [:nickname])
-  end
+  private
+    def render_404
+      render file: Rails.root.join('public/404.html'), status: 404, layout: false, content_type: 'text/html'
+    end
 end

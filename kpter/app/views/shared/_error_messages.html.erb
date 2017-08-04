@@ -1,12 +1,10 @@
-<% if flash[:notice] %>
-  <div class="alert alert-success alert-dismissable">
-    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-    <%= flash[:notice] %>
-  </div>
-<% end %>
-<% if flash[:alert] %>
-  <div class="alert alert-danger alert-dismissable">
-    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-    <%= flash[:alert] %>
-  </div>
+<% if object.errors.any? %>
+  <script>
+    toastr.options = {
+      "closeButton": true,
+      "timeOut": "0",
+      "extendedTimeOut": "0",
+    }
+    toastr.warning('<ul><%= raw(resource.errors.full_messages.map { |msg| content_tag(:li, msg) }.join) %></ul>', 'This form contains <%= pluralize(object.errors.count, 'error') %>.')
+  </script>
 <% end %>

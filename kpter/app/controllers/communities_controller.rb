@@ -82,21 +82,21 @@ class CommunitiesController < ApplicationController
   def leave
     community = Community.find(params[:id])
     current_user.leave(community)
+    flash[:notice] = t('commynity.leave')
     redirect_to :controller => :mypages, :action => :show
   end
 
   def destroy
     community = Community.find(params[:id])
     community.rest_in_place
+    flash[:notice] = t('commynity.destroyed')
     redirect_to :controller => :mypages, :action => :show
   end
 
   private
     def exists_community?
-      unless Community.exists?(params[:id])
-        flash[:alert] = t('commynity.errors.not_allowed')
-        redirect_to :controller => :mypages, :action => :show
-      end
+      # if community does not exists, raise RecordNotFound error
+      Community.find(params[:id])
     end
 
     def allowed_to_display?

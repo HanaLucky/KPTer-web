@@ -420,6 +420,7 @@ GEM
     thor (0.19.4)
     thread_safe (0.3.6)
     tilt (2.0.7)
+    toastr_rails (2.1.3)
     trollop (2.1.2)
     turbolinks (5.0.1)
       turbolinks-source (~> 5)
@@ -479,6 +480,7 @@ DEPENDENCIES
   spring-commands-rspec
   spring-watcher-listen (~> 2.0.0)
   therubyracer
+  toastr_rails (~> 2.1, >= 2.1.3)
   turbolinks (~> 5)
   tzinfo-data
   uglifier (>= 1.3.0)
