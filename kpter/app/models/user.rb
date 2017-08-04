@@ -121,6 +121,14 @@ class User < ApplicationRecord
     )
   end
 
+  def remember_me
+    if Kpter::Application.config.remember_me_enable_by_default
+      true
+    else
+      super
+    end
+  end
+
   private
     # validate of upload image size
     def avatar_size

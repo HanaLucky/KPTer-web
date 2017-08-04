@@ -47,5 +47,8 @@ module Kpter
     # form_for が勝手に出力する<div class="field_with_errors"></div>を制御し、デザイン崩れを防止する
     # see. http://guides.rubyonrails.org/configuring.html#configuring-action-view
     config.action_view.field_error_proc = Proc.new { |html_tag, instance| %Q(#{html_tag}).html_safe }
+
+    # remember me enabled by default
+    config.remember_me_enable_by_default = true
   end
 end

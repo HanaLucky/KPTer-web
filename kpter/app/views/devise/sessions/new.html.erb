@@ -21,14 +21,14 @@
             <%= f.password_field :password, autocomplete: "off", class: "validate", required: true %>
             <%= f.label :password %>
           </div>
-          <% if devise_mapping.rememberable? %>
-          <div class="checkbox rkmd-checkbox checkbox-rotate checkbox-ripple">
-            <label class="input-checkbox checkbox-lightBlue">
-              <%= f.check_box :remember_me %>
-              <span class="checkbox"></span>
-            </label>
-            <label for="user_remember_me" class="label"><%= t('.remember_me', :default => "Remember me") %></label>
-          </div>
+          <% if devise_mapping.rememberable? && !Kpter::Application.config.remember_me_enable_by_default %>
+            <div class="checkbox rkmd-checkbox checkbox-rotate checkbox-ripple">
+              <label class="input-checkbox checkbox-lightBlue">
+                <%= f.check_box :remember_me %>
+                <span class="checkbox"></span>
+              </label>
+              <label for="user_remember_me" class="label"><%= t('.remember_me', :default => "Remember me") %></label>
+            </div>
           <% end %>
           <%= button_tag t('.sign_in', :default => "Sign in"), class: 'btn btn-primary waves-effect waves-light' %>
         <% end %>
