@@ -8,9 +8,11 @@
     </div>
     <div class="modal-body">
       <%= form_tag("/communities/#{current_community.id}/boards", :method => :post) do |f| %>
-        <div class="input-field col">
-          <label for="board_name">Board name</label>
-          <%= text_field :board, :name, class: "form-control validate", required: true, autofocus: true, placeholder: "Board name"%>
+        <div class="form-group">
+          <div class="input-field col">
+            <%= text_field :board, :name, value: "", class: "form-control validate", required: true, autofocus: true, placeholder: "Board name"%>
+            <label for="board_name" class="require" data-error="wrong">Board name</label>
+          </div>
         </div>
         <div class="text-right">
           <button type="reset" class="btn btn-default waves-effect waves-light" data-dismiss="modal">Cancel</button>

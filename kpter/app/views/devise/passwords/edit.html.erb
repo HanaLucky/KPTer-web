@@ -6,16 +6,18 @@
     <%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :put, role: "form" }) do |f| %>
       <%= f.hidden_field :reset_password_token %>
       <%= render 'shared/error_messages', object: f.object %>
-      <div class="form-group">
-        <%= f.label :password, t('.new_password', :default => 'New password') %>
-        <%= f.password_field :password, autofocus: true, class: "form-control"  %>
+      <div class="form-group form-group-field">
+        <div class="input-field col">
+          <%= f.password_field :password, autofocus: true, autocomplete: "off", class: "form-control validate", required: true, maxlength: 128 %>
+          <%= f.label :password, class: "required", data: {error: 'wrong'} %>
+        </div>
       </div>
-
-      <div class="form-group">
-        <%= f.label :password_confirmation, t('.confirm_new_password', :default => 'Confirm new password') %>
-        <%= f.password_field :password_confirmation, class: "form-control"  %>
+      <div class="form-group form-group-field">
+        <div class="input-field col">
+          <%= f.password_field :password_confirmation, class: "form-control validate", required: true, maxlength: 128 %>
+          <%= f.label :password_confirmation, t('.confirm_new_password', :default => 'Confirm new password'), class: "required", data: {error: 'wrong'} %>
+        </div>
       </div>
-
       <%= f.submit t('.change_my_password', :default => 'Change my password'), class: "btn btn-primary" %>
     <% end %>
   </div>

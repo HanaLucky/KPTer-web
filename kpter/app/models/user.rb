@@ -8,6 +8,7 @@ class User < ApplicationRecord
   has_many :community_users
   has_many :tcard_assignees
   has_many :t_card, :through => :tcard_assignees
+  validates :email, presence: true, length: { maximum: 255 }
   validates :nickname, presence: true, length: { maximum: 255 }
   validate :avatar_size
 

@@ -12,13 +12,17 @@
       <div class="card-panel">
         <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { role: "form" }) do |f| %>
           <%= render 'shared/error_messages', object: f.object %>
-          <div class="input-field col">
-            <%= f.email_field :email, class: "validate", required: true %>
-            <%= f.label :email %>
+          <div class="form-group form-group-field">
+            <div class="input-field col">
+              <%= f.email_field :email, autofocus: true, class: "form-control validate", required: true, maxlength: 255 %>
+              <%= f.label :email, class: "required", data: {error: 'wrong'} %>
+            </div>
           </div>
-          <div class="input-field col">
-            <%= f.password_field :password, autocomplete: "off", class: "validate", required: true %>
-            <%= f.label :password %>
+          <div class="form-group form-group-field">
+            <div class="input-field col">
+              <%= f.password_field :password, autocomplete: "off", class: "form-control validate", required: true, maxlength: 128  %>
+              <%= f.label :password, class: "required", data: {error: 'wrong'} %>
+            </div>
           </div>
           <% if devise_mapping.rememberable? && !Kpter::Application.config.remember_me_enable_by_default %>
             <div class="checkbox rkmd-checkbox checkbox-rotate checkbox-ripple">
