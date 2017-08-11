@@ -1,4 +1,5 @@
 $(function () {
+  
   // cropper object
   var cropper;
 

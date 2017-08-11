@@ -36,7 +36,30 @@ en:
         user:
           attributes:
             user_id:
-              taken: "Are you sure that you want to join this community AGAIN??"
+              taken: "%{attribute} has already been taken"
+            email:
+              blank: "%{attribute} can't be blank"
+              taken: "%{attribute} has already been taken"
+              invalid: "%{attribute} is invalid"
+              too_long:  "%{attribute} is too long (maximum is %{count} characters)"
+            nickname:
+              blank: "%{attribute} can't be blank"
+              invalid: "%{attribute} is invalid"
+              too_long:  "%{attribute} is too long (maximum is %{count} characters)"
+            password:
+              blank: "%{attribute} can't be blank"
+              invalid: "%{attribute} is invalid"
+              confirmation: "%{attribute} does not match"
+              too_short: "%{attribute} is too short (minimum is %{count} characters)"
+              too_long:  "%{attribute} is too long (maximum is %{count} characters)"
+            password_confirmation:
+              blank: "%{attribute} can't be blank"
+              invalid: "%{attribute} is invalid"
+              confirmation: "%{attribute} does not match"
+            current_password:
+              blank: "%{attribute} can't be blank"
+              invalid: "%{attribute} is invalid"
+              confirmation: "%{attribute} does not match"
   commynity:
     invitation:
       success: "invited %{users} to this community."

@@ -5,6 +5,10 @@ body {
   font-family: 'Roboto', 'Hiragino Kaku Gothic ProN', sans-serif !important;
 }
 
+* {
+  word-wrap: break-word;
+}
+
 .top0 { margin-top:0px; }
 .top1 { margin-top:1px; }
 .top5 { margin-top:5px; }
@@ -125,5 +129,16 @@ body.modal-open {
     margin: 0 0 5px 10px;
     font-weight: 300;
     color: #777;
+    li:before {
+      content: "* "
+    }
   }
+}
+
+.form-control {
+  padding: .3rem 0 0.3rem !important;
+}
+
+.form-group-field {
+  margin-bottom: 25px !important;
 }

@@ -5,6 +5,6 @@
       "timeOut": "0",
       "extendedTimeOut": "0",
     }
-    toastr.warning('<ul><%= raw(resource.errors.full_messages.map { |msg| content_tag(:li, msg) }.join) %></ul>', 'This form contains <%= pluralize(object.errors.count, 'error') %>.')
+    toastr.warning('<ul><%= raw(resource.errors.values.map { |k, v| content_tag(:li, k) }.join) %></ul>', 'This form contains <%= pluralize(object.errors.count, 'error') %>.')
   </script>
 <% end %>
