@@ -1,10 +1,12 @@
 class ApplicationController < ActionController::Base
+  class Forbidden < ActionController::ActionControllerError; end
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
   before_action :store_location, :configure_permitted_parameters, if: :devise_controller?
   after_action :store_location
-  rescue_from ActiveRecord::RecordNotFound, with: :render_404
+
+  rescue_from Forbidden, with: :render_403
 
   def store_location
     # store last url - this is needed for post-login redirect to whatever the user last visited.
@@ -33,7 +35,8 @@ class ApplicationController < ActionController::Base
     end
 
   private
-    def render_404
-      render file: Rails.root.join('public/404.html'), status: 404, layout: false, content_type: 'text/html'
+    def render_403
+      render file: Rails.root.join('public/403.html'), status: :forbidden, layout: false, content_type: 'text/html'
     end
+
 end
