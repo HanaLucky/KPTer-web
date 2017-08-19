@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170719044057) do
+ActiveRecord::Schema.define(version: 20170819060209) do
 
   create_table "boards", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", comment: "ボード" do |t|
     t.integer  "community_id",             null: false, comment: "コミュニティID"
@@ -22,7 +22,7 @@ ActiveRecord::Schema.define(version: 20170719044057) do
   end
 
   create_table "communities", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", comment: "コミュニティ" do |t|
-    t.string   "name",         limit: 16,             null: false, comment: "コミュニティ名"
+    t.string   "name",         limit: 32,             null: false
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
     t.integer  "lock_version",            default: 0, null: false
@@ -97,12 +97,12 @@ ActiveRecord::Schema.define(version: 20170719044057) do
   end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string   "email",                  default: "",          null: false
-    t.string   "encrypted_password",     default: "",          null: false
+    t.string   "email",                             default: "", null: false
+    t.string   "encrypted_password",                default: "", null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,           null: false
+    t.integer  "sign_in_count",                     default: 0,  null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
@@ -113,11 +113,11 @@ ActiveRecord::Schema.define(version: 20170719044057) do
     t.string   "unconfirmed_email"
     t.string   "provider"
     t.string   "uid"
-    t.string   "nickname",               default: "anonymous"
+    t.string   "nickname",               limit: 32,              null: false
     t.string   "avatar"
-    t.datetime "created_at",                                   null: false
-    t.datetime "updated_at",                                   null: false
-    t.integer  "lock_version",           default: 0,           null: false
+    t.datetime "created_at",                                     null: false
+    t.datetime "updated_at",                                     null: false
+    t.integer  "lock_version",                      default: 0,  null: false
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
