@@ -87,7 +87,7 @@ class User < ApplicationRecord
       community_id: community.id,
       user_id: self.id,
     )
-    community_user.destroy
+    community_user.delete
   end
 
   def leave(community)
@@ -96,7 +96,7 @@ class User < ApplicationRecord
       community_id: community.id,
       user_id: self.id,
     )
-    community_user.destroy
+    community_user.delete
 
     # remove the charge - update t_cards entity, delete from tcard_assignees entity
     assigned_tasks_in_community = Community
@@ -111,7 +111,7 @@ class User < ApplicationRecord
         t_card_id: t_card.id,
         user_id: self.id
       )
-      tcard_assignee.destroy unless tcard_assignee.nil?
+      tcard_assignee.delete unless tcard_assignee.nil?
     end
   end
 
