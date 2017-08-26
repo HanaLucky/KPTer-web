@@ -5,6 +5,10 @@ body {
   font-family: 'Roboto', 'Hiragino Kaku Gothic ProN', sans-serif !important;
 }
 
+* {
+  word-wrap: break-word;
+}
+
 .top0 { margin-top:0px; }
 .top1 { margin-top:1px; }
 .top5 { margin-top:5px; }
@@ -25,6 +29,7 @@ body {
   margin:0 auto;
   text-align:left;
 }
+
 #kpter-description {
   z-index: 2;
   content: "";
@@ -74,4 +79,66 @@ body.modal-open {
 
 .dataTables_filter_action {
   margin: 0 0 10px 0;
+}
+
+.form-inline {
+  display: inline-flex;
+}
+
+
+.new-text {
+  font-weight: 600;
+}
+
+.community-name {
+  width: 90%;
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
+  vertical-align: middle;
+}
+
+.circle {
+  background-color: #ff8c00;
+  border: 1px solid #ff8c00;
+  border-radius: 9px;
+  box-sizing: border-box;
+  display: block;
+  height: .6em;
+  min-width: .6em;
+  padding: 0 .15em;
+  position: relative;
+  text-align: center;
+  width: auto;
+  float: right;
+  margin: 6px 0;
+}
+
+.modal-description-container {
+  padding: 10px 15px;
+  .description {
+    font-size: 16px;
+    line-height: 25px;
+    font-weight: 300;
+    margin: 0 0 15px 0;
+  }
+  .notice {
+    margin: 0 0 5px 10px;
+    font-weight: 300;
+    color: #777;
+    li:before {
+      content: "* "
+    }
+  }
+}
+
+.form-control {
+  padding: .3rem 0 0.3rem !important;
+}
+
+.form-group-field {
+  margin-bottom: 25px !important;
 }

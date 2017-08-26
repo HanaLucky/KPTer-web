@@ -3,7 +3,12 @@ class BoardsController < ApplicationController
 
   def create
     @board = Board.create(name: params[:board][:name], community_id: params[:community_id])
-    redirect_to controller: 'boards', action: 'show', id: @board.id
+    if @board.errors.any?
+      flash.keep[:alert] = @board.errors.full_messages.first
+      redirect_to controller: 'communities', action: 'show', id: params[:community_id]
+    else
+      redirect_to controller: 'boards', action: 'show', id: @board.id
+    end
   end
 
   def show

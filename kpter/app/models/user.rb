@@ -8,16 +8,18 @@ class User < ApplicationRecord
   has_many :community_users
   has_many :tcard_assignees
   has_many :t_card, :through => :tcard_assignees
-  validates :nickname, presence: true
+  validates :email, presence: true, length: { maximum: 255 }
+  validates :nickname, presence: true, length: { maximum: 255 }
   validate :avatar_size
 
   class << self
     def find_communities_with_user_id(user_id)
       User.includes([{ :community_users => :community }])
-        .references(:community_users).order("communities.id DESC")
+        .references(:community_users)
         .where("community_users.user_id = ?", user_id)
-        .map { |u| u.community_users.map { |cu| cu.community }}
+        .map { |u| u.community_users }
         .flatten
+        .sort_by!{ |v| [v[:status], v[:updated_at]] }
     end
 
     def find_tcards_with_user_id(user_id, status = TCard.status.open)
@@ -57,14 +59,75 @@ class User < ApplicationRecord
   end
 
   def joining?(community)
-    CommunityUser.where("user_id = ? and community_id = ?", id, community.id).present?
+    CommunityUser.find_by(
+      user_id: self.id,
+      community_id: community.id,
+      status: CommunityUser.status.joining
+    ).present?
+  end
+
+  def invited(community)
+    CommunityUser.create(
+      community_id: community.id,
+      user_id: self.id,
+      status: CommunityUser.status.inviting
+    )
   end
 
   def join_in(community)
-    CommunityUser.create(
+    community_user = CommunityUser.find_by(
+      community_id: community.id,
+      user_id: self.id,
+    )
+    community_user.update(status: CommunityUser.status.joining)
+  end
+
+  def decline(community)
+    community_user = CommunityUser.find_by(
+      community_id: community.id,
+      user_id: self.id,
+    )
+    community_user.delete
+  end
+
+  def leave(community)
+    # leave community - delete from community_users entity
+    community_user = CommunityUser.find_by(
+      community_id: community.id,
+      user_id: self.id,
+    )
+    community_user.delete
+
+    # remove the charge - update t_cards entity, delete from tcard_assignees entity
+    assigned_tasks_in_community = Community
+      .includes([:boards => [:t_cards => [:tcard_assignee => :user]]])
+      .references(:tcard_assignee => :user)
+      .where('communities.id = ? and t_cards.user_id = ?', community.id, self.id)
+      .map{ |community| community.boards.map{ |board| board.t_cards }}.flatten
+
+    assigned_tasks_in_community.each do | t_card |
+      t_card.update_attributes(user_id: nil)
+      tcard_assignee = TcardAssignee.find_by(
+        t_card_id: t_card.id,
+        user_id: self.id
+      )
+      tcard_assignee.delete unless tcard_assignee.nil?
+    end
+  end
+
+  def allowed_to_display?(community)
+    CommunityUser.exists?(
       community_id: community.id,
       user_id: self.id
     )
+  end
+
+  def remember_me
+    if Kpter::Application.config.remember_me_enable_by_default
+      true
+    else
+      super
+    end
   end
 
   private

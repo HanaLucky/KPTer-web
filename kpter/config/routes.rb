@@ -26,7 +26,10 @@ Rails.application.routes.draw do
   get 'communities/:id/refresh_tasks' => 'communities#refresh_tasks'
   get 'communities/:id/invitable_users' => 'communities#invitable_users'
   post 'communities/:id/invite' => 'communities#invite'
-
+  post 'communities/:id/accept' => 'communities#accept'
+  post 'communities/:id/decline' => 'communities#decline'
+  post 'communities/:id/leave' => 'communities#leave'
+  
   post 'mypage/tasks/:id/toggle' => 'mypages#toggle'
   get 'mypage/refresh_tasks' => 'mypages#refresh_tasks'
   post 'mypage/create_community' => 'mypages#create_community'

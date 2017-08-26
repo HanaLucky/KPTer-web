@@ -1,0 +1,25 @@
+<div id="page-wrapper">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="col-lg-12 top5">
+        <h1 class="page-header"><%= @community.name %></h1>
+      </div>
+      <div class="col-md-6 center-block">
+        <div class="text-center invitation-msg">
+            You received an invitation to join a community.<br>
+            Do you accept or decline?
+        </div>
+        <div class="text-center">
+          <div class="form-inline">
+            <%= form_for @community, :url => {:action => 'decline'}, :method => :post do |f| %>
+              <%= button_tag "Decline", class: "btn btn-info btn-rounded btn-invite waves-effect waves-light", style: "text-transform: initial;" %>
+            <% end %>
+            <%= form_for @community, :url => {:action => 'accept'}, :method => :post do |f| %>
+              <%= button_tag "Accept", class: "btn btn-primary btn-rounded btn-invite waves-effect waves-light", style: "text-transform: initial;" %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

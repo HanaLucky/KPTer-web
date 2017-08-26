@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170624115930) do
+ActiveRecord::Schema.define(version: 20170819060209) do
 
   create_table "boards", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", comment: "ボード" do |t|
     t.integer  "community_id",             null: false, comment: "コミュニティID"
@@ -29,11 +29,12 @@ ActiveRecord::Schema.define(version: 20170624115930) do
   end
 
   create_table "community_users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", comment: "コミュニティ：ユーザー関連" do |t|
-    t.integer  "community_id",             null: false, comment: "コミュニティID"
-    t.integer  "user_id",                  null: false, comment: "ユーザーID"
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
-    t.integer  "lock_version", default: 0, null: false
+    t.integer  "community_id",                                 null: false, comment: "コミュニティID"
+    t.integer  "user_id",                                      null: false, comment: "ユーザーID"
+    t.string   "status",       limit: 16, default: "inviting", null: false, comment: "ステータス"
+    t.datetime "created_at",                                   null: false
+    t.datetime "updated_at",                                   null: false
+    t.integer  "lock_version",            default: 0,          null: false
     t.index ["community_id", "user_id"], name: "index_community_users_on_community_id_and_user_id", unique: true, using: :btree
     t.index ["community_id"], name: "index_community_users_on_community_id", using: :btree
     t.index ["user_id"], name: "index_community_users_on_user_id", using: :btree
@@ -66,12 +67,6 @@ ActiveRecord::Schema.define(version: 20170624115930) do
     t.index ["board_id"], name: "index_memos_on_board_id", using: :btree
   end
 
-  create_table "messages", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.text     "content",    limit: 65535
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
-  end
-
   create_table "t_cards", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", comment: "Tカード" do |t|
     t.integer  "board_id",                                  null: false, comment: "ボードID"
     t.string   "title",                                                  comment: "タイトル"
@@ -102,12 +97,12 @@ ActiveRecord::Schema.define(version: 20170624115930) do
   end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string   "email",                  default: "",           null: false
-    t.string   "encrypted_password",     default: "",           null: false
+    t.string   "email",                             default: "", null: false
+    t.string   "encrypted_password",                default: "", null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,            null: false
+    t.integer  "sign_in_count",                     default: 0,  null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
@@ -118,11 +113,11 @@ ActiveRecord::Schema.define(version: 20170624115930) do
     t.string   "unconfirmed_email"
     t.string   "provider"
     t.string   "uid"
-    t.string   "nickname",                                      null: false
+    t.string   "nickname",               limit: 32,              null: false
     t.string   "avatar"
-    t.datetime "created_at",                                    null: false
-    t.datetime "updated_at",                                    null: false
-    t.integer  "lock_version",           default: 0,            null: false
+    t.datetime "created_at",                                     null: false
+    t.datetime "updated_at",                                     null: false
+    t.integer  "lock_version",                      default: 0,  null: false
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end

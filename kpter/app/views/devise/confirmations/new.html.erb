@@ -9,13 +9,14 @@
 <div class="container">
   <div class="row">
     <div class="col-md-6 col-md-offset-3">
-      <%= bootstrap_devise_error_messages! %>
-      <%= render 'shared/error_messages'%>
       <div class="card-panel">
         <%= form_for(resource, :as => resource_name, :url => confirmation_path(resource_name), :html => { :method => :post, role: "form" }) do |f| %>
-          <div class="input-field col">
-            <%= f.email_field :email, class: "validate", autofocus: true, required: true %>
-            <%= f.label :email %>
+          <%= render 'shared/error_messages', object: f.object %>
+          <div class="form-group form-group-field">
+            <div class="input-field col">
+              <%= f.email_field :email, class: "validate form-control", autofocus: true, required: true, maxlength: 255 %>
+              <%= f.label :email, class: "required", data: {error: 'wrong'} %>
+            </div>
           </div>
           <%= button_tag t('.resend_confirmation_instructions', :default => 'Resend confirmation instructions'), class: 'btn btn-primary waves-effect waves-light' %>
         <% end %>

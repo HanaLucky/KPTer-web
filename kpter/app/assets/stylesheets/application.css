@@ -19,4 +19,5 @@
  *= require bootstrap-editable
  *= require devise_bootstrap_views
  *= require debugger
+ *= require toastr
  */

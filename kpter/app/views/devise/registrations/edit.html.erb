@@ -5,8 +5,6 @@
 
 <div class="container">
   <h3>Personal info</h3>
-  <%= render 'shared/error_messages'%>
-  <%= bootstrap_devise_error_messages! %>
   <div class="row">
     <!-- left column -->
     <div class="col-md-4 col-sm-6 col-xs-12">
@@ -22,37 +20,37 @@
     </div>
     <!-- edit form column -->
     <div class="col-md-8 col-sm-6 col-xs-12 personal-info">
-
       <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, class: 'form-horizontal'}) do |f| %>
+        <%= render 'shared/error_messages', object: f.object %>
         <div class="form-group">
           <div class="input-field col col-lg-8">
-            <%= f.label :email, class: "required" %>
-            <%= f.email_field :email, autofocus: true, class: "form-control validate", :required => true %>
+            <%= f.email_field :email, autofocus: true, class: "form-control validate", required: true, maxlength: 255 %>
+            <%= f.label :email, class: "required", data: {error: 'wrong'} %>
           </div>
         </div>
         <div class="form-group">
           <div class="input-field col col-lg-8">
-          <%= f.label :nickname, class: "required" %>
-          <%= f.text_field :nickname, autofocus: true, class: "form-control validate", required: true %>
+            <%= f.text_field :nickname, autofocus: true, class: "form-control validate", required: true, maxlength: 32 %>
+            <%= f.label :nickname, class: "required", data: {error: 'wrong'} %>
           </div>
         </div>
         <div class="form-group">
           <div class="input-field col col-lg-8">
-            <%= f.label :password %>
-            <%= f.password_field :password, :autocomplete => "off", class: "form-control validate" %>
+            <%= f.password_field :password, :autocomplete => "off", class: "form-control validate", maxlength: 128 %>
+            <%= f.label :password, data: {error: 'wrong'} %>
             <p class="help-block"><small><%= t('.leave_blank_if_you_don_t_want_to_change_it', :default => "leave blank if you don't want to change it") %></small></p>
           </div>
         </div>
         <div class="form-group">
           <div class="input-field col col-lg-8">
-            <%= f.label :password_confirmation %>
-            <%= f.password_field :password_confirmation, class: "form-control validate" %>
+            <%= f.password_field :password_confirmation, class: "form-control validate", maxlength: 128 %>
+            <%= f.label :password_confirmation, data: {error: 'wrong'} %>
           </div>
         </div>
         <div class="form-group">
           <div class="input-field col col-lg-8">
-            <%= f.label :current_password, class: "required" %>
-            <%= f.password_field :current_password, class: "form-control validate", :required => true %>
+            <%= f.password_field :current_password, class: "form-control validate", required: true, maxlength: 128 %>
+            <%= f.label :current_password, class: "required", data: {error: 'wrong'} %>
             <p class="help-block"><small><%= t('.we_need_your_current_password_to_confirm_your_changes', :default => 'we need your current password to confirm your changes') %></small></p>
             <p class="help-block"><small>* Required</small></p>
           </div>

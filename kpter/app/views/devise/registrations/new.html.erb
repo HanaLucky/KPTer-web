@@ -10,25 +10,32 @@
 <div class="container">
   <div class="row">
     <div class="col-md-6 col-md-offset-3">
-      <%= bootstrap_devise_error_messages! %>
-      <%= render 'shared/error_messages'%>
       <div class="card-panel">
         <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), html: { role: "form" }) do |f| %>
-          <div class="input-field col">
-            <%= f.email_field :email, class: "validate", required: true %>
-            <%= f.label :email, class: "required" %>
+          <%= render 'shared/error_messages', object: f.object %>
+          <div class="form-group form-group-field">
+            <div class="input-field col">
+              <%= f.email_field :email, autofocus: true, class: "form-control validate", required: true, maxlength: 255 %>
+              <%= f.label :email, class: "required", data: {error: 'wrong'} %>
+            </div>
           </div>
-          <div class="input-field col">
-            <%= f.text_field :nickname, class: "validate", required: true %>
-            <%= f.label :nickname, class: "required" %>
+          <div class="form-group form-group-field">
+            <div class="input-field col">
+              <%= f.text_field :nickname, class: "form-control validate", required: true, maxlength: 32 %>
+              <%= f.label :nickname, class: "required", data: {error: 'wrong'} %>
+            </div>
           </div>
-          <div class="input-field col">
-            <%= f.password_field :password, class: "validate", required: true %>
-            <%= f.label :password, class: "required" %>
+          <div class="form-group form-group-field">
+            <div class="input-field col">
+              <%= f.password_field :password, autocomplete: "off", class: "form-control validate", required: true, maxlength: 128 %>
+              <%= f.label :password, class: "required", data: {error: 'wrong'} %>
+            </div>
           </div>
-          <div class="input-field col">
-            <%= f.password_field :password_confirmation, class: "validate", required: true %>
-            <%= f.label :password_confirmation, class: "required" %>
+          <div class="form-group form-group-field">
+            <div class="input-field col">
+              <%= f.password_field :password_confirmation, class: "form-control validate", required: true, maxlength: 255 %>
+              <%= f.label :password_confirmation, class: "required", data: {error: 'wrong'} %>
+            </div>
           </div>
           <p class="help-block"><small>* Required</small></p>
           <%= button_tag t('.sign_up', :default => "Sign up"), class: 'btn btn-primary waves-effect waves-light' %>

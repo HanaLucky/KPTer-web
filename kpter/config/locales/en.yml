@@ -36,11 +36,40 @@ en:
         user:
           attributes:
             user_id:
-              taken: "Are you sure that you want to join this community AGAIN??"
+              taken: "%{attribute} has already been taken"
+            email:
+              blank: "%{attribute} can't be blank"
+              taken: "%{attribute} has already been taken"
+              invalid: "%{attribute} is invalid"
+              too_long:  "%{attribute} is too long (maximum is %{count} characters)"
+            nickname:
+              blank: "%{attribute} can't be blank"
+              invalid: "%{attribute} is invalid"
+              too_long:  "%{attribute} is too long (maximum is %{count} characters)"
+            password:
+              blank: "%{attribute} can't be blank"
+              invalid: "%{attribute} is invalid"
+              confirmation: "%{attribute} does not match"
+              too_short: "%{attribute} is too short (minimum is %{count} characters)"
+              too_long:  "%{attribute} is too long (maximum is %{count} characters)"
+            password_confirmation:
+              blank: "%{attribute} can't be blank"
+              invalid: "%{attribute} is invalid"
+              confirmation: "%{attribute} does not match"
+            current_password:
+              blank: "%{attribute} can't be blank"
+              invalid: "%{attribute} is invalid"
+              confirmation: "%{attribute} does not match"
   commynity:
-    invite:
-      success: "invited %{users} in this community."
+    invitation:
+      success: "invited %{users} to this community."
       failure: "Could not join in this community."
+      accept: "You joined in this community!"
+      decline: "declined an invitation."
+    leave: "You have left the community."
+    destroyed: "Community was successfully deleted."
+    errors:
+      not_allowed: "The community does not exists or is not allowed to display."
   datetime:
     distance_in_original_words:
       over_x_day: "%{month} %{day}, %{year}"
