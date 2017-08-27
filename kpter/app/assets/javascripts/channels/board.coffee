@@ -19,3 +19,9 @@ App.board = App.cable.subscriptions.create "BoardChannel",
 
   create_tcard: (title, board_id, x, y) ->
     @perform 'create_tcard', title: title, board_id: board_id, x: x, y: y
+
+  update_kpcard: (id, card_type, title, x, y) ->
+    @perform 'update_kpcard', id: id, card_type: card_type, title: title, x: x, y: y
+
+  update_tcard: (id, title, x, y) ->
+    @perform 'update_tcard', title: title, x: x, y: y

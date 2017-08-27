@@ -15,4 +15,14 @@ class BoardChannel < ApplicationCable::Channel
     tcard = TCard.create! title: data['title'], user_id: current_user.id, board_id: data['board_id'], x: data['x'], y: data['y']
   end
 
+  def update_kpcard(data)
+    card = KpCard.find(data['id'])
+    card.update! card_type: data['card_type'], title: data['title'], x: data['x'], y: data['y']
+  end
+
+  def update_tcard(data)
+    card = TCard.find(data['id'])
+    card.update! title: data['title'], user_id: current_user.id, x: data['x'], y: data['y']
+  end
+
 end
