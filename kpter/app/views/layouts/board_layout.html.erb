@@ -8,7 +8,8 @@
   <%= stylesheet_link_tag  'boards/component', media: 'all' %>
   <%= stylesheet_link_tag  'boards/style', media: 'all' %>
   <%= javascript_tag do %>
-    window.cards = <%= raw @board.kp_cards.to_json %>;
+    window.kp_cards = <%= raw @board.kp_cards.to_json %>;
+    window.t_cards = <%= raw @board.t_cards.to_json %>;
   <% end %>
   <%= javascript_include_tag 'boards/card' %>
   <%= javascript_include_tag 'cable' %>
@@ -23,6 +24,7 @@
   </div>
   <!-- /#wrapper -->
   <%= debug(params) if Rails.env.development? %>
+  <%= javascript_include_tag 'cable' %>
   <%= javascript_include_tag 'boards/cards' %>
 </body>
 </html>
