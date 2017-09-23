@@ -1,4 +1,5 @@
 class BoardsController < ApplicationController
+  layout "board_layout"
   before_action :authenticate_user!
 
   def create

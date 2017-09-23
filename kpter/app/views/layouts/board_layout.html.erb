@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Kpter</title>
+  <%= stylesheet_link_tag    'application', media: 'all' %>
+  <%= javascript_include_tag 'application' %>
+  <%= stylesheet_link_tag  'boards/default', media: 'all' %>
+  <%= stylesheet_link_tag  'boards/component', media: 'all' %>
+  <%= stylesheet_link_tag  'boards/style', media: 'all' %>
+  <%= javascript_tag do %>
+    window.kp_cards = <%= raw @board.kp_cards.to_json %>;
+    window.t_cards = <%= raw @board.t_cards.to_json %>;
+  <% end %>
+  <%= javascript_include_tag 'boards/card' %>
+  <%= javascript_include_tag 'cable' %>
+  <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.0/jquery-ui.min.js"></script>
+
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  <div id="wrapper">
+    <%= render :partial => "header" %>
+    <%= yield %>
+  </div>
+  <!-- /#wrapper -->
+  <%= debug(params) if Rails.env.development? %>
+  <%= javascript_include_tag 'cable' %>
+  <%= javascript_include_tag 'boards/cards' %>
+</body>
+</html>
