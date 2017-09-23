@@ -3,9 +3,9 @@ class CardBroadcastJob < ApplicationJob
 
   def perform(card)
     if card.class == KpCard
-      ActionCable.server.broadcast 'board_channel', kpcard: render_kpcard(card)
+      ActionCable.server.broadcast "board_channel_#{card.board_id}", method: "create", kpcard: render_kpcard(card), id: card.id, type: card.card_type
     elsif card.class == TCard
-      ActionCable.server.broadcast 'board_channel', tcard: render_tcard(card)
+      ActionCable.server.broadcast "board_channel_#{card.board_id}", method: "create", tcard: render_tcard(card), id: card.id, type: 'try'
     end
   end
 
