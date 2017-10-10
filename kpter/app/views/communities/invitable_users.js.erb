@@ -1,5 +1,5 @@
 $(function () {
-  
+
   $('#modal_invite_other').html('<%= j(render(:partial => 'invitable_users', :locals => { invitable_users: @invitable_users, community: @community})) %>')
 
   // レコードクリックでチェックON/OFFできるようにする
@@ -25,6 +25,4 @@ $(function () {
     valueNames: [ 'nickname' ],
   });
 
-  // setting of material design. see. app/assets/javascript/mdb_style.js
-  initialize_md_style();
 });
