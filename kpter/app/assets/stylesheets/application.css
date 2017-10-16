@@ -12,12 +12,8 @@
  *
  *= require_directory ./lib
  *= require_self
- *= require font-awesome
- *= require bootstrap_sb_admin_base_v2
  *= require attendees
  *= require style
- *= require bootstrap-editable
- *= require devise_bootstrap_views
  *= require debugger
  *= require toastr
  */

@@ -47,12 +47,6 @@ Rails.application.config.assets.precompile += %w( boards/style.css )
 Rails.application.config.assets.precompile += %w( boards/default.css )
 Rails.application.config.assets.precompile += %w( boards/component.css )
 
-# bootstrap material design 3. see. https://mdbootstrap.com/mdb3/
-Rails.application.config.assets.precompile += %w( mdb/3.4.1/mdb.css )
-Rails.application.config.assets.precompile += %w( mdb/3.4.1/mdb.js )
-Rails.application.config.assets.precompile += %w( mdb_style.css )
-Rails.application.config.assets.precompile += %w( mdb_style.js )
-
 # users
 Rails.application.config.assets.precompile += %w( cropperjs/1.0.0-rc.2/cropper.css )
 Rails.application.config.assets.precompile += %w( cropperjs/1.0.0-rc.2/cropper.js )
