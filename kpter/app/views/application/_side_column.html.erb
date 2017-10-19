@@ -1,22 +1,10 @@
-<div class="navbar-default sidebar top1" role="navigation">
-  <div class="sidebar-nav navbar-collapse">
-    <ul class="nav" id="side-menu">
-      <li> <a href="<%= url_for :controller => :mypages, :action => :show %>"><i class="fa fa-user fa-fw"></i> Mypage</a> </li>
-      <li> <a href="#" class="waves-effect"><i class="fa fa-comments fa-fw"></i> Communities<span class="fa arrow"></span></a>
-        <ul class="nav nav-second-level" id="navi-communities">
-          <% communities.each do |cu| %>
-            <li>
-              <a href="<%= url_for :controller => :communities, :action => :show, :id => cu.community.id %>" class="community-text <% if cu.status.inviting? %>new-text<% end %>"><span class="community-name"><i class="fa fa-comment fa-fw"></i> <%= cu.community.name %></span><% if cu.status.inviting? %><span class="circle"></span><% end %></a>
-            </li>
-          <% end %>
-        </ul>
-        <!-- /.nav-second-level -->
-      </li>
-      <li class="sidebar-search">
-        <button class="btn btn-primary btn-block waves-effect waves-light" data-toggle="modal" data-target="#modal-new-community"><i class="fa fa-plus left"></i>NEW COMMUNITY</button>
-      </li>
-    </ul>
-  </div>
-  <!-- /.sidebar-collapse -->
+<div class="kpter-drawer mdl-layout__drawer">
+  <span class="mdl-layout-title kpter-logo">KPTER</span>
+  <nav class="mdl-navigation">
+    <a class="mdl-navigation__link" href="">MyPage</a>
+    <a href="<%= url_for :controller => :mypages, :action => :show %>" class>
+    <div class="kpter-drawer-separator"></div>
+    <a class="mdl-navigation__link" href=""><span class="kpter-drawer-inviting-text">Community Name</span><span class="kpter-drawer-circle"></span></a>
+    <a class="mdl-navigation__link" href="">Community Name<span class="kpter-drawer-task-count">3</span></a>
+  </nav>
 </div>
-<!-- /.navbar-static-side -->
