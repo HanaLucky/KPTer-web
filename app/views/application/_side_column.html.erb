@@ -11,8 +11,7 @@
         <% if cu.status.inviting? %>
           <span class="kpter-drawer-circle"></span>
         <% else %>
-          <% # TODO display number of tasks. see) https://github.com/HanaLucky/KPTer-web/issues/220 %>
-          <span class="kpter-drawer-task-count">3</span>
+          <span class="kpter-drawer-task-count"><%= t_cards_count(cu.community) %></span>
         <% end %>
       <% end %>
     <% end %>

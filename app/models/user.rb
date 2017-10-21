@@ -14,7 +14,7 @@ class User < ApplicationRecord
 
   class << self
     def find_communities_with_user_id(user_id)
-      User.includes([{ :community_users => :community }])
+      User.includes([:community_users => [:community => [:boards => :t_cards]]])
         .references(:community_users)
         .where("community_users.user_id = ?", user_id)
         .map { |u| u.community_users }
