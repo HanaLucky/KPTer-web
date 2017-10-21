@@ -1,17 +1,27 @@
 <header class="mdl-layout__header kpter-header">
   <div class="mdl-layout__header-row">
-    <!-- Title -->
-    <span class="mdl-layout-title kpter-logo">KPTER</span>
-    <!-- Add spacer, to align navigation to the right -->
+    <% if user_signed_in? %>
+      <%= link_to "KPTER", mypage_path, class: "mdl-mdl-layout-title kpter-logo mdl-color-text--primary" %>
+    <% else %>
+      <%= link_to "KPTER", root_path, class: "mdl-mdl-layout-title kpter-logo mdl-color-text--primary" %>
+    <% end %>
     <div class="mdl-layout-spacer"></div>
-    <!-- Navigation. We hide it in small screens. -->
     <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" id="hdrbtn">
       <i class="material-icons">more_vert</i>
     </button>
     <ul class="mdl-menu mdl-js-menu mdl-js-ripple-effect mdl-menu--bottom-right" for="hdrbtn">
-      <li class="mdl-menu__item">About</li>
-      <li class="mdl-menu__item">Contact</li>
-      <li class="mdl-menu__item">Legal information</li>
+      <% unless user_signed_in? %>
+        <li class="mdl-menu__item">
+          <a href="<%= url_for new_user_session_path %>"></span>Login</a>
+        </li>
+      <% else %>
+        <li class="mdl-menu__item">
+          <%= link_to "Settings", edit_user_registration_path, class: "kpter-menu-link" %>
+        </li>
+        <li class="mdl-menu__item">
+          <%= link_to "Logout", destroy_user_session_path, class: "kpter-menu-link" %>
+        </li>
+      <% end %>
     </ul>
   </div>
 </header>

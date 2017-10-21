@@ -1,6 +1,7 @@
 class BoardsController < ApplicationController
   layout "board_layout"
   before_action :authenticate_user!
+  before_action :side_column, only: [:show]
 
   def create
     @board = Board.create(name: params[:board][:name], community_id: params[:community_id])

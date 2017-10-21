@@ -2,9 +2,9 @@
 
 .kpter-logo {
   font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
-  color: $primary-color;
   font-weight: 700;
   font-size: 24px;
+  text-decoration: none;
   @media screen and (max-width: $layout-screen-size-threshold) {
     font-size: 22px;
   }
@@ -16,13 +16,17 @@
 .kpter-header {
   overflow: visible;
   background-color: white;
-  .mdl-navigation__link{
+  .mdl-navigation__link {
     color: #757575;
     font-weight: 700;
     font-size: 14px;
   }
   .material-icons {
     color: #767777 !important;
+  }
+  .kpter-menu-link {
+    text-decoration: none;
+    color: inherit;
   }
 }
 /**
