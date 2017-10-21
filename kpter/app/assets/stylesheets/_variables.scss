@@ -1,0 +1,10 @@
+/**
+ * Declarations of Sass variables
+ */
+ /* header */
+ $layout-header-mobile-row-height: 56px !default;
+ $layout-mobile-header-height: $layout-header-mobile-row-height;
+ $layout-header-desktop-row-height: 64px !default;
+ $layout-desktop-header-height: $layout-header-desktop-row-height;
+
+ $layout-screen-size-threshold: 1024px !default;

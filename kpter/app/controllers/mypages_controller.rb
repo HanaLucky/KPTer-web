@@ -1,20 +1,19 @@
 class MypagesController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, :side_column, only: [:show]
 
   def show
-    @communities = User.find_communities_with_user_id(current_user.id)
     @all_tcards = User.find_tcards_with_user_id(current_user.id)
     @t_cards = Kaminari.paginate_array(@all_tcards).page(params[:page])
     @community = Community.new
   end
 
   def toggle
-      render nothing: true
-      all_tcards = User.find_all_tcards_with_user_id(current_user.id)
-      param_id = params[:id].to_i
-      if param_id > 0 && all_tcards.map{ |tc| tc.id }.include?(param_id)
-        TCard.update_status(param_id)
-      end
+    render nothing: true
+    all_tcards = User.find_all_tcards_with_user_id(current_user.id)
+    param_id = params[:id].to_i
+    if param_id > 0 && all_tcards.map{ |tc| tc.id }.include?(param_id)
+      TCard.update_status(param_id)
+    end
   end
 
   def refresh_tasks

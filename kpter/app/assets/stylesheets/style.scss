@@ -1,0 +1,65 @@
+@import "./variables";
+
+.kpter-logo {
+  font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+  font-weight: 700;
+  font-size: 24px;
+  text-decoration: none;
+  @media screen and (max-width: $layout-screen-size-threshold) {
+    font-size: 22px;
+  }
+}
+
+/**
+ * header
+ */
+.kpter-header {
+  overflow: visible;
+  background-color: white;
+  .mdl-navigation__link {
+    color: #757575;
+    font-weight: 700;
+    font-size: 14px;
+  }
+  .material-icons {
+    color: #767777 !important;
+  }
+  .kpter-menu-link {
+    text-decoration: none;
+    color: inherit;
+  }
+}
+/**
+ * drawer (side bar)
+ */
+.kpter-drawer {
+  .kpter-drawer-separator {
+    height: 1px;
+    background-color: #dcdcdc;
+    margin: 8px 0;
+  }
+  .kpter-drawer-inviting-text {
+    font-weight: 600;
+  }
+  .kpter-drawer-circle {
+    background-color: #ff8c00;
+    border: 1px solid #ff8c00;
+    border-radius: 9px;
+    box-sizing: border-box;
+    display: block;
+    height: .6em;
+    min-width: .6em;
+    padding: 0 .15em;
+    position: relative;
+    width: auto;
+    float: right;
+    margin: 8px 0;
+  }
+  .kpter-drawer-task-count {
+    display: inline;
+    float: right;
+    color: #ccc;
+    padding-left: 5px;
+    font-size: 12px;
+  }
+}

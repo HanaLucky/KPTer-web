@@ -1,22 +1,20 @@
-<div class="navbar-default sidebar top1" role="navigation">
-  <div class="sidebar-nav navbar-collapse">
-    <ul class="nav" id="side-menu">
-      <li> <a href="<%= url_for :controller => :mypages, :action => :show %>"><i class="fa fa-user fa-fw"></i> Mypage</a> </li>
-      <li> <a href="#" class="waves-effect"><i class="fa fa-comments fa-fw"></i> Communities<span class="fa arrow"></span></a>
-        <ul class="nav nav-second-level" id="navi-communities">
-          <% communities.each do |cu| %>
-            <li>
-              <a href="<%= url_for :controller => :communities, :action => :show, :id => cu.community.id %>" class="community-text <% if cu.status.inviting? %>new-text<% end %>"><span class="community-name"><i class="fa fa-comment fa-fw"></i> <%= cu.community.name %></span><% if cu.status.inviting? %><span class="circle"></span><% end %></a>
-            </li>
-          <% end %>
-        </ul>
-        <!-- /.nav-second-level -->
-      </li>
-      <li class="sidebar-search">
-        <button class="btn btn-primary btn-block waves-effect waves-light" data-toggle="modal" data-target="#modal-new-community"><i class="fa fa-plus left"></i>NEW COMMUNITY</button>
-      </li>
-    </ul>
-  </div>
-  <!-- /.sidebar-collapse -->
+<div class="kpter-drawer mdl-layout__drawer">
+  <span class="mdl-layout-title kpter-logo mdl-color-text--primary">KPTER</span>
+  <nav class="mdl-navigation">
+    <%= link_to mypage_path, class: "mdl-navigation__link" do %>
+      <span class="<% if request.path_info == mypage_path %>mdl-color-text--primary-dark<% end %>">MyPage</span>
+    <% end %>
+    <div class="kpter-drawer-separator"></div>
+    <% communities.each do |cu| %>
+      <%= link_to community_path(cu.community), class: "mdl-navigation__link" do %>
+        <span class="<% if cu.status.inviting? %>kpter-drawer-inviting-text<% end %> <% if current_community == cu.community %>mdl-color-text--primary-dark<% end %>"><%= cu.community.name %></span>
+        <% if cu.status.inviting? %>
+          <span class="kpter-drawer-circle"></span>
+        <% else %>
+          <% # TODO display number of tasks. see) https://github.com/HanaLucky/KPTer-web/issues/220 %>
+          <span class="kpter-drawer-task-count">3</span>
+        <% end %>
+      <% end %>
+    <% end %>
+  </nav>
 </div>
-<!-- /.navbar-static-side -->

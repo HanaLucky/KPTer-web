@@ -27,6 +27,10 @@ class ApplicationController < ActionController::Base
     session[:next] || mypage_path
   end
 
+  def side_column
+    @communities = User.find_communities_with_user_id(current_user.id)
+  end
+
   protected
     def configure_permitted_parameters
       # see. https://github.com/plataformatec/devise#strong-parameters
