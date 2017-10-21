@@ -17,13 +17,12 @@ App.board = App.cable.subscriptions.create { channel: "BoardChannel", board_id: 
 
       type = data['type']
       $("##{card_id}").data('type', type)
-
       $("##{card_id}").draggable()
 
       $("##{card_id}").on 'blur', ->
         card = $(this)
         type = card.data('type')
-        title = card.text()
+        title = card.find('h4').text()
         offset = card.offset()
         if type is 'keep' || type is 'problem'
           App.board.update_kpcard(card[0].id.split("_")[1], title, offset.left, offset.top)
@@ -33,12 +32,12 @@ App.board = App.cable.subscriptions.create { channel: "BoardChannel", board_id: 
       if data['kpcard']
         card_id = "kp_" + data['kpcard'].id
         card = $('#' + card_id)
-        card.text(data['kpcard'].title)
+        card.find('h4').text(data['kpcard'].title)
         card.offset({top: data['kpcard'].y, left: data['kpcard'].x})
       else if data['tcard']
         card_id = "t_" + data['tcard'].id
         card = $('#' + card_id)
-        card.text(data['tcard'].title)
+        card.find('h4').text(data['tcard'].title)
         card.offset({top: data['tcard'].y, left: data['tcard'].x})
 
     else if data['method'] is 'delete'

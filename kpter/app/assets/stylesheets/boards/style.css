@@ -19,11 +19,8 @@
 
 .cardBox {
   position: relative;
-  font-family: "Mplus 1p";
   -webkit-user-modify: read-write-plaintext-only;
   font-size: x-large;
-  width: 200px;
-  height: 200px;
   left: 10%;
   top: 20%;
 	vertical-align: middle;
@@ -33,11 +30,6 @@
   box-shadow: 0 4px 5px rgba(0, 0, 0, 0.2);
 }
 
-.cardBox.rounded {
-  -moz-border-radius: 5px 5px 5px 5px;
-  border-radius: 5px 5px 5px 5px;
-}
-
 .textBox {
   position: absolute;
   -webkit-user-modify: read-write-plaintext-only;
@@ -45,16 +37,6 @@
   height: 200px;
   margin: auto;
   z-index: 1200;
-}
-
-.keep {
-  background-color: powderblue;
-}
-.problem {
-  background-color: pink;
-}
-.try {
-  background-color: yellowgreen;
 }
 
 .trashCanImg {
@@ -67,4 +49,45 @@
   bottom: 15px;
   right: 15px;
   z-index: 1000;
+}
+
+/* google material lite */
+
+.kpter-card-event.mdl-card {
+  width: 200px;
+  height: 200px;
+  /* background: #3E4EB8;*/
+}
+.kpter-card-event > .mdl-card__actions {
+  border-color: rgba(255, 255, 255, 0.2);
+}
+.kpter-card-event > .mdl-card__title {
+  align-items: flex-start;
+}
+.kpter-card-event > .mdl-card__title > h4 {
+  margin-top: 0;
+}
+.kpter-card-event > .mdl-card__actions {
+  display: flex;
+  box-sizing:border-box;
+  align-items: center;
+}
+.kpter-card-event > .mdl-card__actions > .material-icons {
+  padding-right: 10px;
+}
+.kpter-card-event > .mdl-card__title,
+.kpter-card-event > .mdl-card__actions,
+.kpter-card-event > .mdl-card__actions > .mdl-button {
+  color: #fff;
+}
+
+.kpter-card-event.mdl-card.keep {
+  color: #263238;
+  background: #80DEEA;
+}
+.kpter-card-event.mdl-card.problem {
+  background: #F48FB1;
+}
+.kpter-card-event.mdl-card.try {
+  background: #AED581
 }

@@ -2,11 +2,14 @@
 <html>
 <head>
   <title>Kpter</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <%= stylesheet_link_tag  'mdl/1.3.0/material.kpter-pink.min', media: 'all' %>
   <%= stylesheet_link_tag    'application', media: 'all' %>
   <%= javascript_include_tag 'application' %>
   <%= stylesheet_link_tag  'boards/default', media: 'all' %>
   <%= stylesheet_link_tag  'boards/component', media: 'all' %>
   <%= stylesheet_link_tag  'boards/style', media: 'all' %>
+  <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
   <%= javascript_tag do %>
     window.kp_cards = <%= raw @board.kp_cards.to_json %>;
     window.t_cards = <%= raw @board.t_cards.to_json %>;
