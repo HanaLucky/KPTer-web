@@ -13,11 +13,10 @@ class User < ApplicationRecord
   validate :avatar_size
 
   class << self
-    def find_communities_with_user_id(user_id, status = TCard.status.open)
+    def find_communities_with_user_id(user_id)
       User.includes([:community_users => [:community => [:boards => :t_cards]]])
         .references(:community_users)
         .where("community_users.user_id = ?", user_id)
-        .where("t_cards.status = ?", status)
         .map { |u| u.community_users }
         .flatten
         .sort_by!{ |v| [v[:status], v[:updated_at]] }
