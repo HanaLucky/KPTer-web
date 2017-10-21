@@ -44,3 +44,6 @@ bower.json
 
 # Ignore upload avatar image
 /public/uploads
+
+# Ignore redis binary dump (dump.rdb) files see.https://github.com/github/gitignore/blob/master/Global/Redis.gitignore
+*.rdb
