@@ -1,8 +1,5 @@
 class CommunitiesController < ApplicationController
-  before_action :authenticate_user!
-  before_action :exists_community?
-  before_action :allowed_to_display?
-  before_action :side_column, only: [:show]
+  before_action :authenticate_user!, :exists_community?, :allowed_to_display?, :side_column, only: [:show]
 
   def show
     # TODO: コミュニティページ表示中にコミュニティから除名させられた場合の処理

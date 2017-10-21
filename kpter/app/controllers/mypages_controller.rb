@@ -1,6 +1,5 @@
 class MypagesController < ApplicationController
-  before_action :authenticate_user!
-  before_action :side_column, only: [:show]
+  before_action :authenticate_user!, :side_column, only: [:show]
 
   def show
     @all_tcards = User.find_tcards_with_user_id(current_user.id)
