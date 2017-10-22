@@ -12,7 +12,7 @@
     <ul class="mdl-menu mdl-js-menu mdl-js-ripple-effect mdl-menu--bottom-right" for="hdrbtn">
       <% unless user_signed_in? %>
         <li class="mdl-menu__item">
-          <a href="<%= url_for new_user_session_path %>"></span>Login</a>
+          <%= link_to "Login", new_user_session_path, class: "kpter-menu-link" %>
         </li>
       <% else %>
         <li class="mdl-menu__item">
