@@ -22,19 +22,8 @@ for card in t_cards
     "<p class='card-text' style='height: 130px!important;'>#{card.title}</p></div>" +
     "<div class='mdl-card__actions mdl-card--border'>" +
     "<div class='mdl-layout-spacer'></div>" +
-    "<div class='mdl-layout-spacer'></div>" +
-    "<div class='mdl-layout-spacer'></div>" +
-    "<div class='mdl-layout-spacer'></div>" +
-    "<div class='mdl-layout-spacer'></div>" +
-    "<div class='mdl-layout-spacer'></div>" +
-    "<div class='mdl-layout-spacer'></div>" +
-    "<div class='mdl-layout-spacer'></div>" +
-    "<div class='mdl-layout-spacer'></div>" +
-    "<div class='mdl-layout-spacer'></div>" +
     "<i class='material-icons'>account_circle</i>" +
-    "<div class='mdl-layout-spacer'></div>" +
     "<i class='material-icons'>event</i>" +
-    "<div class='mdl-layout-spacer'></div>" +
     "<i class='material-icons'>thumb_up</i></div>" +
     "<div class='mdl-card__menu'><button class='mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect icon-white delete-btn'><i class='material-icons md-14'>close</i></button></div></div>")
 
