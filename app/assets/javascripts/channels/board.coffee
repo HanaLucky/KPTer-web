@@ -28,6 +28,15 @@ App.board = App.cable.subscriptions.create { channel: "BoardChannel", board_id: 
           App.board.update_kpcard(card[0].id.split("_")[1], title, offset.left, offset.top)
         else if type is 'try'
           App.board.update_tcard(card[0].id.split("_")[1], title, offset.left, offset.top)
+
+      $("##{card_id}").find('.delete-btn').on 'click', ->
+        if type is 'keep' || type is 'problem'
+          App.board.delete_kpcard(data['id'])
+        else if type is 'try'
+          App.board.delete_tcard(data['id'])
+
+        $("##{card_id}").remove()
+
     else if data['method'] is 'update'
       if data['kpcard']
         card_id = "kp_" + data['kpcard'].id

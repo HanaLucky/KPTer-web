@@ -36,4 +36,15 @@ $(function() {
     }
   });
 
+  $('.delete-btn').click(function(){
+    var type = $(this).closest('.cardBox').data('type');
+    var id = $(this).closest('.cardBox')[0].id.split("_")[1]
+    if (type === 'keep' || type === 'problem') {
+      App.board.delete_kpcard(id);
+    } else if (type === 'try') {
+      App.board.delete_tcard(id);
+    }
+    $(this).closest('.cardBox').remove();
+  })
+
 });
