@@ -1,1 +1,10 @@
-<div class="cardBox rounded try" id="t_<%= tcard.id %>" data-type="try"><%= tcard.title %></div>
+<div class="kpter-card-event mdl-card mdl-shadow--2dp try cardBox" id="t_<%= tcard.id %>"　data-type="try">
+ <div class="mdl-card__title mdl-card--expand">
+   <p class='card-text' style='height: 130px!important;'><%= tcard.title %></p>
+ </div>
+ <div class="mdl-card__actions mdl-card--border">
+   <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">Assignees</a>
+   <div class="mdl-layout-spacer"></div>
+   <i class="material-icons">event</i>
+ </div>
+</div>

@@ -17,7 +17,7 @@ App.board = App.cable.subscriptions.create { channel: "BoardChannel", board_id: 
 
       type = data['type']
       $("##{card_id}").data('type', type)
-      $("##{card_id}").draggable()
+      $("##{card_id}").draggable({cancel: '.card-text'})
 
       $("##{card_id}").on 'blur', ->
         card = $(this)
