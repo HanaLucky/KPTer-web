@@ -7,45 +7,19 @@
   <p>
   Board Name: <%= @board.name %>
   </p>
-  <button class="btn btn-6 btn-6a" data-type="keep">Keep</button>
-  <button class="btn btn-6 btn-6a" data-type="problem">Problem</button>
-  <button class="btn btn-6 btn-6a" data-type="try">Try</button>
   <div id="boardWrap" class="wrap"></div>
-  <p id="trashCan" style="display: block;"><%= image_tag("trashCan.png", :class => "trashCanImg") %></p>
+  <div class="tool-bar">
+    <ul class="tool-bar-buttons">
+      <li>
+        <button class="mdl-button mdl-js-button mdl-color-text--primary tool-bar-button"  data-type="keep">Keep</button>
+      </li>
+      <li>
+        <button class="mdl-button mdl-js-button mdl-color-text--primary tool-bar-button" data-type="problem">Problem</button>
+      </li>
+      <li>
+        <button class="mdl-button mdl-js-button mdl-color-text--primary tool-bar-button"  data-type="try">Try</button>
+      </li>
+    </ul>
+  </div>
   <input type="hidden" id="board_id" name="board_id" value="<%= @board.id %>">
-
-
-  <div class="kpter-card-event mdl-card mdl-shadow--2dp keep">
-    <div class="mdl-card__title mdl-card--expand">
-      <h4>
-        Featured event:<br>
-        May 24, 2016<br>
-        7-11pm
-      </h4>
-    </div>
-    <div class="mdl-card__actions mdl-card--border">
-      <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
-        Add to Calendar
-      </a>
-      <div class="mdl-layout-spacer"></div>
-      <i class="material-icons">event</i>
-    </div>
-  </div>
-
-  <div class="kpter-card-event mdl-card mdl-shadow--2dp problem ">
-    <div class="mdl-card__title mdl-card--expand">
-      <h4>
-        Featured event:<br>
-        May 24, 2016<br>
-        7-11pm
-      </h4>
-    </div>
-    <div class="mdl-card__actions mdl-card--border">
-      <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
-        Add to Calendar
-      </a>
-      <div class="mdl-layout-spacer"></div>
-      <i class="material-icons">event</i>
-    </div>
-  </div>
 </div>

@@ -4,29 +4,14 @@
   background-color: snow;
 }
 
-.kBtn {
-  background-color: lightseagreen;
-  color: snow;
-}
-.pBtn{
-  background-color: palevioletred;
-  color: snow;
-}
-.tBtn{
-  background-color: yellowgreen;
-  color: snow;
-}
-
 .cardBox {
   position: relative;
-  -webkit-user-modify: read-write-plaintext-only;
   font-size: x-large;
   left: 10%;
   top: 20%;
 	vertical-align: middle;
 	text-align: center;
   z-index: 1100;
-  padding: 0.5em 0.5em;
   box-shadow: 0 4px 5px rgba(0, 0, 0, 0.2);
 }
 
@@ -49,6 +34,37 @@
   bottom: 15px;
   right: 15px;
   z-index: 1000;
+}
+
+.kpter-color-text {
+  color: #21b7b6;
+}
+
+.tool-bar {
+  /*background-color: #21b7b6;*/
+  position: fixed;
+  display: flex;
+  padding: 0 100px;
+  z-index: 10000;
+  bottom: 0;
+  width: 100%;
+  height: 80px;
+  background: #fff;
+  border-top: 1px #E8ECEB solid;
+}
+
+.tool-bar-buttons {
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  margin-left: auto;
+  list-style-type: none;
+}
+
+.tool-bar-buttons li {
+  position: relative;
+  margin-right: 30px;
+  font-size: 13px;
 }
 
 /* google material lite */
@@ -81,13 +97,20 @@
   color: #fff;
 }
 
+.card-text {
+  -webkit-user-modify: read-write-plaintext-only;
+  padding: 0!important;
+  width: 100%;
+  height: 168px;
+}
+
 .kpter-card-event.mdl-card.keep {
   color: #263238;
-  background: #80DEEA;
+  background: #64B5F6;
 }
 .kpter-card-event.mdl-card.problem {
-  background: #F48FB1;
+  background: #F06292
 }
 .kpter-card-event.mdl-card.try {
-  background: #AED581
+  background: #66BB6A
 }

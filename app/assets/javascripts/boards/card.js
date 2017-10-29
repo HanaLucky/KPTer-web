@@ -1,7 +1,7 @@
 $(function() {
-  $('.cardBox').draggable();
+  $('.cardBox').draggable({cancel: '.card-text'});
   // カードを作成
-  var button = $('.btn');
+  var button = $('.tool-bar-button');
   button.click(function(){
     $boardWrap = $('#boardWrap');
     var board_id = $('[name=board_id]').val();
@@ -35,4 +35,5 @@ $(function() {
       }
     }
   });
+
 });
