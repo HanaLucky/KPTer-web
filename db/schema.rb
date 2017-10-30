@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170819060209) do
+ActiveRecord::Schema.define(version: 20171030032308) do
 
   create_table "boards", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", comment: "ボード" do |t|
     t.integer  "community_id",             null: false, comment: "コミュニティID"
@@ -22,7 +22,7 @@ ActiveRecord::Schema.define(version: 20170819060209) do
   end
 
   create_table "communities", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", comment: "コミュニティ" do |t|
-    t.string   "name",         limit: 32,             null: false
+    t.string   "name",         limit: 32,             null: false, comment: "コミュニティ名"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
     t.integer  "lock_version",            default: 0, null: false
@@ -55,6 +55,16 @@ ActiveRecord::Schema.define(version: 20170819060209) do
     t.index ["card_type"], name: "index_kp_cards_on_card_type", using: :btree
   end
 
+  create_table "likes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "likable_type"
+    t.integer  "likable_id"
+    t.integer  "user_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.index ["likable_type", "likable_id"], name: "index_likes_on_likable_type_and_likable_id", using: :btree
+    t.index ["user_id"], name: "index_likes_on_user_id", using: :btree
+  end
+
   create_table "memos", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", comment: "メモ" do |t|
     t.integer  "board_id",                               null: false, comment: "ボードID"
     t.text     "contents",     limit: 65535,                          comment: "内容"
@@ -71,7 +81,6 @@ ActiveRecord::Schema.define(version: 20170819060209) do
     t.integer  "board_id",                                  null: false, comment: "ボードID"
     t.string   "title",                                                  comment: "タイトル"
     t.string   "detail",       limit: 512,                               comment: "詳細"
-    t.integer  "user_id",                                                comment: "担当者"
     t.date     "deadline",                                               comment: "期限"
     t.string   "status",       limit: 16,  default: "open", null: false, comment: "ステータス"
     t.integer  "x",                        default: 0,      null: false, comment: "X座標"
@@ -82,7 +91,6 @@ ActiveRecord::Schema.define(version: 20170819060209) do
     t.integer  "lock_version",             default: 0,      null: false
     t.index ["board_id"], name: "index_t_cards_on_board_id", using: :btree
     t.index ["status"], name: "index_t_cards_on_status", using: :btree
-    t.index ["user_id"], name: "index_t_cards_on_user_id", using: :btree
   end
 
   create_table "tcard_assignees", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", comment: "Tカード担当者" do |t|
@@ -126,6 +134,7 @@ ActiveRecord::Schema.define(version: 20170819060209) do
   add_foreign_key "community_users", "communities"
   add_foreign_key "community_users", "users"
   add_foreign_key "kp_cards", "boards"
+  add_foreign_key "likes", "users"
   add_foreign_key "memos", "boards"
   add_foreign_key "t_cards", "boards"
   add_foreign_key "tcard_assignees", "t_cards"
