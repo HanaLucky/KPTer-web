@@ -68,15 +68,19 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # The path used after edit user.
   # see. https://github.com/plataformatec/devise/wiki/How-To:-Customize-the-redirect-after-a-user-edits-their-profile
-  def after_update_path_for(resource)
-    edit_user_registration_path
-  end
+    def after_update_path_for(resource)
+      edit_user_registration_path
+    end
 
-  # The path used after sign up for inactive accounts.
-  def after_inactive_sign_up_path_for(resource)
-    # 仮登録画面からきたかどうかのフラグ。confirm画面で、フラグ判定し除去する。
-    session[:route_from_inactive_sign_up] = 1
-    session[:regist_email] = resource.email
-    confirm_path
-  end
+    # The path used after sign up for inactive accounts.
+    def after_inactive_sign_up_path_for(resource)
+      # 仮登録画面からきたかどうかのフラグ。confirm画面で、フラグ判定し除去する。
+      session[:route_from_inactive_sign_up] = 1
+      session[:regist_email] = resource.email
+      confirm_path
+    end
+
+    def update_resource(resource, params)
+      resource.update_without_current_password(params)
+    end
 end

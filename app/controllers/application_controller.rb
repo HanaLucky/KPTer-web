@@ -28,7 +28,9 @@ class ApplicationController < ActionController::Base
   end
 
   def side_column
-    @communities = User.find_communities_with_user_id(current_user.id)
+    if user_signed_in?
+      @communities = User.find_communities_with_user_id(current_user.id)
+    end
   end
 
   protected

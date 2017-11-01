@@ -1,15 +1,30 @@
-<% if flash[:notice] %>
-  <script>
-    toastr.success('<%= flash[:notice] %>')
-  </script>
-<% end %>
-<% if flash[:alert] %>
-  <script>
-    toastr.options = {
-      "closeButton": true,
-      "timeOut": "0",
-      "extendedTimeOut": "0",
+<div id="notification" class="mdl-js-snackbar mdl-snackbar">
+  <div class="mdl-snackbar__text"></div>
+  <button class="mdl-snackbar__action" type="button"></button>
+</div>
+
+<% if notice %>
+  <script type="text/javascript">
+  'use strict';
+  var sms = function () {
+    var checkAndShowSnackBar = function () {
+      var snackbarContainer = document.querySelector('#notification');
+      var data = {
+        message: "<%= notice %>"
+      };
+      snackbarContainer.MaterialSnackbar.showSnackbar(data);
+    };
+    var timeout = function (fn, timeout) {
+      setTimeout(fn, timeout);
+    };
+    return {
+      init: function () {
+        timeout(checkAndShowSnackBar, 100);
+      }
     }
-    toastr.warning('<%= flash[:alert] %>')
+  }();
+  $(document).ready(function () {
+    sms.init();
+  });
   </script>
 <% end %>

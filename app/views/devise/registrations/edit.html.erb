@@ -1,83 +1,51 @@
-<%= stylesheet_link_tag 'cropperjs/1.0.0-rc.2/cropper', media: 'all' %>
+<link  href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.1.3/cropper.min.css" rel="stylesheet">
 <%= stylesheet_link_tag 'users/edit', media: 'all' %>
 
-<div class="container">
-  <h3>Personal info</h3>
-  <div class="row">
-    <!-- left column -->
-    <div class="col-md-4 col-sm-6 col-xs-12">
-      <div class="form-group">
-        <label class="col-lg-5 control-label">Avatar</label>
-        <div class="col-lg-8">
-          <div class="text-center">
-            <%= image_tag(avatar_url(current_user), :class => "img-avatar img-thumbnail rounded float-left", :alt => "#{current_user.nickname}") %>
-            <a class="btn btn-primary btn-block waves-effect waves-light" id="btn-file-uploader">Upload new picture</a>
-          </div>
+<div class="kpter-settings">
+  <div class="kpter-settings-menu">
+    <a href="<%= edit_user_registration_path %>" class="mdl-navigation__link <% if request.path_info == edit_user_registration_path %>active<% end %>">
+      <span class="mdl-list__item-primary-content">
+        <i class="material-icons mdl-list__item-icon">person</i>
+        Personal Setting
+      </span>
+    </a>
+  </div>
+  <div class="kpter-settings-contents">
+    <div class="kpter-form-left mdl-cell mdl-grid mdl-grid--no-spacing">
+      <%= render partial: "devise/shared/error_messages", locals: {object: resource} %>
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+        <div class="mdl-typography--caption mdl-color-text--primary">avator</div>
+        <div class="hoverable" id="btn-file-uploader">
+        	<%= image_tag(avatar_url(current_user), class: "kpter-avatar-img-96", alt: "#{current_user.nickname}") %>
+        	<div class="mask">
+        		<div class="caption">Change<br>avatar</div>
+        	</div>
         </div>
-      </div>
-    </div>
-    <!-- edit form column -->
-    <div class="col-md-8 col-sm-6 col-xs-12 personal-info">
-      <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, class: 'form-horizontal'}) do |f| %>
-        <%= render 'shared/error_messages', object: f.object %>
-        <div class="form-group">
-          <div class="input-field col col-lg-8">
-            <%= f.email_field :email, autofocus: true, class: "form-control validate", required: true, maxlength: 255 %>
-            <%= f.label :email, class: "required", data: {error: 'wrong'} %>
-          </div>
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+          <%= f.text_field :nickname, class: "mdl-textfield__input", maxlength: 32, required: true %>
+          <%= f.label :nickname, class: "mdl-textfield__label" %>
         </div>
-        <div class="form-group">
-          <div class="input-field col col-lg-8">
-            <%= f.text_field :nickname, autofocus: true, class: "form-control validate", required: true, maxlength: 32 %>
-            <%= f.label :nickname, class: "required", data: {error: 'wrong'} %>
-          </div>
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+          <%= f.email_field :email, class: "mdl-textfield__input", maxlength: 255, required: true %>
+          <%= f.label :email, class: "mdl-textfield__label" %>
+          <span class="mdl-textfield__error">Invalid email</span>
         </div>
-        <div class="form-group">
-          <div class="input-field col col-lg-8">
-            <%= f.password_field :password, :autocomplete => "off", class: "form-control validate", maxlength: 128 %>
-            <%= f.label :password, data: {error: 'wrong'} %>
-            <p class="help-block"><small><%= t('.leave_blank_if_you_don_t_want_to_change_it', :default => "leave blank if you don't want to change it") %></small></p>
-          </div>
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+          <%= f.password_field :password, autocomplete: "off", class: "mdl-textfield__input", maxlength: 128 %>
+          <%= f.label :password, class: "mdl-textfield__label" %>
         </div>
-        <div class="form-group">
-          <div class="input-field col col-lg-8">
-            <%= f.password_field :password_confirmation, class: "form-control validate", maxlength: 128 %>
-            <%= f.label :password_confirmation, data: {error: 'wrong'} %>
-          </div>
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+          <%= f.password_field :password_confirmation, autocomplete: "off", class: "mdl-textfield__input", maxlength: 128 %>
+          <%= f.label :password_confirmation, class: "mdl-textfield__label" %>
         </div>
-        <div class="form-group">
-          <div class="input-field col col-lg-8">
-            <%= f.password_field :current_password, class: "form-control validate", required: true, maxlength: 128 %>
-            <%= f.label :current_password, class: "required", data: {error: 'wrong'} %>
-            <p class="help-block"><small><%= t('.we_need_your_current_password_to_confirm_your_changes', :default => 'we need your current password to confirm your changes') %></small></p>
-            <p class="help-block"><small>* Required</small></p>
-          </div>
-        </div>
-        <div class="form-group">
-          <div class="col-lg-8">
-            <%= button_tag t('.update', :default => "Update"), class: 'btn btn-primary waves-effect waves-light' %>
-            <%= link_to 'Cancel', mypage_path, class: 'btn btn-default waves-effect waves-light' %>
-          </div>
-        </div>
-        <%# https://github.com/HanaLucky/KPTer-web/issues/183 %>
-        <!--
-        <div class="form-group">
-          <label class="col-md-3 control-label"></label>
-          <div class="col-lg-8">
-            <p><%= t('.unhappy', :default => 'Unhappy') %>? <%= link_to t('.cancel_my_account', :default => "Cancel my account"), registration_path(resource_name), :data => { :confirm => t('.are_you_sure', :default => "Are you sure?") }, :method => :delete %>.</p>
-          </div>
-        </div>
-        -->
+        <%= button_tag t('.update', :default => "Update"), class: 'mdl-button mdl-button--colored mdl-js-button float-right' %>
       <% end %>
     </div>
   </div>
 </div>
 
-<!-- /#page-wrapper -->
-<div class="modal fade" id="modal-upload-avator" tabindex="-1" role="dialog" aria-labelledby="modal-upload-avator-label" aria-hidden="true">
-  <%= render :partial => 'upload_avator', locals: {user: current_user} %>
-</div>
+<%= render partial: "devise/registrations/upload_avatar" %>
 
-<%= javascript_include_tag 'cropperjs/1.0.0-rc.2/cropper' %>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.1.3/cropper.min.js"></script>
+<%= javascript_include_tag 'fine-uploader/5.15.0/fine-uploader.core' %>
 <%= javascript_include_tag 'users/edit.js' %>
-<%= javascript_include_tag 'fine-uploader/5.14.3/fine-uploader.core' %>

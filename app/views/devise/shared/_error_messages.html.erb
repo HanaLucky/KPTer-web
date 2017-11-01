@@ -1,0 +1,14 @@
+<% if alert || object.errors.any? %>
+  <div class="kpter-alert-message">
+    <ul class="mdl-list">
+      <% if alert %>
+        <li><%= alert %></li>
+      <% end %>
+      <% if object.errors.any? %>
+        <% object.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      <% end %>
+    </ul>
+  </div>
+<% end %>

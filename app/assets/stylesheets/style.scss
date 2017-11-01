@@ -16,11 +16,6 @@
 .kpter-header {
   overflow: visible;
   background-color: white;
-  .mdl-navigation__link {
-    color: #757575;
-    font-weight: 700;
-    font-size: 14px;
-  }
   .material-icons {
     color: #767777 !important;
   }
@@ -28,7 +23,11 @@
     text-decoration: none;
     color: inherit;
   }
+  li a {
+    display:block;
+  }
 }
+
 /**
  * drawer (side bar)
  */
@@ -70,3 +69,108 @@
 .material-icons.md-24 { font-size: 24px; }
 .material-icons.md-36 { font-size: 36px; }
 .material-icons.md-48 { font-size: 48px; }
+
+@mixin kpter-alert-message {
+  width: 100%;
+  margin: 0 0 15px 0;
+  ul {
+    border-bottom: 1px solid rgba(0,0,0,.12);
+    li {
+      color: #d15e5e;
+      font-size: 14px;
+    }
+  }
+}
+
+.kpter-notice-message {
+  width: 100%;
+  margin: 0 0 15px 0;
+  ul {
+    border-bottom: 1px solid rgba(0,0,0,.12);
+    li {
+      font-size: 14px;
+    }
+  }
+}
+
+.kpter-form-middle {
+  margin: 0 auto;
+  margin-top: 40px;
+  width: 320px;
+  .kpter-alert-message {
+    @include kpter-alert-message;
+  }
+}
+
+.kpter-form-left {
+  width: 320px;
+  .kpter-alert-message {
+    @include kpter-alert-message;
+  }
+}
+
+.float-right {
+  display: flex;
+  margin-left: auto;
+}
+
+.kpter-link {
+  text-decoration: none;
+}
+.kpter-checkbox-label {
+  color: rgba(0,0,0,.26);
+}
+
+.kpter-content {
+  .kpter-content-head {
+    padding-top: 24px;
+    margin: 0 16px;
+  }
+  .kpter-content-subhead {
+    margin: 0 16px;
+    padding-top: 8px;
+  }
+}
+
+.kpter-steps {
+  width: 100%;
+  padding: 0;
+  margin: 30px auto 0;
+  overflow: hidden;
+  list-style: none;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  @media screen and (min-width: $grid-tablet-breakpoint) {
+    display: table;
+  }
+  li {
+    @media screen and (min-width: $grid-tablet-breakpoint) {
+      display: table-cell;
+      border-left: 1px solid #ddd;
+    }
+    border: 1px solid #ddd;
+    padding: 10px 15px;
+    border-left: 1px solid #ddd;
+  }
+}
+
+.kpter-mail {
+  padding: 30px 0 0 0;
+}
+
+.kpter-avatar-img-96 {
+  width: 96px;
+  height: 96px;
+  border-radius: 3px;
+}
+
+.kpter-dialog {
+  width: 450px;
+}
+
+dialog {
+  position: fixed;
+  top: 50%;
+  transform: translate(0, -50%);
+}
