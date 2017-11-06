@@ -10,6 +10,8 @@ Rails.application.config.assets.version = '1.0'
 # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
 # Rails.application.config.assets.precompile += %w( search.js )
 Rails.application.config.assets.precompile += %w( mdl/1.3.0/material.kpter-pink.min.css )
+Rails.application.config.assets.precompile += %w( dialog-polyfill/0.4.9/dialog-polyfill.css )
+Rails.application.config.assets.precompile += %w( dialog-polyfill/0.4.9/dialog-polyfill.js )
 
 Rails.application.config.assets.precompile += %w( communities/show.js )
 Rails.application.config.assets.precompile += %w( dataTablesSetting.js )
@@ -31,9 +33,6 @@ Rails.application.config.assets.precompile += %w( welcome/bootstrap/js/bootstrap
 Rails.application.config.assets.precompile += %w( welcome/scrollreveal/scrollreveal.min.js )
 Rails.application.config.assets.precompile += %w( welcome/magnific-popup/jquery.magnific-popup.min.js )
 
-# confirm/show.html.erb/用CSS
-Rails.application.config.assets.precompile += %w( confirm.css )
-
 # Communitiesページ用CSS
 Rails.application.config.assets.precompile += %w( communities.css )
 Rails.application.config.assets.precompile += %w( invite_other.css )
@@ -50,11 +49,8 @@ Rails.application.config.assets.precompile += %w( boards/default.css )
 Rails.application.config.assets.precompile += %w( boards/component.css )
 
 # users
-Rails.application.config.assets.precompile += %w( cropperjs/1.0.0-rc.2/cropper.css )
-Rails.application.config.assets.precompile += %w( cropperjs/1.0.0-rc.2/cropper.js )
-Rails.application.config.assets.precompile += %w( fine-uploader/5.14.3/fine-uploader.core.js )
-Rails.application.config.assets.precompile += %w( fine-uploader/5.14.3/fine-uploader.core.js.map )
-Rails.application.config.assets.precompile += %w( cropperjs/0.8.1/cropper.js )
+Rails.application.config.assets.precompile += %w( fine-uploader/5.15.0/fine-uploader.core.js )
+Rails.application.config.assets.precompile += %w( fine-uploader/5.15.0/fine-uploader.core.js.map )
 Rails.application.config.assets.precompile += %w( users/edit.js )
 Rails.application.config.assets.precompile += %w( users/edit.css )
 

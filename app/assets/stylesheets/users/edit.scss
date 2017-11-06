@@ -1,11 +1,117 @@
+@mixin padding-top {
+  padding-top: 4em;
+}
+
+$background-color: #fafafa;
+
+.kpter-settings {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: stretch;
+  -ms-flex-align: stretch;
+  align-items: stretch;
+  min-height: 100%;
+  background: $background-color;
+  .kpter-settings-menu {
+    padding: 0 2em;
+    width: 240px;
+    @include padding-top;
+    padding-top: 4em;
+    background: $background-color;
+    a {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      align-items: center;
+      padding: .75em .75em;
+      color: #333;
+      font-size: 13px;
+      font-weight: normal;
+      text-decoration: none;
+      line-height: 10px;
+      text-align: left;
+      cursor: pointer;
+    }
+    a.active {
+      cursor: default;
+      background-color: #fff;
+      font-weight: bold;
+      color: #202020;
+    }
+    a:hover{
+      background-color:#fff
+    }
+  }
+  .kpter-settings-contents {
+    background-color: #fff;
+    padding: 0 2em 3em 2em;
+    @include padding-top;
+    width: 70%;
+    max-width: 700px;
+    min-height: 100%;
+    border-right: 1px solid #f1f1f1;
+    border-left: 1px solid #f1f1f1;
+  }
+}
+
 /* Limit image width to avoid overflow the container */
 img {
   max-width: 100%;
 }
-.img-avatar {
-  width: 100%;
-  margin: 0 0 5px 0;
+
+.hoverable {
+  overflow: hidden;
+  position:	relative;
+  .hoverable--overlay {
+  	width: 100%;
+  	height:  100%;
+  	position: absolute;	/* 絶対位置指定 */
+  	top: 0;
+  	left: 0;
+  	opacity: 0;	/* マスクを表示しない */
+  	background-color:	rgba(0,0,0,0.4);	/* マスクは半透明 */
+  	-webkit-transition:	all 0.2s ease;
+  	transition: all 0.2s ease;
+  }
+  .hoverable--overlay:hover {
+  	opacity: 1;	/* マスクを表示する */
+  }
 }
+
+.hoverable {
+  width: 96px;
+  height: 96px;
+	overflow: hidden;
+	position: relative;
+  cursor: pointer;
+  .caption {
+  	text-align: center;
+  	color: #fff;
+    padding-top: 25px;
+  }
+  .mask {
+  	width: 100%;
+  	height: 100%;
+  	position: absolute;
+  	top: 0;
+  	left: 0;
+  	opacity: 0;
+  	background-color:	rgba(0,0,0,0.4);
+    -webkit-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+    border-radius: 3px;
+  }
+  &:hover .mask {
+  	opacity: 1;
+  }
+}
+
 .avatar-image-container {
   margin: auto;
 }

@@ -1,10 +1,26 @@
 $(function () {
-  
+
   // cropper object
   var cropper;
 
-  // ref. http://getbootstrap.com/javascript/#modals-events
-  $('#modal-upload-avator').on('shown.bs.modal', function (event) {
+  // モーダル生成
+  var dialog = document.querySelector('dialog');
+  if (! dialog.showModal) {
+    // dialog,showModal未実装のブラウザ対応 see.https://github.com/GoogleChrome/dialog-polyfill
+    dialogPolyfill.registerDialog(dialog);
+  }
+
+  // クローズボタンにクリックイベントを付加
+  dialog.querySelector('.close').addEventListener('click', function() {
+    if (cropper) {
+      // モーダル閉じたらcropperを破棄（しないと、画像を差し替えられない）
+      cropper.destroy();
+    }
+    $('#avatar').hide();
+    dialog.close();
+  });
+
+  $('#preview-avatar-image').bind('load', function(){
     var image = document.getElementById('preview-avatar-image');
     cropper = new Cropper(image, {
       aspectRatio: 1 / 1,
@@ -14,18 +30,7 @@ $(function () {
 
       }
     });
-    // XXX 動きがびみょい
     $('#avatar').show();
-  });
-
-  // ref. http://getbootstrap.com/javascript/#modals-events
-  $('#modal-upload-avator').on('hidden.bs.modal', function (event) {
-    if (cropper) {
-      // モーダル閉じたらcropperを破棄（しないと、画像を差し替えられない）
-      cropper.destroy();
-    }
-    // XXX 動きがびみょい
-    $('#avatar').hide();
   });
 
   // fine uploader
@@ -52,8 +57,6 @@ $(function () {
         var self = this;
         // プレビュー表示（src 属性に data スキーマがセットされる）
         self.drawThumbnail(id, document.getElementById('preview-avatar-image'))
-        // モーダルを表示する
-        $('#modal-upload-avator').modal('show');
 
         // アップロードボタンにクリックイベントを付加
         document.getElementById('upload-image-btn').addEventListener('click', function (e) {
@@ -73,6 +76,12 @@ $(function () {
             self.uploadStoredFiles();
           })
         }, false);
+      },
+      onSubmitted: function(id, filename) {
+          // サムネイル設定が終わったらダイアログを開く
+          if (!dialog.open) {
+            dialog.showModal();
+          }
       },
       // アップロードが完了した時
       onComplete: function (id, filename, response, xhr) {
