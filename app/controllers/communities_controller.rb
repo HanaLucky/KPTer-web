@@ -8,7 +8,7 @@ class CommunitiesController < ApplicationController
     @all_boards = @community.find_boards
     @boards = Kaminari.paginate_array(@all_boards).page(params[:page]).per(5)
     @all_tcards = @community.find_tcards
-    @t_cards = Kaminari.paginate_array(@all_tcards).page(params[:page]).per(10)
+    @t_cards = Kaminari.paginate_array(@all_tcards).page(params[:page]).per(5)
     @attendees = @community.find_users
   end
 
@@ -22,7 +22,8 @@ class CommunitiesController < ApplicationController
     status ||= TCard.status.open
     @community = Community.find(params[:id])
     @all_tcards = @community.find_tcards(status)
-    @t_cards = Kaminari.paginate_array(@all_tcards).page(params[:page])
+    @t_cards = Kaminari.paginate_array(@all_tcards).page(params[:page]).per(5)
+    @status = status
   end
 
   def update

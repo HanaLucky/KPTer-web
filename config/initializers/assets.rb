@@ -13,9 +13,6 @@ Rails.application.config.assets.precompile += %w( mdl/1.3.0/material.kpter-pink.
 Rails.application.config.assets.precompile += %w( dialog-polyfill/0.4.9/dialog-polyfill.css )
 Rails.application.config.assets.precompile += %w( dialog-polyfill/0.4.9/dialog-polyfill.js )
 
-Rails.application.config.assets.precompile += %w( communities/show.js )
-Rails.application.config.assets.precompile += %w( dataTablesSetting.js )
-Rails.application.config.assets.precompile += %w( tasksTable.js )
 Rails.application.config.assets.precompile += %w( list.js )
 
 # Welcome/index.html.erb用CSS

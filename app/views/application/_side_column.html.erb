@@ -7,7 +7,7 @@
     <div class="kpter-drawer-separator"></div>
     <% communities.each do |cu| %>
       <%= link_to community_path(cu.community), class: "mdl-navigation__link" do %>
-        <span class="<% if cu.status.inviting? %>kpter-drawer-inviting-text<% end %> <% if current_community == cu.community %>mdl-color-text--primary-dark<% end %>"><%= cu.community.name %></span>
+        <span class="kpter-drawer-community-name <% if cu.status.inviting? %>kpter-drawer-inviting-text<% end %> <% if current_community == cu.community %>mdl-color-text--primary-dark<% end %>"><%= cu.community.name %></span>
         <% if cu.status.inviting? %>
           <span class="kpter-drawer-circle"></span>
         <% else %>

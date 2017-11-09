@@ -37,8 +37,16 @@
     background-color: #dcdcdc;
     margin: 8px 0;
   }
+  .kpter-drawer-community-name {
+    max-width: 90%;
+    display:inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
   .kpter-drawer-inviting-text {
     font-weight: 600;
+
   }
   .kpter-drawer-circle {
     background-color: #ff8c00;
@@ -174,3 +182,96 @@ dialog {
   top: 50%;
   transform: translate(0, -50%);
 }
+
+table > tfoot > tr {
+  height: 56px;
+}
+
+.kpter-table {
+  width: 100%;
+  // task
+  th:nth-child(2) {
+    width: 100%;
+  }
+  td {
+    white-space: initial;
+  }
+  td:nth-child(2) {
+    max-width: 100px;
+  }
+  .kpter-table-header-title {
+    font-size: 18px !important;
+  }
+  .kpter-task-open-closed {
+    text-decoration: none;
+    color: inherit;
+    font-weight: inherit;
+    padding-left: 8px;
+  }
+}
+
+/**** paging ****/
+.mdl-paging {
+  color: rgba(0, 0, 0, 0.54);
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-justify-content: flex-end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-flex-flow: row wrap;
+  -ms-flex-flow: row wrap;
+  flex-flow: row wrap;
+}
+
+.mdl-paging > * {
+  -webkit-flex: none;
+  -ms-flex: none;
+  flex: none;
+}
+
+.mdl-list + .mdl-paging {
+  margin: 0;
+}
+
+.mdl-paging__per-page {
+  position: relative;
+}
+
+.mdl-paging__per-page-label {
+  margin-right: 40px;
+}
+
+.mdl-paging__per-page-value {
+  position: absolute;
+  right: 36px;
+  top: 6px;
+}
+
+.mdl-paging__per-page + .mdl-paging__count {
+  margin-left: 24px;
+}
+
+.mdl-paging .mdl-menu {
+  min-width: 64px;
+}
+
+.mdl-paging__prev:last-child {
+  margin-right: 44px;
+}
+
+.mdl-paging__count + .mdl-paging__prev {
+  margin-left: 24px;
+}
+
+.mdl-paging__prev + .mdl-paging__next {
+  margin-left: 12px;
+}
+
+.mdl-paging__count + .mdl-paging__next {
+  margin-left: 68px;
+}
+/**** paging end ****/
