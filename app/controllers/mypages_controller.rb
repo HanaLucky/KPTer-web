@@ -3,7 +3,7 @@ class MypagesController < ApplicationController
 
   def show
     @all_tcards = User.find_tcards_with_user_id(current_user.id)
-    @t_cards = Kaminari.paginate_array(@all_tcards).page(params[:page])
+    @t_cards = Kaminari.paginate_array(@all_tcards).page(params[:page]).per(5)
     @community = Community.new
   end
 
@@ -20,7 +20,7 @@ class MypagesController < ApplicationController
     param_status = params[:status]
     status = param_status == TCard.status.open || param_status == TCard.status.closed ?  param_status : TCard.status.open
     @all_tcards = User.find_tcards_with_user_id(current_user.id, status)
-    @t_cards = Kaminari.paginate_array(@all_tcards).page(params[:page])
+    @t_cards = Kaminari.paginate_array(@all_tcards).page(params[:page]).per(5)
     @status = status
   end
 

@@ -1,162 +1,38 @@
 <div class="mdl-grid">
   <div class="mdl-cell mdl-cell--8-col mdl-cell--8-col-tablet">
-    <%= render :partial => "tasks", :locals => { t_cards: @t_cards, visible_assignee: true, url: @community.id } %>
+    <div class="kpter-sub-heading">
+      <div class="kpter-sub-title">
+        <div class="mdl-typography--body-2-color-contrast"><%= @community.name %></div>
+      </div>
+      <div class="kpter-settings">
+        <%= link_to community_path(@community) + '/invitable_users', {:remote => true, class: "mdl-button mdl-js-button mdl-button--icon dialog-button-invitable-users"} do %>
+          <i class="material-icons md-18">person_add</i>
+        <% end %>
+        <button id="settings" class="mdl-button mdl-js-button mdl-button--icon">
+          <i class="material-icons md-18">settings</i>
+        </button>
+        <ul class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="settings">
+          <li class="mdl-menu__item">Edit</li>
+          <li class="mdl-menu__item mdl-menu__item--full-bleed-divider">Leave</li>
+          <li class="mdl-menu__item">Delete</li>
+        </ul>
+      </div>
+    </div>
+    <%= render :partial => "tasks", :locals => { t_cards: @t_cards, visible_assignee: true, url: @community.id, status: @status, chartDoughnut: true } %>
   </div>
   <div class="mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet">
-    <!-- TODO view attendees list-->
+    <canvas id="topOfAsignee" width="400" height="400"></canvas>
+    <script>
+      <% if @top_of_assignees.empty? %>
+        var labels = []
+        var data = []
+      <% else %>
+        var labels = [<% @top_of_assignees.each do |key, value| %>"<%= key %>",<% end %>]
+        var data = [<% @top_of_assignees.each do |key, value| %>"<%= value %>",<% end %>]
+      <% end %>
+      chartDoughnut("topOfAsignee", "Are your tasks well-balanced?", labels, data);
+    </script>
   </div>
 </div>
 
-<div id="page-wrapper">
-  <div class="row">
-    <div class="col-lg-12">
-      <div class="col-lg-12 top5">
-        <h1 class="page-header">
-          <a href="#" id="community-name" data-type="text" data-resource="community" data-name="name" data-inputclass="form-control" data-url="<%= @community.id %>" data-original-title="Enter Community Name" data-mode="inline">
-          <%= @community.name %>
-          </a>
-        </h1>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-lg-12">
-        <div class="action-ul">
-          <ul class="action-ul-left fa-ul">
-            <li>
-              <a role="button" data-toggle="modal" data-target="#modal_invite_other"></a>
-              <%= link_to community_path(@community) + '/invitable_users', {:remote => true,  'data-toggle' =>  "modal", 'data-target' => '#modal_invite_other'} do %>
-                <i class="fa-li fa fa-user-plus" aria-hidden="true"></i>Invite others to this community
-              <% end %>
-            </li>
-          </ul>
-          <ul class="action-ul-right">
-            <li class="dropdown">
-              <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                <i class="fa fa-cog fa-fw"></i><i class="fa fa-caret-down"></i>
-              </a>
-              <ul class="dropdown-menu dropdown-config">
-                <li>
-                  <a role="button" data-toggle="modal" data-target="#modal_leave">
-                    Leave
-                  </a>
-                </li>
-                <li class="divider"></li>
-                <li>
-                  <a role="button" data-toggle="modal" data-target="#modal_delete">
-                    Delete this community
-                  </a>
-                </li>
-              </ul>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-lg-4 col-md-6">
-        <div class="panel panel-primary">
-          <div class="panel-heading">
-            <div class="row">
-              <div class="col-xs-3"> <i class="fa fa-columns fa-5x"></i> </div>
-              <div class="col-xs-9 text-right">
-                <div class="huge">
-                  <%= @all_boards.length %>
-                </div>
-                <div>Boards</div>
-              </div>
-            </div>
-          </div>
-          <a href="#boards">
-            <div class="panel-footer"> <span class="pull-left">View Details</span> <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-              <div class="clearfix"></div>
-            </div>
-          </a>
-        </div>
-      </div>
-      <div class="col-lg-4 col-md-6">
-        <div class="panel panel-green">
-          <div class="panel-heading">
-            <div class="row">
-              <div class="col-xs-3"> <i class="fa fa-check-square-o fa-5x"></i> </div>
-              <div class="col-xs-9 text-right">
-                <div class="huge">
-                  <%= @all_tcards.length %>
-                </div>
-                <div>Open Tasks</div>
-              </div>
-            </div>
-          </div>
-          <a href="#tasks">
-            <div class="panel-footer"> <span class="pull-left">View Details</span> <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-              <div class="clearfix"></div>
-            </div>
-          </a>
-        </div>
-      </div>
-      <div class="col-lg-4 col-md-6">
-        <div class="panel panel-yellow">
-          <div class="panel-heading">
-            <div class="row">
-              <div class="col-xs-3"> <i class="fa fa-users fa-5x"></i> </div>
-              <div class="col-xs-9 text-right">
-                <div class="huge">
-                  <%= @attendees.length %>
-                </div>
-                <div>Attendees</div>
-              </div>
-            </div>
-          </div>
-          <a href="#attendees">
-            <div class="panel-footer"> <span class="pull-left">View Details</span> <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-              <div class="clearfix"></div>
-            </div>
-          </a>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-lg-12" id="boards">
-        <div class="panel panel-default">
-          <div class="panel-heading"> <i class="fa fa-columns fa-fw"></i> Boards </div>
-          <div class="panel-body">
-            <div class="dataTables_filter dataTables_filter_action">
-              <div class="btn-group btn-group-sm" role="group">
-                <a class="btn btn-primary waves-effect" data-toggle="modal" data-target="#modal-new-board" data-remote="true" href="#"><i class="fa fa-plus fa-lg"></i> New Board</a>
-              </div>
-            </div>
-            <% if @boards.empty? then %>
-              No entries found
-            <% else %>
-              <div class="list-group">
-                <div id="board-list">
-                  <%= render :partial => 'boards', :locals => {boards: @boards, community: @community} %>
-                </div>
-              </div>
-              <%= link_to_next_page @boards, 'View more', :remote => true, :id => :'view-more', class: 'btn btn-flat waves-effect btn-block' %>
-            <% end %>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-lg-12" id="attendees">
-        <%= render :partial => "attendees", :locals => { attendees: @attendees } %>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="modal fade" id="modal_invite_other" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <%= render :partial => 'invitable_users', :locals => {invitable_users: @invitable_users, community: @community} %>
-</div>
-
-<div class="modal fade modal-ext" id="modal-new-board" tabindex="-1" role="dialog" aria-labelledby="modal-new-board" aria-hidden="true">
-  <%= render :partial => 'new_board', locals: {current_community: @community}%>
-</div>
-
-<div class="modal fade" id="modal_leave" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <%= render :partial => 'leave', :locals => {current_community: @community} %>
-</div>
-
-<div class="modal fade" id="modal_delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <%= render :partial => 'delete', :locals => {current_community: @community} %>
-</div>
+<%= render :partial => 'invitable_users', :locals => {invitable_users: @invitable_users, community: @community} %>

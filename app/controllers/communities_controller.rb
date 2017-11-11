@@ -10,11 +10,27 @@ class CommunitiesController < ApplicationController
     @all_tcards = @community.find_tcards
     @t_cards = Kaminari.paginate_array(@all_tcards).page(params[:page]).per(5)
     @attendees = @community.find_users
+    @top_of_assignees = @community.top_of_assignees.first(5)
   end
 
   def toggle
-    render nothing: true
     TCard.update_status(params[:t_card_id])
+
+    respond_to do |format|
+      top_of_assignees = Community.find(params[:id]).top_of_assignees.first(5)
+      other_assignees = Community.find(params[:id]).top_of_assignees.to_a.from(5)
+      other_label = 'others'
+      other_data = other_assignees.map{|a| a[1]}.sum
+      labels = Array.new
+      data = Array.new
+      top_of_assignees.each {|i, j|
+        labels.push(i)
+        data.push(j)
+      }
+      labels.push(other_label)
+      data.push(other_data)
+      format.json { render json: {labels: labels, data: data}}
+    end
   end
 
   def refresh_tasks

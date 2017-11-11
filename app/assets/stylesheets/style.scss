@@ -38,7 +38,7 @@
     margin: 8px 0;
   }
   .kpter-drawer-community-name {
-    max-width: 90%;
+    max-width: 87%;
     display:inline-block;
     overflow: hidden;
     white-space: nowrap;
@@ -275,3 +275,35 @@ table > tfoot > tr {
   margin-left: 68px;
 }
 /**** paging end ****/
+
+@mixin kpter-avatar-icons {
+  width: 24px;
+  height: 24px;
+  opacity: .8;
+}
+
+.kpter-avatar-icons-square {
+  @include kpter-avatar-icons;
+  border-radius: .2rem;
+}
+
+.kpter-avatar-icons-circle {
+  @include kpter-avatar-icons;
+  border-radius: 50%;
+}
+
+.kpter-avatar-name {
+  font-size: 15px;
+}
+
+.kpter-sub-heading {
+  padding: .7rem;
+  .kpter-sub-title {
+    text-align: left;
+    float: left;
+  }
+  .kpter-settings {
+    text-align: right;
+    color: rgba(0,0,0,0.54);
+  }
+}
