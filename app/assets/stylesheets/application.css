@@ -15,6 +15,5 @@
  *= require attendees
  *= require style
  *= require debugger
- *= require toastr
  *= require dialog-polyfill/0.4.9/dialog-polyfill
  */

@@ -5,7 +5,6 @@
   <div class="panel-body">
     <%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :put, role: "form" }) do |f| %>
       <%= f.hidden_field :reset_password_token %>
-      <%= render 'shared/error_messages', object: f.object %>
       <div class="form-group form-group-field">
         <div class="input-field col">
           <%= f.password_field :password, autofocus: true, autocomplete: "off", class: "form-control validate", required: true, maxlength: 128 %>
