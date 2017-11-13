@@ -34,5 +34,6 @@
     </script>
   </div>
 </div>
-
-<%= render :partial => 'invitable_users', :locals => {invitable_users: @invitable_users, community: @community} %>
+<dialog id="invitable-users-dialog" class="mdl-dialog">
+  <%= render :partial => 'invitable_users', :locals => {invitable_users: @invitable_users, community: @community} %>
+</dialog>

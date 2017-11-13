@@ -61,3 +61,19 @@ var chartDoughnut = function(elementId, title, labels, data) {
     }
   });
 };
+
+var settingDialog = function(dialogButtonStyleClassName, dialogDivStyleId){
+  var dialogButton = document.querySelector('.' + dialogButtonStyleClassName);
+  var dialog = document.querySelector('#' + dialogDivStyleId);
+  if (! dialog.showModal) {
+    dialogPolyfill.registerDialog(dialog);
+  }
+  dialogButton.addEventListener('click', function() {
+    if (!dialog.open) {
+      dialog.showModal();
+    }
+  });
+  dialog.querySelector('.close').addEventListener('click', function() {
+    dialog.close();
+  });
+};

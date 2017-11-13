@@ -1,3 +1,4 @@
 $(function () {
   $('#invitable-users-dialog').html('<%= j(render(:partial => 'invitable_users', :locals => { invitable_users: @invitable_users, community: @community})) %>')
+  settingDialog("dialog-button-invitable-users", "invitable-users-dialog");
 });
