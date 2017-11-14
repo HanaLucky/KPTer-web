@@ -76,4 +76,5 @@ var settingDialog = function(dialogButtonStyleClassName, dialogDivStyleId){
   dialog.querySelector('.close').addEventListener('click', function() {
     dialog.close();
   });
+
 };

@@ -11,6 +11,7 @@ class CommunitiesController < ApplicationController
     @t_cards = Kaminari.paginate_array(@all_tcards).page(params[:page]).per(5)
     @attendees = @community.find_users
     @top_of_assignees = @community.top_of_assignees.first(5)
+    @invitable_users = User.find_invitable_users(@community)
   end
 
   def toggle

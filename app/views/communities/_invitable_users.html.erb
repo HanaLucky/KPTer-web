@@ -1,17 +1,19 @@
-  Invite others to <%= community.name %>
-  <%= form_for community, :url => {:action => 'invite'}, :method => :post do |f| %>
+<h3 class="mdl-dialog__title">MDL Dialog</h3>
+<%= form_for community, :url => {:action => 'invite'}, :method => :post do |f| %>
+  <div class="mdl-dialog__content">
     <% if invitable_users.nil? %>
-        No Data Available
+      No data
     <% else %>
-      <% invitable_users.each do |user| %>
-        <%= user.nickname %>
-      <% end %>
+      <%= select_tag 'user[ids]', options_from_collection_for_select(invitable_users, :id, :nickname), class: "select-user-multiple", multiple: true %>
     <% end %>
-  <% end %>
+    <script>
+      $('.select-user-multiple').select2({
+        dropdownParent: $('.mdl-dialog__content')
+      });
+    </script>
+  </div>
   <div class="mdl-dialog__actions">
     <button type="button" class="mdl-button close">Close</button>
-    <button type="button" class="mdl-button" disabled>Disabled action</button>
+    <%= submit_tag "Invite", class: "mdl-button", disabled: true %>
   </div>
-</dialog>
-
-<%= javascript_include_tag 'list' %>
+<% end %>
