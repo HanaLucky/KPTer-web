@@ -62,13 +62,13 @@ class CommunitiesController < ApplicationController
   end
 
   def invite
-    if params[:community].nil?
+    if params[:id].nil?
       # フロントJSで未選択の場合はボタンdisableにするが、それでもユーザー未指定でリクエストされた場合は、画面をリフレッシュする(chatwork理論)
-      errors.add(:avator, t('commynity.invitation.failure'))
+      flash[:notice] = t('commynity.invitation.failure')
       redirect_to :action => :show and return
     end
 
-    @users = User.where(id: params[:community][:user_ids])
+    @users = User.where(id: params[:user][:ids])
     @community = Community.find(params[:id])
     @users.each{ |user|
       unless user.joining?(@community)

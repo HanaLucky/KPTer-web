@@ -1,4 +1,17 @@
 $(function () {
-  $('#invitable-users-dialog').html('<%= j(render(:partial => 'invitable_users', :locals => { invitable_users: @invitable_users, community: @community})) %>')
-  settingDialog("dialog-button-invitable-users", "invitable-users-dialog");
+  $('#invitable-users-dialog').html('<%= j(render(:partial => 'invitable_users', :locals => { invitable_users: @invitable_users, community: @community})) %>');
+
+  $('.select2-user-multiple').select2({
+    dropdownParent: $('.kpter-invitable-select'),
+    placeholder: "Search by name"
+  });
+
+  // 招待するユーザーが一人も選択されていない場合は、Inviteボタンを非活性にする
+  $('.select2-user-multiple').on("change", function(){
+    if($('.select2-container').find('.select2-selection__choice').length == 0) {
+      $(".kpter-invite-button").prop("disabled", true);
+    } else {
+      $(".kpter-invite-button").prop("disabled", false);
+    }
+  });
 });

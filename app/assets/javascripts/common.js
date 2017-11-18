@@ -22,7 +22,7 @@ $(function() {
 
 
 var chart;
-var chartDoughnut = function(elementId, title, labels, data) {
+var chartDoughnut = function chartDoughnut (elementId, title, labels, data) {
 
   var backgroundColors = [
     "rgb(255, 99, 132)",  // red
@@ -62,7 +62,13 @@ var chartDoughnut = function(elementId, title, labels, data) {
   });
 };
 
-var settingDialog = function(dialogButtonStyleClassName, dialogDivStyleId){
+/**
+ * initialize for dialog
+ * 
+ * @param {String} dialogButtonStyleClassName ダイアログ開くボタンのclass名
+ * @param {String} dialogDivStyleId　ダイアログタグのid名
+ */
+var settingDialog = function settingDialog (dialogButtonStyleClassName, dialogDivStyleId){
   var dialogButton = document.querySelector('.' + dialogButtonStyleClassName);
   var dialog = document.querySelector('#' + dialogDivStyleId);
   if (! dialog.showModal) {
@@ -76,5 +82,4 @@ var settingDialog = function(dialogButtonStyleClassName, dialogDivStyleId){
   dialog.querySelector('.close').addEventListener('click', function() {
     dialog.close();
   });
-
 };

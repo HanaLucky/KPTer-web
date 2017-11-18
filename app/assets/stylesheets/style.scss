@@ -19,15 +19,20 @@
   .material-icons {
     color: #767777 !important;
   }
-  .kpter-menu-link {
-    text-decoration: none;
-    color: inherit;
-  }
-  li a {
-    display:block;
-  }
 }
 
+.kpter-menu {
+  .mdl-menu__item {
+    padding: 0;
+    margin: 0;
+    a {
+      display: block;
+      text-decoration: none;
+      color: inherit;
+      padding: 0 16px;
+    }
+  }
+}
 /**
  * drawer (side bar)
  */
@@ -305,5 +310,68 @@ table > tfoot > tr {
   .kpter-settings {
     text-align: right;
     color: rgba(0,0,0,0.54);
+  }
+}
+
+.kpter-dialog-full-screen {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  .mdl-button--icon {
+    position: absolute;
+    top: 3rem;
+    right: 3rem;
+    min-width: 56px;
+    width: 56px;
+    font-size: 56px;
+    height: 56px;
+    .material-icons {
+      font-size: 36px;
+      top: 1.8rem;
+      left: 1.55rem;
+    }
+    .esc {
+      position: relative;
+      text-transform: none;
+      font-size: 12px;
+    }
+  }
+  .kpter-dialog-content {
+    color: rgba(0,0,0,.54);
+    padding: 150px 100px 24px;
+  }
+}
+
+dialog {
+  .select2-user-multiple {
+      width: 80%;
+  }
+  .select2-results__option {
+    color: rgba(0,0,0,.54);
+  }
+}
+
+.kpter-invitable-content {
+  .kpter-invite-button {
+    height: 50px;
+    width: 100px;
+  }
+  .kpter-invitable-select {
+    .select2-container {
+      width: 80% !important;
+    }
+    ul {
+      line-height: 36px;
+      li {
+        line-height: 36px;
+      }
+    }
+    .select2-selection__choice__remove {
+      margin-right: 5px !important;
+    }
+    .select2-search__field {
+      line-height: 40px;
+    }
   }
 }

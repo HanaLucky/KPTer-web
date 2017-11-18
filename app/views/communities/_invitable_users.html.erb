@@ -1,19 +1,21 @@
-<h3 class="mdl-dialog__title">MDL Dialog</h3>
-<%= form_for community, :url => {:action => 'invite'}, :method => :post do |f| %>
-  <div class="mdl-dialog__content">
-    <% if invitable_users.nil? %>
-      No data
-    <% else %>
-      <%= select_tag 'user[ids]', options_from_collection_for_select(invitable_users, :id, :nickname), class: "select-user-multiple", multiple: true %>
+<div class="mdl-dialog__content kpter-dialog-content">
+  <button class="mdl-button mdl-js-button mdl-button--icon close">
+    <i class="material-icons">close</i>
+    <span class="esc">esc</span>
+  </button>
+  <div class="kpter-invitable-content">
+    <%= form_for community, :url => {:action => 'invite'}, :method => :post do |f| %>
+      <% if invitable_users.nil? %>
+        There's nobody.
+      <% else %>
+        <div class="kpter-invitable-select">
+          <%= select_tag 'user[ids]', options_from_collection_for_select(invitable_users, :id, :nickname), class: "select2-user-multiple", multiple: true %>
+          <%= submit_tag "Invite", class: "mdl-button mdl-js-button mdl-button--colored mdl-button--raised kpter-invite-button", disabled: true %>
+        </div>
+      <% end %>
+      <script>
+settingDialog("dialog-button-invitable-users", "invitable-users-dialog");
+      </script>
     <% end %>
-    <script>
-      $('.select-user-multiple').select2({
-        dropdownParent: $('.mdl-dialog__content')
-      });
-    </script>
   </div>
-  <div class="mdl-dialog__actions">
-    <button type="button" class="mdl-button close">Close</button>
-    <%= submit_tag "Invite", class: "mdl-button", disabled: true %>
-  </div>
-<% end %>
+</div>
