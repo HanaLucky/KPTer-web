@@ -64,7 +64,7 @@ var chartDoughnut = function chartDoughnut (elementId, title, labels, data) {
 
 /**
  * initialize for dialog
- * 
+ *
  * @param {String} dialogButtonStyleClassName ダイアログ開くボタンのclass名
  * @param {String} dialogDivStyleId　ダイアログタグのid名
  */

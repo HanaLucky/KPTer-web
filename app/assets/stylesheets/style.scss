@@ -376,3 +376,15 @@ dialog {
     }
   }
 }
+
+dialog[open] {
+  animation: dialog-open 150ms ease-in-out;
+}
+@keyframes dialog-open {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+}
