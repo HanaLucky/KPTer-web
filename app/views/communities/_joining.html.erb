@@ -15,7 +15,7 @@
           <li class="mdl-menu__item">
             <%= link_to community_path(@community) + '/invitable_users', {:remote => true, class: "kpter-menu-link dialog-button-invitable-users"} do %>Invite<% end %>
           </li>
-          <li class="mdl-menu__item"><a href="#">Edit</a></li>
+          <li class="mdl-menu__item"><a href="#" class="dialog-button-edit">Edit</a></li>
           <li class="mdl-menu__item mdl-menu__item--full-bleed-divider"><a href="#" class="dialog-button-leave">Leave</a></li>
           <li class="mdl-menu__item"><a href="#" class="dialog-button-delete">Delete</a></li>
         </ul>
@@ -51,4 +51,9 @@
 <!-- delete -->
 <dialog id="dialog-button-delete" class="mdl-dialog kpter-dialog-full-screen">
   <%= render :partial => 'delete', :locals => {current_community: @community} %>
+</dialog>
+
+<!-- edit -->
+<dialog id="dialog-button-edit" class="mdl-dialog kpter-dialog-full-screen">
+  <%= render :partial => 'edit', :locals => {current_community: @community} %>
 </dialog>

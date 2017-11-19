@@ -45,7 +45,6 @@ class CommunitiesController < ApplicationController
 
   def update
     @community = Community.find(params[:id])
-
     respond_to do |format|
       if @community.update_attributes(name: params[:community][:name])
         format.html { redirect_to @community, notice: 'Community name was successfully updated.' }
