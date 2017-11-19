@@ -58,7 +58,11 @@ class CommunitiesController < ApplicationController
 
   def invitable_users
     @community = Community.find(params[:id])
-    @invitable_users = User.find_invitable_users(@community)
+    @invitable_users = User.find_invitable_users(@community, params[:q])
+    respond_to do |format|
+      format.js
+      format.json { render json: @invitable_users.as_json(only: ['id', 'nickname']) }  # セキュリティ的に必要最小限をレスポンスする
+    end
   end
 
   def invite

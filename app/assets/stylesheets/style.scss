@@ -339,7 +339,7 @@ table > tfoot > tr {
   }
   .kpter-dialog-content {
     color: rgba(0,0,0,.54);
-    padding: 150px 100px 24px;
+    padding: 100px 100px 24px;
   }
 }
 
@@ -358,6 +358,7 @@ dialog {
     width: 100px;
   }
   .kpter-invitable-select {
+    min-width: 520px;
     .select2-container {
       width: 80% !important;
     }

@@ -1,9 +1,22 @@
 $(function () {
   $('#invitable-users-dialog').html('<%= j(render(:partial => 'invitable_users', :locals => { invitable_users: @invitable_users, community: @community})) %>');
 
+  // 招待可能ユーザーの検索
   $('.select2-user-multiple').select2({
     dropdownParent: $('.kpter-invitable-select'),
-    placeholder: "Search by name"
+    placeholder: "Search by name",
+    minimumInputLength: 1,
+    ajax: {
+      url: "<%= community_path(@community) + '/invitable_users' %>",
+      dataType: 'json',
+      delay: 350,
+      processResults: function (data) {
+        return { results: $.map(data, function(user) {
+            return { id: user.id, text: user.nickname };
+          })
+        };
+      }
+    }
   });
 
   // 招待するユーザーが一人も選択されていない場合は、Inviteボタンを非活性にする

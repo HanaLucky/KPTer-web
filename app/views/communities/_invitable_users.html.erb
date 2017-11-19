@@ -4,17 +4,14 @@
     <span class="esc">esc</span>
   </button>
   <div class="kpter-invitable-content">
+    <h3>invite to <%= community.name %></h3>
     <%= form_for community, :url => {:action => 'invite'}, :method => :post do |f| %>
-      <% if invitable_users.nil? %>
-        There's nobody.
-      <% else %>
-        <div class="kpter-invitable-select">
-          <%= select_tag 'user[ids]', options_from_collection_for_select(invitable_users, :id, :nickname), class: "select2-user-multiple", multiple: true %>
-          <%= submit_tag "Invite", class: "mdl-button mdl-js-button mdl-button--colored mdl-button--raised kpter-invite-button", disabled: true %>
-        </div>
-      <% end %>
+      <div class="kpter-invitable-select">
+        <%= select_tag 'user[ids]', "", class: "select2-user-multiple", multiple: true %>
+        <%= submit_tag "Invite", class: "mdl-button mdl-js-button mdl-button--colored mdl-button--raised kpter-invite-button", disabled: true %>
+      </div>
       <script>
-settingDialog("dialog-button-invitable-users", "invitable-users-dialog");
+        settingDialog("dialog-button-invitable-users", "invitable-users-dialog");
       </script>
     <% end %>
   </div>
