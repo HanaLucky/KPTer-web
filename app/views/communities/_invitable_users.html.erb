@@ -4,7 +4,7 @@
     <span class="esc">esc</span>
   </button>
   <div class="kpter-invitable-content">
-    <h3>invite to <%= community.name %></h3>
+    <h4>invite to <%= community.name %></h4>
     <%= form_for community, :url => {:action => 'invite'}, :method => :post do |f| %>
       <div class="kpter-invitable-select">
         <%= select_tag 'user[ids]', "", class: "select2-user-multiple", multiple: true %>
