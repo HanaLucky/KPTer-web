@@ -17,7 +17,7 @@
           </li>
           <li class="mdl-menu__item"><a href="#">Edit</a></li>
           <li class="mdl-menu__item mdl-menu__item--full-bleed-divider"><a href="#" class="dialog-button-leave">Leave</a></li>
-          <li class="mdl-menu__item"><a href="#">Delete</a></li>
+          <li class="mdl-menu__item"><a href="#" class="dialog-button-delete">Delete</a></li>
         </ul>
       </div>
     </div>
@@ -46,4 +46,9 @@
 <!-- leave -->
 <dialog id="dialog-button-leave" class="mdl-dialog kpter-dialog-full-screen">
   <%= render :partial => 'leave', :locals => {current_community: @community} %>
+</dialog>
+
+<!-- delete -->
+<dialog id="dialog-button-delete" class="mdl-dialog kpter-dialog-full-screen">
+  <%= render :partial => 'delete', :locals => {current_community: @community} %>
 </dialog>
