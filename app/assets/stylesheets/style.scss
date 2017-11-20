@@ -356,6 +356,11 @@ dialog {
   }
 }
 
+dialog.kpter-dialog-middle {
+  width: 500px;
+  height: 450px;
+}
+
 .kpter-invitable-content {
   .kpter-invite-button {
     height: 50px;
@@ -399,4 +404,8 @@ ul.notice {
   li:before {
     content: "* ";
   }
+}
+.member-list {
+  overflow-y: scroll;
+  height: 250px;
 }

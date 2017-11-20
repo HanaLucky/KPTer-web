@@ -1,0 +1,4 @@
+$(function () {
+  $('#dialog-button-member').html('<%= j(render(:partial => 'members', :locals => { current_community: @community, members: @members })) %>');
+  settingDialog("dialog-button-member", "dialog-button-member");
+});

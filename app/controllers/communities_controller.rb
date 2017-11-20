@@ -9,7 +9,6 @@ class CommunitiesController < ApplicationController
     @boards = Kaminari.paginate_array(@all_boards).page(params[:page]).per(5)
     @all_tcards = @community.find_tcards
     @t_cards = Kaminari.paginate_array(@all_tcards).page(params[:page]).per(5)
-    @attendees = @community.find_users
     @top_of_assignees = @community.top_of_assignees.first(5)
     @invitable_users = User.find_invitable_users(@community)
   end
@@ -62,6 +61,10 @@ class CommunitiesController < ApplicationController
       format.js
       format.json { render json: @invitable_users.as_json(only: ['id', 'nickname']) }  # セキュリティ的に必要最小限をレスポンスする
     end
+  end
+
+  def members
+    @members = Community.find(params[:id]).find_users
   end
 
   def invite

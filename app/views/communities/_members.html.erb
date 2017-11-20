@@ -1,0 +1,25 @@
+<div class="mdl-dialog__content">
+  <h4 class="mdl-dialog__title">member list</h4>
+  <div class="mdl-dialog__content">
+    <div class="mdl-list member-list">
+      <% if members.nil? %>
+        Nobody is here
+      <% else %>
+        <% members.each do |cu| %>
+          <div class="mdl-list__item">
+            <span class="mdl-list__item-primary-content">
+              <%= image_tag(avatar_url(cu.user), :class => "mdl-list__item-avatar", :alt => "#{cu.user.nickname}") %>
+              <span><%= cu.user.nickname %></span>
+              <% if cu.status.inviting? %>
+                <span class="mdl-list__item-secondary-content mdl-typography--caption-force-preferred-font-color-contrast">(inviting)</span>
+              <% end %>
+            </span>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+  <div class="mdl-dialog__actions">
+    <button type="button" class="mdl-button close">Close</button>
+  </div>
+</div>
