@@ -1,17 +1,20 @@
 <div class="mdl-dialog__content">
   <h4 class="mdl-dialog__title">member list</h4>
   <div class="mdl-dialog__content">
-    <div class="mdl-list member-list">
+    <div class="mdl-list kpter-member-list">
       <% if members.nil? %>
         Nobody is here
       <% else %>
         <% members.each do |cu| %>
-          <div class="mdl-list__item">
+          <div class="mdl-list__item mdl-list__item--two-line">
             <span class="mdl-list__item-primary-content">
-              <%= image_tag(avatar_url(cu.user), :class => "mdl-list__item-avatar", :alt => "#{cu.user.nickname}") %>
-              <span><%= cu.user.nickname %></span>
-              <% if cu.status.inviting? %>
-                <span class="mdl-list__item-secondary-content mdl-typography--caption-force-preferred-font-color-contrast">(inviting)</span>
+              <% if cu.status.joining? %>
+                <%= image_tag(avatar_url(cu.user), :class => "mdl-list__item-avatar", :alt => "#{cu.user.nickname}") %>
+                <span><%= cu.user.nickname %></span>
+              <% else %>
+                <%= image_tag(avatar_url(cu.user), :class => "mdl-list__item-avatar inviting-avatar", :alt => "#{cu.user.nickname}") %>
+                <span class="inviting-text"><%= cu.user.nickname %></span>
+                <span class="mdl-list__item-sub-title">(inviting)</span>
               <% end %>
             </span>
           </div>

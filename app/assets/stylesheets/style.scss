@@ -405,7 +405,54 @@ ul.notice {
     content: "* ";
   }
 }
-.member-list {
+.kpter-member-list {
   overflow-y: scroll;
-  height: 250px;
+  height: 235px;
+  .mdl-list__item {
+    font-size: 14px;
+  }
+  .inviting-text {
+    color: rgba(0, 0, 0, 0.54);
+  }
+  .inviting-avatar {
+    filter: brightness(85%);
+  }
+  .mdl-list__item-avatar,
+  .mdl-list__item-avatar.material-icons {
+    height: 32px;
+    width: 32px;
+    box-sizing: border-box;
+    border-radius: 50%;
+    background-color: rgb(117,117,117);
+    font-size: 40px;
+    color: white;
+  }
+  .mdl-list__item--two-line {
+    height: 50px;
+    .mdl-list__item-primary-content {
+      height: 36px;
+      line-height: 20px;
+      display: block;
+      .mdl-list__item-avatar {
+        float: left;
+      }
+      .mdl-list__item-icon {
+        float: left;
+        margin-top: 6px;
+      }
+      .mdl-list__item-secondary-content {
+        height: 36px;
+      }
+      .mdl-list__item-sub-title {
+        font-size: 12px;
+        font-weight: 400;
+        line-height: 24px;
+        letter-spacing: 0;
+        line-height: 18px;
+        color: rgba(0,0,0, 0.54);
+        display: block;
+        padding: 0;
+      }
+    }
+  }
 }
