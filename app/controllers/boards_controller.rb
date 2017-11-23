@@ -3,7 +3,7 @@ class BoardsController < ApplicationController
   before_action :authenticate_user!, :side_column, only: [:show]
 
   def create
-    @board = Board.create(name: params[:board][:name], community_id: params[:community_id])
+    @board = Board.create(name: params[:community][:boards][:name], community_id: params[:community_id])
     if @board.errors.any?
       flash.keep[:alert] = @board.errors.full_messages.first
       redirect_to controller: 'communities', action: 'show', id: params[:community_id]

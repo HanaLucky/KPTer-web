@@ -217,7 +217,7 @@ table > tfoot > tr {
 
 /**** paging ****/
 .mdl-paging {
-  color: rgba(0, 0, 0, 0.54);
+  color: $colorContrast;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
@@ -309,7 +309,7 @@ table > tfoot > tr {
   }
   .kpter-settings {
     text-align: right;
-    color: rgba(0,0,0,0.54);
+    color: $colorContrast;
   }
 }
 
@@ -412,7 +412,7 @@ ul.notice {
     font-size: 14px;
   }
   .inviting-text {
-    color: rgba(0, 0, 0, 0.54);
+    color: $colorContrast;
   }
   .inviting-avatar {
     filter: brightness(85%);
@@ -449,7 +449,7 @@ ul.notice {
         line-height: 24px;
         letter-spacing: 0;
         line-height: 18px;
-        color: rgba(0,0,0, 0.54);
+        color: $colorContrast;
         display: block;
         padding: 0;
       }
@@ -470,4 +470,10 @@ ul.notice {
 
 .clickable {
   cursor: pointer;
+}
+
+.kpter-mute-text {
+  font-size: 12px;
+  font-weight: 400;
+  color: $colorContrast
 }
