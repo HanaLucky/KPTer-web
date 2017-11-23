@@ -30,7 +30,7 @@ en:
       status:
         open: "Open"
         closed: "Closed"
-  commynity:
+  community:
     invitation:
       success: "invited %{users} to this community."
       failure: "Could not join in this community."

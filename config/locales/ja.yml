@@ -37,7 +37,7 @@ ja:
           attributes:
             user_id:
               taken: "え、もう入ってるのに？"
-  commynity:
+  community:
     invite:
       success: "%{users}を招待しました"
       failure: "招待できませんでした"

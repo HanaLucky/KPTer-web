@@ -70,7 +70,7 @@ class CommunitiesController < ApplicationController
   def invite
     if params[:id].nil?
       # フロントJSで未選択の場合はボタンdisableにするが、それでもユーザー未指定でリクエストされた場合は、画面をリフレッシュする(chatwork理論)
-      flash[:notice] = t('commynity.invitation.failure')
+      flash[:notice] = t('community.invitation.failure')
       redirect_to :action => :show and return
     end
 
@@ -82,28 +82,28 @@ class CommunitiesController < ApplicationController
       end
     }
 
-    flash[:notice] = t('commynity.invitation.success', users: @users.map(&:nickname).join(', '))
+    flash[:notice] = t('community.invitation.success', users: @users.map(&:nickname).join(', '))
     redirect_to :action => :show
   end
 
   def accept
     community = Community.find(params[:id])
     current_user.join_in(community)
-    flash[:notice] = t('commynity.invitation.accept')
+    flash[:notice] = t('community.invitation.accept')
     redirect_to :action => :show
   end
 
   def decline
     community = Community.find(params[:id])
     current_user.decline(community)
-    flash[:notice] = t('commynity.invitation.decline')
+    flash[:notice] = t('community.invitation.decline')
     redirect_to :controller => :mypages, :action => :show
   end
 
   def leave
     community = Community.find(params[:id])
     current_user.leave(community)
-    flash[:notice] = t('commynity.leave')
+    flash[:notice] = t('community.leave')
     redirect_to :controller => :mypages, :action => :show
   end
 
@@ -111,14 +111,14 @@ class CommunitiesController < ApplicationController
     community = Community.find(params[:id])
     user = User.find(params[:user_id])
     community.withdraw(user)
-    flash[:notice] = t('commynity.remove', nickname: user.nickname)
+    flash[:notice] = t('community.remove', nickname: user.nickname)
     redirect_to :action => :show and return
   end
 
   def destroy
     community = Community.find(params[:id])
     community.rest_in_place
-    flash[:notice] = t('commynity.destroyed')
+    flash[:notice] = t('community.destroyed')
     redirect_to :controller => :mypages, :action => :show
   end
 
