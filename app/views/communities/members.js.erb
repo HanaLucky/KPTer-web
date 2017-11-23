@@ -1,4 +1,7 @@
 $(function () {
   $('#dialog-button-member').html('<%= j(render(:partial => 'members', :locals => { current_community: @community, members: @members })) %>');
+  // dialogの挙動を都度初期化
   settingDialog("dialog-button-member", "dialog-button-member");
+  // ...を機能させるため
+  componentHandler.upgradeAllRegistered();
 });

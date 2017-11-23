@@ -29,6 +29,7 @@ Rails.application.routes.draw do
   post 'communities/:id/accept' => 'communities#accept'
   post 'communities/:id/decline' => 'communities#decline'
   post 'communities/:id/leave' => 'communities#leave'
+  post 'communities/:id/remove' => 'communities#remove'
   get 'communities/:id/members' => 'communities#members'
 
   post 'mypage/tasks/:id/toggle' => 'mypages#toggle'

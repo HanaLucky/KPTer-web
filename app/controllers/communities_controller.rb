@@ -107,6 +107,14 @@ class CommunitiesController < ApplicationController
     redirect_to :controller => :mypages, :action => :show
   end
 
+  def remove
+    community = Community.find(params[:id])
+    user = User.find(params[:user_id])
+    community.withdraw(user)
+    flash[:notice] = t('commynity.remove', nickname: user.nickname)
+    redirect_to :action => :show and return
+  end
+
   def destroy
     community = Community.find(params[:id])
     community.rest_in_place

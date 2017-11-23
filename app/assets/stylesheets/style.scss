@@ -472,8 +472,12 @@ ul.notice {
   cursor: pointer;
 }
 
+.mute-color {
+  color: $colorContrast;
+}
+
 .kpter-mute-text {
   font-size: 12px;
   font-weight: 400;
-  color: $colorContrast
+  color: $colorContrast;
 }

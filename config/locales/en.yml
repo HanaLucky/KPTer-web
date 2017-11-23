@@ -37,6 +37,7 @@ en:
       accept: "You joined in this community!"
       decline: "declined an invitation."
     leave: "You have left the community."
+    remove: "%{nickname} removed from here"
     destroyed: "Community was successfully deleted."
     errors:
       not_allowed: "The community does not exists or is not allowed to display."
