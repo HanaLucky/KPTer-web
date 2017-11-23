@@ -68,7 +68,7 @@ var chartDoughnut = function chartDoughnut (elementId, title, labels, data) {
  * @param {String} dialogButtonStyleClassName ダイアログ開くボタンのclass名
  * @param {String} dialogDivStyleId　ダイアログタグのid名
  */
-var settingDialog = function settingDialog (dialogButtonStyleClassName, dialogDivStyleId){
+var settingDialog = function settingDialog(dialogButtonStyleClassName, dialogDivStyleId) {
   var dialogButton = document.querySelector('.' + dialogButtonStyleClassName);
   var dialog = document.querySelector('#' + dialogDivStyleId);
   if (! dialog.showModal) {
@@ -83,3 +83,30 @@ var settingDialog = function settingDialog (dialogButtonStyleClassName, dialogDi
     dialog.close();
   });
 };
+
+/**
+ * table trをリンクにする
+ * リンク先はdata-href属性の値
+ *
+ * @param {String} tableId 対象のテーブルのID
+ *
+ * sample.
+ * <table>
+ *   <tbody>
+ *     <tr data-href="https://kpter.net/communities/6/boards/3">
+ *       <td>board name</td>
+ *     </tr>
+ *   </tbody>
+ * </table>
+ */
+var tableTrClickable = function tableTrClickable(tableId) {
+  $("#" + tableId  + " tbody tr[data-href]").addClass('clickable').click( function() {
+    window.location = $(this).attr('data-href');
+  }).find('a').hover( function() {
+    $(this).parents('tr').unbind('click');
+  }, function() {
+    $(this).parents('tr').click( function() {
+      window.location = $(this).attr('data-href');
+    });
+  });
+}

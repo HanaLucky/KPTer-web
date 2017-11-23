@@ -456,3 +456,18 @@ ul.notice {
     }
   }
 }
+
+.view-more {
+  text-align: center;
+  margin: 5px 0;
+  .mdl-button {
+    width: 100%;
+    background: initial;
+    min-width: initial;
+    padding: 0;
+  }
+}
+
+.clickable {
+  cursor: pointer;
+}

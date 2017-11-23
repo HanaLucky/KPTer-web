@@ -37,6 +37,41 @@
     </script>
   </div>
 </div>
+<div class="mdl-grid">
+  <div class="mdl-cell mdl-cell--8-col mdl-cell--8-col-tablet">
+      <div id="board-list">
+        <table class="mdl-data-table mdl-shadow--2dp kpter-table" id="board-table">
+          <thead>
+            <tr>
+              <th class="mdl-data-table__cell--non-numeric kpter-table-header-title">Board</th>
+              <th>
+              <button class="mdl-button mdl-js-button mdl-button--icon dialog-button-new-board">
+                <i class="material-icons">add</i>
+              </button>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <%= render :partial => 'boards', :locals => {boards: @boards, community: @community} %>
+          </tbody>
+          <% if @boards.empty? %>
+            <tfoot>
+              <tr>
+                <td class="mdl-data-table__cell--non-numeric" colspan="2">
+                  <div class="mdl-paging">
+                    No boards
+                  </div>
+                </td>
+              </tr>
+            </tfoot>
+          <% end %>
+        </table>
+      </div>
+      <div class="view-more mdl-typography--body-1-color-contrast">
+        <%= link_to_next_page(@boards, 'View more', remote: true, id: 'view-more', class: 'mdl-button mdl-js-button mdl-button--raised') %>
+      </div>
+  </div>
+</div>
 
 <!-- invite others -->
 <dialog id="invitable-users-dialog" class="mdl-dialog kpter-dialog-full-screen">
@@ -61,4 +96,9 @@
 <!-- member list -->
 <dialog id="dialog-button-member" class="mdl-dialog kpter-dialog-middle">
   <%= render :partial => 'members', :locals => {current_community: @community, members: @members} %>
+</dialog>
+
+<!-- new board -->
+<dialog id="dialog-button-new-board" class="mdl-dialog kpter-dialog-middle">
+  <%= render :partial => 'new_board', :locals => {current_community: @community}%>
 </dialog>

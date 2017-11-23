@@ -44,12 +44,14 @@
       <% end %>
     </tbody>
     <tfoot>
-      <td class="mdl-data-table__cell--non-numeric" colspan="<% if visible_assignee %>4<% else %>3<% end %>">
-        <div class="mdl-paging">
-          <%= page_entries_info @t_cards %>
-          <%= paginate @t_cards, remote: true, params: {:action => 'refresh_tasks'}%>
-        </div>
-      </td>
+      <tr>
+        <td class="mdl-data-table__cell--non-numeric" colspan="<% if visible_assignee %>4<% else %>3<% end %>">
+          <div class="mdl-paging">
+            <%= page_entries_info @t_cards %>
+            <%= paginate @t_cards, remote: true, params: {:action => 'refresh_tasks'}%>
+          </div>
+        </td>
+      </tr>
     </tfoot>
   </table>
 </div>
