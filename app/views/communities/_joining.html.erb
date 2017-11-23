@@ -5,7 +5,7 @@
         <div class="mdl-typography--body-2-color-contrast"><%= @community.name %></div>
       </div>
       <div class="kpter-settings">
-        <%= link_to community_path(@community) + '/members', {:remote => true, class: "mdl-button mdl-js-button mdl-button--icon dialog-button-member"} do %>
+        <%= link_to community_path + '/members', {:remote => true, class: "mdl-button mdl-js-button mdl-button--icon dialog-button-member"} do %>
           <i class="material-icons md-18">person</i>
         <% end %>
         <button id="settings" class="mdl-button mdl-js-button mdl-button--icon">
@@ -13,7 +13,7 @@
         </button>
         <ul class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect kpter-menu" for="settings">
           <li class="mdl-menu__item">
-            <%= link_to community_path(@community) + '/invitable_users', {:remote => true, class: "kpter-menu-link dialog-button-invitable-users"} do %>Invite<% end %>
+            <%= link_to community_path + '/invitable_users', {:remote => true, class: "kpter-menu-link dialog-button-invitable-users"} do %>Invite<% end %>
           </li>
           <li class="mdl-menu__item"><a href="#" class="dialog-button-edit">Edit</a></li>
           <li class="mdl-menu__item mdl-menu__item--full-bleed-divider"><a href="#" class="dialog-button-leave">Leave</a></li>

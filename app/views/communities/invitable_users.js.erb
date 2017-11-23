@@ -7,7 +7,7 @@ $(function () {
     placeholder: "Search by name",
     minimumInputLength: 1,
     ajax: {
-      url: "<%= community_path(@community) + '/invitable_users' %>",
+      url: "<%= community_path + '/invitable_users' %>",
       dataType: 'json',
       delay: 350,
       processResults: function (data) {
