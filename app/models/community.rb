@@ -12,6 +12,16 @@ class Community < ApplicationRecord
     .sort_by!{ |v| v[:id] }.reverse    # 作成された順(IDの降順)
   end
 
+  def top_of_assignees
+    Community
+    .includes([:boards => [:t_cards => [:tcard_assignee => :user]]])
+    .references(:tcard_assignee => :user)
+    .where('communities.id = ? and t_cards.status = ? and users.nickname is not null', self.id, TCard.status.open)
+    .group('users.id, users.nickname')
+    .order('count_tcard_assignees_id desc, users.id asc')
+    .count('tcard_assignees.id')
+  end
+
   def find_tcards(status=TCard.status.open)
     Community
     .includes([:boards => [:t_cards => [:tcard_assignee => :user]]])

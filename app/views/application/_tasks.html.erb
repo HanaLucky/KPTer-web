@@ -1,51 +1,57 @@
-<%= javascript_include_tag 'dataTablesSetting' %>
-<%= javascript_include_tag 'tasksTable' %>
-
-<table width="100%" class="table table-striped" id="dataTables-tasks">
-  <thead>
-    <tr>
-      <th class="col-xs-8 col-ms-8 col-md-8 col-lg-8">Task</th>
-      <% if visible_assignee %>
-        <th class="col-xs-2 col-ms-2 col-md-2 col-lg-2">Assignee</th>
-      <% end %>
-      <th class="col-xs-1 col-ms-1 col-md-1 col-lg-1">Deadline</th>
-      <th class="col-xs-1 col-ms-1 col-md-1 col-lg-1">Done</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% t_cards.each.with_index(1) do |t_card, index| %>
-      <% row_class = index.even? ? "even" : "odd" %>
-      <tr class="gradeA <%= row_class %>">
-        <td><%= t_card.title %></td>
-        <% if visible_assignee == true %>
-          <% if t_card.tcard_assignee.nil? %>
-            <td></td>
-          <% else %>
-            <td><%= t_card.tcard_assignee.user.nickname %></td>
-          <% end %>
+<div id="t_cards-table">
+  <table class="mdl-data-table mdl-shadow--2dp kpter-table">
+    <thead>
+      <tr>
+        <th class="mdl-data-table__cell--non-numeric kpter-table-header-title" colspan="2">Tasks</th>
+        <th colspan="<% if visible_assignee %>2<% else %>1<% end %>">
+          <%= link_to "open", { action: "refresh_tasks", method: :get, status: TCard.status.open, remote: true }, { id: "open-btn", class: "mdl-color-text--primary kpter-task-open-closed"} %>
+          <%= link_to "close", { action: "refresh_tasks", method: :get, status: TCard.status.closed, remote: true }, { id: "close-btn", class: "kpter-task-open-closed" } %>
+        </th>
+      </tr>
+      <tr>
+        <th class="mdl-data-table__cell--non-numeric">Done</th>
+        <th class="mdl-data-table__cell--non-numeric">Task</th>
+        <% if visible_assignee %>
+          <th class="mdl-data-table__cell--non-numeric">Assignee</th>
         <% end %>
-        <td><%= t_card.deadline %></td>
-        <td align="center">
-          <div class="checkbox rkmd-checkbox checkbox-rotate checkbox-ripple">
-            <label class="input-checkbox checkbox-lightBlue">
-              <%= check_box_tag '', '', t_card.status.closed?, { 'data-id' => t_card.id, 'data-url' => url, :onclick=>"$.post($(this).data('url')+ '/tasks/' + $(this).data('id') + '/toggle/');" } %>
-              <span class="checkbox"></span>
-            </label>
+        <th class="mdl-data-table__cell--non-numeric">Deadline</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% t_cards.each.with_index(1) do |t_card, index| %>
+        <tr>
+           <td>
+              <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-data-table__select" for="row[<%= index %>]">
+                <% if chartDoughnut %>
+                  <%= check_box_tag '', '', t_card.status.closed?, { 'data-id' => t_card.id, 'data-url' => url, :onclick=>"$.post($(this).data('url')+ '/tasks/' + $(this).data('id') + '/toggle/', function(data){
+                    chartDoughnut('topOfAsignee', 'Are your tasks well-balanced?', data.labels, data.data);
+                    });" ,id: "row[#{index}]", class: "mdl-checkbox__input"} %>
+                <% else %>
+                  <%= check_box_tag '', '', t_card.status.closed?, { 'data-id' => t_card.id, 'data-url' => url, :onclick=>"$.post($(this).data('url')+ '/tasks/' + $(this).data('id') + '/toggle/'" ,id: "row[#{index}]", class: "mdl-checkbox__input"} %>
+                <% end %>
+              </label>
+          </td>
+          <td class="mdl-data-table__cell--non-numeric"><%= t_card.title %></td>
+          <% if visible_assignee %>
+            <% if t_card.tcard_assignee.nil? %>
+              <td class="mdl-data-table__cell--non-numeric">&nbsp;</td>
+            <% else %>
+              <td class="mdl-data-table__cell--non-numeric" style="white-space: nowrap;"><%= t_card.tcard_assignee.user.nickname %></td>
+            <% end %>
+          <% end %>
+          <td class="mdl-data-table__cell--non-numeric" style="white-space: nowrap;"><%= t_card.deadline %></td>
+        </tr>
+      <% end %>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td class="mdl-data-table__cell--non-numeric" colspan="<% if visible_assignee %>4<% else %>3<% end %>">
+          <div class="mdl-paging">
+            <%= page_entries_info @t_cards %>
+            <%= paginate @t_cards, remote: true, params: {:action => 'refresh_tasks'}%>
           </div>
         </td>
       </tr>
-    <% end %>
-  </tbody>
-</table>
-<div class="row">
-  <div class="col-sm-8">
-    <div class="dataTables_info" role="status" aria-live="polite">
-      <%= page_entries_info t_cards %>
-    </div>
-  </div>
-  <div class="col-sm-4">
-    <div class="dataTables_paginate paging_simple_numbers">
-      <%= paginate @t_cards, :remote => true, :params => {:action => 'refresh_tasks'}%>
-    </div>
-  </div>
+    </tfoot>
+  </table>
 </div>

@@ -1,0 +1,18 @@
+<div class="mdl-dialog__content kpter-dialog-content">
+  <button class="mdl-button mdl-js-button mdl-button--icon close">
+    <i class="material-icons">close</i>
+    <span class="esc">esc</span>
+  </button>
+  <div class="kpter-invitable-content">
+    <h4>invite to <%= community.name %></h4>
+    <%= form_for community, :url => {:action => 'invite'}, :method => :post do |f| %>
+      <div class="kpter-invitable-select">
+        <%= select_tag 'user[ids]', "", class: "select2-user-multiple", multiple: true %>
+        <%= submit_tag "Invite", class: "mdl-button mdl-js-button mdl-button--colored mdl-button--raised kpter-invite-button", disabled: true %>
+      </div>
+      <script>
+        settingDialog("dialog-button-invitable-users", "invitable-users-dialog");
+      </script>
+    <% end %>
+  </div>
+</div>

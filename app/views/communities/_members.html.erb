@@ -1,0 +1,38 @@
+<div class="mdl-dialog__content">
+  <h4 class="mdl-dialog__title">member list</h4>
+  <div class="mdl-dialog__content">
+    <div class="mdl-list kpter-member-list">
+      <% if members.nil? %>
+        Nobody is here
+      <% else %>
+        <% members.each_with_index do |cu, i| %>
+          <div class="mdl-list__item mdl-list__item--two-line">
+            <span class="mdl-list__item-primary-content">
+              <% if cu.status.joining? %>
+                <%= image_tag(avatar_url(cu.user), :class => "mdl-list__item-avatar", :alt => "#{cu.user.nickname}") %>
+                <span><%= cu.user.nickname %></span>
+              <% else %>
+                <%= image_tag(avatar_url(cu.user), :class => "mdl-list__item-avatar inviting-avatar", :alt => "#{cu.user.nickname}") %>
+                <span class="inviting-text"><%= cu.user.nickname %></span>
+                <span class="mdl-list__item-sub-title">(inviting)</span>
+              <% end %>
+            </span>
+            <% if current_user != cu.user %>
+              <button class="mdl-list__item-secondary-action mdl-button mdl-js-button mdl-button--icon" id="btn-<%= i %>">
+                <i class="material-icons md-18 mute-color">more_horiz</i>
+              </button>
+              <ul class="mdl-menu mdl-js-menu mdl-menu--bottom-right kpter-menu" for="btn-<%= i %>">
+                <li class="mdl-menu__item">
+                  <%= link_to "Remove from here", community_path + "/remove?user_id=#{cu.user.id}", :method => :post, data: {confirm: "Are you sure?"} %>
+                </li>
+              </ul>
+            <% end %>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+  <div class="mdl-dialog__actions">
+    <button type="button" class="mdl-button close">Close</button>
+  </div>
+</div>

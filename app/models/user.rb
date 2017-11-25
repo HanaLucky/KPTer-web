@@ -41,7 +41,7 @@ class User < ApplicationRecord
         .sort_by!{ |t| [t[:deadline].nil? ? Date.new(9999, 12, 31) : t[:deadline], t[:id]]}
     end
 
-    def find_invitable_users(community)
+    def find_invitable_users(community, nickname = "", limit=20)
       User.where("
       id NOT IN (
         SELECT
@@ -52,9 +52,10 @@ class User < ApplicationRecord
 			       users.id = community_users.user_id
              and community_users.community_id = ?
 		  )
-      AND confirmed_at IS NOT NULL", community.id)
-      .order("users.id")
-      # XXX 自分が追加する確率、頻度が高いユーザーを上にだす。同じ部屋に入っている部屋数。個人チャット数。などなど。
+      AND confirmed_at IS NOT NULL
+      AND nickname LIKE ? ", community.id, "%#{nickname}%")
+      .limit(limit)
+      .order("users.nickname, users.id")
     end
   end
 

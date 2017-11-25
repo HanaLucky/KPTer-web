@@ -1,28 +1,30 @@
 $(function () {
+  $('#invitable-users-dialog').html('<%= j(render(:partial => 'invitable_users', :locals => { invitable_users: @invitable_users, community: @community})) %>');
 
-  $('#modal_invite_other').html('<%= j(render(:partial => 'invitable_users', :locals => { invitable_users: @invitable_users, community: @community})) %>')
-
-  // レコードクリックでチェックON/OFFできるようにする
-  $('.invite-table tr').click(function(event) {
-    var $checkbox = $(this).find('.invitable-user-check');
-    var isChecked = $checkbox.prop('checked');
-    if (isChecked) {
-      $checkbox.removeProp('checked');
-    } else {
-      $checkbox.prop('checked', 'checked');
-    }
-
-    // 招待するユーザーが一人も選択されていない場合は、Inviteボタンを非活性にする
-    if ($('.invitable-user-check:checked').length > 0) {
-      $('.invite-button').prop("disabled", false);
-    } else {
-      $('.invite-button').prop("disabled", true);
+  // 招待可能ユーザーの検索
+  $('.select2-user-multiple').select2({
+    dropdownParent: $('.kpter-invitable-select'),
+    placeholder: "Search by name",
+    minimumInputLength: 1,
+    ajax: {
+      url: "<%= community_path + '/invitable_users' %>",
+      dataType: 'json',
+      delay: 350,
+      processResults: function (data) {
+        return { results: $.map(data, function(user) {
+            return { id: user.id, text: user.nickname };
+          })
+        };
+      }
     }
   });
 
-  // setting of narrowed down of users  see. http://listjs.com/
-  var userList = new List('users', {
-    valueNames: [ 'nickname' ],
+  // 招待するユーザーが一人も選択されていない場合は、Inviteボタンを非活性にする
+  $('.select2-user-multiple').on("change", function(){
+    if($('.select2-container').find('.select2-selection__choice').length == 0) {
+      $(".kpter-invite-button").prop("disabled", true);
+    } else {
+      $(".kpter-invite-button").prop("disabled", false);
+    }
   });
-
 });

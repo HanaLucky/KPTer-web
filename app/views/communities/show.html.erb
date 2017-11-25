@@ -1,15 +1,7 @@
-<%= stylesheet_link_tag 'communities', media: 'all' %>
-<%= stylesheet_link_tag 'invite_other', media: 'all' %>
-
 <% if current_user.joining?(@community) %>
   <%= render :partial => 'joining' %>
 <% else %>
   <%= render :partial => 'inviting' %>
 <% end %>
 
-<!-- form of new community modal -->
-<div class="modal fade modal-ext" id="modal-new-community" tabindex="-1" role="dialog" aria-labelledby="modal-new-community" aria-hidden="true">
-  <%= render :partial => 'shared/new_community' %>
-</div>
-
-<%= javascript_include_tag 'communities/show' %>
+<%= javascript_include_tag 'communities' %>
