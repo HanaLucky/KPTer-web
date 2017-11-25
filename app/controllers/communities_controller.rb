@@ -1,9 +1,8 @@
 class CommunitiesController < ApplicationController
   before_action :authenticate_user!, :exists_community?, :allowed_to_display?, :side_column, only: [:show]
+  before_action :belongs_to?, except: [:show, :decline, :accept]
 
   def show
-    # TODO: コミュニティページ表示中にコミュニティから除名させられた場合の処理
-    # https://github.com/HanaLucky/KPTer-web/issues/96
     @community = Community.find(params[:id])
     @all_boards = @community.find_boards
     @boards = Kaminari.paginate_array(@all_boards).page(params[:page]).per(5)
@@ -131,6 +130,13 @@ class CommunitiesController < ApplicationController
     def allowed_to_display?
       community = Community.find(params[:id])
       unless current_user.allowed_to_display?(community)
+        raise Forbidden
+      end
+    end
+
+    def belongs_to?
+      community = Community.find(params[:id])
+      unless current_user.joining?(community)
         raise Forbidden
       end
     end
