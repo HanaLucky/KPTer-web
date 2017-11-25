@@ -1,97 +1,14 @@
 <div class="mdl-grid">
   <div class="mdl-cell mdl-cell--8-col mdl-cell--8-col-tablet">
+    <div class="kpter-sub-heading">
+      <div class="kpter-sub-title">
+        <div class="mdl-typography--body-2-color-contrast">MyPage</div>
+      </div>
+      <div class=“clarifix”></div>
+    </div>
     <%= render :partial => "tasks", :locals => { t_cards: @t_cards, visible_assignee: false, url: @community.id, status: @status, chartDoughnut: false} %>
   </div>
   <div class="mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet">
     <!-- TODO イイね？ -->
   </div>
-</div>
-
-<div id="page-wrapper">
-  <div class="row">
-    <div class="col-lg-12 top5">
-      <h1 class="page-header">Mypage</h1>
-    </div>
-    <!-- /.col-lg-12 -->
-  </div>
-  <!-- /.row -->
-  <div class="row">
-    <div class="col-lg-6 col-md-6">
-      <div class="panel panel-primary">
-        <div class="panel-heading">
-          <div class="row">
-            <div class="col-xs-3"> <i class="fa fa-comments fa-5x"></i> </div>
-            <div class="col-xs-9 text-right">
-              <div class="huge">
-                <%= @communities.length %>
-              </div>
-              <div>Communities You Join</div>
-            </div>
-          </div>
-        </div>
-        <a href="#community_list">
-          <div class="panel-footer"> <span class="pull-left">View Details</span> <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-            <div class="clearfix"></div>
-          </div>
-        </a>
-      </div>
-    </div>
-    <div class="col-lg-6 col-md-6">
-      <div class="panel panel-green">
-        <div class="panel-heading">
-          <div class="row">
-            <div class="col-xs-3"> <i class="fa fa-check-square-o fa-5x"></i> </div>
-            <div class="col-xs-9 text-right">
-              <div class="huge">
-                <%= @all_tcards.length %>
-              </div>
-              <div>Your Open Tasks</div>
-            </div>
-          </div>
-        </div>
-        <a href="#tasks">
-          <div class="panel-footer"> <span class="pull-left">View Details</span> <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-            <div class="clearfix"></div>
-          </div>
-        </a>
-      </div>
-    </div>
-  </div>
-
-  <div class="row" id="community_list">
-    <!-- /.col-lg-12 -->
-    <div class="col-lg-12">
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <i class="fa fa-comments fa-fw"></i> Communities
-        </div>
-        <!-- /.panel-heading -->
-        <div class="panel-body">
-          <% if @communities.empty? then %>
-            No entries found
-          <% else %>
-            <div class="list-group">
-              <% @communities.each do |cu| %>
-                <a href="<%= url_for :controller => :communities, :action => :show, :id => cu.community.id %>" class="list-group-item  <% if cu.status.inviting? %>new-text<% end %>">
-                  <span class="community-name"><i class="fa fa-comment fa-fw"></i> <%= cu.community.name %></span><% if cu.status.inviting? %><span class="circle"></span><% end %>
-                </a>
-              <% end %>
-            </div>
-          <% end %>
-        </div>
-        <!-- /.panel-body -->
-      </div>
-      <!-- /.panel -->
-    </div>
-
-      <!-- /.panel-body -->
-    </div>
-    <!-- /.col-lg-4 -->
-  </div>
-  <!-- /.row -->
-</div>
-
-<!-- form of new community modal -->
-<div class="modal fade modal-ext" id="modal-new-community" tabindex="-1" role="dialog" aria-labelledby="modal-new-community" aria-hidden="true">
-  <%= render :partial => 'shared/new_community' %>
 </div>
