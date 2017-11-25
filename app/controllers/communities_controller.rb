@@ -4,10 +4,10 @@ class CommunitiesController < ApplicationController
 
   def show
     @community = Community.find(params[:id])
-    @all_boards = @community.find_boards
-    @boards = Kaminari.paginate_array(@all_boards).page(params[:page]).per(5)
-    @all_tcards = @community.find_tcards
-    @t_cards = Kaminari.paginate_array(@all_tcards).page(params[:page]).per(5)
+    all_boards = @community.find_boards
+    @boards = Kaminari.paginate_array(all_boards).page(params[:page]).per(5)
+    all_tcards = @community.find_tcards
+    @t_cards = Kaminari.paginate_array(all_tcards).page(params[:page]).per(5)
     @top_of_assignees = @community.top_of_assignees.first(5)
     @invitable_users = User.find_invitable_users(@community)
   end
@@ -36,29 +36,29 @@ class CommunitiesController < ApplicationController
     status = params[:status]
     status ||= TCard.status.open
     @community = Community.find(params[:id])
-    @all_tcards = @community.find_tcards(status)
-    @t_cards = Kaminari.paginate_array(@all_tcards).page(params[:page]).per(5)
+    all_tcards = @community.find_tcards(status)
+    @t_cards = Kaminari.paginate_array(all_tcards).page(params[:page]).per(5)
     @status = status
   end
 
   def update
-    @community = Community.find(params[:id])
+    community = Community.find(params[:id])
     respond_to do |format|
-      if @community.update_attributes(name: params[:community][:name])
-        format.html { redirect_to @community, notice: 'Community name was successfully updated.' }
+      if community.update_attributes(name: params[:community][:name])
+        format.html { redirect_to community, notice: 'Community name was successfully updated.' }
         format.json { head :no_content } # 204 No Content
       else
-        format.json { render json: {message: @community.errors.full_messages.first}, status: :unprocessable_entity }
+        format.json { render json: {message: community.errors.full_messages.first}, status: :unprocessable_entity }
       end
     end
   end
 
   def invitable_users
     @community = Community.find(params[:id])
-    @invitable_users = User.find_invitable_users(@community, params[:q])
+    invitable_users = User.find_invitable_users(@community, params[:q])
     respond_to do |format|
       format.js
-      format.json { render json: @invitable_users.as_json(only: ['id', 'nickname']) }  # セキュリティ的に必要最小限をレスポンスする
+      format.json { render json: invitable_users.as_json(only: ['id', 'nickname']) }  # セキュリティ的に必要最小限をレスポンスする
     end
   end
 
@@ -73,15 +73,15 @@ class CommunitiesController < ApplicationController
       redirect_to :action => :show and return
     end
 
-    @users = User.where(id: params[:user][:ids])
-    @community = Community.find(params[:id])
-    @users.each{ |user|
-      unless user.joining?(@community)
-        user.invited(@community)
+    users = User.where(id: params[:user][:ids])
+    community = Community.find(params[:id])
+    users.each{ |user|
+      unless user.joining?(community)
+        user.invited(community)
       end
     }
 
-    flash[:notice] = t('community.invitation.success', users: @users.map(&:nickname).join(', '))
+    flash[:notice] = t('community.invitation.success', users: users.map(&:nickname).join(', '))
     redirect_to :action => :show
   end
 
