@@ -11,8 +11,5 @@
  * file per style scope.
  *
  *= require_self
- *= require attendees
  *= require style
- *= require debugger
- *= require dialog-polyfill/0.4.9/dialog-polyfill
  */

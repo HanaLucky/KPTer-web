@@ -311,6 +311,11 @@ table > tfoot > tr {
     text-align: right;
     color: $colorContrast;
   }
+  ::after{
+    content: "";
+    display: block;
+    clear: both;
+  }
 }
 
 .kpter-dialog-full-screen {
@@ -480,4 +485,34 @@ ul.notice {
   font-size: 12px;
   font-weight: 400;
   color: $colorContrast;
+}
+
+.kpter-contents {
+  padding: 0.7em;
+  .kpter-sub-heading {
+    padding: 0 0 0.7em 0;
+  }
+  .kpter-sub-contents {
+    padding: 0 0 2em 0;
+  }
+  .kpter-chip-action-container {
+    display: table;
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 75%;
+    .kpter-chip-actions {
+      display: table-row;
+      .kpter-chip-action {
+        display: table-cell;
+        text-align: center;
+        vertical-align: middle;
+        margin: 0;
+      }
+    }
+  }
+}
+
+.kpter-chip-action-m {
+   width: 150px;
+   cursor: pointer;
 }

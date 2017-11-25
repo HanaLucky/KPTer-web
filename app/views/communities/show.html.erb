@@ -1,5 +1,3 @@
-<%= stylesheet_link_tag 'communities', media: 'all' %>
-
 <% if current_user.joining?(@community) %>
   <%= render :partial => 'joining' %>
 <% else %>

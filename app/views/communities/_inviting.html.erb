@@ -1,21 +1,32 @@
-<div id="page-wrapper">
-  <div class="row">
-    <div class="col-lg-12">
-      <div class="col-lg-12 top5">
-        <h1 class="page-header"><%= @community.name %></h1>
-      </div>
-      <div class="col-md-6 center-block">
-        <div class="text-center invitation-msg">
-            You received an invitation to join a community.<br>
-            Do you accept or decline?
+<div class="mdl-grid">
+  <div class="mdl-cell mdl-cell--6-col">
+    <div class="kpter-contents">
+      <div class="kpter-sub-heading">
+        <div class="kpter-sub-title">
+          <div class="mdl-typography--body-2-color-contrast"><%= @community.name %></div>
         </div>
-        <div class="text-center">
-          <div class="form-inline">
+        <div class=“clarifix”></div>
+      </div>
+      <div class="kpter-sub-contents">
+        <div class="mdl-typography--body-1-color-contrast">
+          You received an invitation to join a community.<br>
+          Do you accept or decline?
+        </div>
+      </div>
+      <div class="kpter-chip-action-container">
+        <div class="kpter-chip-actions">
+          <div class="kpter-chip-action">
             <%= form_for @community, :url => {:action => 'decline'}, :method => :post do |f| %>
-              <%= button_tag "Decline", class: "btn btn-info btn-rounded btn-invite waves-effect waves-light", style: "text-transform: initial;" %>
+              <%= button_tag "Decline", class: "mdl-chip mdl-color--cyan-300 mdl-color-text--primary-contrast kpter-chip-action-m" do %>
+                <span class="mdl-chip__text">Decline</span>
+              <% end %>
             <% end %>
+          </div>
+          <div class="kpter-chip-action">
             <%= form_for @community, :url => {:action => 'accept'}, :method => :post do |f| %>
-              <%= button_tag "Accept", class: "btn btn-primary btn-rounded btn-invite waves-effect waves-light", style: "text-transform: initial;" %>
+              <%= button_tag "Decline", class: "mdl-chip mdl-color--primary mdl-color-text--primary-contrast kpter-chip-action-m" do %>
+                <span class="mdl-chip__text">Accept</span>
+              <% end %>
             <% end %>
           </div>
         </div>

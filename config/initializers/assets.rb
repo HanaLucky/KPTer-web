@@ -10,10 +10,6 @@ Rails.application.config.assets.version = '1.0'
 # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
 # Rails.application.config.assets.precompile += %w( search.js )
 Rails.application.config.assets.precompile += %w( mdl/1.3.0/material.kpter-pink.min.css )
-Rails.application.config.assets.precompile += %w( dialog-polyfill/0.4.9/dialog-polyfill.css )
-Rails.application.config.assets.precompile += %w( dialog-polyfill/0.4.9/dialog-polyfill.js )
-
-Rails.application.config.assets.precompile += %w( list.js )
 
 # Welcome/index.html.erb用CSS
 Rails.application.config.assets.precompile += %w( welcome/creative.css )
@@ -30,9 +26,7 @@ Rails.application.config.assets.precompile += %w( welcome/bootstrap/js/bootstrap
 Rails.application.config.assets.precompile += %w( welcome/scrollreveal/scrollreveal.min.js )
 Rails.application.config.assets.precompile += %w( welcome/magnific-popup/jquery.magnific-popup.min.js )
 
-# Communitiesページ用CSS
-Rails.application.config.assets.precompile += %w( communities.css )
-Rails.application.config.assets.precompile += %w( invite_other.css )
+# Communitiesページ用
 Rails.application.config.assets.precompile += %w( communities.js )
 
 # Boardsページ用JS
@@ -51,6 +45,3 @@ Rails.application.config.assets.precompile += %w( fine-uploader/5.15.0/fine-uplo
 Rails.application.config.assets.precompile += %w( fine-uploader/5.15.0/fine-uploader.core.js.map )
 Rails.application.config.assets.precompile += %w( users/edit.js )
 Rails.application.config.assets.precompile += %w( users/edit.css )
-
-# debugger用CSS
-Rails.application.config.assets.precompile += %w( debugger.css )

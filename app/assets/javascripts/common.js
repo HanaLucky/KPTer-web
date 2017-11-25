@@ -71,7 +71,12 @@ var chartDoughnut = function chartDoughnut (elementId, title, labels, data) {
 var settingDialog = function settingDialog(dialogButtonStyleClassName, dialogDivStyleId) {
   var dialogButton = document.querySelector('.' + dialogButtonStyleClassName);
   var dialog = document.querySelector('#' + dialogDivStyleId);
-  if (! dialog.showModal) {
+
+  if (!dialog || !dialogButton) {
+    return;
+  }
+  
+  if (!dialog.showModal) {
     dialogPolyfill.registerDialog(dialog);
   }
   dialogButton.addEventListener('click', function() {
