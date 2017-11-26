@@ -11,7 +11,7 @@
       </a>
     </div>
     <div class="kpter-nav-action kpter-nav-form-content" id="community-editable-container" style="display: none;">
-      <%= form_for communities_path, url: { controller: "communities", action: "create" }, html: { id: "create_community" } do |f| %>
+      <%= form_for communities_path, url: { controller: "/communities", action: "create" }, html: { id: "create_community" } do |f| %>
         <div class="kpter-nav-form-input" id="editable-community-name" contenteditable="true" onkeydown="return onEnterSubmit('community-create-button');"></div>
         <input type="hidden" name="name" value="" id="hidden-input-community-name" />
         <div class="kpter-nav-form-action">
