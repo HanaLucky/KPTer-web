@@ -75,7 +75,7 @@ var settingDialog = function settingDialog(dialogButtonStyleClassName, dialogDiv
   if (!dialog || !dialogButton) {
     return;
   }
-  
+
   if (!dialog.showModal) {
     dialogPolyfill.registerDialog(dialog);
   }
@@ -114,4 +114,73 @@ var tableTrClickable = function tableTrClickable(tableId) {
       window.location = $(this).attr('data-href');
     });
   });
+}
+
+/**
+ * contentEditableの値をフォーム要素に設定する
+ *
+ * @param {String} fromStyleId コピー元
+ * @param {String} toStyleId コピー先
+ */
+var setEditableContentValue = function setEditableContentValue(fromStyleId, toStyleId) {
+  var fromElement = document.getElementById(fromStyleId);
+  var fromData = fromElement.innerHTML;
+
+  if (!fromData) {
+    fromElement.focus();
+    return false;
+  }
+
+  document.getElementById(toStyleId).value = fromData;
+
+  return true;
+}
+
+/**
+ * contentEditableをキャンセルする。
+ *
+ * @param {String} containerStyleId display:noneする要素
+ * @param {String} editableStyleId 入力値を受け付けるcontentEditable要素
+ */
+var hiddenEditable = function hiddenEditable(containerStyleId, editableStyleId) {
+  // 前回入力値が残らないように、値をクリアする
+  document.getElementById(editableStyleId).innerHTML = "";
+  // contentEditableをdisplay:noneする
+  document.getElementById(containerStyleId).style.display="none";
+}
+
+/**
+ * contentEditableを表示する。
+ *
+ * @param {String} containerStyleId 表示する要素
+ * @param {String} editableStyleId 入力値を受け付けるcontentEditable要素
+ */
+var visibleEditable = function visibleEditable(containerStyleId, editableStyleId) {
+  // 前回入力値が残らないように、値をクリアする
+  document.getElementById(editableStyleId).innerHTML = "";
+  // contentEditableをdisplay:noneする
+  document.getElementById(containerStyleId).style.display="block";
+  // editable要素にfocus当てる
+  document.getElementById(editableStyleId).focus();
+}
+
+/**
+ * enterでSubmitする
+ *
+ * @param {String} targetFormStyleId Submit対象のフォーム
+ */
+var onEnterSubmit = function onEnterSubmit(targetFormStyleId) {
+  var code = event.which;
+  var ctrl = (typeof event.modifiers == "undefined") ?
+    event.ctrlKey : event.modifiers & Event.CONTROL_MASK;
+
+  if(ctrl && code == 86) {
+    // control + v
+    return false;
+  } else if (event.keyCode == 13) {
+    // enter
+    $("#" + targetFormStyleId).click();
+
+    return false;
+  }
 }

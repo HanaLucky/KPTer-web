@@ -5,6 +5,25 @@
       <span class="<% if request.path_info == mypage_path %>mdl-color-text--primary-dark<% end %>">MyPage</span>
     <% end %>
     <div class="kpter-drawer-separator"></div>
+    <div class="kpter-nav-action">
+      <a href class="dialog-button-new-community" onclick="visibleEditable('community-editable-container', 'editable-community-name'); return false;">
+        <i class="material-icons md-18">add</i><span>Add community</span>
+      </a>
+    </div>
+    <div class="kpter-nav-action kpter-nav-form-content" id="community-editable-container" style="display: none;">
+      <%= form_for communities_path, url: { controller: "communities", action: "create" }, html: { id: "create_community" } do |f| %>
+        <div class="kpter-nav-form-input" id="editable-community-name" contenteditable="true" onkeydown="return onEnterSubmit('community-create-button');"></div>
+        <input type="hidden" name="name" value="" id="hidden-input-community-name" />
+        <div class="kpter-nav-form-action">
+          <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent kpter-nav-form-button" id="community-create-button" onclick="return setEditableContentValue('editable-community-name', 'hidden-input-community-name');">
+            Add community
+          </button>
+          <button class="mdl-button mdl-js-button kpter-nav-form-button kpter-close-button-text-color" onclick="hiddenEditable('community-editable-container', 'editable-community-name');return false;">
+            Cancel
+          </button>
+        </div>
+      <% end %>
+    </div>
     <% communities.each do |cu| %>
       <%= link_to community_path(cu.community), class: "mdl-navigation__link" do %>
         <span class="kpter-drawer-community-name <% if cu.status.inviting? %>kpter-drawer-inviting-text<% end %> <% if current_community == cu.community %>mdl-color-text--primary-dark<% end %>"><%= cu.community.name %></span>
