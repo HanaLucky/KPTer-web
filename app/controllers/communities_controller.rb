@@ -1,6 +1,30 @@
 class CommunitiesController < ApplicationController
   before_action :authenticate_user!, :exists_community?, :allowed_to_display?, :side_column, only: [:show]
-  before_action :belongs_to?, except: [:show, :decline, :accept]
+  before_action :belongs_to?, except: [:show, :decline, :accept, :create]
+
+  def create
+    @community = Community.new(name: params[:name])
+    respond_to do |format|
+      ActiveRecord::Base.transaction do
+        if @community.save
+          @community_user = CommunityUser.new(
+            user_id: current_user.id,
+            community_id: @community.id,
+            status: CommunityUser.status.joining
+            )
+          if @community_user.save
+            format.html { redirect_to @community, notice: t('community.created') }
+            format.json { render :show, status: :created, location: @community }
+          else
+            format.html { render :show }
+          end
+        else
+          @error_message = @community.errors.full_messages.first
+          format.html { redirect_to :back, alert: @error_message }
+        end
+      end
+    end
+  end
 
   def show
     @community = Community.find(params[:id])
@@ -45,7 +69,7 @@ class CommunitiesController < ApplicationController
     community = Community.find(params[:id])
     respond_to do |format|
       if community.update_attributes(name: params[:community][:name])
-        format.html { redirect_to community, notice: 'Community name was successfully updated.' }
+        format.html { redirect_to community, notice: 'Community was successfully updated.' }
         format.json { head :no_content } # 204 No Content
       else
         format.json { render json: {message: community.errors.full_messages.first}, status: :unprocessable_entity }

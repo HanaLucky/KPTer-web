@@ -74,6 +74,46 @@
     padding-left: 5px;
     font-size: 12px;
   }
+  .kpter-nav-action {
+    padding: 8px 16px;
+     a {
+       text-decoration: none;
+       &:hover {
+         text-decoration: underline;
+       }
+     }
+     i.material-icons {
+       vertical-align: middle;
+     }
+     span {
+       margin-left: 2px;
+     }
+  }
+  .kpter-nav-form-content {
+    padding: 0 16px;
+    .kpter-nav-form-input {
+      font-size: 13px;
+      padding: 5px;
+      margin-bottom: 7px;
+      background-color: white !important;
+      border: 1px solid #ddd;
+      border-radius: 3px;
+      border-collapse: separate !important;
+      &:focus {
+        outline: 0;
+
+      }
+    }
+    .kpter-nav-form-button {
+      font-size: 12px;
+      text-transform: none;
+      height: 28px;
+      line-height: 30px;
+    }
+    .kpter-close-button-text-color {
+      color: #555;
+    }
+  }
 }
 
 /* Rules for sizing the icon. */
