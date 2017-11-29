@@ -20,8 +20,8 @@
       </ul>
     <% else %>
       <nav class="mdl-navigation">
-        <%= link_to t('.sign_in', :default => "Sign in"), new_user_session_path, class: "mdl-button mdl-button--primary mdl-js-button float-right" %>
-        <%= link_to t('.sign_up', :default => "Sign up"), new_user_registration_path, class: "mdl-button mdl-button--primary mdl-js-button float-right" %>
+        <%= link_to t('.sign_in', :default => "Sign in"), new_user_session_path, class: "mdl-button mdl-button--primary mdl-js-button" %>
+        <%= link_to t('.sign_up', :default => "Sign up"), new_user_registration_path, class: "mdl-button mdl-button--primary mdl-js-button" %>
       </nav>
     <% end %>
   </div>
