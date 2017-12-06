@@ -1,6 +1,7 @@
 for card in kp_cards
   type_id = "kp_#{card.id}"
   isLiked = false
+  likeUrl = "http://192.168.33.100:3000/cards/#{card.id}/like"
   for like in card.likes
     isLiked = current_user.id is like.user_id
 
@@ -21,7 +22,7 @@ for card in kp_cards
     "<p class='card-text' id='#{type_id}-text'>#{card.title}</p></div>" +
     "<div class='mdl-card__actions mdl-card--border'>" +
     "<div class='mdl-layout-spacer'></div>" +
-    "<a href='/likes/9/like?method=get&amp;status=open'><i class='material-icons #{likeClass}'>thumb_up</i></a>&nbsp<span class='#{likeNumClass}' style='vertical-align:text-bottom; font-size: 11px;'>#{displayNum}</span></div>" +
+    "<button id='#{type_id}-like' class='mdl-button mdl-js-button mdl-button--icon' data-id='#{card.id}'><i class='material-icons #{likeClass}'>thumb_up</i></button>&nbsp<span class='#{likeNumClass}' style='vertical-align:text-bottom; font-size: 11px;'>#{displayNum}</span></div>" +
     "<div class='mdl-card__menu'><button class='mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect icon-white delete-btn'><i class='material-icons md-14'>close</i></button></div></div>")
   $('#boardWrap').append addingCard
   addingCard.offset(top: card.y, left: card.x)
@@ -32,6 +33,10 @@ for card in kp_cards
   $("##{type_id}-text").on 'blur', ->
     title = $(this).text()
     update_kpcard($(this), title)
+  $("##{type_id}-like").on 'click', ->
+    id = $(this)[0].dataset.id
+    App.board.like_kpcard(id)
+
 
 for card in t_cards
   type_id = "t_#{card.id}"

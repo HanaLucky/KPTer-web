@@ -4,7 +4,7 @@ class TCard < ApplicationRecord
   belongs_to :board
   has_one :tcard_assignee
   has_one :user, :through => :tcard_assignee
-  has_many :likes, :as => :likable
+  has_many :likes, :as => :likable, dependent: :delete_all
 
   after_create_commit { CardBroadcastJob.perform_later self }
   after_update_commit { UpdateCardBroadcastJob.perform_later self }

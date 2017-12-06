@@ -72,3 +72,6 @@ App.board = App.cable.subscriptions.create { channel: "BoardChannel", board_id: 
 
   delete_tcard: (id) ->
     @perform 'delete_tcard', id: id
+
+  like_kpcard: (id) ->
+    @perform 'like_kpcard', id: id
