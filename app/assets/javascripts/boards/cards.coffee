@@ -49,13 +49,13 @@ for card in t_cards
   displayNum = if card.likes.length > 0 then card.likes.length else ''
 
   addingCard = $("<div class='kpter-card-event mdl-card mdl-shadow--2dp try cardBox' id='#{type_id}' data-type='try'>" +
-    "<div class='mdl-card__title mdl-card--expand'>" +
+    "<div class='mdl-card__title mdl-card--expand' id='#{type_id}'>" +
     "<p class='card-text' style='height: 130px!important;' id='#{type_id}-text'>#{card.title}</p></div>" +
     "<div class='mdl-card__actions mdl-card--border'>" +
     "<div class='mdl-layout-spacer'></div>" +
     "<i class='material-icons'>account_circle</i>" +
     "<i class='material-icons'>event</i>" +
-    "<a><i class='material-icons #{likeClass}'>thumb_up</i></a>&nbsp<span class='mdl-color-text--light-green-900' style='vertical-align:text-bottom; font-size: 11px;'>#{displayNum}</span></div>" +
+    "<button id='#{type_id}-like' class='mdl-button mdl-js-button mdl-button--icon' data-id='#{card.id}'><i class='material-icons #{likeClass}'>thumb_up</i></button>&nbsp<span class='#{likeNumClass}' style='vertical-align:text-bottom; font-size: 11px;'>#{displayNum}</span></div>" +
     "<div class='mdl-card__menu'><button class='mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect icon-white delete-btn'><i class='material-icons md-14'>close</i></button></div></div>")
 
   $('#boardWrap').append addingCard
@@ -67,6 +67,9 @@ for card in t_cards
   $("##{type_id}-text").on 'blur', ->
     title = $(this).text()
     update_tcard($(this), title)
+  $("##{type_id}-like").on 'click', ->
+    id = $(this)[0].dataset.id
+    App.board.like_tcard(id)
 
 
 # update card

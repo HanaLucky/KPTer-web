@@ -48,4 +48,15 @@ class BoardChannel < ApplicationCable::Channel
     end
     #LikeCardBroadcastJob.perform_later card.id, card.card_type, card.board_id
   end
+
+  def like_tcard(data)
+    card = TCard.find(data['id'])
+    likes = card.likes
+    if likes.present?
+      likes.delete_all
+    else
+      Like.create! likable_type: card.class, likable_id: card.id, user_id: current_user.id unless likes.present?
+    end
+    #LikeCardBroadcastJob.perform_later card.id, card.card_type, card.board_id
+  end
 end
