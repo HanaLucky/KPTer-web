@@ -55,6 +55,40 @@ App.board = App.cable.subscriptions.create { channel: "BoardChannel", board_id: 
       else if data['type'] is 'try'
         $("#t_#{data['id']}").remove()
 
+    else if data['method'] is 'like'
+      if (data['type'] is 'keep') or (data['type'] is 'problem')
+        likeClass = ""
+        if data['type'] is 'keep'
+          likeClass = 'mdl-color-text--blue-900'
+        else if data['type'] is 'problem'
+          likeClass = 'mdl-color-text--pink-900'
+        $("#kp_#{data['id']}-like").children(".material-icons").addClass(likeClass)
+        $("#kp_#{data['id']}-like").next('span').text(data['num'])
+      else if data['type'] is 'try'
+        likeClass = 'mdl-color-text--light-green-900'
+        $("#t_#{data['id']}-like").children(".material-icons").addClass(likeClass)
+        $("#t_#{data['id']}-like").next('span').text(data['num'])
+
+    else if data['method'] is 'dislike'
+      if (data['type'] is 'keep') or (data['type'] is 'problem')
+        likeClass = ""
+        if data['type'] is 'keep'
+          likeClass = 'mdl-color-text--blue-900'
+        else if data['type'] is 'problem'
+          likeClass = 'mdl-color-text--pink-900'
+        $("#kp_#{data['id']}-like").children(".material-icons").removeClass(likeClass)
+        if data['num'] <= 0
+          $("#kp_#{data['id']}-like").next('span').text("")
+        else
+          $("#kp_#{data['id']}-like").next('span').text(data['num'])
+      else if data['type'] is 'try'
+        likeClass = 'mdl-color-text--light-green-900'
+        $("#t_#{data['id']}-like").children(".material-icons").removeClass(likeClass)
+        if data['num'] <= 0
+          $("#t_#{data['id']}-like").next('span').text("")
+        else
+          $("#t_#{data['id']}-like").next('span').text(data['num'])
+
   create_kpcard: (card_type, title, board_id, x, y) ->
     @perform 'create_kpcard', card_type: card_type, title: title, board_id: board_id, x: x, y: y
 
