@@ -14,6 +14,6 @@ class BoardsController < ApplicationController
 
   def show
     # TODO: 仮実装。直接リンクで自分が所属しているコミュニティ以外のボードが見れないようにする？
-    @board = Board.where(id: params[:id]).includes(:kp_cards).first
+    @board = Board.where(params[:id]).includes(kp_cards: [:likes], t_cards: [:likes]).references(kp_cards: [:likes], t_cards: [:likes]).first
   end
 end

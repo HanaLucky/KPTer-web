@@ -12,10 +12,14 @@ class CardBroadcastJob < ApplicationJob
   private
 
   def render_kpcard(card)
-    ApplicationController.renderer.render(partial: 'cards/kpcard', locals: { kpcard: card })
+    num = card.likes.count
+    num = "" if num <= 0
+    ApplicationController.renderer.render(partial: 'cards/kpcard', locals: { kpcard: card, display_num: num })
   end
 
   def render_tcard(card)
-    ApplicationController.renderer.render(partial: 'cards/tcard', locals: { tcard: card })
+    num = card.likes.count
+    num = "" if num <= 0
+    ApplicationController.renderer.render(partial: 'cards/tcard', locals: { tcard: card, display_num: num })
   end
 end

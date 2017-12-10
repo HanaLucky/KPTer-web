@@ -37,4 +37,32 @@ class BoardChannel < ApplicationCable::Channel
     DeleteCardBroadcastJob.perform_later card.id, 'try', card.board_id
     card.delete
   end
+
+  def like_kpcard(data)
+    card = KpCard.find(data['id'])
+    my_likes = card.likes.where("likes.user_id=?", current_user.id)
+    if my_likes.present?
+      my_likes.delete_all
+      num = card.likes.count
+      LikeCardBroadcastJob.perform_later card.id, card.card_type, "dislike", num, card.board_id
+    else
+      Like.create! likable_type: card.class, likable_id: card.id, user_id: current_user.id
+      num = card.likes.count
+      LikeCardBroadcastJob.perform_later card.id, card.card_type, "like", num, card.board_id
+    end
+  end
+
+  def like_tcard(data)
+    card = TCard.find(data['id'])
+    my_likes = card.likes.where("likes.user_id=?", current_user.id)
+    if my_likes.present?
+      my_likes.delete_all
+      num = card.likes.count
+      LikeCardBroadcastJob.perform_later card.id, "try", "dislike", num, card.board_id
+    else
+      Like.create! likable_type: card.class, likable_id: card.id, user_id: current_user.id
+      num = card.likes.count
+      LikeCardBroadcastJob.perform_later card.id, "try", "like", num, card.board_id
+    end
+  end
 end
