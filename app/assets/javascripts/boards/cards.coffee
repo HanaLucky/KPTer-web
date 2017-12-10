@@ -22,7 +22,7 @@ for card in kp_cards
     "<p class='card-text' id='#{type_id}-text'>#{card.title}</p></div>" +
     "<div class='mdl-card__actions mdl-card--border'>" +
     "<div class='mdl-layout-spacer'></div>" +
-    "<button id='#{type_id}-like' class='mdl-button mdl-js-button mdl-button--icon' data-id='#{card.id}'><i class='material-icons #{likeClass}'>thumb_up</i></button>&nbsp<span class='#{likeNumClass}' style='vertical-align:text-bottom; font-size: 11px;'>#{displayNum}</span></div>" +
+    "<button id='#{type_id}-like' class='mdl-button mdl-js-button mdl-button--icon' data-id='#{card.id}' data-type='#{card.card_type}'><i class='material-icons #{likeClass}'>thumb_up</i></button>&nbsp<span class='#{likeClass}' style='vertical-align:text-bottom; font-size: 11px;'>#{displayNum}</span></div>" +
     "<div class='mdl-card__menu'><button class='mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect icon-white delete-btn'><i class='material-icons md-14'>close</i></button></div></div>")
   $('#boardWrap').append addingCard
   addingCard.offset(top: card.y, left: card.x)
@@ -34,8 +34,27 @@ for card in kp_cards
     title = $(this).text()
     update_kpcard($(this), title)
   $("##{type_id}-like").on 'click', ->
+    kLikeClass = 'mdl-color-text--blue-900'
+    pLikeClass = 'mdl-color-text--pink-900'
+    noLikeClass = 'kpter-color-text--white'
+
+    type = $(this)[0].dataset.type
     id = $(this)[0].dataset.id
     App.board.like_kpcard(id)
+
+    if $(this).children(".material-icons").hasClass(kLikeClass)
+      $(this).children(".material-icons").removeClass(kLikeClass)
+      $(this).next('span').removeClass(kLikeClass)
+    else if $(this).children(".material-icons").hasClass(pLikeClass)
+      $(this).children(".material-icons").removeClass(pLikeClass)
+      $(this).next('span').removeClass(pLikeClass)
+    else
+      if type is 'keep'
+        $(this).children(".material-icons").addClass(kLikeClass)
+        $(this).next('span').addClass(kLikeClass)
+      else if type is 'problem'
+        $(this).children(".material-icons").addClass(pLikeClass)
+        $(this).next('span').addClass(pLikeClass)
 
 
 for card in t_cards
@@ -55,7 +74,7 @@ for card in t_cards
     "<div class='mdl-layout-spacer'></div>" +
     "<i class='material-icons'>account_circle</i>" +
     "<i class='material-icons'>event</i>" +
-    "<button id='#{type_id}-like' class='mdl-button mdl-js-button mdl-button--icon' data-id='#{card.id}'><i class='material-icons #{likeClass}'>thumb_up</i></button>&nbsp<span class='#{likeNumClass}' style='vertical-align:text-bottom; font-size: 11px;'>#{displayNum}</span></div>" +
+    "<button id='#{type_id}-like' class='mdl-button mdl-js-button mdl-button--icon' data-id='#{card.id}' data-type='#{card.card_type}'><i class='material-icons #{likeClass}'>thumb_up</i></button>&nbsp<span class='#{likeClass}' style='vertical-align:text-bottom; font-size: 11px;'>#{displayNum}</span></div>" +
     "<div class='mdl-card__menu'><button class='mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect icon-white delete-btn'><i class='material-icons md-14'>close</i></button></div></div>")
 
   $('#boardWrap').append addingCard
@@ -68,8 +87,17 @@ for card in t_cards
     title = $(this).text()
     update_tcard($(this), title)
   $("##{type_id}-like").on 'click', ->
+    likeClass = 'mdl-color-text--light-green-900'
     id = $(this)[0].dataset.id
     App.board.like_tcard(id)
+
+    if $(this).children(".material-icons").hasClass(likeClass)
+      $(this).children(".material-icons").removeClass(likeClass)
+      $(this).next('span').removeClass(likeClass)
+    else
+      $(this).children(".material-icons").addClass(likeClass)
+      $(this).next('span').addClass(likeClass)
+
 
 
 # update card

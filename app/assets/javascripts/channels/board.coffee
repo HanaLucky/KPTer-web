@@ -57,33 +57,17 @@ App.board = App.cable.subscriptions.create { channel: "BoardChannel", board_id: 
 
     else if data['method'] is 'like'
       if (data['type'] is 'keep') or (data['type'] is 'problem')
-        likeClass = ""
-        if data['type'] is 'keep'
-          likeClass = 'mdl-color-text--blue-900'
-        else if data['type'] is 'problem'
-          likeClass = 'mdl-color-text--pink-900'
-        $("#kp_#{data['id']}-like").children(".material-icons").addClass(likeClass)
         $("#kp_#{data['id']}-like").next('span').text(data['num'])
       else if data['type'] is 'try'
-        likeClass = 'mdl-color-text--light-green-900'
-        $("#t_#{data['id']}-like").children(".material-icons").addClass(likeClass)
         $("#t_#{data['id']}-like").next('span').text(data['num'])
 
     else if data['method'] is 'dislike'
       if (data['type'] is 'keep') or (data['type'] is 'problem')
-        likeClass = ""
-        if data['type'] is 'keep'
-          likeClass = 'mdl-color-text--blue-900'
-        else if data['type'] is 'problem'
-          likeClass = 'mdl-color-text--pink-900'
-        $("#kp_#{data['id']}-like").children(".material-icons").removeClass(likeClass)
         if data['num'] <= 0
           $("#kp_#{data['id']}-like").next('span').text("")
         else
           $("#kp_#{data['id']}-like").next('span').text(data['num'])
       else if data['type'] is 'try'
-        likeClass = 'mdl-color-text--light-green-900'
-        $("#t_#{data['id']}-like").children(".material-icons").removeClass(likeClass)
         if data['num'] <= 0
           $("#t_#{data['id']}-like").next('span').text("")
         else
