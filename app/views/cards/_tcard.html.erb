@@ -6,7 +6,10 @@
     <div class="mdl-layout-spacer"></div>
     <i class="material-icons">account_circle</i>
     <i class='material-icons'>event</i>
-    <i class='material-icons'>thumb_up</i>
+    <button id="t_<%= tcard.id %>-like" class='mdl-button mdl-js-button mdl-button--icon' data-id="<%= tcard.id %>" data-type="try">
+      <i class='material-icons'>thumb_up</i>
+    </button>&nbsp
+    <span class='' style='vertical-align:text-bottom; font-size: 11px;'><%= display_num %></span>
   </div>
   <div class='mdl-card__menu'>
     <button class='mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect icon-white delete-btn'>

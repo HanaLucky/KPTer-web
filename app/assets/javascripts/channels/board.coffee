@@ -37,6 +37,40 @@ App.board = App.cable.subscriptions.create { channel: "BoardChannel", board_id: 
 
         $("##{card_id}").remove()
 
+      $("##{card_id}-like").on 'click', ->
+        kLikeClass = 'mdl-color-text--blue-900'
+        pLikeClass = 'mdl-color-text--pink-900'
+        tLikeClass = 'mdl-color-text--light-green-900'
+        noLikeClass = 'kpter-color-text--white'
+
+        type = $(this)[0].dataset.type
+        id = $(this)[0].dataset.id
+        if type is 'keep' or type is 'problem'
+          App.board.like_kpcard(id)
+        else if type is 'try'
+          App.board.like_tcard(id)
+
+        if $(this).children(".material-icons").hasClass(kLikeClass)
+          $(this).children(".material-icons").removeClass(kLikeClass)
+          $(this).next('span').removeClass(kLikeClass)
+        else if $(this).children(".material-icons").hasClass(pLikeClass)
+          $(this).children(".material-icons").removeClass(pLikeClass)
+          $(this).next('span').removeClass(pLikeClass)
+        else if $(this).children(".material-icons").hasClass(tLikeClass)
+          $(this).children(".material-icons").removeClass(tLikeClass)
+          $(this).next('span').removeClass(tLikeClass)
+        else
+          if type is 'keep'
+            $(this).children(".material-icons").addClass(kLikeClass)
+            $(this).next('span').addClass(kLikeClass)
+          else if type is 'problem'
+            $(this).children(".material-icons").addClass(pLikeClass)
+            $(this).next('span').addClass(pLikeClass)
+          else if type is 'try'
+            $(this).children(".material-icons").addClass(tLikeClass)
+            $(this).next('span').addClass(tLikeClass)
+
+
     else if data['method'] is 'update'
       if data['kpcard']
         card_id = "kp_" + data['kpcard'].id

@@ -1,6 +1,13 @@
- <div class="kpter-card-event mdl-card mdl-shadow--2dp <%= kpcard.card_type %> cardBox" id="kp_<%= kpcard.id %>"　data-type="<%= kpcard.card_type %>">
+<div class="kpter-card-event mdl-card mdl-shadow--2dp <%= kpcard.card_type %> cardBox" id="kp_<%= kpcard.id %>"　data-type="<%= kpcard.card_type %>">
   <div class="mdl-card__title mdl-card--expand">
     <p class="card-text"><%= kpcard.title %></p>
+  </div>
+  <div class='mdl-card__actions mdl-card--border'>
+    <div class='mdl-layout-spacer'></div>
+    <button id="kp_<%= kpcard.id %>-like" class='mdl-button mdl-js-button mdl-button--icon' data-id="<%= kpcard.id %>" data-type="<%= kpcard.card_type %>">
+      <i class="material-icons">thumb_up</i>
+    </button>&nbsp
+    <span class="" style='vertical-align:text-bottom; font-size: 11px;'><%= display_num %></span>
   </div>
   <div class='mdl-card__menu'>
     <button class='mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect icon-white delete-btn'>
