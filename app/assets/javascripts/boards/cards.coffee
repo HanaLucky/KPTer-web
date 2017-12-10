@@ -1,7 +1,7 @@
 for card in kp_cards
   type_id = "kp_#{card.id}"
   isLiked = false
-  likeUrl = "http://192.168.33.100:3000/cards/#{card.id}/like"
+  likeUrl = "/cards/#{card.id}/like"
   for like in card.likes
     isLiked = current_user.id is like.user_id
 
