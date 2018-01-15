@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   root 'welcome#index'
 
   get 'index' => 'welcome#index'
+  get 'sp' => 'sp#index'
   get 'confirm' => 'confirm#show'
   get 'mypage' => 'mypages#show'
 
