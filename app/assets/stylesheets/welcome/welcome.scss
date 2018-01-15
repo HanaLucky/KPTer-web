@@ -1,0 +1,225 @@
+@import "./variables";
+/* header */
+body {
+  font-family: Open Sans,sans-serif;
+  color: #606873;
+}
+
+.site-header {
+  .overlay-black:before {
+    background-color: rgba(0, 0, 0, 0.33);
+  }
+  .navbar {
+    position: fixed !important;
+    -webkit-transition: 0.2s ease;
+    -o-transition: 0.2s ease;
+    transition: 0.2s ease;
+    .navbar-toggle {
+      color: #888 !important;
+      .icon-bar {
+        background-color: #888 !important;
+      }
+      &.for-sidebar {
+        float: right !important;
+        margin-top: 3px;
+        padding: 14px 10px;
+      }
+    }
+    ul {
+      font-family: Raleway,sans-serif;
+    }
+  }
+}
+
+.hero > a {
+  font-family: Raleway,sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  line-height: 16px !important;
+  margin-top: 3px !important;
+  padding: 15px 15px;
+  border-radius: 3px;
+  transition: 0.3s linear;
+  text-decoration: none;
+}
+
+.hero-opacity > a {
+  line-height: 16px;
+  margin-top: 3px;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.navbar-transparent .navbar {
+  background-color: transparent !important;
+  -webkit-transition: 0.2s ease;
+  -o-transition: 0.2s ease;
+  transition: 0.2s ease;
+  a {
+    color: #fff;
+  }
+  .navbar-right li {
+    &.active > a {
+      color: #fff;
+      &:focus, &:hover {
+        color: #fff;
+      }
+    }
+    > a {
+      &:focus, &:hover {
+        color: #fff;
+      }
+      color: rgba(255, 255, 255, 0.7);
+    }
+  }
+  .navbar-toggle {
+    color: rgba(255, 255, 255, 0.8) !important;
+    .icon-bar {
+      background-color: rgba(255, 255, 255, 0.8) !important;
+    }
+  }
+}
+
+.navbar-default.navbar-light li > a {
+  color: #777;
+  font-weight: 700;
+}
+
+.kpter-logo {
+  float: left;
+  padding: 15px 15px;
+  line-height: 20px;
+}
+
+.btn-outline.btn-white:hover {
+  color: #ffffff !important;
+  background-color: $primary-color !important;
+  border-color: $primary-color !important;
+}
+
+@media screen and (max-width: 767px) {
+  html, body {
+    padding-top: 0px;
+  }
+  .sidebar ul.sidenav {
+    padding-left: 0px;
+    li.section {
+      border-bottom: 0px;
+      li.item {
+        border-bottom: 1px solid #f7f7f9;
+      }
+      a {
+        color: #818a91;
+        display: inline-block;
+        font-family: Raleway,sans-serif;
+        font-size: 13px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        padding: 0 14px;
+        line-height: 50px;
+        color: #818a91;
+        transition: color .2s linear,line-height .2s linear;
+        &:hover {
+          color: $primary-color;
+        }
+      }
+    }
+  }
+  main section .container .feature {
+    display: flex;
+    display: -webkit-flex;
+    flex-direction: column;
+    -webkit-flex-direction: column;
+    .feature-text {
+      order: 1;
+    }
+    .feature-image {
+      order: 2;
+    }
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .sidebar {
+    display: none;
+  }
+}
+
+main {
+  img {
+    max-width: 100%;
+  }
+  section {
+    display: block;
+    position: relative;
+    padding: 96px 32px;
+    z-index: 0;
+    background-attachment: fixed;
+    background-size: cover;
+    background-repeat: no-repeat;
+    overflow: hidden;
+    border-bottom: 1px solid #eceeef;
+    &.no-border-bottom {
+      border-bottom: none;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      font-family: Raleway,sans-serif;
+      color: #000;
+      letter-spacing: 2px;
+      margin: 24px 0 16px;
+    }
+    [class^=col-] .section-header h2 {
+      margin-top: 0;
+    }
+  }
+  .section-header {
+    &.text-right h2:after {
+      left: 100%;
+      margin-left: -64px;
+    }
+    &.text-left h2:after {
+      left: 0;
+      margin-left: 0;
+    }
+    h2 {
+      &:after {
+        position: absolute;
+        left: 50%;
+        margin-left: -32px;
+        bottom: -24px;
+        width: 64px;
+        height: 2px;
+        background-color: $primary-color;
+        content: "";
+      }
+      font-size: 38px;
+      margin-bottom: 48px;
+      position: relative;
+      font-weight: 400;
+      border-bottom: none;
+    }
+    p {
+      font-size: 18px;
+      line-height: 30px;
+      color: #606873;
+    }
+  }
+  .bg-gray-lighter {
+    background-color: #fafafa !important;
+  }
+  .container {
+    margin-right: auto;
+    margin-left: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+}
+
+.get-started {
+  margin: 80px 0;
+}
+
+.offcanvas-backdrop {
+  background-color: rgba(0, 0, 0, 0.5);
+}

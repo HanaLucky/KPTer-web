@@ -11,20 +11,31 @@ Rails.application.config.assets.version = '1.0'
 # Rails.application.config.assets.precompile += %w( search.js )
 Rails.application.config.assets.precompile += %w( mdl/1.3.0/material.kpter-pink.min.css )
 
-# Welcome/index.html.erb用CSS
-Rails.application.config.assets.precompile += %w( welcome/creative.css )
-Rails.application.config.assets.precompile += %w( welcome/creative.min.css )
-Rails.application.config.assets.precompile += %w( welcome/style.css )
-Rails.application.config.assets.precompile += %w( welcome/font-awesome/css/font-awesome.min.css )
-Rails.application.config.assets.precompile += %w( welcome/bootstrap/css/bootstrap.min.css )
-Rails.application.config.assets.precompile += %w( welcome/magnific-popup/magnific-popup.css )
+Rails.application.config.assets.precompile += %w( style.css )
 
-# Welcome/index.html.erb用JS
-Rails.application.config.assets.precompile += %w( welcome/creative.js )
-Rails.application.config.assets.precompile += %w( welcome/jquery/jquery.min.js )
-Rails.application.config.assets.precompile += %w( welcome/bootstrap/js/bootstrap.min.js )
-Rails.application.config.assets.precompile += %w( welcome/scrollreveal/scrollreveal.min.js )
-Rails.application.config.assets.precompile += %w( welcome/magnific-popup/jquery.magnific-popup.min.js )
+# welcome/index.html.erb
+Rails.application.config.assets.precompile += %w( theDocs/1.4.0/theDocs.all.js )
+Rails.application.config.assets.precompile += %w( theDocs/1.4.0/theDocs.all.css )
+Rails.application.config.assets.precompile += %w( welcome/welcome.css )
+Rails.application.config.assets.precompile += %w( theDocs/1.4.0/skin/skin-teal.css )
+
+
+Rails.application.config.assets.precompile += %w( jquery.js )
+
+# sp/index.html.erb用CSS
+Rails.application.config.assets.precompile += %w( sp/creative.css )
+Rails.application.config.assets.precompile += %w( sp/creative.min.css )
+Rails.application.config.assets.precompile += %w( sp/style.css )
+Rails.application.config.assets.precompile += %w( sp/font-awesome/css/font-awesome.min.css )
+Rails.application.config.assets.precompile += %w( sp/bootstrap/css/bootstrap.min.css )
+Rails.application.config.assets.precompile += %w( sp/magnific-popup/magnific-popup.css )
+
+# sp/index.html.erb用JS
+Rails.application.config.assets.precompile += %w( sp/creative.js )
+Rails.application.config.assets.precompile += %w( sp/jquery/jquery.min.js )
+Rails.application.config.assets.precompile += %w( sp/bootstrap/js/bootstrap.min.js )
+Rails.application.config.assets.precompile += %w( sp/scrollreveal/scrollreveal.min.js )
+Rails.application.config.assets.precompile += %w( sp/magnific-popup/jquery.magnific-popup.min.js )
 
 # Communitiesページ用
 Rails.application.config.assets.precompile += %w( communities.js )
