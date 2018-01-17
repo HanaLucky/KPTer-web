@@ -1,3 +1,26 @@
+window.fromServer = false
+window.pickers = []
+
+# update card
+update_kpcard = (_this, title) ->
+  id = _this[0].id.split("_")[1]
+  type = _this[0].dataset.type
+  offset = _this.offset()
+  App.board.update_kpcard(id, title, offset.left, offset.top)
+  return
+
+update_tcard = (_this, title) ->
+  id = _this[0].id.split("_")[1]
+  type = _this[0].dataset.type
+  offset = _this.offset()
+  App.board.update_tcard(id, title, offset.left, offset.top)
+  return
+
+select_date = (date, id) ->
+  unless window.fromServer
+    App.board.set_deadline(id, date)
+  return
+
 for card in kp_cards
   type_id = "kp_#{card.id}"
   isLiked = false
@@ -55,7 +78,6 @@ for card in kp_cards
         $(this).children(".material-icons").addClass(pLikeClass)
         $(this).next('span').addClass(pLikeClass)
 
-
 for card in t_cards
   type_id = "t_#{card.id}"
 
@@ -72,12 +94,26 @@ for card in t_cards
     "<div class='mdl-card__actions mdl-card--border'>" +
     "<div class='mdl-layout-spacer'></div>" +
     "<i class='material-icons'>account_circle</i>" +
-    "<i class='material-icons'>event</i>" +
+    "<button id='#{type_id}-datepicker' class='mdl-button mdl-js-button mdl-button--icon' data-id='#{card.id}' data-type='#{card.card_type}'><i class='material-icons' id='datepicker'>event</i></button><input type='hidden' id='#{type_id}-datepicker-field'>" +
     "<button id='#{type_id}-like' class='mdl-button mdl-js-button mdl-button--icon' data-id='#{card.id}' data-type='#{card.card_type}'><i class='material-icons #{likeClass}'>thumb_up</i></button>&nbsp<span class='#{likeClass}' style='vertical-align:text-bottom; font-size: 11px;'>#{displayNum}</span></div>" +
     "<div class='mdl-card__menu'><button class='mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect icon-white delete-btn'><i class='material-icons md-14'>close</i></button></div></div>")
 
   $('#boardWrap').append addingCard
   addingCard.offset(top: card.y, left: card.x)
+  date = new Date()
+  year  = date.getFullYear()
+
+  window.pickers[card.id] = new Pikaday(
+    {
+        field: document.getElementById("#{type_id}-datepicker-field"),
+        trigger: document.getElementById("#{type_id}-datepicker"),
+        ariaLabel: card.id,
+        minDate: new Date(year - 2, 0, 1),
+        maxDate: new Date(year + 2, 12, 31),
+        yearRange: [year - 2, year + 2]
+        onSelect: ((date) -> select_date(date, this._o.ariaLabel))
+    })
+
 
   $("##{type_id}").on 'dragstop', ->
     title = $(this).find(".card-text").text()
@@ -96,20 +132,3 @@ for card in t_cards
     else
       $(this).children(".material-icons").addClass(likeClass)
       $(this).next('span').addClass(likeClass)
-
-
-
-# update card
-update_kpcard = (_this, title) ->
-  id = _this[0].id.split("_")[1]
-  type = _this[0].dataset.type
-  offset = _this.offset()
-  App.board.update_kpcard(id, title, offset.left, offset.top)
-  return
-
-update_tcard = (_this, title) ->
-  id = _this[0].id.split("_")[1]
-  type = _this[0].dataset.type
-  offset = _this.offset()
-  App.board.update_tcard(id, title, offset.left, offset.top)
-  return

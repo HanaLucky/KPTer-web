@@ -65,4 +65,11 @@ class BoardChannel < ApplicationCable::Channel
       LikeCardBroadcastJob.perform_later card.id, "try", "like", num, card.board_id
     end
   end
+
+  def set_deadline(data)
+    card = TCard.find(data['id'])
+    deadline = data['deadline'].in_time_zone
+    card.update! deadline: deadline
+    SetDeadlineBroadcastJob.perform_later card.id, deadline.to_s, card.board_id
+  end
 end

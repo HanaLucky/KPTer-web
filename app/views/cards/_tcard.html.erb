@@ -5,7 +5,10 @@
   <div class="mdl-card__actions mdl-card--border">
     <div class="mdl-layout-spacer"></div>
     <i class="material-icons">account_circle</i>
-    <i class='material-icons'>event</i>
+    <button id="t_<%= tcard.id %>-datepicker" class='mdl-button mdl-js-button mdl-button--icon' data-id='<%= tcard.id %>' data-type='try'>
+      <i class='material-icons' id='datepicker'>event</i>
+    </button>
+    <input type='hidden' id="t_<%= tcard.id %>-datepicker-field"/>
     <button id="t_<%= tcard.id %>-like" class='mdl-button mdl-js-button mdl-button--icon' data-id="<%= tcard.id %>" data-type="try">
       <i class='material-icons'>thumb_up</i>
     </button>&nbsp

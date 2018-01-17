@@ -8,12 +8,30 @@ App.board = App.cable.subscriptions.create { channel: "BoardChannel", board_id: 
   received: (data) ->
     card_id = ""
     if data['method'] is 'create'
+      select_date = (date, id) ->
+        unless window.fromServer
+          App.board.set_deadline(id, date)
+        return
+
       if data['kpcard']
         $('#boardWrap').append data['kpcard']
         card_id = "kp_" + data['id']
       else if data['tcard']
         $('#boardWrap').append data['tcard']
         card_id = "t_" + data['id']
+        id = parseInt(data['id'], 10)
+        date = new Date()
+        year  = date.getFullYear()
+        window.pickers[id] = new Pikaday(
+          {
+              field: document.getElementById("#{card_id}-datepicker-field"),
+              trigger: document.getElementById("#{card_id}-datepicker"),
+              ariaLabel: id,
+              minDate: new Date(year - 2, 0, 1),
+              maxDate: new Date(year + 2, 12, 31),
+              yearRange: [year - 2, year + 2]
+              onSelect: (-> select_date(window.pickers[id].getDate(), this._o.ariaLabel))
+          });
 
       type = data['type']
       $("##{card_id}").data('type', type)
@@ -107,6 +125,12 @@ App.board = App.cable.subscriptions.create { channel: "BoardChannel", board_id: 
         else
           $("#t_#{data['id']}-like").next('span').text(data['num'])
 
+    else if data['method'] is 'set_deadline'
+      id = parseInt(data['id'], 10)
+      window.fromServer = data['from_server']
+      window.pickers[id].setDate(data['deadline'])
+      window.fromServer = false
+
   create_kpcard: (card_type, title, board_id, x, y) ->
     @perform 'create_kpcard', card_type: card_type, title: title, board_id: board_id, x: x, y: y
 
@@ -130,3 +154,6 @@ App.board = App.cable.subscriptions.create { channel: "BoardChannel", board_id: 
 
   like_tcard: (id) ->
     @perform 'like_tcard', id: id
+
+  set_deadline: (id, deadline) ->
+    @perform 'set_deadline', id: id, deadline: deadline
