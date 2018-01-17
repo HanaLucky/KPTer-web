@@ -100,15 +100,17 @@ for card in t_cards
 
   $('#boardWrap').append addingCard
   addingCard.offset(top: card.y, left: card.x)
+  date = new Date()
+  year  = date.getFullYear()
 
   window.pickers[card.id] = new Pikaday(
     {
         field: document.getElementById("#{type_id}-datepicker-field"),
         trigger: document.getElementById("#{type_id}-datepicker"),
         ariaLabel: card.id,
-        minDate: new Date(2000, 0, 1),
-        maxDate: new Date(2020, 12, 31),
-        yearRange: [2010,2020]
+        minDate: new Date(year - 2, 0, 1),
+        maxDate: new Date(year + 2, 12, 31),
+        yearRange: [year - 2, year + 2]
         onSelect: ((date) -> select_date(date, this._o.ariaLabel))
     })
 

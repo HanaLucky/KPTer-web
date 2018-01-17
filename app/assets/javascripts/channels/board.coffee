@@ -20,14 +20,16 @@ App.board = App.cable.subscriptions.create { channel: "BoardChannel", board_id: 
         $('#boardWrap').append data['tcard']
         card_id = "t_" + data['id']
         id = parseInt(data['id'], 10)
+        date = new Date()
+        year  = date.getFullYear()
         window.pickers[id] = new Pikaday(
           {
               field: document.getElementById("#{card_id}-datepicker-field"),
               trigger: document.getElementById("#{card_id}-datepicker"),
               ariaLabel: id,
-              minDate: new Date(2000, 0, 1),
-              maxDate: new Date(2020, 12, 31),
-              yearRange: [2010,2020]
+              minDate: new Date(year - 2, 0, 1),
+              maxDate: new Date(year + 2, 12, 31),
+              yearRange: [year - 2, year + 2]
               onSelect: (-> select_date(window.pickers[id].getDate(), this._o.ariaLabel))
           });
 
