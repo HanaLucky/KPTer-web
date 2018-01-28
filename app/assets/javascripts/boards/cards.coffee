@@ -113,7 +113,7 @@ for card in t_cards
         yearRange: [year - 2, year + 2]
         onSelect: ((date) -> select_date(date, this._o.ariaLabel))
     })
-
+  window.pickers[card.id].setDate(card.deadline)
 
   $("##{type_id}").on 'dragstop', ->
     title = $(this).find(".card-text").text()
