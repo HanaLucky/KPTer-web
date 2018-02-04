@@ -18,7 +18,6 @@
     window.t_cards = <%= raw @board.t_cards.to_json(include: :likes) %>;
     window.current_user = <%= raw current_user.to_json %>;
   <% end %>
-  <%= javascript_include_tag 'boards/card' %>
   <%= javascript_include_tag 'cable' %>
   <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.0/jquery-ui.min.js"></script>
 

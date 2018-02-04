@@ -8,87 +8,11 @@ App.board = App.cable.subscriptions.create { channel: "BoardChannel", board_id: 
   received: (data) ->
     card_id = ""
     if data['method'] is 'create'
-      select_date = (date, id) ->
-        unless window.fromServer
-          App.board.set_deadline(id, date)
-        return
-
-      if data['kpcard']
-        $('#boardWrap').append data['kpcard']
-        card_id = "kp_" + data['id']
+      if data['kpcard'] 
+        App.board.add_kpcard(data['kpcard'])
       else if data['tcard']
-        $('#boardWrap').append data['tcard']
-        card_id = "t_" + data['id']
-        id = parseInt(data['id'], 10)
-        date = new Date()
-        year  = date.getFullYear()
-        window.pickers[id] = new Pikaday(
-          {
-              field: document.getElementById("#{card_id}-datepicker-field"),
-              trigger: document.getElementById("#{card_id}-datepicker"),
-              ariaLabel: id,
-              minDate: new Date(year - 2, 0, 1),
-              maxDate: new Date(year + 2, 12, 31),
-              yearRange: [year - 2, year + 2]
-              onSelect: (-> select_date(window.pickers[id].getDate(), this._o.ariaLabel))
-          });
-
-      type = data['type']
-      $("##{card_id}").data('type', type)
-      $("##{card_id}").draggable({cancel: '.card-text'})
-
-      $("##{card_id}").on 'blur', ->
-        card = $(this)
-        type = card.data('type')
-        title = card.find('h4').text()
-        offset = card.offset()
-        if type is 'keep' || type is 'problem'
-          App.board.update_kpcard(card[0].id.split("_")[1], title, offset.left, offset.top)
-        else if type is 'try'
-          App.board.update_tcard(card[0].id.split("_")[1], title, offset.left, offset.top)
-
-      $("##{card_id}").find('.delete-btn').on 'click', ->
-        if type is 'keep' || type is 'problem'
-          App.board.delete_kpcard(data['id'])
-        else if type is 'try'
-          App.board.delete_tcard(data['id'])
-
-        $("##{card_id}").remove()
-
-      $("##{card_id}-like").on 'click', ->
-        kLikeClass = 'mdl-color-text--blue-900'
-        pLikeClass = 'mdl-color-text--pink-900'
-        tLikeClass = 'mdl-color-text--light-green-900'
-        noLikeClass = 'kpter-color-text--white'
-
-        type = $(this)[0].dataset.type
-        id = $(this)[0].dataset.id
-        if type is 'keep' or type is 'problem'
-          App.board.like_kpcard(id)
-        else if type is 'try'
-          App.board.like_tcard(id)
-
-        if $(this).children(".material-icons").hasClass(kLikeClass)
-          $(this).children(".material-icons").removeClass(kLikeClass)
-          $(this).next('span').removeClass(kLikeClass)
-        else if $(this).children(".material-icons").hasClass(pLikeClass)
-          $(this).children(".material-icons").removeClass(pLikeClass)
-          $(this).next('span').removeClass(pLikeClass)
-        else if $(this).children(".material-icons").hasClass(tLikeClass)
-          $(this).children(".material-icons").removeClass(tLikeClass)
-          $(this).next('span').removeClass(tLikeClass)
-        else
-          if type is 'keep'
-            $(this).children(".material-icons").addClass(kLikeClass)
-            $(this).next('span').addClass(kLikeClass)
-          else if type is 'problem'
-            $(this).children(".material-icons").addClass(pLikeClass)
-            $(this).next('span').addClass(pLikeClass)
-          else if type is 'try'
-            $(this).children(".material-icons").addClass(tLikeClass)
-            $(this).next('span').addClass(tLikeClass)
-
-
+        App.board.add_tcard(data['tcard'])
+ 
     else if data['method'] is 'update'
       if data['kpcard']
         card_id = "kp_" + data['kpcard'].id
@@ -137,12 +61,6 @@ App.board = App.cable.subscriptions.create { channel: "BoardChannel", board_id: 
   create_tcard: (title, board_id, x, y) ->
     @perform 'create_tcard', title: title, board_id: board_id, x: x, y: y
 
-  update_kpcard: (id, title, x, y) ->
-    @perform 'update_kpcard', id: id, title: title, x: x, y: y
-
-  update_tcard: (id, title, x, y) ->
-    @perform 'update_tcard', id: id, title: title, x: x, y: y
-
   delete_kpcard: (id) ->
     @perform 'delete_kpcard', id: id
 
@@ -157,3 +75,180 @@ App.board = App.cable.subscriptions.create { channel: "BoardChannel", board_id: 
 
   set_deadline: (id, deadline) ->
     @perform 'set_deadline', id: id, deadline: deadline
+
+  # update card
+  update_kpcard: (_this, title) ->
+    id = _this[0].id.split("_")[1]
+    type = _this[0].dataset.type
+    offset = _this.offset()
+    @perform 'update_kpcard', id: id, title: title, x: offset.left, y:offset.top
+
+  update_tcard: (_this, title) ->
+    id = _this[0].id.split("_")[1]
+    type = _this[0].dataset.type
+    offset = _this.offset()
+    @perform 'update_tcard', id: id, title: title, x: offset.left, y: offset.top
+
+  select_date: (date, id) ->
+    unless window.fromServer
+      App.board.set_deadline(id, date)
+    return
+
+  initialize_buttons: (_this) ->
+    $boardWrap = $('#boardWrap')
+    board_id = $('[name=board_id]').val()
+    type = _this.data('type').toString()
+    title = ""
+    offset =  _this.offset()
+
+    if type is 'keep' or type is 'problem' 
+      App.board.create_kpcard(type, title, board_id, offset.left, offset.top)
+    else if type is 'try'
+      App.board.create_tcard(title, board_id, offset.left, offset.top)
+  
+  initialize_cards: ->
+    window.fromServer = false
+    window.pickers = []
+
+    for card in kp_cards
+      App.board.add_kpcard(card)
+
+    for card in t_cards
+      App.board.add_tcard(card)
+      
+  add_kpcard: (card) ->
+    type_id = "kp_#{card.id}"
+      
+    addingCard = App.board.adding_kpcard(card, type_id)
+    $('#boardWrap').append addingCard
+    addingCard.offset(top: card.y, left: card.x)
+    $("##{type_id}").draggable({cancel: '.card-text'})
+
+    $("##{type_id}").on 'dragstop', ->
+      title = $(this).find(".card-text").text()
+      App.board.update_kpcard($(this), title)
+    $("##{type_id}-text").on 'blur', ->
+      title = $(this).text()
+      App.board.update_kpcard($(this), title)
+    $("##{type_id}-like").on 'click', ->
+      kLikeClass = 'mdl-color-text--blue-900'
+      pLikeClass = 'mdl-color-text--pink-900'
+      noLikeClass = 'kpter-color-text--white'
+
+      type = $(this)[0].dataset.type
+      id = $(this)[0].dataset.id
+      App.board.like_kpcard(id)
+
+      if $(this).children(".material-icons").hasClass(kLikeClass)
+        $(this).children(".material-icons").removeClass(kLikeClass)
+        $(this).next('span').removeClass(kLikeClass)
+      else if $(this).children(".material-icons").hasClass(pLikeClass)
+        $(this).children(".material-icons").removeClass(pLikeClass)
+        $(this).next('span').removeClass(pLikeClass)
+      else
+        if type is 'keep'
+          $(this).children(".material-icons").addClass(kLikeClass)
+          $(this).next('span').addClass(kLikeClass)
+        else if type is 'problem'
+          $(this).children(".material-icons").addClass(pLikeClass)
+          $(this).next('span').addClass(pLikeClass)   
+    $("##{type_id}").find('.delete-btn').on 'click', ->
+      type = $(this).closest('.cardBox').data('type')
+      id = $(this).closest('.cardBox')[0].id.split("_")[1]
+      if type is 'keep' || type is 'problem'
+        App.board.delete_kpcard(id)
+      else if type is 'try'
+        App.board.delete_tcard(id)
+      $("##{type_id}").remove()
+        
+  add_tcard: (card) ->
+    type_id = "t_#{card.id}"
+
+    addingCard = App.board.adding_tcard(card, type_id)
+
+    $('#boardWrap').append addingCard
+    addingCard.offset(top: card.y, left: card.x)
+    $("##{type_id}").draggable({cancel: '.card-text'})
+    
+    date = new Date()
+    year  = date.getFullYear()
+
+    window.pickers[card.id] = new Pikaday(
+      {
+          field: document.getElementById("#{type_id}-datepicker-field"),
+          trigger: document.getElementById("#{type_id}-datepicker"),
+          ariaLabel: card.id,
+          minDate: new Date(year - 2, 0, 1),
+          maxDate: new Date(year + 2, 12, 31),
+          yearRange: [year - 2, year + 2]
+          onSelect: ((date) -> App.board.select_date(date, this._o.ariaLabel))
+      })
+    window.pickers[card.id].setDate(card.deadline)
+
+    $("##{type_id}").on 'dragstop', ->
+      title = $(this).find(".card-text").text()
+      App.board.update_tcard($(this), title)
+    $("##{type_id}-text").on 'blur', ->
+      title = $(this).text()
+      App.board.update_tcard($(this), title)
+    $("##{type_id}-like").on 'click', ->
+      likeClass = 'mdl-color-text--light-green-900'
+      id = $(this)[0].dataset.id
+      App.board.like_tcard(id)
+
+      if $(this).children(".material-icons").hasClass(likeClass)
+        $(this).children(".material-icons").removeClass(likeClass)
+        $(this).next('span').removeClass(likeClass)
+      else
+        $(this).children(".material-icons").addClass(likeClass)
+        $(this).next('span').addClass(likeClass)
+
+
+  adding_kpcard: (card, type_id) ->
+    isLiked = false
+    if card.likes
+      for like in card.likes
+        isLiked = current_user.id is like.user_id
+    else
+      isLiked = false
+
+    likeClass = ''
+    if isLiked
+      if card.card_type is 'keep'
+        likeClass = 'mdl-color-text--blue-900'
+      else if card.card_type is 'problem'
+        likeClass = 'mdl-color-text--pink-900'
+    else
+      likeClass = 'kpter-color-text--white'
+
+    likeNumClass = if card.card_type is 'keep' then 'mdl-color-text--blue-900' else 'mdl-color-text--pink-900'
+    displayNum = if card.likes and card.likes.length > 0 then card.likes.length else ''
+
+    addingCard = $("<div class='kpter-card-event mdl-card mdl-shadow--2dp #{card.card_type} cardBox' id='#{type_id}' data-type='#{card.card_type}'>" +
+        "<div class='mdl-card__title mdl-card--expand' id='#{type_id}'>" +
+        "<p class='card-text' id='#{type_id}-text'>#{card.title}</p></div>" +
+        "<div class='mdl-card__actions mdl-card--border'>" +
+        "<div class='mdl-layout-spacer'></div>" +
+        "<button id='#{type_id}-like' class='mdl-button mdl-js-button mdl-button--icon' data-id='#{card.id}' data-type='#{card.card_type}'><i class='material-icons #{likeClass}'>thumb_up</i></button>&nbsp<span class='#{likeClass}' style='vertical-align:text-bottom; font-size: 11px;'>#{displayNum}</span></div>" +
+        "<div class='mdl-card__menu'><button class='mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect icon-white delete-btn'><i class='material-icons md-14'>close</i></button></div></div>")
+
+  adding_tcard: (card, type_id) ->
+    isLiked = false
+    if card.likes
+      for like in card.likes
+        isLiked = current_user.id is like.user_id
+    else
+      isLiked = false
+
+    likeClass = if isLiked then 'mdl-color-text--light-green-900' else 'kpter-color-text--white'
+    displayNum = if card.likes and card.likes.length > 0 then card.likes.length else ''
+
+    addingCard = $("<div class='kpter-card-event mdl-card mdl-shadow--2dp try cardBox' id='#{type_id}' data-type='try'>" +
+        "<div class='mdl-card__title mdl-card--expand' id='#{type_id}'>" +
+        "<p class='card-text' style='height: 130px!important;' id='#{type_id}-text'>#{card.title}</p></div>" +
+        "<div class='mdl-card__actions mdl-card--border'>" +
+        "<div class='mdl-layout-spacer'></div>" +
+        "<i class='material-icons'>account_circle</i>" +
+        "<button id='#{type_id}-datepicker' class='mdl-button mdl-js-button mdl-button--icon' data-id='#{card.id}' data-type='#{card.card_type}'><i class='material-icons' id='datepicker'>event</i></button><input type='hidden' id='#{type_id}-datepicker-field'>" +
+        "<button id='#{type_id}-like' class='mdl-button mdl-js-button mdl-button--icon' data-id='#{card.id}' data-type='#{card.card_type}'><i class='material-icons #{likeClass}'>thumb_up</i></button>&nbsp<span class='#{likeClass}' style='vertical-align:text-bottom; font-size: 11px;'>#{displayNum}</span></div>" +
+        "<div class='mdl-card__menu'><button class='mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect icon-white delete-btn'><i class='material-icons md-14'>close</i></button></div></div>")
