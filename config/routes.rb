@@ -18,6 +18,8 @@ Rails.application.routes.draw do
   get 'sp' => 'sp#index'
   get 'confirm' => 'confirm#show'
   get 'mypage' => 'mypages#show'
+  get 'terms' => 'terms#show'
+  get 'privacy' => 'privacy#show'
 
   resources :communities, :only => [:new, :create, :show, :edit, :update, :destroy] do
     resources :boards, :only => [:new, :create, :show, :edit, :update, :destroy]

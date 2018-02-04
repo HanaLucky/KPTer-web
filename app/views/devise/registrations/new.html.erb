@@ -19,6 +19,9 @@
       <%= f.password_field :password_confirmation, class: "mdl-textfield__input", maxlength: 128, required: true %>
       <%= f.label :password_confirmation, class: "mdl-textfield__label" %>
     </div>
+    <div class="mdl-typography--caption-force-preferred-font-color-contrast">
+      By signing up you agree to our <%= link_to "Terms", terms_path, target: '_blank' %> of Use and <%= link_to "Privacy Policy", privacy_path, target: '_blank' %>.
+    </div>
     <%= button_tag t('.sign_up', :default => "Sign up"), class: "mdl-button mdl-button--colored mdl-js-button float-right" %>
   <% end %>
   <%= render "devise/shared/links" %>

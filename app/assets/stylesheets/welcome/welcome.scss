@@ -20,7 +20,7 @@ body {
         background-color: #888 !important;
       }
       &.for-sidebar {
-        float: right !important;
+        /* float: right !important;*/
         margin-top: 3px;
         padding: 14px 10px;
       }
@@ -222,4 +222,9 @@ main {
 
 .offcanvas-backdrop {
   background-color: rgba(0, 0, 0, 0.5);
+}
+
+section.section-container {
+  border-bottom: none;
+  padding: 32px 32px 64px 32px;
 }
