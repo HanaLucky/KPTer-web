@@ -62,14 +62,7 @@
           </div>
         </div>
       </nav>
-      <div class="banner banner-full-height overlay-black" style="background-image: url(http://thetheme.io/thedocs/assets/img/banner1.jpg);">
-        <div class="container text-center">
-          <h1>Online Documentation</h1>
-          <h5><strong>theDocs</strong> reduce the burden of developing documentation for your next product.</h5>
-          <br><br><br>
-          <p><%= link_to "Get Started - It's Free", new_user_registration_path, class: 'btn btn-white btn-lg btn-outline' %></p>
-        </div>
-      </div>
+      <%= yield :header %>
     </header>
     <aside class="col-md-3 sidebar">
       <ul class="sidenav">
@@ -89,13 +82,13 @@
         <a id="scroll-up" href="#"><i class="fa fa-angle-up"></i></a>
         <div class="row">
           <div class="col-md-6 col-sm-6">
-            <p>KPTER &copy; <%= Time.now.year %></p>
+            <p>&copy; <%= Time.now.year %> KPTER</p>
           </div>
           <div class="col-md-6 col-sm-6">
             <ul class="footer-menu">
-              <li><a href="#">Terms</a></li>
-              <li><a href="#">Contact</a></li>
-              <li><a href="#">Privacy policy</a></li>
+              <li><%= link_to "Terms", terms_path %></li>
+              <li><%= link_to "Privacy Policy", privacy_path %></li>
+              <li><a href="https://form.run/@kpter-contact">Contact</a></li>
             </ul>
           </div>
         </div>
