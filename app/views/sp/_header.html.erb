@@ -1,40 +1,7 @@
 <nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
-    <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
-            </button>
-            <a class="navbar-brand page-scroll" href="#page-top">KPTer</a>
-        </div>
-
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav navbar-right">
-                <li>
-                    <a class="page-scroll" href="#about">ABOUT KPTer</a>
-                </li>
-                <li>
-                    <a class="page-scroll" href="#services">About KPT</a>
-                </li>
-                <li>
-                    <a class="page-scroll" href="#contact">Contact</a>
-                </li>
-                <% unless user_signed_in? %>
-                  <li>
-                      <a class="page-scroll" href="<%= url_for new_user_session_path %>"><span class="fa fa-sign-in fa-fw"></span>Login</a>
-                  </li>
-                <% else %>
-                  <li>
-                      <a class="page-scroll header-text" href="<%= url_for :controller => :mypages, :action => :show  %>"><span class="fa fa-user fa-fw"></span>Mypage</a>
-                  </li>
-                  <li>
-                    <a class="page-scroll header-text" href="<%= url_for destroy_user_session_path %>"><span class="fa fa-sign-out fa-fw"></span>Logout</a>
-                  </li>
-                <% end %>
-            </ul>
-        </div>
-        <!-- /.navbar-collapse -->
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <%= link_to 'KPTER', root_path, class: "navbar-brand page-scroll" %>
     </div>
-    <!-- /.container-fluid -->
+  </div>
 </nav>
