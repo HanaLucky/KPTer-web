@@ -1,3 +1,6 @@
+<% content_for :head_title do %>
+  Sign up
+<% end %>
 <div class="kpter-form-middle mdl-cell mdl-grid mdl-grid--no-spacing">
   <div class="mdl-typography--display-1-color-contrast"><%= t('.sign_up', default: "Sign up") %></div>
   <%= render partial: "devise/shared/error_messages", locals: {object: resource} %>

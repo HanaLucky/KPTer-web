@@ -1,3 +1,6 @@
+<% content_for :head_title do %>
+  Reset Password
+<% end %>
 <div class="kpter-form-middle mdl-cell mdl-grid mdl-grid--no-spacing">
   <div class="mdl-typography--display-1-color-contrast"><%= t('.forgot_your_password', default: 'Forgot your password?') %></div>
   <%= render partial: "devise/shared/error_messages", locals: {object: resource} %>

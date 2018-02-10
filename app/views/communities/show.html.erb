@@ -1,3 +1,7 @@
+<% content_for :head_title do %>
+  <%=@community.name%>
+<% end %>
+
 <% if current_user.joining?(@community) %>
   <%= render :partial => 'joining' %>
 <% else %>
