@@ -1,3 +1,7 @@
+<% content_for :head_title do %>
+  KPTER
+<% end %>
+
 <% content_for :header do %>
   <div class="banner banner-full-height overlay-black" style="background-image: url(http://thetheme.io/thedocs/assets/img/banner1.jpg);">
     <div class="container text-center">
@@ -54,6 +58,32 @@
     </div>
   </div>
 </section>
-<div class="get-started">
-  <p class="text-center hero"><%= link_to "GET STARTED - IT'S FREE", new_user_registration_path %></p>
-</div>
+<section>
+  <div class="container">
+    <p class="text-center hero"><%= link_to "GET STARTED - IT'S FREE", new_user_registration_path %></p>
+  </div>
+</section>
+<section class="no-border-bottom text-center">
+  <div class="container">
+    <%= image_tag("app_icon.png", alt: "KPTER App", class: "kpter-app-logo") %>
+    <header class="section-header">
+      <h2>Mobile</h2>
+      <p>On Your iPhone.</p>
+      <div class="app">
+        <a href="//itunes.apple.com/jp/app/kpter/id1118192741?mt=8" ontouchstart="" target="_blank">
+          <%= image_tag("app_store_badge-us-uk.svg", alt: "App Store") %>
+        </a>
+      </div>
+      <div class="app-notice">
+        <small class="text-gray">
+          Notice</br>
+          It's a stand-alone application.</br>
+          We are under improving the app to synchronize with the web.
+        </small>
+      </div>
+      <div class="app">
+        <%= link_to("For more information...", sp_path, class: "btn btn-default") %>
+      </div>
+    </header>
+  </div>
+</section>

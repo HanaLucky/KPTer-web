@@ -1,3 +1,6 @@
+<% content_for :head_title do %>
+  Resend confirmation instructions
+<% end %>
 <div class="kpter-form-middle mdl-cell mdl-grid mdl-grid--no-spacing">
   <div class="mdl-typography--display-1-color-contrast"><%= t('.resend_confirmation_instructions', default: "Resend confirmation instructions") %></div>
   <%= render partial: "devise/shared/error_messages", locals: {object: resource} %>

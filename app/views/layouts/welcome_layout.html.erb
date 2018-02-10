@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <%= render partial: "google_tag_manager_in_head" %>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -10,18 +11,12 @@
     <meta http-equiv="cache-control" content="no-cache" />
     <meta http-equiv="expires" content="0" />
     <meta name="robots" content="noodp" />
-    <title>KPTER</title>
-    <%= stylesheet_link_tag  'theDocs/1.4.0/theDocs.all', media: 'all' %>
-    <%= stylesheet_link_tag  'welcome/welcome', media: 'all' %>
-    <%= stylesheet_link_tag  'style', media: 'all' %>
+    <title><%= yield :head_title %></title>
+    <%= stylesheet_link_tag 'theDocs/1.4.0/theDocs.all', media: 'all' %>
+    <%= stylesheet_link_tag 'welcome/welcome', media: 'all' %>
+    <%= stylesheet_link_tag 'style', media: 'all' %>
     <link href='https://fonts.googleapis.com/css?family=Raleway:300,400,500,600,800%7COpen+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800%7CMontserrat:400,700' rel='stylesheet' type='text/css'>
     <%= csrf_meta_tags %>
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
     <link rel="apple-touch-icon" sizes="57x57" href="/images/icons/apple-icon-57x57.png">
@@ -43,6 +38,7 @@
     <meta name="theme-color" content="#ffffff">
   </head>
   <body>
+    <%= render partial: "google_tag_manager_in_body" %>
     <header class="site-header sticky navbar-transparent navbar-sm">
       <nav class="navbar navbar-default navbar-light">
         <div class="container">
@@ -52,7 +48,7 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="kpter-logo" href="/">KPTER</a>
+            <%= link_to 'KPTER', root_path, class: "kpter-logo" %>
           </div>
           <div id="navbar" class="navbar-collapse collapse" aria-expanded="true" role="banner">
             <ul class="nav navbar-nav navbar-right">
