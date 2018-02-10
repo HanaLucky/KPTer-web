@@ -1,8 +1,10 @@
 <% content_for :head_title do %>
   Settings
 <% end %>
-<link  href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.1.3/cropper.min.css" rel="stylesheet">
-<%= stylesheet_link_tag 'users/edit', media: 'all' %>
+<% content_for :extra_stylesheet do %>
+  <link  href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.1.3/cropper.min.css" rel="stylesheet">
+  <%= stylesheet_link_tag 'users/edit', media: 'all' %>
+<% end %>
 
 <div class="kpter-settings">
   <div class="kpter-settings-menu">
@@ -48,7 +50,8 @@
 </div>
 
 <%= render partial: "devise/registrations/upload_avatar" %>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.1.3/cropper.min.js"></script>
-<%= javascript_include_tag 'fine-uploader/5.15.0/fine-uploader.core' %>
-<%= javascript_include_tag 'users/edit.js' %>
+<% content_for :extra_js do %>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.1.3/cropper.min.js"></script>
+  <%= javascript_include_tag 'fine-uploader/5.15.0/fine-uploader.core' %>
+  <%= javascript_include_tag 'users/edit.js' %>
+<% end %>
