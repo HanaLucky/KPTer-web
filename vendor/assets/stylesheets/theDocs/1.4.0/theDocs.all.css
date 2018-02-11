@@ -3012,10 +3012,16 @@ figcaption {
   -webkit-background-size: cover;
           background-size: cover;
   background-position: center;
-  background-attachment: fixed;
   -webkit-transform-style: preserve-3d;
           transform-style: preserve-3d;
   overflow: hidden;
+}
+
+@media screen and (min-width: 1170px) {
+  .banner {
+    /* this property doesn't work on smartphone and tablet, so these device ignore it. */
+    background-attachment: fixed;
+  }
 }
 
 .banner.overlay-black, .banner.overlay-white {
