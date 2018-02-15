@@ -562,3 +562,71 @@ ul.notice {
    width: 150px;
    cursor: pointer;
 }
+
+// コメントアウト外すと、PCサイズで縦並びになる
+//@media screen and (max-width: 839px){
+  .kpter-card-status-container {
+    display: table-cell;
+    &:not(:last-child) {
+      padding-right: 10px;
+    }
+    margin-right: 10px;
+    width: 500px;
+  }
+//}
+
+@media screen and (min-width: $grid-desktop-breakpoint) {
+  .kpter-card-status-container {
+    padding: 0 0 0.9rem 0;
+  }
+}
+
+.kpter-card-status-container {
+  .kpter-likes-box{
+    background-color: #03A9F4;
+    color: rgba(255,255,255,.87);
+    .material-icons {
+      color: #29B6F6;
+    }
+  }
+  .kpter-tasks-box {
+    background-color: #66BB6A;
+    color: rgba(255,255,255,.87);
+    .material-icons {
+      color: #81C784;
+    }
+  }
+  .kpter-card-status {
+    position: relative;
+    border-radius: .25rem;
+    width: initial;
+    min-height: 95px;
+    .kpter-status-icon-box {
+      color: rgba(0,0,0,.20);
+      font-size: 95px;
+      height: 95px;
+      overflow: hidden;
+      padding-left: 3px;
+      .material-icons {
+        position: absolute;
+        top: 25px;
+        font-size: 90px;
+      }
+    }
+    .box-layout-text {
+      position: absolute;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+      top: 15px;
+      right: 12px;
+      height: 100px;
+      overflow: hidden;
+      margin-left: 5px;
+      .count {
+        font-size: 30px;
+        margin: 0;
+        line-height: 1.2;
+        text-align: right;
+      }
+    }
+  }
+}

@@ -40,6 +40,9 @@ Rails.application.config.assets.precompile += %w( sp/magnific-popup/jquery.magni
 # Communitiesページ用
 Rails.application.config.assets.precompile += %w( communities.js )
 
+# MyPageページ用
+Rails.application.config.assets.precompile += %w( mypages.js )
+
 # Boardsページ用JS
 Rails.application.config.assets.precompile += %w( cable.js )
 Rails.application.config.assets.precompile += %w( channels/board.coffee )

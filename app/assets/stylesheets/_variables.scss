@@ -8,8 +8,9 @@
  $layout-mobile-header-height: $layout-header-mobile-row-height;
  $layout-header-desktop-row-height: 64px !default;
  $layout-desktop-header-height: $layout-header-desktop-row-height;
-
  $layout-screen-size-threshold: 1024px !default;
+
  $grid-tablet-breakpoint: 480px !default;
+ $grid-desktop-breakpoint: 840px !default;
 
  $colorContrast: rgba(0, 0, 0, 0.54);

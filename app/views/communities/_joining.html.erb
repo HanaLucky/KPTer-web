@@ -21,20 +21,10 @@
         </ul>
       </div>
     </div>
-    <%= render :partial => "tasks", :locals => { t_cards: @t_cards, visible_assignee: true, url: @community.id, status: @status, chartDoughnut: true } %>
+    <%= render :partial => "tasks", :locals => { t_cards: @t_cards, visible_assignee: true, url: @community.id, status: @status, callback: "chartTopOfAsignee" } %>
   </div>
   <div class="mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet">
     <canvas id="topOfAsignee" width="400" height="400"></canvas>
-    <script>
-      <% if @top_of_assignees.empty? %>
-        var labels = []
-        var data = []
-      <% else %>
-        var labels = [<% @top_of_assignees.each do |key, value| %>"<%= key %>",<% end %>]
-        var data = [<% @top_of_assignees.each do |key, value| %>"<%= value %>",<% end %>]
-      <% end %>
-      chartDoughnut("topOfAsignee", "Are your tasks well-balanced?", labels, data);
-    </script>
   </div>
 </div>
 <div class="mdl-grid">
@@ -102,3 +92,21 @@
 <dialog id="dialog-button-new-board" class="mdl-dialog kpter-dialog-full-screen">
   <%= render :partial => 'new_board', :locals => {current_community: @community}%>
 </dialog>
+
+<% content_for :extra_js do %>
+  <%= javascript_include_tag 'communities' %>
+  <script>
+    <% if @top_of_assignees.empty? %>
+      var labels = []
+      var data = []
+    <% else %>
+      var labels = [<% @top_of_assignees.each do |key, value| %>"<%= key %>",<% end %>]
+      var data = [<% @top_of_assignees.each do |key, value| %>"<%= value %>",<% end %>]
+    <% end %>
+    var datas = {
+      "labels": labels,
+      "data": data
+    }
+    chartTopOfAsignee(datas);
+  </script>
+<% end %>

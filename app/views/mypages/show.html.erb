@@ -9,9 +9,39 @@
       </div>
       <div class=“clarifix”></div>
     </div>
-    <%= render :partial => "tasks", :locals => { t_cards: @t_cards, visible_assignee: false, url: @community.id, status: @status, chartDoughnut: false} %>
+    <%= render :partial => "tasks", :locals => { t_cards: @t_cards, visible_assignee: false, url: "mypage", status: @status, chartDoughnut: false, callback: "setTasksCount"} %>
   </div>
-  <div class="mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet">
-    <!-- TODO イイね？ -->
+  <div class="mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet mdl-cell--4-col-phone">
+    <div class="kpter-sub-heading mdl-cell--hide-tablet mdl-cell--hide-phone">
+      <div class="kpter-sub-title">
+        <div class="mdl-typography--body-2-color-contrast">&nbsp;</div>
+      </div>
+      <div class=“clarifix”></div>
+    </div>
+    <div class="kpter-card-status-container">
+      <div class="kpter-card-status mdl-card mdl-shadow--2dp kpter-tasks-box">
+          <div class="kpter-status-icon-box rounded">
+            <i class="material-icons">check_box</i>
+          </div>
+          <div class="box-layout-text text-right">
+            <div class="count" id="open-task-count"><%= number_with_delimiter(@all_tcards.count) %></div>
+            <span>Uncompleted Tasks</span>
+          </div>
+      </div>
+    </div>
+    <div class="kpter-card-status-container">
+      <div class="kpter-card-status mdl-card mdl-shadow--2dp kpter-likes-box">
+        <div class="kpter-status-icon-box rounded">
+          <i class='material-icons'>thumb_up</i>
+        </div>
+        <div class="box-layout-text text-right">
+          <div class="count"><%= number_with_delimiter(@like_count) %></div>
+          <span>Likes You Got</span>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
+<% content_for :extra_js do %>
+  <%= javascript_include_tag 'mypages.js' %>
+<% end %>

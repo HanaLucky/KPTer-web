@@ -22,12 +22,16 @@
         <tr>
            <td>
               <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-data-table__select" for="row[<%= index %>]">
-                <% if chartDoughnut %>
-                  <%= check_box_tag '', '', t_card.status.closed?, { 'data-id' => t_card.id, 'data-url' => url, :onclick=>"$.post($(this).data('url')+ '/tasks/' + $(this).data('id') + '/toggle/', function(data){
+                <% if false %>
+                  <%= check_box_tag '', '', t_card.status.closed?, { 'data-id' => t_card.id, 'data-url' => url, :onclick=>"$.post($(this).data('url')+ '/tasks/' + $(this).data('id') + '/toggle/', function(data) {
                     chartDoughnut('topOfAsignee', 'Are your tasks well-balanced?', data.labels, data.data);
                     });" ,id: "row[#{index}]", class: "mdl-checkbox__input"} %>
                 <% else %>
-                  <%= check_box_tag '', '', t_card.status.closed?, { 'data-id' => t_card.id, 'data-url' => url, :onclick=>"$.post($(this).data('url')+ '/tasks/' + $(this).data('id') + '/toggle/'" ,id: "row[#{index}]", class: "mdl-checkbox__input"} %>
+                  <%= check_box_tag '', '', t_card.status.closed?, { 'data-id' => t_card.id, 'data-url' => url, :onclick=>
+                    "$.post($(this).data('url')+ '/tasks/' + $(this).data('id') + '/toggle/', function(data) {
+                      #{callback}(data);
+                    });" ,
+                    id: "row[#{index}]", class: "mdl-checkbox__input"} %>
                 <% end %>
               </label>
           </td>

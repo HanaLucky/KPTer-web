@@ -1,5 +1,5 @@
 $(function () {
-  $('#t_cards-table').html('<%= j(render(:partial => 'tasks', :locals => { t_cards: @t_cards, visible_assignee: false, url: "mypage", status: @status, chartDoughnut: false })) %>')
+  $('#t_cards-table').html('<%= j(render(:partial => 'tasks', :locals => { t_cards: @t_cards, visible_assignee: false, url: "mypage", status: @status, callback: "setTasksCount" })) %>')
   <% if @status == TCard.status.open %>
     $("#open-btn").addClass('mdl-color-text--primary');
     $("#close-btn").removeClass('mdl-color-text--primary');
