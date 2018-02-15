@@ -8,4 +8,6 @@
   <%= render :partial => 'inviting' %>
 <% end %>
 
-<%= javascript_include_tag 'communities' %>
+<% content_for :extra_js do %>
+  <%= javascript_include_tag 'communities' %>
+<% end %>

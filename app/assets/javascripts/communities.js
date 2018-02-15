@@ -1,3 +1,7 @@
+var chartTopOfAsignee = function (data) {
+  chartDoughnut('topOfAsignee', 'Are your tasks well-balanced?', data.labels, data.data);
+}
+
 $(function() {
   settingDialog("dialog-button-leave", "dialog-button-leave");
   settingDialog("dialog-button-delete", "dialog-button-delete");
