@@ -7,7 +7,7 @@
     <% end %>
     <div class="mdl-layout-spacer"></div>
     <% if user_signed_in? %>
-      <button class="mdl-button mdl-js-button mdl-button--icon" id="hdrbtn">
+      <button class="mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect" id="hdrbtn">
         <i class="material-icons">more_vert</i>
       </button>
       <ul class="mdl-menu mdl-js-menu mdl-menu--bottom-right" for="hdrbtn">
@@ -20,8 +20,8 @@
       </ul>
     <% else %>
       <nav class="mdl-navigation">
-        <%= link_to t('.sign_in', :default => "Sign in"), new_user_session_path, class: "mdl-button mdl-button--primary mdl-js-button" %>
-        <%= link_to t('.sign_up', :default => "Sign up"), new_user_registration_path, class: "mdl-button mdl-button--primary mdl-js-button" %>
+        <%= link_to t('.sign_in', :default => "Sign in"), new_user_session_path, class: "mdl-button mdl-button--primary mdl-js-button mdl-js-ripple-effect" %>
+        <%= link_to t('.sign_up', :default => "Sign up"), new_user_registration_path, class: "mdl-button mdl-button--primary mdl-js-button mdl-js-ripple-effect" %>
       </nav>
     <% end %>
   </div>

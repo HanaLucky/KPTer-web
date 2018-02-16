@@ -14,10 +14,10 @@
       <%= form_for communities_path, url: { controller: "/communities", action: "create" } do |f| %>
         <input type="text" name="name" class="kpter-nav-form-input" id="create-community-name" maxlength="32" required="required" >
         <div class="kpter-nav-form-action">
-          <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent kpter-nav-form-button">
+          <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent kpter-nav-form-button mdl-js-ripple-effect">
             Add community
           </button>
-          <button class="mdl-button mdl-js-button kpter-nav-form-button kpter-close-button-text-color" onclick="hiddenForm('community-form-container', 'create-community-name');return false;">
+          <button class="mdl-button mdl-js-button kpter-nav-form-button kpter-close-button-text-color mdl-js-ripple-effect" onclick="hiddenForm('community-form-container', 'create-community-name');return false;">
             Cancel
           </button>
         </div>

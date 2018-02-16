@@ -18,7 +18,7 @@
               <% end %>
             </span>
             <% if current_user != cu.user %>
-              <button class="mdl-list__item-secondary-action mdl-button mdl-js-button mdl-button--icon" id="btn-<%= i %>">
+              <button class="mdl-list__item-secondary-action mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect" id="btn-<%= i %>">
                 <i class="material-icons md-18 mute-color">more_horiz</i>
               </button>
               <ul class="mdl-menu mdl-js-menu mdl-menu--bottom-right kpter-menu" for="btn-<%= i %>">
@@ -33,6 +33,6 @@
     </div>
   </div>
   <div class="mdl-dialog__actions">
-    <button type="button" class="mdl-button close">Close</button>
+    <button type="button" class="mdl-button mdl-js-button mdl-js-ripple-effect close">Close</button>
   </div>
 </div>

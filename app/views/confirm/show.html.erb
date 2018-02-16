@@ -24,9 +24,9 @@
     </ul>
     <div class="kpter-mail">
       <% if @email.end_with?("@gmail.com") %>
-        <a href="https://mail.google.com/mail/" target="_blank" class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent" role="button">Check Gmail</a>
+        <a href="https://mail.google.com/mail/" target="_blank" class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent mdl-js-ripple-effect" role="button">Check Gmail</a>
       <% elsif @email.end_with?("@yahoo.co.jp") %>
-        <a href="https://mail.yahoo.co.jp" target="_blank" class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent" role="button">Check Yahoo! Mail</a>
+        <a href="https://mail.yahoo.co.jp" target="_blank" class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent mdl-js-ripple-effect" role="button">Check Yahoo! Mail</a>
       <% end %>
     </div>
   </div>
