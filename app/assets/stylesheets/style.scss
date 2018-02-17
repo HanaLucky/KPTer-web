@@ -241,12 +241,17 @@ table > tfoot > tr {
 
 .kpter-table {
   width: 100%;
-  // task
   th:nth-child(2) {
     width: 100%;
   }
   td {
     white-space: initial;
+    &.assignee-image {
+      text-align: center;
+      .mdl-chip__contact {
+        margin-right: 0 !important;
+      }
+    }
   }
   td:nth-child(2) {
     max-width: 100px;
