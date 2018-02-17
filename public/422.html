@@ -1,67 +1,119 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <title>The change you wanted was rejected (422)</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <style>
-  body {
-    background-color: #EFEFEF;
-    color: #2E2F30;
-    text-align: center;
-    font-family: arial, sans-serif;
-    margin: 0;
-  }
-
-  div.dialog {
-    width: 95%;
-    max-width: 33em;
-    margin: 4em auto 0;
-  }
-
-  div.dialog > div {
-    border: 1px solid #CCC;
-    border-right-color: #999;
-    border-left-color: #999;
-    border-bottom-color: #BBB;
-    border-top: #B00100 solid 4px;
-    border-top-left-radius: 9px;
-    border-top-right-radius: 9px;
-    background-color: white;
-    padding: 7px 12% 0;
-    box-shadow: 0 3px 8px rgba(50, 50, 50, 0.17);
-  }
-
-  h1 {
-    font-size: 100%;
-    color: #730E15;
-    line-height: 1.5em;
-  }
-
-  div.dialog > p {
-    margin: 0 0 1em;
-    padding: 1em;
-    background-color: #F7F7F7;
-    border: 1px solid #CCC;
-    border-right-color: #999;
-    border-left-color: #999;
-    border-bottom-color: #999;
-    border-bottom-left-radius: 4px;
-    border-bottom-right-radius: 4px;
-    border-top-color: #DADADA;
-    color: #666;
-    box-shadow: 0 3px 8px rgba(50, 50, 50, 0.17);
-  }
-  </style>
-</head>
-
-<body>
-  <!-- This file lives in public/422.html -->
-  <div class="dialog">
-    <div>
-      <h1>The change you wanted was rejected.</h1>
-      <p>Maybe you tried to change something you didn't have access to.</p>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Unprocessable Entity 422</title>
+    <style type="text/css">
+      * {
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: Lato, "Helvetica Neue", Helvetica, Arial, sans-serif;
+        color: #333;
+        font-size: 14px;
+        line-height: 1.42857143;
+        background-color: #fff;
+        margin: 0;
+      }
+      h1, h6 {
+        font-family: Raleway, "Helvetica Neue", Helvetica, Arial, sans-serif;
+      }
+      h1 {
+        font-weight: 200;
+        line-height: 52px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+      }
+      @media screen and (max-width: 991px) {
+        h1 {
+          font-size: 150px !important;
+        }
+      }
+      h6 {
+        font-size: 18px;
+        font-weight: 400;
+        line-height: 1.1;
+        margin-top: 10px;
+        margin-bottom: 10px;
+      }
+      p {
+        font-weight: 400;
+        margin: 0 0 10px;
+      }
+      a {
+        color: #ff4081;
+        font-weight: 500;
+      }
+      a.btn {
+        text-decoration: none;
+      }
+      .error-page-container {
+        text-align: center;
+        margin: 0 15px;
+      }
+      .text-center {
+        text-align: center;
+      }
+      .text-gray {
+        color: #ccc;
+      }
+      .text-uppercase {
+        text-transform: uppercase;
+      }
+      .text-muted {
+        color: #777;
+      }
+      .btn-default {
+        background-color: #f5f5f5;
+        color: #777;
+      }
+      .btn {
+        display: inline-block;
+        padding: 6px 12px;
+        margin-bottom: 0;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 1.42857143;
+        text-align: center;
+        white-space: nowrap;
+        vertical-align: middle;
+        -ms-touch-action: manipulation;
+        touch-action: manipulation;
+        cursor: pointer;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        background-image: none;
+        border-radius: 2px;
+        border: none;
+        transition: .3s ease;
+      }
+      .btn-default:hover {
+        color: #333;
+        background-color: #e6e6e6;
+        border-color: #adadad;
+      }
+      .btn-default:active:hover{
+        color: #333;
+        background-color: #d4d4d4;
+        border-color: #8c8c8c;
+      }
+    </style>
+    <link href='//fonts.googleapis.com/css?family=Raleway:100,300,400,500%7CLato:300,400' rel='stylesheet' type='text/css'>
+  </head>
+  <body>
+    <div class="error-page-container">
+      <br><br><br><br><br>
+      <h1 class="text-gray" style="font-size: 180px; opacity: 0.5;"><strong>422</strong></h1>
+      <br><br><br><br><br>
+      <h6>The change you wanted was rejected.</h6>
+      <p class="text-muted">Maybe you tried to change something you didn't have access to.</p>
+      <br><br>
+      <p><a class="btn btn-default" href="/">Return home</a></p>
     </div>
-    <p>If you are the application owner check the logs for more information.</p>
-  </div>
-</body>
+  </body>
 </html>
