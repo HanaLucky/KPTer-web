@@ -25,7 +25,7 @@
     <div class="mdl-typography--caption-force-preferred-font-color-contrast">
       By signing up you agree to our <%= link_to "Terms", terms_path, target: '_blank' %> of Use and <%= link_to "Privacy Policy", privacy_path, target: '_blank' %>.
     </div>
-    <%= button_tag t('.sign_up', :default => "Sign up"), class: "mdl-button mdl-button--colored mdl-js-button float-right" %>
+    <%= button_tag t('.sign_up', :default => "Sign up"), class: "mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect float-right mdl-js-ripple-effect" %>
   <% end %>
   <%= render "devise/shared/links" %>
 </div>
