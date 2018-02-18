@@ -5,7 +5,7 @@
         <div class="mdl-typography--body-2-color-contrast"><%= @community.name %></div>
       </div>
       <div class="kpter-settings">
-        <%= link_to community_path + '/members', {:remote => true, class: "mdl-button mdl-js-button mdl-button--icon dialog-button-member"} do %>
+        <%= link_to community_path + '/members', {:remote => true, class: "mdl-button mdl-js-button mdl-button--icon"} do %>
           <i class="material-icons md-18">person</i>
         <% end %>
         <button id="settings" class="mdl-button mdl-js-button mdl-button--icon">
@@ -84,9 +84,9 @@
 </dialog>
 
 <!-- member list -->
-<dialog id="dialog-button-member" class="mdl-dialog kpter-dialog-middle">
+<div class="modal micromodal-slide" id="modal-button-member" aria-hidden="true">
   <%= render :partial => 'members', :locals => {current_community: @community, members: @members} %>
-</dialog>
+</div>
 
 <!-- new board -->
 <dialog id="dialog-button-new-board" class="mdl-dialog kpter-dialog-full-screen">

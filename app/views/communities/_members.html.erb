@@ -1,38 +1,42 @@
-<div class="mdl-dialog__content">
-  <h4 class="mdl-dialog__title">member list</h4>
-  <div class="mdl-dialog__content">
-    <div class="mdl-list kpter-member-list">
-      <% if members.nil? %>
-        Nobody is here
-      <% else %>
-        <% members.each_with_index do |cu, i| %>
-          <div class="mdl-list__item mdl-list__item--two-line">
-            <span class="mdl-list__item-primary-content">
-              <% if cu.status.joining? %>
-                <%= image_tag(avatar_url(cu.user), :class => "mdl-list__item-avatar", :alt => "#{cu.user.nickname}") %>
-                <span><%= cu.user.nickname %></span>
-              <% else %>
-                <%= image_tag(avatar_url(cu.user), :class => "mdl-list__item-avatar inviting-avatar", :alt => "#{cu.user.nickname}") %>
-                <span class="inviting-text"><%= cu.user.nickname %></span>
-                <span class="mdl-list__item-sub-title">(inviting)</span>
+<div class="modal__overlay" tabindex="-1" data-micromodal-close>
+  <div class="modal__container mdl-shadow--2dp" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
+    <header class="modal__header">
+      <h2 class="modal__title" id="modal-1-title">
+        Member List
+      </h2>
+      <button class="modal__close" aria-label="Close modal" data-micromodal-close></button>
+    </header>
+    <main class="modal__content" id="modal-1-content">
+      <div class="mdl-list kpter-member-list">
+        <% if members.nil? %>
+          Nobody is here
+        <% else %>
+          <% members.each_with_index do |cu, i| %>
+            <div class="mdl-list__item mdl-list__item--two-line">
+              <span class="mdl-list__item-primary-content">
+                <% if cu.status.joining? %>
+                  <%= image_tag(avatar_url(cu.user), :class => "mdl-list__item-avatar", :alt => "#{cu.user.nickname}") %>
+                  <span><%= cu.user.nickname %><% if current_user == cu.user %><span class="joining-you">&nbsp;(you)</span><% end %></span>
+                <% else %>
+                  <%= image_tag(avatar_url(cu.user), :class => "mdl-list__item-avatar inviting-avatar", :alt => "#{cu.user.nickname}") %>
+                  <span class="inviting-text"><%= cu.user.nickname %></span>
+                  <span class="mdl-list__item-sub-title">(inviting)</span>
+                <% end %>
+              </span>
+              <% if current_user != cu.user %>
+                <button class="mdl-list__item-secondary-action mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect" id="btn-<%= i %>">
+                  <i class="material-icons md-18 mute-color">more_horiz</i>
+                </button>
+                <ul class="mdl-menu mdl-js-menu mdl-menu--bottom-right kpter-menu" for="btn-<%= i %>">
+                  <li class="mdl-menu__item">
+                    <%= link_to "Remove from here", community_path + "/remove?user_id=#{cu.user.id}", :method => :post, data: {confirm: "Are you sure?"} %>
+                  </li>
+                </ul>
               <% end %>
-            </span>
-            <% if current_user != cu.user %>
-              <button class="mdl-list__item-secondary-action mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect" id="btn-<%= i %>">
-                <i class="material-icons md-18 mute-color">more_horiz</i>
-              </button>
-              <ul class="mdl-menu mdl-js-menu mdl-menu--bottom-right kpter-menu" for="btn-<%= i %>">
-                <li class="mdl-menu__item">
-                  <%= link_to "Remove from here", community_path + "/remove?user_id=#{cu.user.id}", :method => :post, data: {confirm: "Are you sure?"} %>
-                </li>
-              </ul>
-            <% end %>
-          </div>
+            </div>
+          <% end %>
         <% end %>
-      <% end %>
-    </div>
+      </div>
+    </main>
   </div>
-  <div class="mdl-dialog__actions">
-    <button type="button" class="mdl-button mdl-js-button mdl-js-ripple-effect close">Close</button>
-  </div>
-</div>
+ </div>

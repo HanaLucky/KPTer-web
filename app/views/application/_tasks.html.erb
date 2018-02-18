@@ -25,7 +25,7 @@
                 <%= check_box_tag '', '', t_card.status.closed?, { 'data-id' => t_card.id, 'data-url' => url, :onclick=>
                   "$.post($(this).data('url')+ '/tasks/' + $(this).data('id') + '/toggle/', function(data) {
                     #{callback}(data);
-                  });" ,
+                  });",
                   id: "row[#{index}]", class: "mdl-checkbox__input"} %>
               </label>
           </td>
@@ -34,7 +34,10 @@
             <% if t_card.tcard_assignee.nil? %>
               <td class="mdl-data-table__cell--non-numeric">&nbsp;</td>
             <% else %>
-              <td class="mdl-data-table__cell--non-numeric" style="white-space: nowrap;"><%= t_card.tcard_assignee.user.nickname %></td>
+              <td class="assignee-image">
+                <div class="mdl-tooltip" for="<%= t_card.id %>"><%= t_card.tcard_assignee.user.nickname %></div>
+                <%= image_tag(avatar_url(t_card.tcard_assignee.user), class: "mdl-chip__contact", id: t_card.id, alt: t_card.tcard_assignee.user.nickname) %>
+              </td>
             <% end %>
           <% end %>
           <td class="mdl-data-table__cell--non-numeric" style="white-space: nowrap;"><%= t_card.deadline %></td>
