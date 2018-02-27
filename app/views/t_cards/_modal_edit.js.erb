@@ -1,0 +1,6 @@
+$(function () {
+  $('#modal-button-edit-task').html('<%= j(render(:partial => 't_cards/modal_edit.html', :locals => { task: @task, community_users: @community_users, chaindata: chaindata })) %>');
+  componentHandler.upgradeAllRegistered();
+  var picker = new Pikaday({ field: document.getElementById('datepicker') });
+  MicroModal.show('modal-button-edit-task');
+});

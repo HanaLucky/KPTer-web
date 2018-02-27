@@ -1,0 +1,76 @@
+<div class="modal__overlay" tabindex="-1" data-micromodal-close>
+  <div class="modal__container mdl-shadow--8dp" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
+    <header class="modal__header">
+      <h2 class="modal__title" id="modal-1-title">
+        Edit Task
+      </h2>
+      <button class="modal__close" aria-label="Close modal" data-micromodal-close></button>
+    </header>
+    <main class="modal__content" id="modal-1-content">
+      <% if task %>
+        <%= form_for(task, html: {id: 'form_edit_task', data: { remote: true }} ) do |f| %>
+          <% if !chaindata.nil? %>
+            <% chaindata.each do |k, v| %>
+              <input type="hidden" name="chaindata[<%= k %>]" value="<%= v %>">
+            <% end %>
+          <% end %>
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <%= f.text_area :title, class: "mdl-textfield__input", rows: 4, maxlength: 255, required: true %>
+            <%= f.label :title, class: "mdl-textfield__label" %>
+          </div>
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <%= f.text_field :deadline, class: "mdl-textfield__input", id: "datepicker", maxlength: 10 %>
+            <%= f.label :deadline, class: "mdl-textfield__label" %>
+          </div>
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-select">
+            <input type="text" name="nickname" value="<%= task.user.try(:nickname) %>" class="mdl-textfield__input" id="select-section" readonly="readonly">
+            <%= f.hidden_field :user_id %>
+            <%= f.label :assignee, class: "mdl-textfield__label" %>
+            <ul class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="select-section">
+              <li class="mdl-menu__item"></li>
+              <% community_users.each do | cu | %>
+                <li class="mdl-menu__item" data-user-id="<%= cu.user.id %>"><%= image_tag(avatar_url(cu.user), class: "kpter-avatar-icons-circle-m8", alt: cu.user.nickname) %><%= cu.user.nickname %></li>
+              <% end %>
+            </ul>
+          </div>
+          <div class="mdl-dialog__actions">
+            <button class="mdl-button mdl-js-button mdl-button--colored mdl-js-ripple-effect">Update</button>
+          </div>
+        <% end %>
+      <% end %>
+    </main>
+  </div>
+ </div>
+
+<% if task %>
+  <script>
+    <% # セレクト要素クリックしたら値をセットする %>
+    $('div.mdl-select > ul > li').click(function(e) {
+        var nickname = $(e.target).text();
+        var id = $(e.target).data("user-id");
+        if (nickname && id) {
+          $(e.target).parents('.mdl-select').addClass('is-dirty').children('input:text[name="nickname"]').val(nickname);
+          $(e.target).parents('.mdl-select').children('input:hidden[name="t_card[user_id]"]').val(id);
+        } else {
+          $(e.target).parents('.mdl-select').removeClass('is-dirty').children('input').val("");
+        }
+    });
+
+    // $(function($){
+    //   $('#form_edit_task')
+    //     .bind("ajax:success", function(e, data, status, xhr) {
+    //       var $task_table_record = $('#t_cards-table-data').find("tbody > tr#<%= task.id %>");
+    //       $task_table_record.find('.t-card-title').text(data.t_card.title);
+    //       $task_table_record.find('.t-card-deadline').text(data.t_card.deadline);
+    //     })
+    //     .bind("ajax:complete", function(xhr) {
+    //        MicroModal.close('modal-button-edit-task');
+    //     })
+    //     .bind("ajax:failure", function(data, status, xhr) {
+    //        alert(data.messages);
+    //        location.reload();
+    //     });
+    // });
+
+  </script>
+<% end %>

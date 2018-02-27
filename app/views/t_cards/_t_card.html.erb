@@ -1,0 +1,21 @@
+   <td class="t-card-status">
+      <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-data-table__select" for="row[<%= t_card.id %>]">
+        <%= check_box_tag '', '', t_card.status.closed?, { 'data-id' => t_card.id, 'data-url' => url, :onclick=>
+          "$.post($(this).data('url')+ '/tasks/' + $(this).data('id') + '/toggle/', function(data) {
+            #{callback}(data);
+          });",
+          id: "row[#{t_card.id}]", class: "mdl-checkbox__input"} %>
+      </label>
+  </td>
+  <td class="mdl-data-table__cell--non-numeric edit_task_modal_event t-card-title"><%= t_card.title %></td>
+  <% if visible_assignee.to_s == "true"  %>
+    <td class="assignee-image edit_task_modal_event t-card-assignee">
+      <% if t_card.tcard_assignee.nil? %>
+        &nbsp;
+      <% else %>
+        <div class="mdl-tooltip" for="nickname-<%= t_card.id %>"><%= t_card.tcard_assignee.try(:user).try(:nickname) %></div>
+        <%= image_tag(avatar_url(t_card.tcard_assignee.user), class: "mdl-chip__contact", id: "nickname-#{t_card.id}", alt: t_card.tcard_assignee.user.nickname) %>
+      <% end %>
+    </td>
+  <% end %>
+  <td class="mdl-data-table__cell--non-numeric edit_task_modal_event t-card-deadline" style="white-space: nowrap;"><%= t_card.deadline %></td>

@@ -6,7 +6,6 @@
   <div class="kpter-form-middle mdl-cell mdl-grid mdl-grid--no-spacing">
     <h4>Edit <%= current_community.name %></h4>
     <%= form_for(current_community) do |f| %>
-      <input name="_method" type="hidden" value="patch" />
       <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
         <%= f.text_field :name, class: "mdl-textfield__input", maxlength: 32, required: true %>
         <%= f.label :name, class: "mdl-textfield__label" %>

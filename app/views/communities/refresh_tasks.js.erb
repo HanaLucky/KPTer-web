@@ -1,5 +1,5 @@
 $(function () {
-  $('#t_cards-table').html('<%= j(render(:partial => 'tasks', :locals => { t_cards: @t_cards, visible_assignee: true, url: "#{@community.id}", status: @status, callback: "chartTopOfAsignee" })) %>');
+  $('#t_cards-table').html('<%= j(render(:partial => 't_cards/t_card_table', :locals => { t_cards: @t_cards, visible_assignee: true, url: @community.id, status: @status, callback: "chartTopOfAsignee" })) %>');
   <% if @status == TCard.status.open %>
     $("#open-btn").addClass('mdl-color-text--primary');
     $("#close-btn").removeClass('mdl-color-text--primary');
@@ -7,6 +7,8 @@ $(function () {
     $("#open-btn").removeClass('mdl-color-text--primary');
     $("#close-btn").addClass('mdl-color-text--primary');
   <% end %>
-  // see. https://github.com/google/material-design-lite/wiki/How-the-Component-Handler-works
+  <% # カード編集のモーダルイベントを設定する %>
+  tableTdClickableAjax("t_cards-table-data", "edit_task_modal_event");
+  <% # see. https://github.com/google/material-design-lite/wiki/How-the-Component-Handler-works %>
   componentHandler.upgradeAllRegistered();
 });

@@ -145,6 +145,10 @@ class CommunitiesController < ApplicationController
     redirect_to :controller => :mypages, :action => :show
   end
 
+  def edit_task
+    @task = TCard.find(params[:id]);
+  end
+
   private
     def exists_community?
       # if community does not exists, raise RecordNotFound error

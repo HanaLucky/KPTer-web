@@ -1,0 +1,6 @@
+$(function () {
+  $("#t_card-tr-<%= t_card.id %>").html('<%= j(render(:partial => 't_cards/t_card.html', :locals => {t_card: t_card, visible_assignee: chaindata[:visible_assignee], url: chaindata[:url], callback: chaindata[:callback]})) %>');
+  componentHandler.upgradeAllRegistered();
+  tableTrTdClickableAjax("t_cards-table-data", "t_card-tr-<%= t_card.id %>", "edit_task_modal_event");
+  MicroModal.close('modal-button-edit-task');
+});
