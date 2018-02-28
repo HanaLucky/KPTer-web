@@ -3,9 +3,11 @@ class CardBroadcastJob < ApplicationJob
 
   def perform(card)
     if card.class == KpCard
-      ActionCable.server.broadcast "board_channel_#{card.board_id}", method: "create", kpcard: card, id: card.id, type: card.card_type
+      card = KpCard.includes(:owner).references(:owner).find(card.id)
+      ActionCable.server.broadcast "board_channel_#{card.board_id}", method: "create", kpcard: card.to_json(include: [:owner]), id: card.id, type: card.card_type
     elsif card.class == TCard
-      ActionCable.server.broadcast "board_channel_#{card.board_id}", method: "create", tcard: card, id: card.id, type: 'try'
+      card = TCard.includes(:owner).references(:owner).find(card.id)
+      ActionCable.server.broadcast "board_channel_#{card.board_id}", method: "create", tcard: card.to_json(include: [:owner]), id: card.id, type: 'try'
     end
   end
 

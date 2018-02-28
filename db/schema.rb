@@ -42,6 +42,7 @@ ActiveRecord::Schema.define(version: 20171030032308) do
 
   create_table "kp_cards", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", comment: "KPカード" do |t|
     t.integer  "board_id",                             null: false, comment: "ボードID"
+    t.integer  "owner_id",                             null: false, comment: "カード作成者ID"
     t.string   "title",                                             comment: "タイトル"
     t.string   "detail",       limit: 512,                          comment: "詳細"
     t.string   "card_type",    limit: 16,              null: false, comment: "カード種別"
@@ -79,6 +80,7 @@ ActiveRecord::Schema.define(version: 20171030032308) do
 
   create_table "t_cards", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", comment: "Tカード" do |t|
     t.integer  "board_id",                                  null: false, comment: "ボードID"
+    t.integer  "owner_id",                                  null: false, comment: "カード作成者ID"
     t.string   "title",                                                  comment: "タイトル"
     t.string   "detail",       limit: 512,                               comment: "詳細"
     t.date     "deadline",                                               comment: "期限"

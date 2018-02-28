@@ -8,10 +8,10 @@ App.board = App.cable.subscriptions.create { channel: "BoardChannel", board_id: 
   received: (data) ->
     card_id = ""
     if data['method'] is 'create'
-      if data['kpcard'] 
-        App.board.add_kpcard(data['kpcard'])
+      if data['kpcard']
+        App.board.add_kpcard(JSON.parse(data['kpcard']))
       else if data['tcard']
-        App.board.add_tcard(data['tcard'])
+        App.board.add_tcard(JSON.parse(data['tcard']))
  
     else if data['method'] is 'update'
       if data['kpcard']
@@ -109,7 +109,6 @@ App.board = App.cable.subscriptions.create { channel: "BoardChannel", board_id: 
   initialize_cards: ->
     window.fromServer = false
     window.pickers = []
-
     for card in kp_cards
       App.board.add_kpcard(card)
 
@@ -221,6 +220,7 @@ App.board = App.cable.subscriptions.create { channel: "BoardChannel", board_id: 
     else
       likeClass = 'kpter-color-text--white'
 
+    src = if card.owner && card.owner.avatar then "#{card.owner.avatar.url}" else no_img
     likeNumClass = if card.card_type is 'keep' then 'mdl-color-text--blue-900' else 'mdl-color-text--pink-900'
     displayNum = if card.likes and card.likes.length > 0 then card.likes.length else ''
 
@@ -228,6 +228,7 @@ App.board = App.cable.subscriptions.create { channel: "BoardChannel", board_id: 
         "<div class='mdl-card__title mdl-card--expand' id='#{type_id}'>" +
         "<p class='card-text' id='#{type_id}-text'>#{card.title}</p></div>" +
         "<div class='mdl-card__actions mdl-card--border'>" +
+        "<img class='mdl-list__item-avatar' src='#{src}' style='width:30px; height:30px;'>" +
         "<div class='mdl-layout-spacer'></div>" +
         "<button id='#{type_id}-like' class='mdl-button mdl-js-button mdl-button--icon' data-id='#{card.id}' data-type='#{card.card_type}'><i class='material-icons #{likeClass}'>thumb_up</i></button>&nbsp<span class='#{likeClass}' style='vertical-align:text-bottom; font-size: 11px;'>#{displayNum}</span></div>" +
         "<div class='mdl-card__menu'><button class='mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect icon-white delete-btn'><i class='material-icons md-14'>close</i></button></div></div>")
@@ -239,7 +240,8 @@ App.board = App.cable.subscriptions.create { channel: "BoardChannel", board_id: 
         isLiked = current_user.id is like.user_id
     else
       isLiked = false
-
+    
+    src = if card.owner.avatar.url then "#{card.owner.avatar.url}" else no_img
     likeClass = if isLiked then 'mdl-color-text--light-green-900' else 'kpter-color-text--white'
     displayNum = if card.likes and card.likes.length > 0 then card.likes.length else ''
 
@@ -247,6 +249,7 @@ App.board = App.cable.subscriptions.create { channel: "BoardChannel", board_id: 
         "<div class='mdl-card__title mdl-card--expand' id='#{type_id}'>" +
         "<p class='card-text' style='height: 130px!important;' id='#{type_id}-text'>#{card.title}</p></div>" +
         "<div class='mdl-card__actions mdl-card--border'>" +
+        "<img class='mdl-list__item-avatar' src='#{src}' style='width:30px; height:30px;'>" +
         "<div class='mdl-layout-spacer'></div>" +
         "<i class='material-icons'>account_circle</i>" +
         "<button id='#{type_id}-datepicker' class='mdl-button mdl-js-button mdl-button--icon' data-id='#{card.id}' data-type='#{card.card_type}'><i class='material-icons' id='datepicker'>event</i></button><input type='hidden' id='#{type_id}-datepicker-field'>" +

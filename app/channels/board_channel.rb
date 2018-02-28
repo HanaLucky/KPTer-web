@@ -8,11 +8,11 @@ class BoardChannel < ApplicationCable::Channel
   end
 
   def create_kpcard(data)
-    kpcard = KpCard.create! card_type: data['card_type'], title: data['title'], board_id: data['board_id'], x: data['x'], y: data['y']
+    kpcard = KpCard.create! card_type: data['card_type'], title: data['title'], board_id: data['board_id'], owner_id: current_user.id, x: data['x'], y: data['y']
   end
 
   def create_tcard(data)
-    tcard = TCard.create! title: data['title'], board_id: data['board_id'], x: data['x'], y: data['y']
+    tcard = TCard.create! title: data['title'], board_id: data['board_id'], owner_id: current_user.id, x: data['x'], y: data['y']
   end
 
   def update_kpcard(data)

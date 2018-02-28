@@ -2,6 +2,7 @@ class CreateTCards < ActiveRecord::Migration[5.0]
   def change
     create_table :t_cards, comment: "Tカード" do |t|
       t.references :board, foreign_key: true, null: false, comment: "ボードID"
+      t.integer :owner_id, foreign_key: true, null: false, comment: "カード作成者ID"
       t.string :title, comment: "タイトル"
       t.string :detail, limit: 512, comment: "詳細"
       t.date :deadline, comment: "期限"

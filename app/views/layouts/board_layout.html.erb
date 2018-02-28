@@ -14,9 +14,10 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/css/pikaday.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/pikaday.min.js"></script>
   <%= javascript_tag do %>
-    window.kp_cards = <%= raw @board.kp_cards.to_json(include: :likes) %>;
-    window.t_cards = <%= raw @board.t_cards.to_json(include: :likes) %>;
+    window.kp_cards = <%= raw @board.kp_cards.to_json(include: [:likes, :owner]) %>;
+    window.t_cards = <%= raw @board.t_cards.to_json(include: [:likes, :owner]) %>;
     window.current_user = <%= raw current_user.to_json %>;
+    window.no_img = "<%= @no_img %>";
   <% end %>
   <%= javascript_include_tag 'cable' %>
   <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.0/jquery-ui.min.js"></script>
