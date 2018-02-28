@@ -2,7 +2,6 @@ class TCardsController < ApplicationController
   before_action :authenticate_user!, :exists_task?, :belongs_to?, :side_column, only: [:edit, :update]
 
   def edit
-    # TODO 所属しているコミュニティのタスクだけみれたり編集できたり。
     @task = TCard.find(params[:id])
     @community_users = @task.board.community.find_users
     respond_to do |format|
@@ -26,11 +25,13 @@ class TCardsController < ApplicationController
 
     if t_card.update_attributes(t_cart_params) then
       respond_to do |format|
+        flash.now[:notice] = t('t_card.update.success')
         format.js { render template: "t_cards/_t_card", :locals => {t_card: TCard.find(params[:id]), chaindata: params[:chaindata]} }
       end
     else
-      # TODO error message
+      flash.now[:notice] = t('t_card.update.failure')
     end
+
   end
 
   private

@@ -52,3 +52,7 @@ en:
         one: "1 minute ago"
         other: "%{minutes} minutes ago"
       within_1_minute: "a few seconds ago"
+  t_card:
+    update:
+      success: "The task was updated."
+      failure: "Sorry...Something was wrong."

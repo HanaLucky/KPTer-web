@@ -15,7 +15,7 @@
             <% end %>
           <% end %>
           <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <%= f.text_area :title, class: "mdl-textfield__input", rows: 4, maxlength: 255, required: true %>
+            <%= f.text_area :title, class: "mdl-textfield__input", rows: 3, maxlength: 255, required: true %>
             <%= f.label :title, class: "mdl-textfield__label" %>
           </div>
           <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
@@ -55,22 +55,5 @@
           $(e.target).parents('.mdl-select').removeClass('is-dirty').children('input').val("");
         }
     });
-
-    // $(function($){
-    //   $('#form_edit_task')
-    //     .bind("ajax:success", function(e, data, status, xhr) {
-    //       var $task_table_record = $('#t_cards-table-data').find("tbody > tr#<%= task.id %>");
-    //       $task_table_record.find('.t-card-title').text(data.t_card.title);
-    //       $task_table_record.find('.t-card-deadline').text(data.t_card.deadline);
-    //     })
-    //     .bind("ajax:complete", function(xhr) {
-    //        MicroModal.close('modal-button-edit-task');
-    //     })
-    //     .bind("ajax:failure", function(data, status, xhr) {
-    //        alert(data.messages);
-    //        location.reload();
-    //     });
-    // });
-
   </script>
 <% end %>

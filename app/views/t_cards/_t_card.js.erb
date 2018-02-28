@@ -3,4 +3,10 @@ $(function () {
   componentHandler.upgradeAllRegistered();
   tableTrTdClickableAjax("t_cards-table-data", "t_card-tr-<%= t_card.id %>", "edit_task_modal_event");
   MicroModal.close('modal-button-edit-task');
+
+  <% if notice %>
+    var snackbarContainer = document.querySelector('#notification');
+    var data = {message: "<%= notice %>"};
+    snackbarContainer.MaterialSnackbar.showSnackbar(data);
+  <% end %>
 });
