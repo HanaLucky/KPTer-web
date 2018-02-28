@@ -25,6 +25,8 @@ Rails.application.routes.draw do
     resources :boards, :only => [:new, :create, :show, :edit, :update, :destroy]
   end
 
+  resources :t_cards, :only => [:edit, :update]
+
   post 'communities/:id/tasks/:t_card_id/toggle' => 'communities#toggle'
   get 'communities/:id/refresh_tasks' => 'communities#refresh_tasks'
   get 'communities/:id/invitable_users' => 'communities#invitable_users'

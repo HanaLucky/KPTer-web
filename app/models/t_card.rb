@@ -10,6 +10,33 @@ class TCard < ApplicationRecord
   after_create_commit { CardBroadcastJob.perform_later self }
   after_update_commit { UpdateCardBroadcastJob.perform_later self }
 
+  def assign(user)
+    ActiveRecord::Base.transaction do
+      # 担当者が割り当てられている場合は、削除してからアサインする
+      if self.tcard_assignee
+        TcardAssignee.delete(self.tcard_assignee)
+      end
+      TcardAssignee.create(
+        t_card_id: self.id,
+        user_id: user.id
+      )
+      self.update_attributes(user_id: user.id)
+    end
+  end
+
+  def remove_assign
+    ActiveRecord::Base.transaction do
+      # 元から担当者が設定されている場合だけ処理する
+      unless self.user_id.blank?
+        tcard_assignee = TcardAssignee.find_by(t_card_id: self.id, user_id: self.user_id)
+        if tcard_assignee
+          TcardAssignee.delete(tcard_assignee)
+        end
+        self.update_attributes(user_id: nil)
+      end
+    end
+  end
+
   class << self
     def update_status(t_card_id)
       @t_card = TCard.find(t_card_id)

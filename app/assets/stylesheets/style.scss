@@ -254,6 +254,9 @@ table > tfoot > tr {
       }
     }
   }
+  tbody tr {
+    height: 57px;
+  }
   td:nth-child(2) {
     max-width: 100px;
   }
@@ -347,6 +350,12 @@ table > tfoot > tr {
 
 .kpter-avatar-icons-circle {
   @include kpter-avatar-icons;
+  border-radius: 50%;
+}
+
+.kpter-avatar-icons-circle-m8 {
+  @include kpter-avatar-icons;
+  margin-right: 8px;
   border-radius: 50%;
 }
 
@@ -640,6 +649,27 @@ ul.notice {
         margin: 0;
         line-height: 1.2;
         text-align: right;
+      }
+    }
+  }
+}
+
+.modal__kptercard {
+  .modal__overlay {
+    background: initial;
+    z-index: 900;
+    .modal__container {
+      overflow-y: visible;
+      max-width: 375px;
+      height: 75vh;
+      .mdl-menu__container {
+        overflow-y: scroll !important;
+        height: 150px !important;
+        .mdl-menu {
+          &.mdl-menu--bottom-left {
+            height: initial;
+          }
+        }
       }
     }
   }

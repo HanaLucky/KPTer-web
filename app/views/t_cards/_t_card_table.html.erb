@@ -1,5 +1,5 @@
 <div id="t_cards-table">
-  <table class="mdl-data-table mdl-shadow--2dp kpter-table">
+  <table class="mdl-data-table mdl-shadow--2dp kpter-table" id="t_cards-table-data" data-visible_assignee="<%= visible_assignee %>" data-url="<%= url %>" data-callback="<%= callback %>">
     <thead>
       <tr>
         <th class="mdl-data-table__cell--non-numeric kpter-table-header-title" colspan="2">Tasks</th>
@@ -19,28 +19,8 @@
     </thead>
     <tbody>
       <% t_cards.each.with_index(1) do |t_card, index| %>
-        <tr>
-           <td>
-              <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-data-table__select" for="row[<%= index %>]">
-                <%= check_box_tag '', '', t_card.status.closed?, { 'data-id' => t_card.id, 'data-url' => url, :onclick=>
-                  "$.post($(this).data('url')+ '/tasks/' + $(this).data('id') + '/toggle/', function(data) {
-                    #{callback}(data);
-                  });",
-                  id: "row[#{index}]", class: "mdl-checkbox__input"} %>
-              </label>
-          </td>
-          <td class="mdl-data-table__cell--non-numeric"><%= t_card.title %></td>
-          <% if visible_assignee %>
-            <% if t_card.tcard_assignee.nil? %>
-              <td class="mdl-data-table__cell--non-numeric">&nbsp;</td>
-            <% else %>
-              <td class="assignee-image">
-                <div class="mdl-tooltip" for="<%= t_card.id %>"><%= t_card.tcard_assignee.user.nickname %></div>
-                <%= image_tag(avatar_url(t_card.tcard_assignee.user), class: "mdl-chip__contact", id: t_card.id, alt: t_card.tcard_assignee.user.nickname) %>
-              </td>
-            <% end %>
-          <% end %>
-          <td class="mdl-data-table__cell--non-numeric" style="white-space: nowrap;"><%= t_card.deadline %></td>
+        <tr id="t_card-tr-<%= t_card.id %>" data-href="<%= edit_t_card_path(t_card) %>" data-method="GET" data-url="<%= url %>">
+          <%= render :partial => 't_cards/t_card.html', :locals => {t_card: t_card, visible_assignee: visible_assignee, url: url, callback: callback}%>
         </tr>
       <% end %>
     </tbody>

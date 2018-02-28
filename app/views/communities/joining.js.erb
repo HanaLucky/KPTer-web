@@ -1,3 +1,3 @@
 $("#board-list tbody").append("<%= escape_javascript(render( :partial => 'boards', :locals => {boards: @boards, community: @community})) %>");
 $("#view-more").replaceWith("<%= escape_javascript(link_to_next_page @boards, 'View more', :remote => true, :id => :'view-more', class: 'mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect') %>");
-tableTrClickable("board-table");
+tableClickable("board-table");

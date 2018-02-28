@@ -21,7 +21,7 @@
         </ul>
       </div>
     </div>
-    <%= render :partial => "tasks", :locals => { t_cards: @t_cards, visible_assignee: true, url: @community.id, status: @status, callback: "chartTopOfAsignee" } %>
+    <%= render :partial => "t_cards/t_card_table", :locals => { t_cards: @t_cards, visible_assignee: true, url: @community.id, status: @status, callback: "chartTopOfAsignee" } %>
   </div>
   <div class="mdl-cell mdl-cell--4-col mdl-cell--hide-tablet mdl-cell--hide-phone">
     <canvas id="topOfAsignee" width="400" height="400"></canvas>
@@ -86,6 +86,11 @@
 <!-- member list -->
 <div class="modal micromodal-slide" id="modal-button-member" aria-hidden="true">
   <%= render :partial => 'members', :locals => {current_community: @community, members: @members} %>
+</div>
+
+<!-- task -->
+<div class="modal modal__kptercard micromodal-slide" id="modal-button-edit-task" aria-hidden="true">
+  <%= render :partial => 't_cards/modal_edit', :locals => {task: @task, community_users: @community_users} %>
 </div>
 
 <!-- new board -->

@@ -9,7 +9,7 @@
       </div>
       <div class=“clarifix”></div>
     </div>
-    <%= render :partial => "tasks", :locals => { t_cards: @t_cards, visible_assignee: false, url: "mypage", status: @status, chartDoughnut: false, callback: "setTasksCount"} %>
+    <%= render :partial => "t_cards/t_card_table", :locals => { t_cards: @t_cards, visible_assignee: false, url: "mypage", status: @status, chartDoughnut: false, callback: "setTasksCount"} %>
   </div>
   <div class="mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet mdl-cell--4-col-phone">
     <div class="kpter-sub-heading mdl-cell--hide-tablet mdl-cell--hide-phone">
@@ -42,6 +42,12 @@
     </div>
   </div>
 </div>
+
+<!-- task -->
+<div class="modal micromodal-slide" id="modal-button-edit-task" aria-hidden="true">
+  <%= render :partial => 't_cards/modal_edit', :locals => {task: @task, community_users: @community_users} %>
+</div>
+
 <% content_for :extra_js do %>
   <%= javascript_include_tag 'mypages.js' %>
 <% end %>
