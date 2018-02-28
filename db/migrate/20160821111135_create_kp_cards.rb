@@ -2,6 +2,7 @@ class CreateKpCards < ActiveRecord::Migration[5.0]
   def change
     create_table :kp_cards, comment: "KPカード" do |t|
       t.references :board, foreign_key: true, null: false, comment: "ボードID"
+      t.integer :owner_id, foreign_key: true, null: false, comment: "カード作成者ID"
       t.string :title, comment: "タイトル"
       t.string :detail, limit: 512, comment: "詳細"
       t.string :card_type, limit: 16, null: false, comment: "カード種別"

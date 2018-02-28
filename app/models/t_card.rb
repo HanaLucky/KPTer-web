@@ -2,6 +2,7 @@ class TCard < ApplicationRecord
   extend Enumerize
   enumerize :status, in: [:open, :closed], default: :open
   belongs_to :board
+  belongs_to :owner, :class_name => 'User'
   has_one :tcard_assignee
   has_one :user, :through => :tcard_assignee
   has_many :likes, :as => :likable, dependent: :delete_all
