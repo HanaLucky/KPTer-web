@@ -20,19 +20,17 @@ class TCard < ApplicationRecord
         t_card_id: self.id,
         user_id: user.id
       )
-      self.update_attributes(user_id: user.id)
     end
   end
 
   def remove_assign
     ActiveRecord::Base.transaction do
       # 元から担当者が設定されている場合だけ処理する
-      unless self.user_id.blank?
-        tcard_assignee = TcardAssignee.find_by(t_card_id: self.id, user_id: self.user_id)
+      unless self.user.blank?
+        tcard_assignee = TcardAssignee.find_by(t_card_id: self.id, user_id: self.user.id)
         if tcard_assignee
           TcardAssignee.delete(tcard_assignee)
         end
-        self.update_attributes(user_id: nil)
       end
     end
   end
