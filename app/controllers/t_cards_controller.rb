@@ -12,18 +12,18 @@ class TCardsController < ApplicationController
   def update
     t_card = TCard.find(params[:id])
     # 担当者に変更がある場合だけ
-    unless t_card.user_id.to_s == t_cart_params[:user_id]
-      if t_cart_params[:user_id].blank?
+    unless t_card.try(:user).try(:id).to_s == params[:tcard_assignee][:user_id]
+      if params[:tcard_assignee][:user_id].blank?
         # 担当者を外す
         t_card.remove_assign
       else
         # 他の人にアサイン
-        user = User.find_by(id: t_cart_params[:user_id])
+        user = User.find_by(id: params[:tcard_assignee][:user_id])
         t_card.assign(user)
       end
     end
 
-    if t_card.update_attributes(t_cart_params) then
+    if t_card.update_attributes(t_card_params) then
       respond_to do |format|
         flash.now[:notice] = t('t_card.update.success')
         format.js { render template: "t_cards/_t_card", :locals => {t_card: TCard.find(params[:id]), chaindata: params[:chaindata]} }
@@ -35,8 +35,8 @@ class TCardsController < ApplicationController
   end
 
   private
-    def t_cart_params
-      params.require(:t_card).permit(:id, :title, :detail, :user_id, :deadline, :status)
+    def t_card_params
+      params.require(:t_card).permit(:id, :title, :detail, :deadline, :status)
     end
 
     def exists_task?

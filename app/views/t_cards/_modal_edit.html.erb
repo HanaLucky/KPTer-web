@@ -24,7 +24,7 @@
           </div>
           <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-select">
             <input type="text" name="nickname" value="<%= task.user.try(:nickname) %>" class="mdl-textfield__input" id="select-section" readonly="readonly">
-            <%= f.hidden_field :user_id %>
+            <input type="hidden" name="tcard_assignee[user_id]" value="<%= task.try(:tcard_assignee).try(:user_id) %>">
             <%= f.label :assignee, class: "mdl-textfield__label" %>
             <ul class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="select-section">
               <li class="mdl-menu__item"></li>
@@ -50,7 +50,7 @@
         var id = $(e.target).data("user-id");
         if (nickname && id) {
           $(e.target).parents('.mdl-select').addClass('is-dirty').children('input:text[name="nickname"]').val(nickname);
-          $(e.target).parents('.mdl-select').children('input:hidden[name="t_card[user_id]"]').val(id);
+          $(e.target).parents('.mdl-select').children('input:hidden[name="tcard_assignee[user_id]"]').val(id);
         } else {
           $(e.target).parents('.mdl-select').removeClass('is-dirty').children('input').val("");
         }
