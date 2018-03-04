@@ -22,16 +22,15 @@
             <%= f.text_field :deadline, class: "mdl-textfield__input", id: "datepicker", maxlength: 10 %>
             <%= f.label :deadline, class: "mdl-textfield__label" %>
           </div>
-          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-select">
-            <input type="text" name="nickname" value="<%= task.user.try(:nickname) %>" class="mdl-textfield__input" id="select-section" readonly="readonly">
-            <input type="hidden" name="tcard_assignee[user_id]" value="<%= task.try(:tcard_assignee).try(:user_id) %>">
-            <%= f.label :assignee, class: "mdl-textfield__label" %>
-            <ul class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="select-section">
-              <li class="mdl-menu__item"></li>
+
+          <div class="mdl-selectfield mdl-js-selectfield mdl-selectfield--floating-label">
+            <select class="mdl-selectfield__select" id="t_card_assignee" name="tcard_assignee[user_id]">
+              <option value=""></option>
               <% community_users.each do | cu | %>
-                <li class="mdl-menu__item" data-user-id="<%= cu.user.id %>"><%= image_tag(avatar_url(cu.user), class: "kpter-avatar-icons-circle-m8", alt: cu.user.nickname) %><%= cu.user.nickname %></li>
+                <option value="<%= cu.user.id %>" <% if cu.user.id == task.user.try(:id) %>selected<% end%>><%= cu.user.nickname %></option>
               <% end %>
-            </ul>
+            </select>
+            <%= f.label :assignee, class: "mdl-selectfield__label" %>
           </div>
           <div class="mdl-dialog__actions">
             <button class="mdl-button mdl-js-button mdl-button--colored mdl-js-ripple-effect">Update</button>
@@ -41,19 +40,3 @@
     </main>
   </div>
  </div>
-
-<% if task %>
-  <script>
-    <% # セレクト要素クリックしたら値をセットする %>
-    $('div.mdl-select > ul > li').click(function(e) {
-        var nickname = $(e.target).text();
-        var id = $(e.target).data("user-id");
-        if (nickname && id) {
-          $(e.target).parents('.mdl-select').addClass('is-dirty').children('input:text[name="nickname"]').val(nickname);
-          $(e.target).parents('.mdl-select').children('input:hidden[name="tcard_assignee[user_id]"]').val(id);
-        } else {
-          $(e.target).parents('.mdl-select').removeClass('is-dirty').children('input').val("");
-        }
-    });
-  </script>
-<% end %>
