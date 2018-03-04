@@ -156,8 +156,6 @@ App.board = App.cable.subscriptions.create { channel: "BoardChannel", board_id: 
       id = $(this).closest('.cardBox')[0].id.split("_")[1]
       if type is 'keep' || type is 'problem'
         App.board.delete_kpcard(id)
-      else if type is 'try'
-        App.board.delete_tcard(id)
       $("##{type_id}").remove()
         
   add_tcard: (card) ->
@@ -201,6 +199,11 @@ App.board = App.cable.subscriptions.create { channel: "BoardChannel", board_id: 
       else
         $(this).children(".material-icons").addClass(likeClass)
         $(this).next('span').addClass(likeClass)
+    
+    $("##{type_id}").find('.delete-btn').on 'click', ->
+      id = $(this).closest('.cardBox')[0].id.split("_")[1]
+      App.board.delete_tcard(id)
+      $("##{type_id}").remove()
 
 
   adding_kpcard: (card, type_id) ->
@@ -220,7 +223,7 @@ App.board = App.cable.subscriptions.create { channel: "BoardChannel", board_id: 
     else
       likeClass = 'kpter-color-text--white'
 
-    src = if card.owner && card.owner.avatar then "#{card.owner.avatar.url}" else no_img
+    src = if card.owner && card.owner.avatar.url then "#{card.owner.avatar.url}" else no_img
     likeNumClass = if card.card_type is 'keep' then 'mdl-color-text--blue-900' else 'mdl-color-text--pink-900'
     displayNum = if card.likes and card.likes.length > 0 then card.likes.length else ''
 
