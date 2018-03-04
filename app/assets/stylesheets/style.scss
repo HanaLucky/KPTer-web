@@ -242,9 +242,17 @@ table > tfoot > tr {
 
 .kpter-table {
   width: 100%;
-  th:nth-child(2) {
-    width: 100%;
+  &#t_cards-table-data {
+    th:nth-child(2) {
+      width: 100%;
+    }
   }
+  &#board-table {
+    th:nth-child(1) {
+      width: 80%;
+    }
+  }
+
   td {
     white-space: initial;
     &.assignee-image {

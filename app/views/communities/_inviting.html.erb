@@ -17,14 +17,14 @@
         <div class="kpter-chip-actions">
           <div class="kpter-chip-action">
             <%= form_for @community, :url => {:action => 'decline'}, :method => :post do |f| %>
-              <%= button_tag "Decline", class: "mdl-chip mdl-color--cyan-300 mdl-color-text--primary-contrast kpter-chip-action-m" do %>
+              <%= button_tag "Decline", class: "mdl-chip mdl-color--primary mdl-color-text--primary-contrast kpter-chip-action-m" do %>
                 <span class="mdl-chip__text">Decline</span>
               <% end %>
             <% end %>
           </div>
           <div class="kpter-chip-action">
             <%= form_for @community, :url => {:action => 'accept'}, :method => :post do |f| %>
-              <%= button_tag "Decline", class: "mdl-chip mdl-color--primary mdl-color-text--primary-contrast kpter-chip-action-m" do %>
+              <%= button_tag "Decline", class: "mdl-chip mdl-color--cyan-300 mdl-color-text--primary-contrast kpter-chip-action-m" do %>
                 <span class="mdl-chip__text">Accept</span>
               <% end %>
             <% end %>
