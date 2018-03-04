@@ -670,15 +670,6 @@ ul.notice {
       overflow-y: visible;
       max-width: 375px;
       height: 75vh;
-      .mdl-menu__container {
-        overflow-y: scroll !important;
-        height: 150px !important;
-        .mdl-menu {
-          &.mdl-menu--bottom-left {
-            height: initial;
-          }
-        }
-      }
     }
   }
 }
