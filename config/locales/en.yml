@@ -34,7 +34,7 @@ en:
     invitation:
       success: "invited %{users} to this community."
       failure: "Could not join in this community."
-      accept: "You joined in this community!"
+      accept: "Welcome to the community!"
       decline: "declined an invitation."
     created: "Community was successfully created."
     leave: "You have left the community."
