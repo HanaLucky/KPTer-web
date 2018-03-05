@@ -127,7 +127,7 @@ App.board = App.cable.subscriptions.create { channel: "BoardChannel", board_id: 
       title = $(this).find(".card-text").text()
       App.board.update_kpcard($(this), title)
     $("##{type_id}-text").on 'blur', ->
-      title = $(this).text()
+      title = $(this).context.value
       App.board.update_kpcard($(this), title)
     $("##{type_id}-like").on 'click', ->
       kLikeClass = 'mdl-color-text--blue-900'
@@ -186,7 +186,7 @@ App.board = App.cable.subscriptions.create { channel: "BoardChannel", board_id: 
       title = $(this).find(".card-text").text()
       App.board.update_tcard($(this), title)
     $("##{type_id}-text").on 'blur', ->
-      title = $(this).text()
+      title = $(this).context.value
       App.board.update_tcard($(this), title)
     $("##{type_id}-like").on 'click', ->
       likeClass = 'mdl-color-text--light-green-900'
@@ -229,7 +229,7 @@ App.board = App.cable.subscriptions.create { channel: "BoardChannel", board_id: 
 
     addingCard = $("<div class='kpter-card-event mdl-card mdl-shadow--2dp #{card.card_type} cardBox' id='#{type_id}' data-type='#{card.card_type}'>" +
         "<div class='mdl-card__title mdl-card--expand' id='#{type_id}'>" +
-        "<p class='card-text' id='#{type_id}-text'>#{card.title}</p></div>" +
+        "<textarea class='card-text' id='#{type_id}-text'>#{card.title}</textarea></div>" +
         "<div class='mdl-card__actions mdl-card--border'>" +
         "<img class='mdl-list__item-avatar' src='#{src}' style='width:30px; height:30px;'>" +
         "<div class='mdl-layout-spacer'></div>" +
@@ -250,7 +250,7 @@ App.board = App.cable.subscriptions.create { channel: "BoardChannel", board_id: 
 
     addingCard = $("<div class='kpter-card-event mdl-card mdl-shadow--2dp try cardBox' id='#{type_id}' data-type='try'>" +
         "<div class='mdl-card__title mdl-card--expand' id='#{type_id}'>" +
-        "<p class='card-text' style='height: 130px!important;' id='#{type_id}-text'>#{card.title}</p></div>" +
+        "<textarea class='card-text' style='height: 130px!important;' id='#{type_id}-text'>#{card.title}</textarea></div>" +
         "<div class='mdl-card__actions mdl-card--border'>" +
         "<img class='mdl-list__item-avatar' src='#{src}' style='width:30px; height:30px;'>" +
         "<div class='mdl-layout-spacer'></div>" +
