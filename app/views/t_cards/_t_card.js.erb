@@ -5,8 +5,6 @@ $(function () {
   MicroModal.close('modal-button-edit-task');
 
   <% if notice %>
-    var snackbarContainer = document.querySelector('#notification');
-    var data = {message: "<%= notice %>"};
-    snackbarContainer.MaterialSnackbar.showSnackbar(data);
+    showSnackbarMessage("<%= notice %>");
   <% end %>
 });

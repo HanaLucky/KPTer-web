@@ -7,19 +7,25 @@
   <script type="text/javascript">
     'use strict';
     var sms = function () {
+      var id;
       var checkAndShowSnackBar = function () {
         var snackbarContainer = document.querySelector('#notification');
+        if (!snackbarContainer
+          || !snackbarContainer.MaterialSnackbar) {
+          return;
+        }
         var data = {
           message: "<%= notice %>"
         };
         snackbarContainer.MaterialSnackbar.showSnackbar(data);
+        clearInterval(id);
       };
       var timeout = function (fn, timeout) {
-        setTimeout(fn, timeout);
+        id = setInterval(fn, timeout);
       };
       return {
         init: function () {
-          timeout(checkAndShowSnackBar, 300);
+          timeout(checkAndShowSnackBar, 50);
         }
       }
     }();
