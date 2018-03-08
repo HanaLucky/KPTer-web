@@ -3,6 +3,13 @@ $(function () {
   componentHandler.upgradeAllRegistered();
   var picker = new Pikaday({
     field: document.getElementById('datepicker'),
+    format: 'D/M/YYYY',
+    toString(date, format) {
+      const day = date.getDate();
+      const month = date.getMonth() + 1;
+      const year = date.getFullYear();
+      return `${day}/${month}/${year}`;
+    },
     onSelect: function(date) {
       $('input[name="t_card[deadline]"]').parent().addClass("is-dirty");
     }

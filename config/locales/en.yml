@@ -58,3 +58,8 @@ en:
     update:
       success: "The task was updated."
       failure: "Sorry...Something was wrong."
+  date:
+    formats:
+      default: ! '%-m/%-d/%Y'
+      long: ! '%a %-m/%-d/%Y'
+      short: ! '%-m/%-d'
