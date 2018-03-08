@@ -58,12 +58,16 @@ class CommunitiesController < ApplicationController
   end
 
   def update
-    community = Community.find(params[:id])
+    @community = Community.find(params[:id])
     respond_to do |format|
-      if community.update_attributes(name: params[:community][:name])
-        format.html { redirect_to community, notice: 'Community was successfully updated.' }
+      if @community.update_attributes(name: params[:community][:name])
+        @community = Community.find(params[:id])
+        flash[:notice] = t('community.update.success')
+        format.js
+        format.html { redirect_to community }
         format.json { head :no_content } # 204 No Content
       else
+        format.js
         format.json { render json: {message: community.errors.full_messages.first}, status: :unprocessable_entity }
       end
     end
@@ -126,8 +130,13 @@ class CommunitiesController < ApplicationController
     community = Community.find(params[:id])
     user = User.find(params[:user_id])
     community.withdraw(user)
-    flash[:notice] = t('community.remove', nickname: user.nickname)
-    redirect_to :action => :show and return
+
+    respond_to do |format|
+      flash[:notice] = t('community.remove', nickname: user.nickname)
+      format.js
+      format.html { redirect_to community }
+    end
+
   end
 
   def destroy

@@ -36,6 +36,8 @@ en:
       failure: "Could not join in this community."
       accept: "Welcome to the community!"
       decline: "declined an invitation."
+    update:
+      success: "Successfully updated."
     created: "Community was successfully created."
     leave: "You have left the community."
     remove: "%{nickname} removed from here"
