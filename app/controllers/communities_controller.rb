@@ -62,9 +62,9 @@ class CommunitiesController < ApplicationController
     respond_to do |format|
       if @community.update_attributes(name: params[:community][:name])
         @community = Community.find(params[:id])
-        flash[:notice] = t('community.update.success')
-        format.js
-        format.html { redirect_to community }
+        message = t('community.update.success')
+        format.js { flash.now[:notice] = message }
+        format.html { redirect_to @community, notice: message }
         format.json { head :no_content } # 204 No Content
       else
         format.js
@@ -101,8 +101,12 @@ class CommunitiesController < ApplicationController
       end
     }
 
-    flash[:notice] = t('community.invitation.success', users: users.map(&:nickname).join(', '))
-    redirect_to :action => :show
+    respond_to do |format|
+      message = t('community.invitation.success', users: users.map(&:nickname).join(', '))
+      format.js { flash.now[:notice] = message }
+      format.html { redirect_to community, notice: message }
+    end
+
   end
 
   def accept
@@ -132,9 +136,9 @@ class CommunitiesController < ApplicationController
     community.withdraw(user)
 
     respond_to do |format|
-      flash[:notice] = t('community.remove', nickname: user.nickname)
-      format.js
-      format.html { redirect_to community }
+      message = t('community.remove', nickname: user.nickname)
+      format.js { flash.now[:notice] = message }
+      format.html { redirect_to community, notice: message }
     end
 
   end
