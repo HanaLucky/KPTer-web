@@ -2,7 +2,7 @@
   <div class="mdl-cell mdl-cell--8-col mdl-cell--8-col-tablet mdl-cell--4-col-phone">
     <div class="kpter-sub-heading">
       <div class="kpter-sub-title">
-        <div class="mdl-typography--body-2-color-contrast"><%= @community.name %></div>
+        <div class="mdl-typography--body-2-color-contrast js-current-community-name"><%= @community.name %></div>
       </div>
       <div class="kpter-settings">
         <%= link_to community_path + '/members', {:remote => true, class: "mdl-button mdl-js-button mdl-button--icon"} do %>
@@ -105,8 +105,8 @@
       var labels = []
       var data = []
     <% else %>
-      var labels = [<% @top_of_assignees.each do |key, value| %>"<%= key %>",<% end %>]
-      var data = [<% @top_of_assignees.each do |key, value| %>"<%= value %>",<% end %>]
+      var labels = [<% @top_of_assignees[:top_of_assignees].each do |v| %>"<%= v[:name] %>",<% end %>]
+      var data = [<% @top_of_assignees[:top_of_assignees].each do |v| %>"<%= v[:count] %>",<% end %>]
     <% end %>
     var datas = {
       "labels": labels,

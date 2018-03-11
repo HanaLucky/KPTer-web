@@ -5,7 +5,7 @@
   </button>
   <div class="kpter-invitable-content">
     <h4>invite to <%= community.name %></h4>
-    <%= form_for community, :url => {:action => 'invite'}, :method => :post do |f| %>
+    <%= form_for community, :url => {:action => 'invite'}, :method => :post, remote: true do |f| %>
       <div class="kpter-invitable-select">
         <%= select_tag 'user[ids]', "", class: "select2-user-multiple", multiple: true %>
         <%= submit_tag "Invite", class: "mdl-button mdl-js-button mdl-button--colored mdl-button--raised kpter-invite-button mdl-js-ripple-effect", disabled: true %>

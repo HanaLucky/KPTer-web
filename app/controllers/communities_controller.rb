@@ -32,26 +32,18 @@ class CommunitiesController < ApplicationController
     @boards = Kaminari.paginate_array(all_boards).page(params[:page]).per(5)
     all_tcards = @community.find_tcards
     @t_cards = Kaminari.paginate_array(all_tcards).page(params[:page]).per(5)
-    @top_of_assignees = @community.top_of_assignees.first(5)
+    @top_of_assignees = find_top_of_assignees(params[:id])
     @invitable_users = User.find_invitable_users(@community)
   end
 
   def toggle
     TCard.update_status(params[:t_card_id])
 
+    top_of_assignees = find_top_of_assignees(params[:id])
+    labels = top_of_assignees[:top_of_assignees].map{|ta| ta[:name]}
+    data = top_of_assignees[:top_of_assignees].map{|ta| ta[:count]}
+
     respond_to do |format|
-      top_of_assignees = Community.find(params[:id]).top_of_assignees.first(5)
-      other_assignees = Community.find(params[:id]).top_of_assignees.to_a.from(5)
-      other_label = 'others'
-      other_data = other_assignees.map{|a| a[1]}.sum
-      labels = Array.new
-      data = Array.new
-      top_of_assignees.each {|i, j|
-        labels.push(i)
-        data.push(j)
-      }
-      labels.push(other_label)
-      data.push(other_data)
       format.json { render json: {labels: labels, data: data}}
     end
   end
@@ -66,12 +58,16 @@ class CommunitiesController < ApplicationController
   end
 
   def update
-    community = Community.find(params[:id])
+    @community = Community.find(params[:id])
     respond_to do |format|
-      if community.update_attributes(name: params[:community][:name])
-        format.html { redirect_to community, notice: 'Community was successfully updated.' }
+      if @community.update_attributes(name: params[:community][:name])
+        @community = Community.find(params[:id])
+        message = t('community.update.success')
+        format.js { flash.now[:notice] = message }
+        format.html { redirect_to @community, notice: message }
         format.json { head :no_content } # 204 No Content
       else
+        format.js
         format.json { render json: {message: community.errors.full_messages.first}, status: :unprocessable_entity }
       end
     end
@@ -105,8 +101,12 @@ class CommunitiesController < ApplicationController
       end
     }
 
-    flash[:notice] = t('community.invitation.success', users: users.map(&:nickname).join(', '))
-    redirect_to :action => :show
+    respond_to do |format|
+      message = t('community.invitation.success', users: users.map(&:nickname).join(', '))
+      format.js { flash.now[:notice] = message }
+      format.html { redirect_to community, notice: message }
+    end
+
   end
 
   def accept
@@ -134,8 +134,13 @@ class CommunitiesController < ApplicationController
     community = Community.find(params[:id])
     user = User.find(params[:user_id])
     community.withdraw(user)
-    flash[:notice] = t('community.remove', nickname: user.nickname)
-    redirect_to :action => :show and return
+
+    respond_to do |format|
+      message = t('community.remove', nickname: user.nickname)
+      format.js { flash.now[:notice] = message }
+      format.html { redirect_to community, notice: message }
+    end
+
   end
 
   def destroy
@@ -167,5 +172,31 @@ class CommunitiesController < ApplicationController
       unless current_user.joining?(community)
         raise Forbidden
       end
+    end
+
+    # {
+    # :top_of_assignees=>
+    #   [{:name=>"nickname-1", :count=>5},
+    #    {:name=>"nickname-2", :count=>4},
+    #    {:name=>"nickname-3", :count=>4},
+    #    {:name=>"nickname-4", :count=>4},
+    #    {:name=>"nickname-5", :count=>4},
+    #    {:name=>"others", :count=>22}]
+    # }
+    def find_top_of_assignees(community_id)
+      top5 = Community.find(community_id).top_of_assignees.first(5)
+      others = Community.find(community_id).top_of_assignees.to_a.from(5)
+      top_of_assignees = Array.new
+      top5.each { |i, j|
+        data = { name: i, count: j }
+        top_of_assignees.push(data)
+      }
+
+      if others.length > 0
+        data = { name: "others", count: others.map{ |a| a[1] }.sum }
+        top_of_assignees.push(data)
+      end
+
+      Hash["top_of_assignees": top_of_assignees]
     end
 end

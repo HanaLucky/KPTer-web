@@ -101,21 +101,14 @@ class User < ApplicationRecord
     )
     community_user.delete
 
-    # remove the charge - update t_cards entity, delete from tcard_assignees entity
-    assigned_tasks_in_community = Community
+    # remove the charge - delete from tcard_assignees entity
+    tcard_assignees = Community
       .includes([:boards => [:t_cards => [:tcard_assignee => :user]]])
       .references(:tcard_assignee => :user)
-      .where('communities.id = ? and t_cards.user_id = ?', community.id, self.id)
-      .map{ |community| community.boards.map{ |board| board.t_cards }}.flatten
+      .where('communities.id = ? and tcard_assignees.user_id = ?', community.id, self.id)
+      .map{ |community| community.boards.map{ |board| board.t_cards.map{ |tcard| tcard.tcard_assignee } } }.flatten
 
-    assigned_tasks_in_community.each do | t_card |
-      t_card.update_attributes(user_id: nil)
-      tcard_assignee = TcardAssignee.find_by(
-        t_card_id: t_card.id,
-        user_id: self.id
-      )
-      tcard_assignee.delete unless tcard_assignee.nil?
-    end
+    TcardAssignee.delete(tcard_assignees) unless tcard_assignees.nil?
   end
 
   def allowed_to_display?(community)

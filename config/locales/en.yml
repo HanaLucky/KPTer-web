@@ -34,8 +34,10 @@ en:
     invitation:
       success: "invited %{users} to this community."
       failure: "Could not join in this community."
-      accept: "You joined in this community!"
+      accept: "Welcome to the community!"
       decline: "declined an invitation."
+    update:
+      success: "Successfully updated."
     created: "Community was successfully created."
     leave: "You have left the community."
     remove: "%{nickname} removed from here"
@@ -56,3 +58,8 @@ en:
     update:
       success: "The task was updated."
       failure: "Sorry...Something was wrong."
+  date:
+    formats:
+      default: ! '%-m/%-d/%Y'
+      long: ! '%a %-m/%-d/%Y'
+      short: ! '%-m/%-d'

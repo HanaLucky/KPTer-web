@@ -95,6 +95,19 @@ var settingDialog = function settingDialog(dialogButtonStyleClassName, dialogDiv
 };
 
 /**
+ * close dialog
+ *
+ * @param {String} dialogStyleId ダイアログタグのid名
+ */
+var closeDialog = function closeDialog(dialogStyleId) {
+
+  var dialog = document.querySelector('#' + dialogStyleId);
+  // if dialog had opened, it could close it.
+  if (dialog.open) {
+    dialog.close();
+  }
+}
+/**
  * table の全trタグをリンクにする
  * リンク先はdata-href属性の値
  *
@@ -210,4 +223,15 @@ var visibleForm = function visibleForm(containerStyleId, inputStyleId) {
   document.getElementById(containerStyleId).style.display="block";
   // editable要素にfocus当てる
   document.getElementById(inputStyleId).focus();
+}
+
+/**
+ * snackbarメッセージを表示する
+ * - レンダリング中に呼び出しは動作保証しない
+ * @param {String} notice メッセージ
+ */
+var showSnackbarMessage = function (notice) {
+  var snackbarContainer = document.querySelector('#notification');
+  var data = { message: notice };
+  snackbarContainer.MaterialSnackbar.showSnackbar(data);
 }
