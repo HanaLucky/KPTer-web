@@ -114,6 +114,10 @@ textarea {
   background-color: transparent;
 }
 
+textarea:focus {
+  outline: none;
+  }
+
 .kpter-card-event.mdl-card.keep {
   color: #263238;
   background: #64B5F6;
