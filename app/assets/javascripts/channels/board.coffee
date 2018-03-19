@@ -12,24 +12,36 @@ App.board = App.cable.subscriptions.create { channel: "BoardChannel", board_id: 
         App.board.add_kpcard(JSON.parse(data['kpcard']))
       else if data['tcard']
         App.board.add_tcard(JSON.parse(data['tcard']))
+      else if data['memo']
+        App.board.add_memo(JSON.parse(data['memo']))
  
     else if data['method'] is 'update'
       if data['kpcard']
-        card_id = "kp_" + data['kpcard'].id
-        card = $('#' + card_id)
-        card.find('h4').text(data['kpcard'].title)
+        card_id = "#kp_" + data['kpcard'].id
+        card_text_id = card_id + '-text'
+        card = $(card_id)
+        card.find(card_text_id).val(data['kpcard'].title)
         card.offset({top: data['kpcard'].y, left: data['kpcard'].x})
       else if data['tcard']
-        card_id = "t_" + data['tcard'].id
-        card = $('#' + card_id)
-        card.find('h4').text(data['tcard'].title)
+        card_id = "#t_" + data['tcard'].id
+        card_text_id = card_id + '-text'
+        card = $(card_id)
+        card.find(card_text_id).val(data['tcard'].title)
         card.offset({top: data['tcard'].y, left: data['tcard'].x})
+      else if data['memo']
+        card_id = "#m_" + data['memo'].id
+        card_text_id = card_id + '-text'
+        card = $(card_id)
+        card.find(card_text_id).val(data['memo'].contents)
+        card.offset({top: data['memo'].y, left: data['memo'].x})
 
     else if data['method'] is 'delete'
       if (data['type'] is 'keep') or (data['type'] is 'problem')
         $("#kp_#{data['id']}").remove()
       else if data['type'] is 'try'
         $("#t_#{data['id']}").remove()
+      else if data['type'] is 'memo'
+        $("#m_#{data['id']}").remove()
 
     else if data['method'] is 'like'
       if (data['type'] is 'keep') or (data['type'] is 'problem')
@@ -60,12 +72,18 @@ App.board = App.cable.subscriptions.create { channel: "BoardChannel", board_id: 
 
   create_tcard: (title, board_id, x, y) ->
     @perform 'create_tcard', title: title, board_id: board_id, x: x, y: y
+  
+  create_memo: (contents, board_id, x, y) ->
+    @perform 'create_memo', contents: contents, board_id: board_id, x: x, y: y
 
   delete_kpcard: (id) ->
     @perform 'delete_kpcard', id: id
 
   delete_tcard: (id) ->
     @perform 'delete_tcard', id: id
+
+  delete_memo: (id) ->
+    @perform 'delete_memo', id: id
 
   like_kpcard: (id) ->
     @perform 'like_kpcard', id: id
@@ -89,6 +107,15 @@ App.board = App.cable.subscriptions.create { channel: "BoardChannel", board_id: 
     offset = _this.offset()
     @perform 'update_tcard', id: id, title: title, x: offset.left, y: offset.top
 
+  update_memo: (_this, contents) ->
+    id = _this[0].id.split("_")[1]
+    type = _this[0].dataset.type
+    offset = _this.offset()
+    if contents is ""
+      App.board.delete_memo(id)
+    else
+      @perform 'update_memo', id: id, contents: contents, x: offset.left, y: offset.top
+
   select_date: (date, id) ->
     unless window.fromServer
       App.board.set_deadline(id, date)
@@ -96,15 +123,29 @@ App.board = App.cable.subscriptions.create { channel: "BoardChannel", board_id: 
 
   initialize_buttons: (_this) ->
     $boardWrap = $('#boardWrap')
+    $boardWrap.addClass('cursor-copy')
+    window.create_type = _this.data('type').toString()
+    $boardWrap.click((e) -> App.board.create_card(e))
+    
+  create_card: (e) ->
+    type = window.create_type 
     board_id = $('[name=board_id]').val()
-    type = _this.data('type').toString()
     title = ""
-    offset =  _this.offset()
+    offsetX = e.offsetX
+    offsetY = e.offsetY
+    $boardWrap = $('#boardWrap')
+    if $boardWrap.hasClass('cursor-copy')
+      if type is 'keep' or type is 'problem'
+        
+        App.board.create_kpcard(type, title, board_id, offsetX, offsetY)
+      else if type is 'try'
+        App.board.create_tcard(title, board_id, offsetX, offsetY)
+      else if type is 'memo'
+        memo = {id: 'local', contents: "", x: offsetX, y: offsetY}
+        App.board.add_memo(memo)
 
-    if type is 'keep' or type is 'problem' 
-      App.board.create_kpcard(type, title, board_id, offset.left, offset.top)
-    else if type is 'try'
-      App.board.create_tcard(title, board_id, offset.left, offset.top)
+      $boardWrap.removeClass('cursor-copy')
+
   
   initialize_cards: ->
     window.fromServer = false
@@ -114,6 +155,9 @@ App.board = App.cable.subscriptions.create { channel: "BoardChannel", board_id: 
 
     for card in t_cards
       App.board.add_tcard(card)
+    
+    for card in memos
+      App.board.add_memo(card)
       
   add_kpcard: (card) ->
     type_id = "kp_#{card.id}"
@@ -128,7 +172,7 @@ App.board = App.cable.subscriptions.create { channel: "BoardChannel", board_id: 
       App.board.update_kpcard($(this), title)
     $("##{type_id}-text").on 'blur', ->
       title = $(this).context.value
-      App.board.update_kpcard($(this), title)
+      App.board.update_kpcard($(this).parent(), title)
     $("##{type_id}-like").on 'click', ->
       kLikeClass = 'mdl-color-text--blue-900'
       pLikeClass = 'mdl-color-text--pink-900'
@@ -187,7 +231,7 @@ App.board = App.cable.subscriptions.create { channel: "BoardChannel", board_id: 
       App.board.update_tcard($(this), title)
     $("##{type_id}-text").on 'blur', ->
       title = $(this).context.value
-      App.board.update_tcard($(this), title)
+      App.board.update_tcard($(this).parent(), title)
     $("##{type_id}-like").on 'click', ->
       likeClass = 'mdl-color-text--light-green-900'
       id = $(this)[0].dataset.id
@@ -205,6 +249,37 @@ App.board = App.cable.subscriptions.create { channel: "BoardChannel", board_id: 
       App.board.delete_tcard(id)
       $("##{type_id}").remove()
 
+  add_memo: (card) ->
+    type_id = "m_#{card.id}"
+
+    addingCard = App.board.adding_memo(card, type_id)
+    $('#boardWrap').append addingCard
+    addingCard.offset(top: card.y, left: card.x)
+    $("##{type_id}").draggable({cancel: '.memo-text'})
+    if type_id is 'm_local'
+      $("##{type_id}-text").focus()
+      $("##{type_id}").addClass('memo-outline')
+
+
+    $("##{type_id}").on 'dragstop', ->
+      title = $(this).find(".memo-text").val()
+      App.board.update_memo($(this), title)
+    $("##{type_id}-text").on 'focus', ->
+      $("##{type_id}").addClass('memo-outline')
+    $("##{type_id}-text").on 'blur', ->
+      $("##{type_id}").removeClass('memo-outline')
+      title = $(this).val()
+      if type_id is 'm_local' and title isnt ""
+        App.board.create_memo(title, $("#board_id").val(), card.x, card.y)
+        $("##{type_id}").remove()
+      else if type_id is 'm_local' and title is ""
+        $("#m_local").remove()
+      else
+        App.board.update_memo($(this).parent(), title)
+    $("##{type_id}").find('.delete-btn').on 'click', ->
+      id = $(this).closest('.memoBox')[0].id.split("_")[1]
+      App.board.delete_memo(id)
+      $("##{type_id}").remove()
 
   adding_kpcard: (card, type_id) ->
     isLiked = false
@@ -257,4 +332,10 @@ App.board = App.cable.subscriptions.create { channel: "BoardChannel", board_id: 
         "<i class='material-icons'>account_circle</i>" +
         "<button id='#{type_id}-datepicker' class='mdl-button mdl-js-button mdl-button--icon' data-id='#{card.id}' data-type='#{card.card_type}'><i class='material-icons' id='datepicker'>event</i></button><input type='hidden' id='#{type_id}-datepicker-field'>" +
         "<button id='#{type_id}-like' class='mdl-button mdl-js-button mdl-button--icon' data-id='#{card.id}' data-type='#{card.card_type}'><i class='material-icons #{likeClass}'>thumb_up</i></button>&nbsp<span class='#{likeClass}' style='vertical-align:text-bottom; font-size: 11px;'>#{displayNum}</span></div>" +
+        "<div class='mdl-card__menu'><button class='mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect icon-white delete-btn'><i class='material-icons md-14'>close</i></button></div></div>")
+
+  adding_memo: (card, type_id) ->
+    addingCard = $("<div class='kpter-card-event mdl-card memo memoBox' id='#{type_id}' data-type='memo'>" +
+        "<div class='mdl-card__title mdl-card--expand' id='#{type_id}'>" +
+        "<textarea class='memo-text' style='height: 130px!important;' id='#{type_id}-text'>#{card.contents}</textarea></div>" +
         "<div class='mdl-card__menu'><button class='mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect icon-white delete-btn'><i class='material-icons md-14'>close</i></button></div></div>")

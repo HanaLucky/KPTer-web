@@ -6,6 +6,8 @@ class UpdateCardBroadcastJob < ApplicationJob
       ActionCable.server.broadcast "board_channel_#{card.board_id}", method: "update",  kpcard: card
     elsif card.class == TCard
       ActionCable.server.broadcast "board_channel_#{card.board_id}", method: "update",  tcard: card
+    elsif card.class == Memo
+      ActionCable.server.broadcast "board_channel_#{card.board_id}", method: "update",  memo: card
     end
   end
 end

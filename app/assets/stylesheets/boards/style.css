@@ -15,6 +15,7 @@
   box-shadow: 0 4px 5px rgba(0, 0, 0, 0.2);
 }
 
+
 .trashCanImg {
   width: 152px;
   height: 230px;
@@ -116,7 +117,23 @@ textarea {
 
 textarea:focus {
   outline: none;
-  }
+}
+
+.memo-text {
+  padding: 0!important;
+  width: 100%;
+  height: 150px;
+  color: #263238;
+  font-size: x-large;
+}
+
+.memo-outline{
+  outline: solid 2px #64B5F6;
+}
+
+.cursor-copy {
+  cursor: copy;
+}
 
 .kpter-card-event.mdl-card.keep {
   color: #263238;
@@ -127,4 +144,18 @@ textarea:focus {
 }
 .kpter-card-event.mdl-card.try {
   background: #66BB6A
+}
+
+.mdl-card {
+  cursor: move; /* fallback if grab cursor is unsupported */
+  cursor: grab;
+  cursor: -moz-grab;
+  cursor: -webkit-grab;
+  background: rgba(0,0,0,0);
+}
+ /* (Optional) Apply a "closed-hand" cursor during drag operation. */
+ .ui-draggable-dragging { 
+  cursor: grabbing;
+  cursor: -moz-grabbing;
+  cursor: -webkit-grabbing;
 }

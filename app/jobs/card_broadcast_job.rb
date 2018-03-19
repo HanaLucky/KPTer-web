@@ -8,6 +8,9 @@ class CardBroadcastJob < ApplicationJob
     elsif card.class == TCard
       card = TCard.includes(:owner).references(:owner).find(card.id)
       ActionCable.server.broadcast "board_channel_#{card.board_id}", method: "create", tcard: card.to_json(include: [:owner]), id: card.id, type: 'try'
+    elsif card.class == Memo
+      card = Memo.find(card.id)
+      ActionCable.server.broadcast "board_channel_#{card.board_id}", method: "create", memo: card.to_json, id: card.id, type: 'memo'
     end
   end
 
