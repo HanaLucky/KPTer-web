@@ -15,6 +15,10 @@ class BoardChannel < ApplicationCable::Channel
     tcard = TCard.create! title: data['title'], board_id: data['board_id'], owner_id: current_user.id, x: data['x'], y: data['y']
   end
 
+  def create_memo(data)
+    memo = Memo.create! contents: data['contents'], board_id: data['board_id'], x: data['x'], y: data['y']
+  end
+
   def update_kpcard(data)
     id = data['id'].to_i
     card = KpCard.find(id)
@@ -26,6 +30,11 @@ class BoardChannel < ApplicationCable::Channel
     card.update! title: data['title'], x: data['x'], y: data['y']
   end
 
+  def update_memo(data)
+    card = Memo.find(data['id'])
+    card.update! contents: data['contents'], x: data['x'], y: data['y']
+  end
+
   def delete_kpcard(data)
     card = KpCard.find(data['id'])
     DeleteCardBroadcastJob.perform_later card.id, card.card_type, card.board_id
@@ -35,6 +44,12 @@ class BoardChannel < ApplicationCable::Channel
   def delete_tcard(data)
     card = TCard.find(data['id'])
     DeleteCardBroadcastJob.perform_later card.id, 'try', card.board_id
+    card.delete
+  end
+
+  def delete_memo(data)
+    card = Memo.find(data['id'])
+    DeleteCardBroadcastJob.perform_later card.id, 'memo', card.board_id
     card.delete
   end
 

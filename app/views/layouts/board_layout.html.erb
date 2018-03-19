@@ -16,6 +16,7 @@
   <%= javascript_tag do %>
     window.kp_cards = <%= raw @board.kp_cards.to_json(include: [:likes, :owner]) %>;
     window.t_cards = <%= raw @board.t_cards.to_json(include: [:likes, :owner]) %>;
+    window.memos = <%= raw @board.memos.to_json %>;
     window.current_user = <%= raw current_user.to_json %>;
     window.no_img = "<%= @no_img %>";
   <% end %>
