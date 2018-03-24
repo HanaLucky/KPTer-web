@@ -159,3 +159,14 @@ textarea:focus {
   cursor: -moz-grabbing;
   cursor: -webkit-grabbing;
 }
+
+.board-list-radio {
+  display: inline;
+}
+
+.modal__container {
+  overflow-y: hidden !important;
+}
+.members__container {
+  overflow-y: auto;
+}

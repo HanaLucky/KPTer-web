@@ -87,4 +87,11 @@ class BoardChannel < ApplicationCable::Channel
     card.update! deadline: deadline
     SetDeadlineBroadcastJob.perform_later card.id, deadline.to_s, card.board_id
   end
+
+  def assign(data)
+    tcard = TCard.find(data['id'])
+    user = User.find(data['user_id'])
+    tcard.assign(user)
+    AssignBroadcastJob.perform_later tcard.id, user.id, tcard.board_id
+  end
 end
