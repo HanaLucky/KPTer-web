@@ -14,7 +14,7 @@ class BoardsController < ApplicationController
 
   def show
     # TODO: 仮実装。直接リンクで自分が所属しているコミュニティ以外のボードが見れないようにする？
-    @board = Board.includes(:memos, kp_cards: [:likes, :owner], t_cards: [:likes, :owner]).references(:memos, kp_cards: [:likes, :user], t_cards: [:likes, :user]).find(params[:id])
+    @board = Board.includes(:memos, community: [community_users: [:user]], kp_cards: [:likes, :owner], t_cards: [:likes, :owner, :user]).references(:memos, community: [community_users: [:user]], kp_cards: [:likes, :user], t_cards: [:likes, :owner, :user]).find(params[:id])
     @no_img = view_context.asset_path("noimages/profile.png")
   end
 end
