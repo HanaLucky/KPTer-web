@@ -120,3 +120,26 @@ img {
   position: relative;
   padding: 0 !important;
 }
+
+.fieldset {
+  border-bottom: solid 1px #eee;
+  padding: 2em 0;
+  > .legend {
+    margin-bottom: 1em;
+    padding-top: 2.5em;
+    font-weight: bold;
+    font-size: 14px;
+    color: #202020;
+  }
+  &:first-of-type {
+    border-bottom: solid 1px #eee;
+    padding-top: 0;
+    margin-top: .5em;
+    > .legend {
+      padding-top: 0;
+    }
+  }
+  &:last-of-type {
+    border: 0;
+  }
+}

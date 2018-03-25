@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171030032308) do
+ActiveRecord::Schema.define(version: 20180321043855) do
 
   create_table "boards", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", comment: "ボード" do |t|
     t.integer  "community_id",             null: false, comment: "コミュニティID"
@@ -78,6 +78,21 @@ ActiveRecord::Schema.define(version: 20171030032308) do
     t.index ["board_id"], name: "index_memos_on_board_id", using: :btree
   end
 
+  create_table "social_profiles", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", comment: "ソーシャルプロファイル" do |t|
+    t.integer  "user_id"
+    t.string   "provider",                               null: false, comment: "プロバイダー"
+    t.string   "uid",                                    null: false, comment: "uid"
+    t.string   "name",                                                comment: "名前"
+    t.string   "email",                                               comment: "メールアドレス"
+    t.string   "image_url",                                           comment: "画像URL"
+    t.text     "auth_info",    limit: 65535,                          comment: "認証情報"
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
+    t.integer  "lock_version",               default: 0, null: false
+    t.index ["provider", "uid"], name: "index_social_profiles_on_provider_and_uid", unique: true, using: :btree
+    t.index ["user_id"], name: "index_social_profiles_on_user_id", using: :btree
+  end
+
   create_table "t_cards", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", comment: "Tカード" do |t|
     t.integer  "board_id",                                  null: false, comment: "ボードID"
     t.integer  "owner_id",                                  null: false, comment: "カード作成者ID"
@@ -107,12 +122,12 @@ ActiveRecord::Schema.define(version: 20171030032308) do
   end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string   "email",                             default: "", null: false
-    t.string   "encrypted_password",                default: "", null: false
+    t.string   "email",                              default: "",    null: false
+    t.string   "encrypted_password",                 default: "",    null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",                     default: 0,  null: false
+    t.integer  "sign_in_count",                      default: 0,     null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
@@ -121,13 +136,12 @@ ActiveRecord::Schema.define(version: 20171030032308) do
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string   "unconfirmed_email"
-    t.string   "provider"
-    t.string   "uid"
-    t.string   "nickname",               limit: 32,              null: false
+    t.string   "nickname",                limit: 32,                 null: false
     t.string   "avatar"
-    t.datetime "created_at",                                     null: false
-    t.datetime "updated_at",                                     null: false
-    t.integer  "lock_version",                      default: 0,  null: false
+    t.datetime "created_at",                                         null: false
+    t.boolean  "only_oauth_registration",            default: false, null: false
+    t.datetime "updated_at",                                         null: false
+    t.integer  "lock_version",                       default: 0,     null: false
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
@@ -138,6 +152,7 @@ ActiveRecord::Schema.define(version: 20171030032308) do
   add_foreign_key "kp_cards", "boards"
   add_foreign_key "likes", "users"
   add_foreign_key "memos", "boards"
+  add_foreign_key "social_profiles", "users"
   add_foreign_key "t_cards", "boards"
   add_foreign_key "tcard_assignees", "t_cards"
   add_foreign_key "tcard_assignees", "users"

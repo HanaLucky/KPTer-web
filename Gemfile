@@ -23,6 +23,8 @@ gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 # authorize user
 gem 'devise'
+gem 'omniauth'
+gem 'omniauth-google-oauth2'
 gem 'omniauth-twitter'
 gem 'devise-bootstrap-views'
 gem 'devise-i18n'

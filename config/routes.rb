@@ -1,10 +1,12 @@
 Rails.application.routes.draw do
   devise_for :users, controllers: {
-    registrations: 'users/registrations'
+    registrations: 'users/registrations',
+    omniauth_callbacks: "users/omniauth_callbacks"
   }
 
   devise_scope :user do
     post "users/upload", to: "users/registrations#upload", as: "upload_registration"
+    post "users/disconnect" => 'users/registrations#disconnect', as: "disconnect_provider"
   end
 
   get 'welcome/index'

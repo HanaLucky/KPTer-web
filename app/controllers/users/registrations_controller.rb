@@ -37,6 +37,16 @@ class Users::RegistrationsController < Devise::RegistrationsController
   #   super
   # end
 
+  # disconnect social provider
+  def disconnect
+    if current_user.only_oauth_registration?
+      flash[:alert] = t 'errors.messages.can_not_disconnect_social_provider'
+    else
+      current_user.disconnect(params[:provider])
+    end
+    redirect_to edit_user_registration_path
+  end
+
   # avatar image upload
   def upload
     if current_user.update_attributes(avatar: params[:qqfile])
