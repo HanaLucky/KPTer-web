@@ -63,3 +63,7 @@ en:
       default: ! '%-m/%-d/%Y'
       long: ! '%a %-m/%-d/%Y'
       short: ! '%-m/%-d'
+  social:
+    failure:
+      can_not_disconnect_social_provider: "cannot disconnect you from your Social Account"
+      already_associated: "There is a KPTER account already associated with %{provider} Account %{email}"

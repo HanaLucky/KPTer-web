@@ -40,7 +40,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # disconnect social provider
   def disconnect
     if current_user.only_oauth_registration?
-      flash[:alert] = t 'errors.messages.can_not_disconnect_social_provider'
+      flash[:alert] = t 'social.failure.can_not_disconnect_social_provider'
     else
       current_user.disconnect(params[:provider])
     end
