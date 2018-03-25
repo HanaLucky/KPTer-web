@@ -11,40 +11,81 @@
     <a href="<%= edit_user_registration_path %>" class="mdl-navigation__link <% if request.path_info == edit_user_registration_path %>active<% end %>">
       <span class="mdl-list__item-primary-content">
         <i class="material-icons mdl-list__item-icon">person</i>
-        Personal Setting
+        Account
       </span>
     </a>
   </div>
   <div class="kpter-settings-contents">
     <div class="kpter-form-left mdl-cell mdl-grid mdl-grid--no-spacing">
-      <%= render partial: "devise/shared/error_messages", locals: {object: resource} %>
-      <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-        <div class="mdl-typography--caption mdl-color-text--primary">avator</div>
-        <div class="hoverable" id="btn-file-uploader">
-        	<%= image_tag(avatar_url(current_user), class: "kpter-avatar-img-96", alt: "#{current_user.nickname}") %>
-        	<div class="mask">
-        		<div class="caption">Change<br>avatar</div>
-        	</div>
-        </div>
-        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-          <%= f.text_field :nickname, class: "mdl-textfield__input", maxlength: 32, required: true %>
-          <%= f.label :nickname, class: "mdl-textfield__label" %>
-        </div>
-        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-          <%= f.email_field :email, class: "mdl-textfield__input", maxlength: 255, required: true %>
-          <%= f.label :email, class: "mdl-textfield__label" %>
-          <span class="mdl-textfield__error">Invalid email</span>
-        </div>
-        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-          <%= f.password_field :password, autocomplete: "off", class: "mdl-textfield__input", maxlength: 128 %>
-          <%= f.label :password, class: "mdl-textfield__label" %>
-        </div>
-        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-          <%= f.password_field :password_confirmation, autocomplete: "off", class: "mdl-textfield__input", maxlength: 128 %>
-          <%= f.label :password_confirmation, class: "mdl-textfield__label" %>
-        </div>
-        <%= button_tag t('.update', :default => "Update"), class: 'mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect float-right' %>
-      <% end %>
+      <div class="fieldset">
+        <div class="legend">Personal information</div>
+        <%= render partial: "devise/shared/error_messages", locals: {object: resource} %>
+        <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+          <div class="mdl-typography--caption mdl-color-text--primary">avator</div>
+          <div class="hoverable" id="btn-file-uploader">
+            <%= image_tag(avatar_url(current_user), class: "kpter-avatar-img-96", alt: "#{current_user.nickname}") %>
+            <div class="mask">
+              <div class="caption">Change<br>avatar</div>
+            </div>
+          </div>
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <%= f.text_field :nickname, class: "mdl-textfield__input", maxlength: 32, required: true %>
+            <%= f.label :nickname, class: "mdl-textfield__label" %>
+          </div>
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <%= f.email_field :email, class: "mdl-textfield__input", maxlength: 255, required: true %>
+            <%= f.label :email, class: "mdl-textfield__label" %>
+            <span class="mdl-textfield__error">Invalid email</span>
+          </div>
+          <div class="mdl-typography--body-1-color-contrast">
+            If you want to change your password, please enter the new password below.
+          </div>
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <%= f.password_field :password, autocomplete: "off", class: "mdl-textfield__input", maxlength: 128 %>
+            <%= f.label :password, class: "mdl-textfield__label" %>
+          </div>
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <%= f.password_field :password_confirmation, autocomplete: "off", class: "mdl-textfield__input", maxlength: 128 %>
+            <%= f.label :password_confirmation, class: "mdl-textfield__label" %>
+          </div>
+          <div style="width: 300px;">
+            <%= button_tag t('.update', :default => "Update"), class: 'mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect float-right' %>
+          </div>
+        <% end %>
+      </div>
+      <div class="fieldset">
+        <div class="legend">Connect social accounts</div>
+        <ul class="social-connect-list">
+          <li class="social-item">
+            <% # ソーシャル連携している場合、Disconnectボタンを表示 %>
+            <% if current_user.authenticated?(SocialProfile.provider.google_oauth2) %>
+              <% # パスワード設定していない場合（ソーシャル連携でしか登録していない場合）は、disable %>
+              <% if current_user.only_oauth_registration? %>
+                <p>Your password is not set, and we cannot disconnect you from your Google Account. If you want to disconnect, please set up your password in your Account Settings first.</p>
+                <%= button_tag(class: "mdl-button mdl-js-button mdl-button--raised social-connect-button-large", disabled: true) do %>
+                  <%= image_tag(asset_path("google-logo.svg"), class: "social-logo") %> <span class="social-text">Disconnect with my Google account</span>
+                <% end %>
+              <% else %>
+                <% # パスワード設定済みの場合は、Disconnectボタン表示 %>
+                <%= form_for(resource, as: "user_disconnect_google", url: disconnect_provider_path, html: { method: :post }) do |f| %>
+                  <%= button_tag(class: "mdl-button mdl-js-button mdl-button--raised social-connect-button-large") do %>
+                    <%= image_tag(asset_path("google-logo.svg"), class: "social-logo") %> <span class="social-text">Disconnect with my Google account</span>
+                    <%= hidden_field_tag :provider, SocialProfile.provider.google_oauth2 %>
+                  <% end %>
+                <% end %>
+              <% end %>
+            <% else %>
+              <% # ソーシャル連携未の場合は、Connectボタン表示 %>
+              <%= form_for(resource, as: "user_connect_google", url: user_google_oauth2_omniauth_authorize_path(return_url: edit_user_registration_path ), html: { method: :post }) do |f| %>
+                <%= button_tag(class: "mdl-button mdl-js-button mdl-button--raised social-connect-button-large") do %>
+                  <%= image_tag(asset_path("google-logo.svg"), class: "social-logo") %> <span class="social-text">Connect with my Google account</span>
+                  <%= hidden_field_tag :provider, "test" %>
+                <% end %>
+              <% end %>
+            <% end %>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
 </div>

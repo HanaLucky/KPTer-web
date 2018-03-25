@@ -4,6 +4,18 @@
 <div class="kpter-form-middle mdl-cell mdl-grid mdl-grid--no-spacing">
   <div class="mdl-typography--display-1-color-contrast"><%= t('.sign_in', default: "Sign in") %></div>
   <%= render partial: "devise/shared/error_messages", locals: {object: resource} %>
+  <div class="social-connect-container">
+    <ul class="social-connect-list">
+      <li class="social-item">
+        <%= link_to(user_google_oauth2_omniauth_authorize_path, class: "mdl-button mdl-js-button mdl-js-ripple-effect social-connect-button") do%>
+          <%= image_tag(asset_path("google-logo.svg"), class: "social-logo") %> <span class="social-text">Sign in with Google</span>
+        <%end %>
+      </li>
+    </ul>
+  </div>
+  <div class="separator">
+    <div class="middle_separator">or</div>
+  </div>
   <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { role: "form" }) do |f| %>
     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
       <%= f.email_field :email, class: "mdl-textfield__input", maxlength: 255, required: true %>

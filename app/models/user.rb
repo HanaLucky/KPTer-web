@@ -3,13 +3,15 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
-         :confirmable, :omniauthable
+         :confirmable, :omniauthable, omniauth_providers: [:google_oauth2]
+
   mount_uploader :avatar, AvatarUploader
   has_many :community_users
   has_many :tcard_assignees
   has_many :t_card, :through => :tcard_assignees
   has_many :t_cards_of_owner, :class_name => 'TCard', :foreign_key => 'owner_id'
   has_many :kp_cards_of_owner, :class_name => 'KpCard', :foreign_key => 'owner_id'
+  has_many :social_profiles, dependent: :destroy
   validates :email, presence: true, length: { maximum: 255 }
   validates :nickname, presence: true, length: { maximum: 255 }
   validate :avatar_size
@@ -134,6 +136,9 @@ class User < ApplicationRecord
     if params[:password].blank? && params[:password_confirmation].blank?
       params.delete(:password)
       params.delete(:password_confirmation)
+    else
+      # パスワードが設定されるタイミングで、oauthのみの登録ではなくす
+      params = params.merge(only_oauth_registration: false)
     end
 
     result = update_attributes(params, *options)
@@ -141,11 +146,23 @@ class User < ApplicationRecord
     result
   end
 
+  def social_profile(provider)
+    social_profiles.select{ |sp| sp.provider == provider.to_s }.first
+  end
+
+  def authenticated?(provider)
+    self.social_profiles.exists?(provider: provider)
+  end
+
+  def disconnect(provider)
+    self.social_profiles.where(provider: provider).delete_all
+  end
+
   private
     # validate of upload image size
     def avatar_size
-      if avatar.size > 5.megabytes
-        errors.add(:avator, I18n.t('errors.messages.exceeded_limit_size', limit_size: "5MB"))
+      if avatar.size > 3.megabytes
+        errors.add(:avator, I18n.t('errors.messages.exceeded_limit_size', limit_size: "3MB"))
       end
     end
 end

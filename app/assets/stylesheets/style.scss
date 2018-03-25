@@ -164,7 +164,7 @@
 }
 
 .kpter-form-left {
-  width: 320px;
+  width: 350px;
   .kpter-alert-message {
     @include kpter-alert-message;
   }
@@ -671,4 +671,70 @@ ul.notice {
       max-width: 375px;
     }
   }
+}
+
+.social-connect-container {
+  margin: 40px 0 0 0;
+}
+
+.separator {
+  position: relative;
+  width: 300px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  height: 0;
+  @media screen and (max-width:922px) {
+    border-top: 1px solid #ddd;
+  }
+  border-bottom: 1px solid #ddd;
+}
+
+.middle_separator {
+  position: absolute;
+  top: -9px;
+  left: 41%;
+  padding: 0 16px;
+  color: #ccc;
+  background: #fff;
+  font-size: 14px;
+  font-weight: 100;
+  text-shadow: 0 1px 0 #fff;
+  letter-spacing: 0.1em;
+}
+
+.social-connect-list {
+  list-style: none;
+  padding: 0;
+  margin-top: 0;
+  .social-item {
+    margin: 0 0 2em 0;
+  }
+}
+
+.social-connect-button-large {
+  width: 350px;
+  height: 40px !important;
+  border-radius: 3px !important;
+  box-shadow: 0 0 1px 0 rgba(0,0,0,0.12), 0 1px 1px 0 rgba(0,0,0,0.24);
+  background-color: #FFFFFF;
+}
+
+.social-connect-button {
+  width: 270px;
+  height: 40px !important;
+  border-radius: 3px !important;
+  box-shadow: 0 0 1px 0 rgba(0,0,0,0.12), 0 1px 1px 0 rgba(0,0,0,0.24);
+  background-color: #FFFFFF;
+}
+.social-logo {
+  width: 18px;
+  height: 18px;
+  margin-right: 24px;
+}
+.social-text {
+  font-family: "Roboto-Medium";
+  font-size: 14px;
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.54);
+  text-transform: initial;
 }
