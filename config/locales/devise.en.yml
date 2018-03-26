@@ -62,4 +62,3 @@ en:
         one: "1 error prohibited this %{resource} from being saved:"
         other: "%{count} errors prohibited this %{resource} from being saved:"
       exceeded_limit_size: "should be less than %{limit_size}"
-      can_not_disconnect_social_provider: "cannot disconnect you from your Social Account"
