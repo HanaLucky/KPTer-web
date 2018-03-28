@@ -5,41 +5,39 @@
   mdl-layout--fixed-drawer
 <% end %>
 <div class="mdl-grid">
-  <div class="mdl-cell mdl-cell--8-col mdl-cell--8-col-tablet">
+  <div class="mdl-cell mdl-cell--12-col mdl-cell--8-col-tablet mdl-cell--4-col-phone">
     <div class="kpter-sub-heading">
       <div class="kpter-sub-title">
         <div class="mdl-typography--body-2-color-contrast">MyPage</div>
       </div>
       <div class=“clarifix”></div>
     </div>
-    <%= render :partial => "t_cards/t_card_table", :locals => { t_cards: @t_cards, visible_assignee: false, url: "mypage", status: @status, chartDoughnut: false, callback: "setTasksCount"} %>
   </div>
-  <div class="mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet mdl-cell--4-col-phone">
-    <div class="kpter-sub-heading mdl-cell--hide-tablet mdl-cell--hide-phone">
-      <div class="kpter-sub-title">
-        <div class="mdl-typography--body-2-color-contrast">&nbsp;</div>
-      </div>
-      <div class=“clarifix”></div>
+  <div class="kpter-mypage-cell">
+    <div class="mdl-cell mdl-cell--8-col mdl-cell--8-col-tablet kpter-mypage-cell-task">
+      <%= render :partial => "t_cards/t_card_table", :locals => { t_cards: @t_cards, visible_assignee: false, url: "mypage", status: @status, chartDoughnut: false, callback: "setTasksCount"} %>
     </div>
-    <div class="kpter-card-status-container">
-      <div class="kpter-card-status mdl-card mdl-shadow--2dp kpter-tasks-box">
+    <div class="mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet mdl-cell--4-col-phone kpter-mypage-cell-status">
+      <div class="kpter-card-status-container">
+        <div class="kpter-card-status mdl-card mdl-shadow--2dp kpter-tasks-box">
+            <div class="kpter-status-icon-box rounded">
+              <i class="material-icons">check_box</i>
+            </div>
+            <div class="box-layout-text text-right">
+              <div class="count" id="open-task-count"><%= number_with_delimiter(@all_tcards.count) %></div>
+              <span>Uncompleted Tasks</span>
+            </div>
+        </div>
+      </div>
+      <div class="kpter-card-status-container">
+        <div class="kpter-card-status mdl-card mdl-shadow--2dp kpter-likes-box">
           <div class="kpter-status-icon-box rounded">
-            <i class="material-icons">check_box</i>
+            <i class='material-icons'>thumb_up</i>
           </div>
           <div class="box-layout-text text-right">
-            <div class="count" id="open-task-count"><%= number_with_delimiter(@all_tcards.count) %></div>
-            <span>Uncompleted Tasks</span>
+            <div class="count"><%= number_with_delimiter(@like_count) %></div>
+            <span>Likes You Got</span>
           </div>
-      </div>
-    </div>
-    <div class="kpter-card-status-container">
-      <div class="kpter-card-status mdl-card mdl-shadow--2dp kpter-likes-box">
-        <div class="kpter-status-icon-box rounded">
-          <i class='material-icons'>thumb_up</i>
-        </div>
-        <div class="box-layout-text text-right">
-          <div class="count"><%= number_with_delimiter(@like_count) %></div>
-          <span>Likes You Got</span>
         </div>
       </div>
     </div>
