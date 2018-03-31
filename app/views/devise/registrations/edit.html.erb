@@ -21,7 +21,7 @@
         <div class="legend">Personal information</div>
         <%= render partial: "devise/shared/error_messages", locals: {object: resource} %>
         <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-          <div class="mdl-typography--caption mdl-color-text--primary">avator</div>
+          <div class="mdl-typography--caption mdl-color-text--primary">Avator</div>
           <div class="hoverable" id="btn-file-uploader">
             <%= image_tag(avatar_url(current_user), class: "kpter-avatar-img-96", alt: "#{current_user.nickname}") %>
             <div class="mask">

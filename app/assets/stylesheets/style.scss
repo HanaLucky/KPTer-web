@@ -1,15 +1,15 @@
 @import "./variables";
 @import "./_micromodal";
 
-.kpter-logo {
+.kpter-logo, .kpter-logo-header {
   font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif !important;
+  color: $primary-color;
   font-weight: 700;
   font-size: 24px;
   text-decoration: none !important;
   @media screen and (max-width: $layout-screen-size-threshold) {
     font-size: 22px;
   }
-  color: $primary-color;
 }
 
 /**
@@ -20,6 +20,14 @@
   background-color: white;
   .material-icons {
     color: #767777 !important;
+  }
+}
+
+@media screen and (min-width: 1025px) {
+  .mdl-layout--fixed-drawer {
+    .kpter-logo-header {
+      display: none;
+    }
   }
 }
 
@@ -250,6 +258,12 @@ table > tfoot > tr {
   &#board-table {
     th:nth-child(1) {
       width: 80%;
+    }
+    .board-add-button {
+      height: 32px !important;
+      min-width: 32px !important;
+      width: 32px !important;
+      text-transform: none !important;
     }
   }
 
@@ -593,9 +607,36 @@ ul.notice {
    width: 150px;
    cursor: pointer;
 }
+@media screen and (max-width: 839px){
+  .kpter-mypage-cell {
+    display: flex;
+    display: -webkit-flex;
+    flex-direction: column;
+    -webkit-flex-direction: column;
+    .kpter-mypage-cell-task {
+      order: 2;
+    }
+    .kpter-mypage-cell-status {
+      order: 1;
+    }
+  }
+}
 
+.kpter-mypage-cell {
+  display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-flow: row wrap;
+    -ms-flex-flow: row wrap;
+    flex-flow: row wrap;
+    margin: 0 auto;
+    -webkit-align-items: stretch;
+    -ms-flex-align: stretch;
+    align-items: stretch;
+}
+// @media screenをコメントアウトすると、PCサイズで横並びになる
 // コメントアウト外すと、PCサイズで縦並びになる
-//@media screen and (max-width: 839px){
+@media screen and (max-width: 839px){
   .kpter-card-status-container {
     display: table-cell;
     &:not(:last-child) {
@@ -604,7 +645,7 @@ ul.notice {
     margin-right: 10px;
     width: 500px;
   }
-//}
+}
 
 @media screen and (min-width: $grid-desktop-breakpoint) {
   .kpter-card-status-container {
@@ -613,7 +654,7 @@ ul.notice {
 }
 
 .kpter-card-status-container {
-  .kpter-likes-box{
+  .kpter-likes-box {
     background-color: #03A9F4;
     color: rgba(255,255,255,.87);
     .material-icons {

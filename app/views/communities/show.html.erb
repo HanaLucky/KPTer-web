@@ -1,6 +1,9 @@
 <% content_for :head_title do %>
   <%=@community.name%>
 <% end %>
+<% content_for :header_layout_type do %>
+  mdl-layout--fixed-drawer
+<% end %>
 
 <% if current_user.joining?(@community) %>
   <%= render :partial => 'joining' %>

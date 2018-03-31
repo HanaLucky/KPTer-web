@@ -1,5 +1,9 @@
 <div class="kpter-drawer mdl-layout__drawer">
-  <span class="mdl-layout-title kpter-logo mdl-color-text--primary">KPTER</span>
+  <% if user_signed_in? %>
+    <%= link_to "KPTER", mypage_path, class: "mdl-layout-title kpter-logo mdl-color-text--primary" %>
+  <% else %>
+    <%= link_to "KPTER", root_path, class: "mdl-layout-title kpter-logo mdl-color-text--primary" %>
+  <% end %>
   <nav class="mdl-navigation">
     <%= link_to mypage_path, class: "mdl-navigation__link" do %>
       <span class="<% if request.path_info == mypage_path %>mdl-color-text--primary-dark<% end %>">MyPage</span>
