@@ -259,6 +259,12 @@ table > tfoot > tr {
     th:nth-child(1) {
       width: 80%;
     }
+    .board-add-button {
+      height: 32px !important;
+      min-width: 32px !important;
+      width: 32px !important;
+      text-transform: none !important;
+    }
   }
 
   td {
