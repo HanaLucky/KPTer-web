@@ -60,3 +60,7 @@ Rails.application.config.assets.precompile += %w( fine-uploader/5.15.0/fine-uplo
 Rails.application.config.assets.precompile += %w( fine-uploader/5.15.0/fine-uploader.core.js.map )
 Rails.application.config.assets.precompile += %w( users/edit.js )
 Rails.application.config.assets.precompile += %w( users/edit.css )
+
+# terms, privacy policy
+Rails.application.config.assets.precompile += %w( heading.css )
+Rails.application.config.assets.precompile += %w( heading.js )
