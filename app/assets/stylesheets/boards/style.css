@@ -39,6 +39,7 @@
   height: 80px;
   background: #fff;
   border-top: 1px #E8ECEB solid;
+  align-items: center;
 }
 
 .tool-bar-buttons {
@@ -53,6 +54,10 @@
   position: relative;
   margin-right: 30px;
   font-size: 13px;
+}
+
+.back {
+  align-items: center;
 }
 
 /* google material lite */
