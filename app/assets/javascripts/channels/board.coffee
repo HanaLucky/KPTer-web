@@ -242,7 +242,10 @@ App.board = App.cable.subscriptions.create { channel: "BoardChannel", board_id: 
           minDate: new Date(year - 2, 0, 1),
           maxDate: new Date(year + 2, 12, 31),
           yearRange: [year - 2, year + 2]
-          onSelect: ((date) -> App.board.select_date(date, this._o.ariaLabel))
+          onSelect: ((date) -> 
+            App.board.select_date(date, this._o.ariaLabel)
+            $("##{type_id}-datepicker").addClass('mdl-color-text--light-green-900')
+          )
       })
     window.pickers[card.id].setDate(card.deadline)
 
@@ -269,6 +272,9 @@ App.board = App.cable.subscriptions.create { channel: "BoardChannel", board_id: 
       # assignのradio button制御
       $('[name="user_id"]').on 'click', ->
         $(this).prop('checked', true)
+      $('#assign').on 'click', ->
+        App.board.assign()
+        $("##{type_id}-assign").addClass('mdl-color-text--light-green-900')
 
     $("##{type_id}-like").on 'click', ->
       likeClass = 'mdl-color-text--light-green-900'
@@ -357,6 +363,9 @@ App.board = App.cable.subscriptions.create { channel: "BoardChannel", board_id: 
         isLiked = current_user.id is like.user_id
     else
       isLiked = false
+
+    assigneeClass = if card.user then 'mdl-color-text--light-green-900' else ''
+    deadlineClass = if card.deadline then 'mdl-color-text--light-green-900' else ''
     
     src = if card.owner.avatar.url then "#{card.owner.avatar.url}" else no_img
     likeClass = if isLiked then 'mdl-color-text--light-green-900' else 'kpter-color-text--white'
@@ -368,8 +377,8 @@ App.board = App.cable.subscriptions.create { channel: "BoardChannel", board_id: 
         "<div class='mdl-card__actions mdl-card--border'>" +
         "<img class='mdl-list__item-avatar' src='#{src}' style='width:30px; height:30px;'>" +
         "<div class='mdl-layout-spacer'></div>" +
-        "<button id='#{type_id}-assign' class='mdl-button mdl-js-button mdl-button--icon' data-id='#{card.id}' data-type='#{card.card_type}'><i class='material-icons'>account_circle</i></button>" +
-        "<button id='#{type_id}-datepicker' class='mdl-button mdl-js-button mdl-button--icon' data-id='#{card.id}' data-type='#{card.card_type}'><i class='material-icons' id='datepicker'>event</i></button><input type='hidden' id='#{type_id}-datepicker-field'>" +
+        "<button id='#{type_id}-assign' class='mdl-button mdl-js-button mdl-button--icon #{assigneeClass}' data-id='#{card.id}' data-type='#{card.card_type}'><i class='material-icons'>account_circle</i></button>" +
+        "<button id='#{type_id}-datepicker' class='mdl-button mdl-js-button mdl-button--icon #{deadlineClass}' data-id='#{card.id}' data-type='#{card.card_type}'><i class='material-icons' id='datepicker'>event</i></button><input type='hidden' id='#{type_id}-datepicker-field'>" +
         "<button id='#{type_id}-like' class='mdl-button mdl-js-button mdl-button--icon' data-id='#{card.id}' data-type='#{card.card_type}'><i class='material-icons #{likeClass}'>thumb_up</i></button>&nbsp<span class='#{likeClass}' style='vertical-align:text-bottom; font-size: 11px;'>#{displayNum}</span></div>" +
         "<div class='mdl-card__menu'><button class='mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect icon-white delete-btn'><i class='material-icons md-14'>close</i></button></div></div>")
 
