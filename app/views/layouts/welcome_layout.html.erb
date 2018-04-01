@@ -15,6 +15,8 @@
     <%= stylesheet_link_tag 'theDocs/1.4.0/theDocs.all', media: 'all' %>
     <%= stylesheet_link_tag 'welcome/welcome', media: 'all' %>
     <%= stylesheet_link_tag 'style', media: 'all' %>
+    <% # append extra stylesheet tags %>
+    <%= yield :extra_stylesheet %>
     <link href='https://fonts.googleapis.com/css?family=Raleway:300,400,500,600,800%7COpen+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800%7CMontserrat:400,700' rel='stylesheet' type='text/css'>
     <%= csrf_meta_tags %>
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
@@ -92,5 +94,7 @@
     </footer>
     <%= javascript_include_tag 'jquery' %>
     <%= javascript_include_tag 'theDocs/1.4.0/theDocs.all' %>
+    <% # append extra js tags %>
+    <%= yield :extra_js %>
   </body>
 </html>

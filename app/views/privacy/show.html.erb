@@ -1,9 +1,27 @@
 <% content_for :head_title do %>
-  KPTER Privacy Policy
+  Privacy Policy
+<% end %>
+<% content_for :extra_stylesheet do %>
+  <%= stylesheet_link_tag 'heading', media: 'all' %>
 <% end %>
 <div class="container">
   <div class="row">
-    <div class="col-sm-10 col-md-10 col-lg-8">
+    <aside id="navigation" class="col-md-3 col-sm-3">
+      <ul class="sidenav dropable sticky ps ps--theme_default" data-ps-id="a0242a18-6298-e18d-f436-235aa52e0193" style="position: static; bottom: 40px; top: 40px; max-width: 200px;">
+        <li>
+          <a href="#" class="active has-child open">Privacy Policy</a>
+          <ul id="kpter-heading">
+          </ul>
+        </li>
+        <div class="ps__scrollbar-x-rail" style="left: 0px; bottom: 0px;">
+          <div class="ps__scrollbar-x" tabindex="0" style="left: 0px; width: 0px;"></div>
+        </div>
+        <div class="ps__scrollbar-y-rail" style="top: 0px; right: 0px;">
+          <div class="ps__scrollbar-y" tabindex="0" style="top: 0px; height: 0px;"></div>
+        </div>
+      </ul>
+    </aside>
+    <div class="col-sm-9 col-md-9 col-lg-8">
       <section class="section-container">
         <h2 id="privacy-policy">Privacy Policy</h2>
         <p>Last updated: January 29, 2018</p>
@@ -110,3 +128,7 @@
     </div>
   </div>
 </div>
+
+<% content_for :extra_js do %>
+  <%= javascript_include_tag 'heading' %>
+<% end %>
