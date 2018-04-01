@@ -385,5 +385,5 @@ App.board = App.cable.subscriptions.create { channel: "BoardChannel", board_id: 
   adding_memo: (card, type_id) ->
     addingCard = $("<div class='kpter-card-event mdl-card memo memoBox' id='#{type_id}' data-type='memo'>" +
         "<div class='mdl-card__title mdl-card--expand' id='#{type_id}'>" +
-        "<textarea class='memo-text' style='height: 130px!important;' id='#{type_id}-text'>#{card.contents}</textarea></div>" +
-        "<div class='mdl-card__menu'><button class='mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect icon-white delete-btn'><i class='material-icons md-14'>close</i></button></div></div>")
+        "<textarea class='memo-text' id='#{type_id}-text'>#{card.contents}</textarea></div>" +
+        "<div class='mdl-card__menu'><button class='mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect icon-gray delete-btn'><i class='material-icons md-14'>close</i></button></div></div>")
