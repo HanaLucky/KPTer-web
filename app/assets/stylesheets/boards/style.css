@@ -7,8 +7,6 @@
 .cardBox {
   position: relative;
   font-size: x-large;
-  left: 10%;
-  top: 20%;
 	vertical-align: middle;
 	text-align: center;
   z-index: 1100;
@@ -65,6 +63,7 @@
 .kpter-card-event.mdl-card {
   width: 250px;
   height: 200px;
+  position: absolute;
   /* background: #3E4EB8;*/
 }
 .kpter-card-event > .mdl-card__actions {
