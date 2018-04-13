@@ -44,7 +44,7 @@ class BoardChannel < ApplicationCable::Channel
   def delete_tcard(data)
     card = TCard.find(data['id'])
     DeleteCardBroadcastJob.perform_later card.id, 'try', card.board_id
-    card.delete
+    card.destroy
   end
 
   def delete_memo(data)
