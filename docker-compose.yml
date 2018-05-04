@@ -1,0 +1,48 @@
+version: '3.3'
+services:
+  webserver:
+    build: .
+    volumes:
+      - .:/KPTer-web:delegated
+    working_dir: "/KPTer-web"
+    environment:
+      MYSQL_USER: "root"
+      MYSQL_PASSWORD: "root"
+      MYSQL_DATABASE: "kpter_development"
+      MYSQL_ROOT_PASSWORD: "root"
+    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    ports:
+      - "3000:3000"
+    networks:
+      - kpter_default
+    links:
+      - db
+    depends_on:
+      - redis
+      - db
+
+  redis:
+    image: redis
+    networks:
+      - kpter_default
+
+  db:
+    image: mysql
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_general_ci
+    volumes:
+      - data:/var/lib/mysql
+    environment:
+      MYSQL_DATABASE: "kpter_development"
+      MYSQL_ROOT_PASSWORD: "root"
+    ports:
+      - "3306:3306"
+    networks:
+      - kpter_default
+
+networks:
+  kpter_default:
+    external: true
+
+volumes:
+  data:
+    driver: local
