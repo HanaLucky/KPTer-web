@@ -3,7 +3,7 @@ module ApplicationHelper
   # avatar image url
   def avatar_url(user)
     if user
-      unless user.avatar.file
+      unless user.avatar
         url = asset_path("noimages/profile.png")
       else
         url = "#{asset_path(user.avatar)}?#{user.lock_version}"
