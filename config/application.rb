@@ -49,8 +49,10 @@ module Kpter
     config.action_view.field_error_proc = Proc.new do |html_tag, instance|
       %Q(#{html_tag}).html_safe
     end
-    
+
     # remember me enabled by default
     config.remember_me_enable_by_default = true
+
+    config.x.settings = Rails.application.config_for :settings
   end
 end

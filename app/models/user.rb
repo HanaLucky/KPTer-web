@@ -1,3 +1,5 @@
+require "google/cloud/storage"
+
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
@@ -5,7 +7,6 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable,
          :confirmable, :omniauthable, omniauth_providers: [:google_oauth2]
 
-  mount_uploader :avatar, AvatarUploader
   has_many :community_users
   has_many :tcard_assignees
   has_many :t_card, :through => :tcard_assignees
@@ -14,7 +15,20 @@ class User < ApplicationRecord
   has_many :social_profiles, dependent: :destroy
   validates :email, presence: true, length: { maximum: 255 }
   validates :nickname, presence: true, length: { maximum: 255 }
-  validate :avatar_size
+  validate :cover_image_size
+
+  def self.storage_bucket
+    if Rails.env.production?
+      @storage_bucket ||= begin
+        config = Rails.application.config.x.settings
+        storage = Google::Cloud::Storage.new project_id: config["project_id"],
+                                             credentials: config["keyfile"]
+        storage.bucket config["gcs_bucket"], skip_lookup: true
+      end
+    end
+  end
+
+  attr_accessor :cover_image
 
   class << self
     def find_communities_with_user_id(user_id)
@@ -160,9 +174,54 @@ class User < ApplicationRecord
 
   private
     # validate of upload image size
-    def avatar_size
-      if avatar.size > 3.megabytes
+    def cover_image_size
+      if cover_image.size > 3.megabytes
         errors.add(:avator, I18n.t('errors.messages.exceeded_limit_size', limit_size: "3MB"))
       end
+    end
+
+    after_create :upload_image, if: :cover_image
+    def upload_image
+      avatar_path = "uploads/user/avatar/#{id}"
+      if Rails.env.production?
+        file = User.storage_bucket.create_file \
+          cover_image.tempfile,
+          "#{avatar_path}/#{cover_image.original_filename}",
+          content_type: cover_image.content_type,
+          acl: "public"
+        avatar_url = file.public_url
+      else
+        fs_directory = Rails.root.join('public', avatar_path)
+        FileUtils.mkdir_p(fs_directory) unless FileTest.exist?(fs_directory)
+        File.open("#{fs_directory}/#{cover_image.original_filename}", 'w+b') do |fp|
+          fp.write(cover_image.tempfile.read)
+        end
+        avatar_url = "#{avatar_path}/#{cover_image.original_filename}"
+      end
+      update_columns avatar: avatar_url
+    end
+
+    before_destroy :delete_image, if: :avatar
+    def delete_image
+      if Rails.env.production?
+        image_uri = URI.parse avatar
+        if "#{image_uri.host}/#{User.storage_bucket.name}" == "storage.googleapis.com/#{User.storage_bucket.name}"
+          # Remove leading forward slash from image path
+          # The result will be the image key, eg. "cover_images/:id/:filename"
+          image_path = image_uri.path.sub("/#{User.storage_bucket.name}/", "")
+          file = User.storage_bucket.file image_path
+          file.delete
+        end
+      else
+        # 元のファイルを削除する
+        avatar_file = Rails.root.join('public', self.avatar)
+        FileUtils.rm_r(avatar_file) if FileTest.exist?(avatar_file)
+      end
+    end
+
+    before_update :update_image, if: :cover_image
+    def update_image
+      delete_image if avatar?
+      upload_image
     end
 end

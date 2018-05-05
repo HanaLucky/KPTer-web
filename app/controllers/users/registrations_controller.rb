@@ -49,7 +49,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # avatar image upload
   def upload
-    if current_user.update_attributes(avatar: params[:qqfile])
+    if current_user.update_attributes(cover_image: params[:qqfile])
       flash.keep[:notice] = t 'devise.registrations.update_avatar_image'
     else
       # XXX いまひとつ

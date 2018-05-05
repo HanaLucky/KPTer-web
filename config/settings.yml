@@ -1,0 +1,9 @@
+default: &default
+  project_id: <%= ENV["GOOGLE_PROJECT_ID"] %>
+  keyfile: <%= ENV["GOOGLE_SERVICE_ACCOUNT_SECRET_KEY_FILE"] %>
+
+development:
+
+production:
+  <<: *default
+  gcs_bucket: <%= ENV["GCS_BUCKET_NAME"] %>

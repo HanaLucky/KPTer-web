@@ -31,13 +31,9 @@ gem 'devise-i18n'
 gem 'devise-i18n-views'
 # Enumerize. Read more: https://github.com/brainspec/enumerize
 gem 'enumerize'
-# Image uploader. Read more: https://github.com/carrierwaveuploader/carrierwave
-gem 'carrierwave', '~> 1.0'
-# Cloud upload. Read more: https://github.com/fog/fog
-gem 'fog'
-
+# https://github.com/GoogleCloudPlatform/google-cloud-ruby
+gem 'google-cloud-storage'
 gem 'kaminari'
-
 gem 'redis'
 gem 'redis-rails'
 
