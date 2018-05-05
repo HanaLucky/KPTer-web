@@ -175,8 +175,10 @@ class User < ApplicationRecord
   private
     # validate of upload image size
     def cover_image_size
-      if cover_image.size > 3.megabytes
-        errors.add(:avator, I18n.t('errors.messages.exceeded_limit_size', limit_size: "3MB"))
+      unless cover_image.nil?
+        if cover_image.size > 3.megabytes
+          errors.add(:avator, I18n.t('errors.messages.exceeded_limit_size', limit_size: "3MB"))
+        end
       end
     end
 

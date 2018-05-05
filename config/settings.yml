@@ -1,6 +1,6 @@
 default: &default
   project_id: <%= ENV["GOOGLE_PROJECT_ID"] %>
-  keyfile: <%= ENV["GOOGLE_SERVICE_ACCOUNT_SECRET_KEY_FILE"] %>
+  keyfile: <%= ENV["GOOGLE_APPLICATION_CREDENTIALS"] %>
 
 development:
 
