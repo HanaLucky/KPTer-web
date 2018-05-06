@@ -12,7 +12,7 @@
 
 ActiveRecord::Schema.define(version: 20180321043855) do
 
-  create_table "boards", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin ROW_FORMAT=DYNAMIC", comment: "ボード" do |t|
+  create_table "boards", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", comment: "ボード" do |t|
     t.integer  "community_id",             null: false, comment: "コミュニティID"
     t.string   "name",                     null: false, comment: "ボード名"
     t.datetime "created_at",               null: false
@@ -21,14 +21,14 @@ ActiveRecord::Schema.define(version: 20180321043855) do
     t.index ["community_id"], name: "index_boards_on_community_id", using: :btree
   end
 
-  create_table "communities", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin ROW_FORMAT=DYNAMIC", comment: "コミュニティ" do |t|
+  create_table "communities", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", comment: "コミュニティ" do |t|
     t.string   "name",         limit: 32,             null: false, comment: "コミュニティ名"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
     t.integer  "lock_version",            default: 0, null: false
   end
 
-  create_table "community_users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin ROW_FORMAT=DYNAMIC", comment: "コミュニティ：ユーザー関連" do |t|
+  create_table "community_users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", comment: "コミュニティ：ユーザー関連" do |t|
     t.integer  "community_id",                                 null: false, comment: "コミュニティID"
     t.integer  "user_id",                                      null: false, comment: "ユーザーID"
     t.string   "status",       limit: 16, default: "inviting", null: false, comment: "ステータス"
@@ -40,7 +40,7 @@ ActiveRecord::Schema.define(version: 20180321043855) do
     t.index ["user_id"], name: "index_community_users_on_user_id", using: :btree
   end
 
-  create_table "kp_cards", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin ROW_FORMAT=DYNAMIC", comment: "KPカード" do |t|
+  create_table "kp_cards", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", comment: "KPカード" do |t|
     t.integer  "board_id",                             null: false, comment: "ボードID"
     t.integer  "owner_id",                             null: false, comment: "カード作成者ID"
     t.string   "title",                                             comment: "タイトル"
@@ -56,7 +56,7 @@ ActiveRecord::Schema.define(version: 20180321043855) do
     t.index ["card_type"], name: "index_kp_cards_on_card_type", using: :btree
   end
 
-  create_table "likes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin ROW_FORMAT=DYNAMIC" do |t|
+  create_table "likes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin" do |t|
     t.string   "likable_type"
     t.integer  "likable_id"
     t.integer  "user_id"
@@ -66,7 +66,7 @@ ActiveRecord::Schema.define(version: 20180321043855) do
     t.index ["user_id"], name: "index_likes_on_user_id", using: :btree
   end
 
-  create_table "memos", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin ROW_FORMAT=DYNAMIC", comment: "メモ" do |t|
+  create_table "memos", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", comment: "メモ" do |t|
     t.integer  "board_id",                               null: false, comment: "ボードID"
     t.text     "contents",     limit: 65535,                          comment: "内容"
     t.integer  "x",                          default: 0, null: false, comment: "X座標"
@@ -78,7 +78,7 @@ ActiveRecord::Schema.define(version: 20180321043855) do
     t.index ["board_id"], name: "index_memos_on_board_id", using: :btree
   end
 
-  create_table "social_profiles", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin ROW_FORMAT=DYNAMIC", comment: "ソーシャルプロファイル" do |t|
+  create_table "social_profiles", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", comment: "ソーシャルプロファイル" do |t|
     t.integer  "user_id"
     t.string   "provider",                               null: false, comment: "プロバイダー"
     t.string   "uid",                                    null: false, comment: "uid"
@@ -93,7 +93,7 @@ ActiveRecord::Schema.define(version: 20180321043855) do
     t.index ["user_id"], name: "index_social_profiles_on_user_id", using: :btree
   end
 
-  create_table "t_cards", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin ROW_FORMAT=DYNAMIC", comment: "Tカード" do |t|
+  create_table "t_cards", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", comment: "Tカード" do |t|
     t.integer  "board_id",                                  null: false, comment: "ボードID"
     t.integer  "owner_id",                                  null: false, comment: "カード作成者ID"
     t.string   "title",                                                  comment: "タイトル"
@@ -110,7 +110,7 @@ ActiveRecord::Schema.define(version: 20180321043855) do
     t.index ["status"], name: "index_t_cards_on_status", using: :btree
   end
 
-  create_table "tcard_assignees", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin ROW_FORMAT=DYNAMIC", comment: "Tカード担当者" do |t|
+  create_table "tcard_assignees", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", comment: "Tカード担当者" do |t|
     t.integer  "user_id",                               comment: "ユーザーID"
     t.integer  "t_card_id",                             comment: "TカードID"
     t.datetime "created_at",               null: false
@@ -121,7 +121,7 @@ ActiveRecord::Schema.define(version: 20180321043855) do
     t.index ["user_id"], name: "index_tcard_assignees_on_user_id", using: :btree
   end
 
-  create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin ROW_FORMAT=DYNAMIC" do |t|
+  create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin" do |t|
     t.string   "email",                              default: "",    null: false
     t.string   "encrypted_password",                 default: "",    null: false
     t.string   "reset_password_token"
