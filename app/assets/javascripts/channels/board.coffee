@@ -14,7 +14,7 @@ App.board = App.cable.subscriptions.create { channel: "BoardChannel", board_id: 
         App.board.add_tcard(JSON.parse(data['tcard']))
       else if data['memo']
         App.board.add_memo(JSON.parse(data['memo']))
- 
+
     else if data['method'] is 'update'
       if data['kpcard']
         card_id = "#kp_" + data['kpcard'].id
@@ -66,7 +66,7 @@ App.board = App.cable.subscriptions.create { channel: "BoardChannel", board_id: 
       window.fromServer = data['from_server']
       window.pickers[id].setDate(data['deadline'])
       window.fromServer = false
-    
+
     else if data['method'] is 'set_assignee'
       window.assignees[data['id']] = data['user_id']
 
@@ -75,7 +75,7 @@ App.board = App.cable.subscriptions.create { channel: "BoardChannel", board_id: 
 
   create_tcard: (title, board_id, x, y) ->
     @perform 'create_tcard', title: title, board_id: board_id, x: x, y: y
-  
+
   create_memo: (contents, board_id, x, y) ->
     @perform 'create_memo', contents: contents, board_id: board_id, x: x, y: y
 
@@ -123,22 +123,22 @@ App.board = App.cable.subscriptions.create { channel: "BoardChannel", board_id: 
     unless window.fromServer
       App.board.set_deadline(id, date)
     return
-  
+
   assign: () ->
     id = $("#tcard_id").val()
     user_id = $('input[name=user_id]:checked').val()
     @perform 'assign', id: id, user_id: user_id
     window.setTimeout("MicroModal.close('modal-button-member')", 100)
-    
+
 
   initialize_buttons: (_this) ->
     $boardWrap = $('#boardWrap')
     $boardWrap.addClass('cursor-copy')
     window.create_type = _this.data('type').toString()
     $boardWrap.click((e) -> App.board.create_card(e))
-    
+
   create_card: (e) ->
-    type = window.create_type 
+    type = window.create_type
     board_id = $('[name=board_id]').val()
     title = ""
     offsetX = e.offsetX
@@ -146,7 +146,7 @@ App.board = App.cable.subscriptions.create { channel: "BoardChannel", board_id: 
     $boardWrap = $('#boardWrap')
     if $boardWrap.hasClass('cursor-copy')
       if type is 'keep' or type is 'problem'
-        
+
         App.board.create_kpcard(type, title, board_id, offsetX, offsetY)
       else if type is 'try'
         App.board.create_tcard(title, board_id, offsetX, offsetY)
@@ -156,7 +156,7 @@ App.board = App.cable.subscriptions.create { channel: "BoardChannel", board_id: 
 
       $boardWrap.removeClass('cursor-copy')
 
-  
+
   initialize_cards: ->
     window.fromServer = false
     window.pickers = []
@@ -168,28 +168,28 @@ App.board = App.cable.subscriptions.create { channel: "BoardChannel", board_id: 
       App.board.add_tcard(card)
       if card.user
         window.assignees[card.id] = card.user.id
-    
+
     for card in memos
       App.board.add_memo(card)
 
   # kpcard
   add_kpcard: (card) ->
     type_id = "kp_#{card.id}"
-      
+
     addingCard = App.board.adding_kpcard(card, type_id)
     $('#boardWrap').append addingCard
     addingCard.offset(top: card.y, left: card.x)
-    
+
     $("##{type_id}").draggable({cancel: '.card-text'})
 
     $("##{type_id}").on 'dragstop', ->
       title = $(this).find(".card-text").text()
       App.board.update_kpcard($(this), title)
-    
+
     $("##{type_id}-text").on 'blur', ->
       title = $(this).context.value
       App.board.update_kpcard($(this).parent(), title)
-    
+
     $("##{type_id}-like").on 'click', ->
       kLikeClass = 'mdl-color-text--blue-900'
       pLikeClass = 'mdl-color-text--pink-900'
@@ -211,8 +211,8 @@ App.board = App.cable.subscriptions.create { channel: "BoardChannel", board_id: 
           $(this).next('span').addClass(kLikeClass)
         else if type is 'problem'
           $(this).children(".material-icons").addClass(pLikeClass)
-          $(this).next('span').addClass(pLikeClass)   
-    
+          $(this).next('span').addClass(pLikeClass)
+
     $("##{type_id}").find('.delete-btn').on 'click', ->
       type = $(this).closest('.cardBox').data('type')
       id = $(this).closest('.cardBox')[0].id.split("_")[1]
@@ -230,7 +230,7 @@ App.board = App.cable.subscriptions.create { channel: "BoardChannel", board_id: 
     $('#boardWrap').append addingCard
     addingCard.offset(top: card.y, left: card.x)
     $("##{type_id}").draggable({cancel: '.card-text'})
-    
+
     date = new Date()
     year  = date.getFullYear()
 
@@ -242,7 +242,7 @@ App.board = App.cable.subscriptions.create { channel: "BoardChannel", board_id: 
           minDate: new Date(year - 2, 0, 1),
           maxDate: new Date(year + 2, 12, 31),
           yearRange: [year - 2, year + 2]
-          onSelect: ((date) -> 
+          onSelect: ((date) ->
             App.board.select_date(date, this._o.ariaLabel)
             $("##{type_id}-datepicker").addClass('mdl-color-text--light-green-900')
           )
@@ -252,11 +252,11 @@ App.board = App.cable.subscriptions.create { channel: "BoardChannel", board_id: 
     $("##{type_id}").on 'dragstop', ->
       title = $(this).find(".card-text").text()
       App.board.update_tcard($(this), title)
-    
+
     $("##{type_id}-text").on 'blur', ->
       title = $(this).context.value
       App.board.update_tcard($(this).parent(), title)
-    
+
     $("##{type_id}-assign").on 'click', ->
       $("#tcard_id").val(card.id)
       if window.assignees[card.id]
@@ -264,10 +264,10 @@ App.board = App.cable.subscriptions.create { channel: "BoardChannel", board_id: 
         $('input[name="user_id"]:checked:eq(0)').prop('checked', false)
         $("#user_id_#{window.assignees[card.id]}").prop('checked', true)
         $("#user_id_#{window.assignees[card.id]}").parent().addClass('is-checked')
-      else if $('input[name="user_id"]:checked')[0] 
+      else if $('input[name="user_id"]:checked')[0]
         $('input[name="user_id"]:checked:eq(0)').parent().removeClass('is-checked')
         $('input[name="user_id"]:checked:eq(0)').prop('checked', false)
-      
+
       MicroModal.show('modal-button-member')
       # assignのradio button制御
       $('[name="user_id"]').on 'click', ->
@@ -287,7 +287,7 @@ App.board = App.cable.subscriptions.create { channel: "BoardChannel", board_id: 
       else
         $(this).children(".material-icons").addClass(likeClass)
         $(this).next('span').addClass(likeClass)
-    
+
     $("##{type_id}").find('.delete-btn').on 'click', ->
       id = $(this).closest('.cardBox')[0].id.split("_")[1]
       App.board.delete_tcard(id)
@@ -343,7 +343,7 @@ App.board = App.cable.subscriptions.create { channel: "BoardChannel", board_id: 
     else
       likeClass = 'kpter-color-text--white'
 
-    src = if card.owner && card.owner.avatar.url then "#{card.owner.avatar.url}" else no_img
+    src = if card.owner && card.owner.avatar then "#{card.owner.avatar}" else no_img
     likeNumClass = if card.card_type is 'keep' then 'mdl-color-text--blue-900' else 'mdl-color-text--pink-900'
     displayNum = if card.likes and card.likes.length > 0 then card.likes.length else ''
 
@@ -366,8 +366,8 @@ App.board = App.cable.subscriptions.create { channel: "BoardChannel", board_id: 
 
     assigneeClass = if card.user then 'mdl-color-text--light-green-900' else ''
     deadlineClass = if card.deadline then 'mdl-color-text--light-green-900' else ''
-    
-    src = if card.owner.avatar.url then "#{card.owner.avatar.url}" else no_img
+
+    src = if card.owner.avatar then "#{card.owner.avatar}" else no_img
     likeClass = if isLiked then 'mdl-color-text--light-green-900' else 'kpter-color-text--white'
     displayNum = if card.likes and card.likes.length > 0 then card.likes.length else ''
 

@@ -198,7 +198,7 @@ class User < ApplicationRecord
         File.open("#{fs_directory}/#{cover_image.original_filename}", 'w+b') do |fp|
           fp.write(cover_image.tempfile.read)
         end
-        avatar_url = "#{avatar_path}/#{cover_image.original_filename}"
+        avatar_url = "/#{avatar_path}/#{cover_image.original_filename}"
       end
       update_columns avatar: avatar_url
     end
