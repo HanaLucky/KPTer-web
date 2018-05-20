@@ -6,10 +6,12 @@ services:
       - .:/KPTer-web:delegated
     working_dir: "/KPTer-web"
     environment:
-      MYSQL_USER: "root"
-      MYSQL_PASSWORD: "root"
-      MYSQL_DATABASE: "kpter_development"
-      MYSQL_ROOT_PASSWORD: "root"
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
+      MYSQL_DATABASE: kpter_development
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_HOST: db
+      REDIS_URL: redis://redis:6379
     command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
     ports:
       - "3000:3000"
@@ -17,12 +19,16 @@ services:
       - kpter_default
     links:
       - db
+      - redis
     depends_on:
       - redis
       - db
 
   redis:
     image: redis
+    command: redis-server 
+    ports:
+      - 6379:6379
     networks:
       - kpter_default
 
@@ -32,8 +38,8 @@ services:
     volumes:
       - data:/var/lib/mysql
     environment:
-      MYSQL_DATABASE: "kpter_development"
-      MYSQL_ROOT_PASSWORD: "root"
+      MYSQL_DATABASE: kpter_development
+      MYSQL_ROOT_PASSWORD: root
     ports:
       - "3306:3306"
     networks:
