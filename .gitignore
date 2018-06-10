@@ -47,3 +47,6 @@ bower.json
 
 # Ignore redis binary dump (dump.rdb) files see.https://github.com/github/gitignore/blob/master/Global/Redis.gitignore
 *.rdb
+
+# Ignore master key for decrypting credentials and more.
+/config/master.key

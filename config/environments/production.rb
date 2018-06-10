@@ -91,5 +91,7 @@ Rails.application.configure do
     :authentication => :plain,
     :enable_starttls_auto => true
   }
+  # Reading the Credentials
+  config.require_master_key = true
 
 end
