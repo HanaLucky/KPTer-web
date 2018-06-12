@@ -56,4 +56,5 @@ production:
   username: <%= ENV['KPTER_DATABASE_USER'] %>
   password: <%= ENV['KPTER_DATABASE_PASSWORD'] %>
   timeout: 5000
-  socket: <%= ENV['KPTER_INSTANCE_CONNECTION_NAME'] %>
+  host: <%= ENV['KPTER_DATABASE_HOST'] %>
+ 

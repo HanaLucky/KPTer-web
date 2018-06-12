@@ -51,7 +51,7 @@ group :development, :test do
   gem 'pry-byebug'
   gem 'pry-stack_explorer'
   gem 'rspec-rails', '~> 3.5.0'
-  gem 'factory_girl_rails'
+  gem 'factory_bot_rails'
   # To examine N+1
   gem 'bullet'
   gem 'faker'
@@ -67,8 +67,6 @@ group :development do
   gem 'spring-commands-rspec'
 
   gem 'pry-rails'
-  # Create for ERD (https://github.com/voormedia/rails-erd)
-  gem 'rails-erd'
 
   gem 'letter_opener_web'
 end
