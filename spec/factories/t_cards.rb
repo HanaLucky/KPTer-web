@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :t_card do
     board nil
     title "MyString"

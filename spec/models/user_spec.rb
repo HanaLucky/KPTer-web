@@ -7,7 +7,7 @@ RSpec.describe User, type: :model do
     context "正常系" do
 
       before :all do
-        @user = FactoryGirl.create(:user)
+        @user = FactoryBot.create(:user)
         @community = Community.create(
           name: "test_community"
         )
@@ -41,7 +41,7 @@ RSpec.describe User, type: :model do
   describe "Userに紐付いたTCardを引数があれば、statusで絞込、期限でソートして取得します。" do
 
     before :all do
-      @user = FactoryGirl.create(:user)
+      @user = FactoryBot.create(:user)
       @community = Community.create(
         name: "test_community"
       )
@@ -156,7 +156,7 @@ RSpec.describe User, type: :model do
   describe "Userに紐付いたTCardを引数があれば、期限でソートして取得します。" do
 
     before :all do
-      @user = FactoryGirl.create(:user)
+      @user = FactoryBot.create(:user)
       @community = Community.create(
         name: "test_community"
       )
@@ -246,13 +246,13 @@ RSpec.describe User, type: :model do
     before :all do
       # コミュニティに１ユーザー参加させる
       @community = Community.create(name: "community name")
-      @joining_user = FactoryGirl.create(:user)
+      @joining_user = FactoryBot.create(:user)
       @community_user = CommunityUser.create(
         community_id: @community.id,
         user_id: @joining_user.id
       )
       # コミュニティに属さないユーザを作成する
-      @unjoining_user = FactoryGirl.create(:user)
+      @unjoining_user = FactoryBot.create(:user)
     end
 
     context "参加済みの場合" do
@@ -277,7 +277,7 @@ RSpec.describe User, type: :model do
 
     before :all do
       @community = Community.create(name: "community name")
-      @user = FactoryGirl.create(:user)
+      @user = FactoryBot.create(:user)
       # コミュニティに参加させる
       @user.join_in(@community)
       @community_user = CommunityUser.find_by(community_id: @community.id, user_id: @user.id)

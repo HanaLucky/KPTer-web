@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :like do
     likable nil
     user nil

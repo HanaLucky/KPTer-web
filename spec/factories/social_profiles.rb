@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :social_profile do
     user nil
     provider "MyString"

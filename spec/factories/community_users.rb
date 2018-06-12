@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :community_user do
     community nil
     user nil
