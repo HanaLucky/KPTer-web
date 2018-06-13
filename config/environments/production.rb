@@ -83,8 +83,8 @@ Rails.application.configure do
   config.action_mailer.default_url_options = { host: "https://kpter.net" }
 
   config.action_mailer.smtp_settings = {
-    :user_name => "ENV['SMTP_PROVIDER_USERNAME']",
-    :password => "ENV['SMTP_PROVIDER_PASSWORD']",
+    :user_name => ENV['SMTP_PROVIDER_USERNAME'],
+    :password => ENV['SMTP_PROVIDER_PASSWORD'],
     :domain => "kpter.net",
     :address => "smtp.sendgrid.net",
     :port => ENV['SMTP_PROVIDER_PORT'],
