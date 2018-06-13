@@ -21,8 +21,7 @@ class User < ApplicationRecord
     if Rails.env.production?
       @storage_bucket ||= begin
         config = Rails.application.config.x.settings
-        storage = Google::Cloud::Storage.new project_id: config["project_id"],
-                                             credentials: config["keyfile"]
+        storage = Google::Cloud::Storage.new
         storage.bucket config["gcs_bucket"], skip_lookup: true
       end
     end

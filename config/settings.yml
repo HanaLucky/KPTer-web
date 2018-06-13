@@ -1,6 +1,4 @@
 default: &default
-  project_id: <%= ENV["GOOGLE_PROJECT_ID"] %>
-  keyfile: <%= ENV["GOOGLE_APPLICATION_CREDENTIALS"] %>
 
 production:
   <<: *default
