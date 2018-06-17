@@ -47,4 +47,7 @@ Rails.application.configure do
   # disables logging of assets requests. Set to true by default in development.rb.
   # ref. http://edgeguides.rubyonrails.org/configuring.html (search with 'config.assets.quiet')
   config.assets.quiet = true
+  
+  # redis
+  config.action_cable.allowed_request_origins = [ /http:\/\/.*/ ]
 end
