@@ -7,7 +7,7 @@ RSpec.describe TCard, type: :model do
     context "正常系" do
 
       before :all do
-        @user = FactoryGirl.create(:user)
+        @user = FactoryBot.create(:user)
         @community = Community.create(
           name: "test_community"
         )

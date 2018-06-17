@@ -25,7 +25,7 @@ RSpec.describe Community, type: :model do
   describe "コミュニティに紐づくt_cardsを取得する" do
     before :all do
 
-      @user = FactoryGirl.create(:user)
+      @user = FactoryBot.create(:user)
       @community = Community.create(name: "community name")
 
       @board1 = Board.create(name: "board_1", community_id: @community.id)
@@ -147,7 +147,7 @@ RSpec.describe Community, type: :model do
   describe "コミュニティ内からユーザーを脱退させる" do
     before :all do
       @community = Community.create(name: "community name")
-      @user = FactoryGirl.create(:user)
+      @user = FactoryBot.create(:user)
       # コミュニティに参加させる
       @community_user = CommunityUser.create(community_id: @community.id, user_id: @user.id)
       # 脱退する
@@ -171,11 +171,11 @@ RSpec.describe Community, type: :model do
     before :all do
       # community_1に5ユーザーがあらわれた
       @community_1 = Community.create(name: "community_1")
-      @user_1_1 = FactoryGirl.create(:user)
-      @user_1_2 = FactoryGirl.create(:user)
-      @user_1_3 = FactoryGirl.create(:user)
-      @user_1_4 = FactoryGirl.create(:user)
-      @user_1_5 = FactoryGirl.create(:user)
+      @user_1_1 = FactoryBot.create(:user)
+      @user_1_2 = FactoryBot.create(:user)
+      @user_1_3 = FactoryBot.create(:user)
+      @user_1_4 = FactoryBot.create(:user)
+      @user_1_5 = FactoryBot.create(:user)
       # 4, 2, 1, 5, 3の順でコミュニティに参加した
       @users = [@user_1_4, @user_1_2, @user_1_1, @user_1_5, @user_1_3]
       @users.each{ |user|
@@ -184,7 +184,7 @@ RSpec.describe Community, type: :model do
 
       # community_2に1ユーザーがあらわれた（ダミーデータ）
       @community_2 = Community.create(name: "community_2")
-      @user_2_1 = FactoryGirl.create(:user)
+      @user_2_1 = FactoryBot.create(:user)
       CommunityUser.create(community_id: @community_2.id, user_id: @user_2_1.id)
 
       # community_1のユーザーを全員取得する

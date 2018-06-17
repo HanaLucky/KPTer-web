@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :tcard_assignee do
     user nil
     t_card nil
