@@ -3,10 +3,11 @@ module ApplicationHelper
   # avatar image url
   def avatar_url(user)
     if user
-      unless user.avatar
-        url = asset_path("noimages/profile.png")
+      if user.avatar.attached?
+        # url = "#{asset_path(user.avatar)}?#{user.lock_version}"
+        url = url_for(user.avatar)
       else
-        url = "#{asset_path(user.avatar)}?#{user.lock_version}"
+        url = asset_path("noimages/profile.png")
       end
     end
   end

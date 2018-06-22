@@ -49,12 +49,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # avatar image upload
   def upload
-    if current_user.update_attributes(cover_image: params[:qqfile])
-      flash.keep[:notice] = t 'devise.registrations.update_avatar_image'
-    else
-      # XXX いまひとつ
-      flash.keep[:alert] = current_user.errors.full_messages
-    end
+    # if avatar image has already exists, delete avatar image file
+    if current_user.avatar.attached? then current_user.avatar.purge end
+    current_user.avatar.attach(params[:qqfile])
+    flash.keep[:notice] = t 'devise.registrations.update_avatar_image'
+
     # tokenリフレッシュするのに成功してもエラーでもレンダリングしなおすため、success固定で返す
     render json: {success: true}
   end

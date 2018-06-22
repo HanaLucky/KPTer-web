@@ -9,6 +9,7 @@ capybara-*.html
 **.orig
 rerun.txt
 pickle-email-*.html
+/storage
 
 # for Mac
 .DS_Store
