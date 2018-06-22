@@ -36,6 +36,7 @@ gem 'google-cloud-storage'
 gem 'kaminari'
 gem 'redis'
 gem 'redis-rails'
+gem 'bootsnap'
 
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
