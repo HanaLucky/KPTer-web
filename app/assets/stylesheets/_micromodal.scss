@@ -130,5 +130,10 @@
   }
   .modal__container, .modal__overlay {
     will-change: transform;
+    footer {
+      form.button_to {
+        display: inline;
+      }
+    }
   }
 }

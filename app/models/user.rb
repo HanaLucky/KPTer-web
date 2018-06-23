@@ -171,6 +171,22 @@ class User < ApplicationRecord
     self.social_profiles.where(provider: provider).delete_all
   end
 
+  def inactive
+    ActiveRecord::Base.transaction do
+      # K, P, Tカード所有者でなくす
+      TCard.where('owner_id = ?', self.id).update_all(:owner_id => nil)
+      KpCard.where('owner_id = ?', self.id).update_all(:owner_id => nil)
+      # タスクの担当者から外す
+      tcard_assignees = TcardAssignee.where(user_id: self.id).delete_all
+      # like差し引く
+      likes = Like.where(user_id: self.id).delete_all
+      # 全コミュニティから抜ける
+      community_users = CommunityUser.where(user_id: self.id).delete_all
+      # ソーシャル連携を削除する
+      social_profiles = SocialProfile.where(user_id: self.id).delete_all
+    end
+  end
+
   private
     # validate of upload image size
     def cover_image_size

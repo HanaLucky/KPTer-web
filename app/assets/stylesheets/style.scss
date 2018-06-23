@@ -753,8 +753,9 @@ ul.notice {
 }
 
 .social-connect-button-large {
-  width: 350px;
+  width: 320px;
   height: 40px !important;
+  padding: 0 8px !important;
   border-radius: 3px !important;
   box-shadow: 0 0 1px 0 rgba(0,0,0,0.12), 0 1px 1px 0 rgba(0,0,0,0.24);
   background-color: #FFFFFF;
@@ -763,6 +764,7 @@ ul.notice {
 .social-connect-button {
   width: 270px;
   height: 40px !important;
+  padding: 0 8px !important;
   border-radius: 3px !important;
   box-shadow: 0 0 1px 0 rgba(0,0,0,0.12), 0 1px 1px 0 rgba(0,0,0,0.24);
   background-color: #FFFFFF;
@@ -778,4 +780,26 @@ ul.notice {
   font-weight: 600;
   color: rgba(0, 0, 0, 0.54);
   text-transform: initial;
+}
+
+.kpter-danger-button {
+  font-size: 14px;
+  display: inline-block;
+  padding: .25em 1.5em;
+  border: 1px solid #dd4b40;
+  border-radius: 3px;
+  color: #dd4b40;
+  background: white;
+  text-decoration: none;
+  text-align: center;
+  white-space: nowrap;
+  cursor: pointer;
+  line-height: 24px;
+  min-width: 270px;
+  transition: box-shadow .2s cubic-bezier(.4,0,1,1),background-color .2s cubic-bezier(.4,0,.2,1),color .2s cubic-bezier(.4,0,.2,1);
+  &:hover {
+    text-decoration: none !important;
+    color: #fff !important;
+    background: #dd4b40;
+  }
 }

@@ -1,4 +1,6 @@
 $(function () {
+  // init modal
+  MicroModal.init();
 
   // cropper object
   var cropper;

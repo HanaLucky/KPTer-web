@@ -33,6 +33,12 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  # Override
+  # See. https://github.com/plataformatec/devise/blob/3722aa62961720eafa5bb5ee6c99b76c26b6be3e/lib/devise/controllers/helpers.rb#L219-L230
+  def after_sign_out_path_for(resource)
+    new_user_session_path
+  end
+
   protected
     def configure_permitted_parameters
       # see. https://github.com/plataformatec/devise#strong-parameters

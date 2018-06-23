@@ -22,11 +22,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
   #   super
   # end
 
-  # see. https://github.com/HanaLucky/KPTer-web/issues/183
   # DELETE /resource
-  # def destroy
-  #  super
-  # end
+  # see. https://github.com/HanaLucky/KPTer-web/issues/183
+  # see. https://github.com/plataformatec/devise/blob/715192a7709a4c02127afb067e66230061b82cf2/app/controllers/devise/registrations_controller.rb#L68-L74
+  def destroy
+    current_user.inactive
+    super
+  end
 
   # GET /resource/cancel
   # Forces the session data which is usually expired after sign
