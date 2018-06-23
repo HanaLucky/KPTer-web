@@ -184,6 +184,8 @@ class User < ApplicationRecord
     after_create :upload_image, if: :cover_image
     def upload_image
       avatar_path = "uploads/user/avatar/#{id}"
+      ext = File.extname(cover_image.original_filename)
+      cover_image.original_filename = cover_image.original_filename.unpack("H*")[0] + ext
       if Rails.env.production?
         file = User.storage_bucket.create_file \
           cover_image.tempfile,
@@ -205,7 +207,7 @@ class User < ApplicationRecord
     before_destroy :delete_image, if: :avatar
     def delete_image
       if Rails.env.production?
-        image_uri = URI.parse avatar
+        image_uri = URI.parse URI.encode avatar
         if "#{image_uri.host}/#{User.storage_bucket.name}" == "storage.googleapis.com/#{User.storage_bucket.name}"
           # Remove leading forward slash from image path
           # The result will be the image key, eg. "cover_images/:id/:filename"
@@ -215,7 +217,7 @@ class User < ApplicationRecord
         end
       else
         # 元のファイルを削除する
-        avatar_file = Rails.root.join('public', self.avatar)
+        avatar_file = 'public' + self.avatar
         FileUtils.rm_r(avatar_file) if FileTest.exist?(avatar_file)
       end
     end
