@@ -15,7 +15,8 @@
           return;
         }
         var data = {
-          message: "<%= notice %>"
+          message: "<%= notice %>",
+          timeout: 5000
         };
         snackbarContainer.MaterialSnackbar.showSnackbar(data);
         clearInterval(id);

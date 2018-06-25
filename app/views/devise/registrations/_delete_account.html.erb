@@ -1,0 +1,21 @@
+<div class="modal__overlay" tabindex="-1" data-micromodal-close>
+  <div class="modal__container mdl-shadow--2dp" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
+    <header class="modal__header">
+      <h2 class="modal__title mdl-color-text--red-800">
+        Delete Account
+      </h2>
+      <button class="modal__close" aria-label="Close modal" data-micromodal-close></button>
+    </header>
+    <main class="modal__content">
+      <div class="mdl-typography--body-1-color-contrast">
+        Deleting your account will immediately delete all your data. This can not be reversed.
+      </div>
+    </main>
+    <footer class="modal__footer">
+      <%= button_to "Yes, Delete KPTER account", registration_path(current_user), method: :delete, class: "kpter-danger-button", style: "display: inline;" %>
+      <button class="mdl-button" data-micromodal-close aria-label="Close delete account dialog window">
+        Cancel
+      </button>
+    </footer>
+  </div>
+ </div>

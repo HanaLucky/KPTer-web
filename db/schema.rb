@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_03_21_043855) do
+ActiveRecord::Schema.define(version: 2018_06_23_190939) do
 
   create_table "boards", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", comment: "ボード", force: :cascade do |t|
     t.integer "community_id", null: false, comment: "コミュニティID"
@@ -42,7 +42,7 @@ ActiveRecord::Schema.define(version: 2018_03_21_043855) do
 
   create_table "kp_cards", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", comment: "KPカード", force: :cascade do |t|
     t.integer "board_id", null: false, comment: "ボードID"
-    t.integer "owner_id", null: false, comment: "カード作成者ID"
+    t.integer "owner_id", comment: "カード作成者ID"
     t.string "title", comment: "タイトル"
     t.string "detail", limit: 512, comment: "詳細"
     t.string "card_type", limit: 16, null: false, comment: "カード種別"
@@ -95,7 +95,7 @@ ActiveRecord::Schema.define(version: 2018_03_21_043855) do
 
   create_table "t_cards", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", comment: "Tカード", force: :cascade do |t|
     t.integer "board_id", null: false, comment: "ボードID"
-    t.integer "owner_id", null: false, comment: "カード作成者ID"
+    t.integer "owner_id", comment: "カード作成者ID"
     t.string "title", comment: "タイトル"
     t.string "detail", limit: 512, comment: "詳細"
     t.date "deadline", comment: "期限"

@@ -367,7 +367,7 @@ App.board = App.cable.subscriptions.create { channel: "BoardChannel", board_id: 
     assigneeClass = if card.user then 'mdl-color-text--light-green-900' else ''
     deadlineClass = if card.deadline then 'mdl-color-text--light-green-900' else ''
 
-    src = if card.owner.avatar then "#{card.owner.avatar}" else no_img
+    src = if card.owner && card.owner.avatar then "#{card.owner.avatar}" else no_img
     likeClass = if isLiked then 'mdl-color-text--light-green-900' else 'kpter-color-text--white'
     displayNum = if card.likes and card.likes.length > 0 then card.likes.length else ''
 
