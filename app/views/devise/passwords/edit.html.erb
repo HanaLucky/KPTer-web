@@ -1,24 +1,20 @@
-<div class="panel panel-default devise-bs">
-  <div class="panel-heading">
-    <h4><%= t('.change_your_password', :default => 'Change your password') %></h4>
-  </div>
-  <div class="panel-body">
-    <%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :put, role: "form" }) do |f| %>
-      <%= f.hidden_field :reset_password_token %>
-      <div class="form-group form-group-field">
-        <div class="input-field col">
-          <%= f.password_field :password, autofocus: true, autocomplete: "off", class: "form-control validate", required: true, maxlength: 128 %>
-          <%= f.label :password, class: "required", data: {error: 'wrong'} %>
-        </div>
-      </div>
-      <div class="form-group form-group-field">
-        <div class="input-field col">
-          <%= f.password_field :password_confirmation, class: "form-control validate", required: true, maxlength: 128 %>
-          <%= f.label :password_confirmation, t('.confirm_new_password', :default => 'Confirm new password'), class: "required", data: {error: 'wrong'} %>
-        </div>
-      </div>
-      <%= f.submit t('.change_my_password', :default => 'Change my password'), class: "btn btn-primary" %>
-    <% end %>
-  </div>
+<% content_for :head_title do %>
+  <%= t('.change_your_password', :default => 'Change your password') %>
+<% end %>
+<div class="kpter-form-middle mdl-cell mdl-grid mdl-grid--no-spacing">
+  <div class="mdl-typography--display-1-color-contrast"><%= t('.forgot_your_password', default: 'Forgot your password?') %></div>
+  <%= render partial: "devise/shared/error_messages", locals: {object: resource} %>
+  <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put, role: "form" }) do |f| %>
+    <%= f.hidden_field :reset_password_token %>
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+      <%= f.password_field :password, autocomplete: true, autocomplete: "off", class: "mdl-textfield__input", maxlength: 128, required: true %>
+      <%= f.label :password, class: "mdl-textfield__label" %>
+    </div>
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+      <%= f.password_field :password_confirmation, class: "mdl-textfield__input", maxlength: 128, required: true %>
+      <%= f.label :password_confirmation, class: "mdl-textfield__label" %>
+    </div>
+    <%= button_tag t('.change_my_password', :default => "Change my password"), class: "mdl-button mdl-button--colored mdl-js-button float-right mdl-js-ripple-effect" %>
+  <% end %>
+  <%= render "devise/shared/links" %>
 </div>
-<%= render "devise/shared/links" %>
