@@ -1,5 +1,5 @@
 <% content_for :head_title do %>
-  Resend confirmation instructions
+  <%= t('.resend_confirmation_instructions', default: "Resend confirmation instructions") %>
 <% end %>
 <div class="kpter-form-middle mdl-cell mdl-grid mdl-grid--no-spacing">
   <div class="mdl-typography--display-1-color-contrast"><%= t('.resend_confirmation_instructions', default: "Resend confirmation instructions") %></div>
@@ -8,7 +8,7 @@
     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
       <%= f.email_field :email, class: "mdl-textfield__input", maxlength: 255, required: true %>
       <%= f.label :email, class: "mdl-textfield__label" %>
-      <span class="mdl-textfield__error">Invalid email</span>
+      <span class="mdl-textfield__error"><%= t('errors.messages.invalids.email', default: "Invalid email") %></span>
     </div>
     <%= button_tag t('.resend_confirmation_instructions', :default => "Resend confirmation instructions"), class: "mdl-button mdl-button--colored mdl-js-button float-right mdl-js-ripple-effect" %>
   <% end %>

@@ -1,22 +1,22 @@
-<div class="modal__overlay" tabindex="-1" data-micromodal-close> 
-  <div class="modal__container mdl-shadow--2dp" role="dialog" aria-modal="true" aria-labelledby="modal-1-title"> 
-    <header class="modal__header"> 
-      <h2 class="modal__title" id="modal-1-title"> 
-        Member List 
-      </h2> 
-      <button class="modal__close" aria-label="Close modal" data-micromodal-close></button> 
-    </header> 
-    <main class="modal__content" id="modal-1-content"> 
-      <div class="mdl-list kpter-member-list members__container"> 
-        <% if members.nil? %> 
-          Nobody is here 
-        <% else %> 
+<div class="modal__overlay" tabindex="-1" data-micromodal-close>
+  <div class="modal__container mdl-shadow--2dp" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
+    <header class="modal__header">
+      <h2 class="modal__title" id="modal-1-title">
+        <%= t('community.members_list.title') %>
+      </h2>
+      <button class="modal__close" aria-label="Close modal" data-micromodal-close></button>
+    </header>
+    <main class="modal__content" id="modal-1-content">
+      <div class="mdl-list kpter-member-list members__container">
+        <% if members.nil? %>
+          <%= t('members_list.members_list.nobody_is_here') %>
+        <% else %>
           <ul class="kpter-list-control mdl-list">
-            <% members.each_with_index do |cu, i| %> 
+            <% members.each_with_index do |cu, i| %>
               <li class="mdl-list__item">
                 <% if cu.status.joining? %>
-                  <span class="mdl-list__item-primary-content"> 
-                    <%= image_tag(avatar_url(cu.user), :class => "mdl-list__item-avatar", :alt => "#{cu.user.nickname}") %> 
+                  <span class="mdl-list__item-primary-content">
+                    <%= image_tag(avatar_url(cu.user), :class => "mdl-list__item-avatar", :alt => "#{cu.user.nickname}") %>
                     <span><%= cu.user.nickname %><% if current_user == cu.user %><span class="joining-you">&nbsp;(you)</span><% end %></span>
                   </span>
                   <span class="mdl-list__item-secondary-action">
@@ -24,19 +24,19 @@
                       <input type="radio" id="user_id_<%= cu.user_id %>" class="mdl-radio__button" name="user_id" value="<%= cu.user_id %>" />
                     </label>
                   </span>
-                <% end %> 
-              </li> 
-            <% end %> 
-          <% end %> 
+                <% end %>
+              </li>
+            <% end %>
+          <% end %>
         </ul>
       </div>
       <div class="mdl-dialog__actions">
         <input id="tcard_id" name="tcard_id" type="hidden" />
         <button id="assign" class="mdl-button mdl-js-button mdl-button--colored mdl-js-ripple-effect">
           <span class="mdl-button__ripple-container"><span class="mdl-ripple"></span></span>
-          ASSIGN
+          <%= t('community.board.actions.assign') %>
         </button>
-      </div> 
-    </main> 
-  </div> 
-</div> 
+      </div>
+    </main>
+  </div>
+</div>

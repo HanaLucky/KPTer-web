@@ -1,32 +1,32 @@
 <% content_for :head_title do %>
-  Thank you!
+  <%= t('confirm.title', default: 'Thank you!') %>
 <% end %>
 <div class="kpter-content mdl-cell mdl-cell--12-col">
   <div class="mdl-typography--text-center">
-    <div class="kpter-content-head mdl-typography--display-1-color-contrast">Completed send authenticate mail</div>
+    <div class="kpter-content-head mdl-typography--display-1-color-contrast"><%= t('confirm.head') %></div>
     <div class="kpter-content-subhead">
-      <div class="mdl-typography--subhead">Registration is not completed yet.</div>
-      <div class="mdl-typography--subhead">Please access the URL described in the mail and perform the registration completion procedure.</div>
+      <div class="mdl-typography--subhead"><%= t('confirm.subhead1') %></div>
+      <div class="mdl-typography--subhead"><%= t('confirm.subhead2') %></div>
     </div>
     <ul class="kpter-steps">
       <li>
         <%= image_tag("confirm_step_1.png") %><br>
-        <strong>Step 1:</strong> Check your mail.
+        <%= t('confirm.step1_html') %>
       </li>
       <li>
         <%= image_tag("confirm_step_2.png") %><br>
-        <strong>Step 2:</strong> Click on link, please.
+        <%= t('confirm.step2_html') %>
       </li>
       <li>
         <%= image_tag("confirm_step_3.png") %><br>
-        <strong>Step 3:</strong> Complete register.
+        <%= t('confirm.step3_html') %>
       </li>
     </ul>
     <div class="kpter-mail">
       <% if @email.end_with?("@gmail.com") %>
-        <a href="https://mail.google.com/mail/" target="_blank" class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent mdl-js-ripple-effect" role="button">Check Gmail</a>
+        <a href="https://mail.google.com/mail/" target="_blank" class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent mdl-js-ripple-effect" role="button"><%= t('confirm.check_mail', {mailer: 'Gmail'} ) %></a>
       <% elsif @email.end_with?("@yahoo.co.jp") %>
-        <a href="https://mail.yahoo.co.jp" target="_blank" class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent mdl-js-ripple-effect" role="button">Check Yahoo! Mail</a>
+        <a href="https://mail.yahoo.co.jp" target="_blank" class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent mdl-js-ripple-effect" role="button"><%= t('confirm.check_mail', {mailer: 'Yahoo! Mail'} ) %></a>
       <% end %>
     </div>
   </div>

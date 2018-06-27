@@ -13,11 +13,11 @@
         </button>
         <ul class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect kpter-menu" for="settings">
           <li class="mdl-menu__item">
-            <%= link_to community_path + '/invitable_users', {:remote => true, class: "kpter-menu-link dialog-button-invitable-users"} do %>Invite<% end %>
+            <%= link_to community_path + '/invitable_users', {:remote => true, class: "kpter-menu-link dialog-button-invitable-users"} do %><%= t("community.menus.invite") %><% end %>
           </li>
-          <li class="mdl-menu__item"><a href="#" class="dialog-button-edit">Edit</a></li>
-          <li class="mdl-menu__item mdl-menu__item--full-bleed-divider"><a href="#" class="dialog-button-leave">Leave</a></li>
-          <li class="mdl-menu__item"><a href="#" class="dialog-button-delete">Delete</a></li>
+          <li class="mdl-menu__item"><a href="#" class="dialog-button-edit"><%= t("community.menus.edit") %></a></li>
+          <li class="mdl-menu__item mdl-menu__item--full-bleed-divider"><a href="#" class="dialog-button-leave"><%= t("community.menus.leave") %></a></li>
+          <li class="mdl-menu__item"><a href="#" class="dialog-button-delete"><%= t("community.menus.delete") %></a></li>
         </ul>
       </div>
     </div>
@@ -33,12 +33,12 @@
         <table class="mdl-data-table mdl-shadow--2dp kpter-table" id="board-table">
           <thead>
             <tr>
-              <th class="mdl-data-table__cell--non-numeric kpter-table-header-title">Board</th>
+              <th class="mdl-data-table__cell--non-numeric kpter-table-header-title"><%= t('community.board.title') %></th>
               <th>
               <button class="mdl-button mdl-js-button mdl-button--icon dialog-button-new-board mdl-button--fab mdl-button--mini-fab board-add-button">
                 <i class="material-icons" id="board-add-button">add</i>
                 <div class="mdl-tooltip" data-mdl-for="board-add-button">
-                  Create Board
+                  <%= t('community.board.actions.create') %>
                 </div>
               </button>
               </th>
@@ -104,6 +104,7 @@
 <% content_for :extra_js do %>
   <%= javascript_include_tag 'communities' %>
   <script>
+    const title = "<%= t('community.well_balanced.title') %>"
     <% if @top_of_assignees.empty? %>
       var labels = []
       var data = []
@@ -112,6 +113,7 @@
       var data = [<% @top_of_assignees[:top_of_assignees].each do |v| %>"<%= v[:count] %>",<% end %>]
     <% end %>
     var datas = {
+      "title": title,
       "labels": labels,
       "data": data
     }

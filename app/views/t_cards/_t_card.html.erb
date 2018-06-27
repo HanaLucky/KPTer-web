@@ -1,4 +1,4 @@
-   <td class="t-card-status">
+  <td class="t-card-status">
       <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-data-table__select" for="row[<%= t_card.id %>]">
         <%= check_box_tag '', '', t_card.status.closed?, { 'data-id' => t_card.id, 'data-url' => url, :onclick=>
           "$.post($(this).data('url')+ '/tasks/' + $(this).data('id') + '/toggle/', function(data) {

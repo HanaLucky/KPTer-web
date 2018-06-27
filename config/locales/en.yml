@@ -1,35 +1,41 @@
-# Files in the config/locales directory are used for internationalization
-# and are automatically loaded by Rails. If you want to use locales other
-# than English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t 'hello'
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t('hello') %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# The following keys must be escaped otherwise they will not be retrieved by
-# the default I18n backend:
-#
-# true, false, on, off, yes, no
-#
-# Instead, surround them with single quotes.
-#
-# en:
-#   'true': 'foo'
-#
-# To learn more, please read the Rails Internationalization guide
-# available at http://guides.rubyonrails.org/i18n.html.
-
 en:
+  activerecord:
+    attributes:
+      user:
+        email: Email
+        unconfirmed_email: Unconfirmed　email
+        avatar: Avatar
+        nickname: Nickname
+      board:
+        name: Name
+      community:
+        name: Name
+      t_card:
+        title: Title
+        deadline: Deadline
+        assignee: Assignee
+  sessions:
+    sign_in: "Sign in"
+    sign_out: "Sign out"
+  registrations:
+    sign_up: "Sign up"
+    update_avatar_image: "Your profile picture has been updated successfully."
+    agree_terms_html: "By signing up you agree to our %{terms_path} of Use and %{privacy_path}."
+    settings:
+      title: "Settings"
+      menus:
+        account:
+          title: "Account"
+          personal_information: "Personal information"
+          change_avatar_html: "Change<br>avatar"
+          change_password_notice: "If you want to change your password, please enter the new password below."
+          connect_social_account: "Connect social accounts"
+          only_social_connect: "Your password is not set, and we cannot disconnect you from your Google Account. If you want to disconnect, please set up your password in your Account Settings first."
+          delete_account: "Delete account"
+          delete_account_button: "Delete KPTER account"
+          delete_account_notice: "Deleting your account will immediately delete all your data. This can not be reversed."
+          delete:
+            do: "settings"
   enumerize:
     kp_card:
       card_type:
@@ -39,6 +45,12 @@ en:
       status:
         open: "Open"
         closed: "Closed"
+  actions:
+    cancel: "Cancel"
+    add: "Add"
+    create: "Create"
+    update: "Update"
+    delete: "Delete"
   community:
     invitation:
       success: "invited %{users} to this community."
@@ -48,11 +60,54 @@ en:
     update:
       success: "Successfully updated."
     created: "Community was successfully created."
-    leave: "You have left the community."
     remove: "%{nickname} removed from here"
     destroyed: "Community was successfully deleted."
     errors:
       not_allowed: "The community does not exists or is not allowed to display."
+    board:
+      title: "Board"
+      actions:
+        create: "Create Board"
+        assign: "Assign"
+    members_list:
+      title: "Members List"
+      nobody_is_here: "Nobody is here"
+      you: "you"
+      inviting: "inviting"
+      remove: "Remove from here"
+    invitable_users:
+      title: "Invite to %{community_name}"
+      actions:
+        invite: "invite"
+      select:
+        placeholder: "search by name"
+        too_short: "Please enter %{mimimum_input_length} or more characters"
+        searching: "Searching..."
+        not_found: "No results found users"
+    leave:
+      title: "Leave %{community_name}"
+      body_html: "If you want to join again, you will need to be invited by the community members.<br>Are you sure you want to leave %{community_name}?"
+      notice: "The task that you are assigned will lose an assignee."
+      i_will: "Yes, Leave this community"
+      success: "You have left the community."
+    delete:
+      title: "Delete %{community_name}"
+      body: "Are you sure you want to delete %{community_name}"
+      notice1: "Anyone will not be able to access this community any more."
+      notice2: "All boards and tasks will be deleted."
+      notice3: "Deleted data can not be restored again."
+      i_will: "Yes, Delete this community"
+    menus:
+      invite: "Invite"
+      edit: "Edit"
+      leave: "Leave"
+      delete: "Delete"
+    edit:
+      title: "Edit Community"
+    well_balanced:
+      title: "Are your tasks well-balanced?"
+      label:
+        others: "others"
   datetime:
     distance_in_original_words:
       over_x_day: "%{month} %{day}, %{year}"
@@ -64,15 +119,62 @@ en:
         other: "%{minutes} minutes ago"
       within_1_minute: "a few seconds ago"
   t_card:
+    edit:
+      title: "Edit Task"
+      deadline:
+        format: '${day}/${month}/${year}'
     update:
       success: "The task was updated."
       failure: "Sorry...Something was wrong."
+    title: "Tasks"
+    status:
+      open: "open"
+      close: "close"
+    list:
+      done: "Done"
+      task: "Task"
+      assignee: "Assignee"
+      deadline: "Deadline"
   date:
     formats:
       default: ! '%-m/%-d/%Y'
       long: ! '%a %-m/%-d/%Y'
       short: ! '%-m/%-d'
-  social:
+  socials:
+    google:
+      sign_in: "Sign in with Google"
+      connect: "Connect with Google account"
+      disconnect: "Disconnect with Google account"
     failure:
       can_not_disconnect_social_provider: "cannot disconnect you from your Social Account"
       already_associated: "There is a KPTER account already associated with %{provider} Account %{email}"
+  terms:
+    label: "Terms"
+  privacy_policy:
+    label: "Privacy Policy"
+  contact:
+    label: "Contact"
+  confirm:
+    title: Thank you!
+    head: Completed send authenticate mail
+    subhead1: Registration is not completed yet.
+    subhead2: Please access the URL described in the mail and perform the registration completion procedure.
+    step1_html: "<strong>Step 1:</strong> Check your mail."
+    step2_html: "<strong>Step 2:</strong> Click on link, please."
+    step3_html: "<strong>Step 3:</strong> Complete register."
+    check_mail: "Check %{mailer}"
+  mypage:
+    title: "MyPage"
+    uncompleted_tasks: "Uncompleted Tasks"
+    got_you_likes: "Likes You Got"
+    add_community: "Add community"
+  date:
+    formats:
+      default: "%m-%d-%Y"
+      long: "%B %d, %Y"
+      short: "%b %d"
+  errors:
+    messages:
+      exceeded_limit_size: "should be less than %{limit_size}"
+      invalids:
+        email: "Invalid email"

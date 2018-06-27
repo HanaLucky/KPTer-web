@@ -2,19 +2,19 @@
   <table class="mdl-data-table mdl-shadow--2dp kpter-table" id="t_cards-table-data" data-visible_assignee="<%= visible_assignee %>" data-url="<%= url %>" data-callback="<%= callback %>">
     <thead>
       <tr>
-        <th class="mdl-data-table__cell--non-numeric kpter-table-header-title" colspan="2">Tasks</th>
+        <th class="mdl-data-table__cell--non-numeric kpter-table-header-title" colspan="2"><%= t('t_card.title', default: 'Tasks') %></th>
         <th colspan="<% if visible_assignee %>2<% else %>1<% end %>">
-          <%= link_to "open", { action: "refresh_tasks", method: :get, status: TCard.status.open, remote: true }, { id: "open-btn", class: "mdl-color-text--primary kpter-task-open-closed"} %>
-          <%= link_to "close", { action: "refresh_tasks", method: :get, status: TCard.status.closed, remote: true }, { id: "close-btn", class: "kpter-task-open-closed" } %>
+          <%= link_to t('t_card.status.open', default: 'open'), { action: "refresh_tasks", method: :get, status: TCard.status.open, remote: true }, { id: "open-btn", class: "mdl-color-text--primary kpter-task-open-closed"} %>
+          <%= link_to t('t_card.status.close', default: 'close'), { action: "refresh_tasks", method: :get, status: TCard.status.closed, remote: true }, { id: "close-btn", class: "kpter-task-open-closed" } %>
         </th>
       </tr>
       <tr>
-        <th class="mdl-data-table__cell--non-numeric">Done</th>
-        <th class="mdl-data-table__cell--non-numeric">Task</th>
+        <th class="mdl-data-table__cell--non-numeric"><%= t('t_card.list.done', default: 'Done') %></th>
+        <th class="mdl-data-table__cell--non-numeric"><%= t('t_card.list.task', default: 'Task') %></th>
         <% if visible_assignee %>
-          <th class="mdl-data-table__cell--non-numeric">Assignee</th>
+          <th class="mdl-data-table__cell--non-numeric"><%= t('t_card.list.assignee', default: 'Assignee') %></th>
         <% end %>
-        <th class="mdl-data-table__cell--non-numeric">Deadline</th>
+        <th class="mdl-data-table__cell--non-numeric"><%= t('t_card.list.deadline', default: 'Deadline') %></th>
       </tr>
     </thead>
     <tbody>
