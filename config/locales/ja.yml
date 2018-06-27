@@ -19,8 +19,38 @@
 # To learn more, please read the Rails Internationalization guide
 # available at http://guides.rubyonrails.org/i18n.html.
 
+# Files in the config/locales directory are used for internationalization
+# and are automatically loaded by Rails. If you want to use locales other
+# than English, add the necessary files in this directory.
+#
+# To use the locales, use `I18n.t`:
+#
+#     I18n.t 'hello'
+#
+# In views, this is aliased to just `t`:
+#
+#     <%= t('hello') %>
+#
+# To use a different locale, set it with `I18n.locale`:
+#
+#     I18n.locale = :es
+#
+# This would use the information in config/locales/es.yml.
+#
+# The following keys must be escaped otherwise they will not be retrieved by
+# the default I18n backend:
+#
+# true, false, on, off, yes, no
+#
+# Instead, surround them with single quotes.
+#
+# en:
+#   'true': 'foo'
+#
+# To learn more, please read the Rails Internationalization guide
+# available at http://guides.rubyonrails.org/i18n.html.
+
 ja:
-  hello: "Hello world"
   enumerize:
     kp_card:
       card_type:
@@ -30,17 +60,20 @@ ja:
       status:
         open: "Open"
         closed: "Closed"
-  activerecord:
-    errors:
-      models:
-        user:
-          attributes:
-            user_id:
-              taken: "え、もう入ってるのに？"
   community:
-    invite:
-      success: "%{users}を招待しました"
-      failure: "招待できませんでした"
+    invitation:
+      success: "invited %{users} to this community."
+      failure: "Could not join in this community."
+      accept: "Welcome to the community!"
+      decline: "declined an invitation."
+    update:
+      success: "Successfully updated."
+    created: "Community was successfully created."
+    leave: "You have left the community."
+    remove: "%{nickname} removed from here"
+    destroyed: "Community was successfully deleted."
+    errors:
+      not_allowed: "The community does not exists or is not allowed to display."
   datetime:
     distance_in_original_words:
       over_x_day: "%{year}年%{month}月%{day}日"
@@ -51,3 +84,16 @@ ja:
         one: "1分前"
         other: "%{minutes}分前"
       within_1_minute: "数秒前"
+  t_card:
+    update:
+      success: "The task was updated."
+      failure: "Sorry...Something was wrong."
+  date:
+    formats:
+      default: ! '%-m/%-d/%Y'
+      long: ! '%a %-m/%-d/%Y'
+      short: ! '%-m/%-d'
+  social:
+    failure:
+      can_not_disconnect_social_provider: "cannot disconnect you from your Social Account"
+      already_associated: "There is a KPTER account already associated with %{provider} Account %{email}"

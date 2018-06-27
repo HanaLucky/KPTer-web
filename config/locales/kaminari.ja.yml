@@ -1,0 +1,22 @@
+# Sample localization file for Kaminari. You can override these values in your app's locales file if you want.
+en:
+  views:
+    pagination:
+      first: "&laquo; First"
+      last: "Last &raquo;"
+      previous: "<i class=\"material-icons\">keyboard_arrow_left</i>"
+      next: "<i class=\"material-icons\">keyboard_arrow_right</i>"
+      truncate: "&hellip;"
+  helpers:
+    page_entries_info:
+      entry:
+        zero: "entries"
+        one: "entry"
+        other: "entries"
+      one_page:
+        display_entries:
+          zero: "<span class=\"mdl-paging__count\">You are all done!</span>"
+          one: "<span class=\"mdl-paging__count\">%{count} of %{count}</span>"
+          other: "<span class=\"mdl-paging__count\">%{count} of %{count}</span>"
+      more_pages:
+        display_entries: "<span class=\"mdl-paging__count\">%{first}-%{last} of %{total}</span>"
