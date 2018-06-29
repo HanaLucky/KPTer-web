@@ -15,7 +15,7 @@
           <%= link_to t('registrations.settings.title', default: "Settings"), edit_user_registration_path, class: "kpter-menu-link" %>
         </li>
         <li class="mdl-menu__item">
-          <%= link_to t('.sign_out', :default => "Sign out"), destroy_user_session_path, class: "kpter-menu-link" %>
+          <%= link_to t('sessions.sign_out', :default => "Sign out"), destroy_user_session_path, class: "kpter-menu-link" %>
         </li>
       </ul>
     <% else %>
