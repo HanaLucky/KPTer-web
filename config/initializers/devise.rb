@@ -20,6 +20,11 @@ Devise.setup do |config|
   # Configure the parent class responsible to send e-mails.
   # config.parent_mailer = 'ActionMailer::Base'
 
+  # to configure mailer layout
+  Rails.application.config.to_prepare do
+    Devise::Mailer.layout "email" # email.haml or email.erb
+  end
+
   # ==> ORM configuration
   # Load and configure the ORM. Supports :active_record (default) and
   # :mongoid (bson_ext recommended) by default. Other ORMs may be

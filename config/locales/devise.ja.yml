@@ -46,31 +46,43 @@ ja:
       unconfirmed: "メールアドレスの本人確認が必要です。"
     mailer:
       confirmation_instructions:
-        action: "アカウント確認"
+        subject: "[KPTER]仮登録完了のお知らせ"
         greeting: "%{recipient}様"
-        instruction: "次のリンクでメールアドレスの確認が完了します。"
-        subject: "アカウントの有効化について"
+        instruction_html: |
+          この度はKPTERの登録をお申込みいただき誠にありがとうございます。<br><br>
+          現在はまだ仮登録の状態です。本登録を完了するために、以下のリンクをクリックしてユーザ情報を登録してください。<br>
       email_changed:
-        greeting:
-        message:
-        subject:
+        greeting: "%{recipient}様"
+        message1_html: "メールアドレスを変更がリクエストされました。メールアドレスに間違いがないことをご確認の上、以下のリンクにアクセスし変更を完了してください。"
+        message2_html: "変更後のメールアドレス<br><b>%{unconfirmed_email}</b>"
+        message3_html: "尚、このメールは現在のメールアドレスに送信しております。"
+        subject: "[KPTER]メールアドレス変更のご確認"
       password_change:
         greeting: "%{recipient}様"
         message: "パスワードが再設定されたことを通知します。"
-        subject: "パスワードの変更について"
+        subject: "[KPTER]パスワードの変更について"
       reset_password_instructions:
         action: "パスワード変更"
         greeting: "%{recipient}様"
-        instruction: "パスワード再設定の依頼を受けたため、メールを送信しています。下のリンクからパスワードの再設定ができます。"
+        instruction: "パスワードリセットをリクエストされました。下記のURLをクリックし、パスワードの再設定を行って下さい。"
         instruction_2: "パスワード再設定の依頼をしていない場合、このメールを無視してください。"
         instruction_3: "パスワードの再設定は、上のリンクから新しいパスワードを登録するまで完了しません。"
-        subject: "パスワードの再設定について"
+        instruction_4: 上記のリンクにアクセスして新しいパスワードを設定するまではパスワードは変更されません。このメールに心あたりがない場合は、第三者がメールアドレスの入力を誤った可能性があります。このメールは破棄してくださいますようお願いします。
+        subject: "[KPTER]パスワードの再設定について"
       unlock_instructions:
         action: "アカウントのロック解除"
         greeting: "%{recipient}様"
         instruction: "アカウントのロックを解除するには下のリンクをクリックしてください。"
         message: "ログイン失敗が繰り返されたため、アカウントはロックされています。"
-        subject: "アカウントの凍結解除について"
+        subject: "[KPTER]アカウントの凍結解除について"
+      ending_html: 本メールにお心当りがない場合は、誠に恐れ入りますがお問い合わせページよりご連絡くださいますようお願いいたします。
+      support_html: |
+        ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━<br>
+        お問い合わせ<br>
+        <a href="https://form.run/@kpter-contact" target="_blank">https://form.run/@kpter-contact</a><br>
+        <br>
+        このメールは、送信専用メールアドレスから配信されています。<br>
+        ご返信いただいてもお答えできませんので、ご了承ください。<br>
     omniauth_callbacks:
       failure: "%{kind} アカウントによる認証に失敗しました。理由：（%{reason}）"
       success: "%{kind} アカウントによる認証に成功しました。"
