@@ -1,14 +1,14 @@
 <% content_for :head_title do %>
-  Sign up
+  <%= t('registrations.sign_up', default: "Sign up") %>
 <% end %>
 <div class="kpter-form-middle mdl-cell mdl-grid mdl-grid--no-spacing">
-  <div class="mdl-typography--display-1-color-contrast"><%= t('.sign_up', default: "Sign up") %></div>
+  <div class="mdl-typography--display-1-color-contrast"><%= t('registrations.sign_up', default: "Sign up") %></div>
   <%= render partial: "devise/shared/error_messages", locals: {object: resource} %>
   <div class="social-connect-container">
     <ul class="social-connect-list">
       <li class="social-item">
         <%= link_to(user_google_oauth2_omniauth_authorize_path, class: "mdl-button mdl-js-button mdl-js-ripple-effect social-connect-button") do%>
-          <%= image_tag(asset_path("google-logo.svg"), class: "social-logo") %><span class="social-text">Sign up with Google</span>
+          <%= image_tag(asset_path("google-logo.svg"), class: "social-logo") %><span class="social-text"><%= t('socials.google.sign_in', default: "Sign in with Google") %></span>
         <%end %>
       </li>
     </ul>
@@ -20,7 +20,7 @@
     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
       <%= f.email_field :email, class: "mdl-textfield__input", maxlength: 255, required: true %>
       <%= f.label :email, class: "mdl-textfield__label" %>
-      <span class="mdl-textfield__error">Invalid email</span>
+      <span class="mdl-textfield__error"><%= t('errors.messages.invalids.email', default: "Invalid email") %></span>
     </div>
     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
       <%= f.text_field :nickname, class: "mdl-textfield__input", maxlength: 32, required: true %>
@@ -34,10 +34,12 @@
       <%= f.password_field :password_confirmation, class: "mdl-textfield__input", maxlength: 128, required: true %>
       <%= f.label :password_confirmation, class: "mdl-textfield__label" %>
     </div>
-    <div class="mdl-typography--caption-force-preferred-font-color-contrast">
-      By signing up you agree to our <%= link_to "Terms", terms_path, target: '_blank' %> of Use and <%= link_to "Privacy Policy", privacy_path, target: '_blank' %>.
+    <div class="mdl-typography--caption-force-preferred-font-color-contrast" style="margin-bottom: 10px;">
+      <%= t('registrations.agree_terms_html',
+        { terms_path: link_to( t('terms.label', default: "Terms") , terms_path, target: '_blank'),
+          privacy_path: link_to( t('privacy_policy.label', default: "Terms"), privacy_path, target: '_blank')}) %>
     </div>
-    <%= button_tag t('.sign_up', :default => "Sign up"), class: "mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect float-right mdl-js-ripple-effect" %>
+    <%= button_tag t('registrations.sign_up', default: "Sign up"), class: "mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect float-right mdl-js-ripple-effect" %>
   <% end %>
   <%= render "devise/shared/links" %>
 </div>

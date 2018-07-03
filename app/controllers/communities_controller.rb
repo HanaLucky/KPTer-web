@@ -44,7 +44,7 @@ class CommunitiesController < ApplicationController
     data = top_of_assignees[:top_of_assignees].map{|ta| ta[:count]}
 
     respond_to do |format|
-      format.json { render json: {labels: labels, data: data}}
+      format.json { render json: {title: t('community.well_balanced.title'), labels: labels, data: data}}
     end
   end
 
@@ -126,7 +126,7 @@ class CommunitiesController < ApplicationController
   def leave
     community = Community.find(params[:id])
     current_user.leave(community)
-    flash[:notice] = t('community.leave')
+    flash[:notice] = t('community.leave.success')
     redirect_to :controller => :mypages, :action => :show
   end
 
@@ -193,7 +193,7 @@ class CommunitiesController < ApplicationController
       }
 
       if others.length > 0
-        data = { name: "others", count: others.map{ |a| a[1] }.sum }
+        data = { name: t('community.well_balanced.label.others'), count: others.map{ |a| a[1] }.sum }
         top_of_assignees.push(data)
       end
 

@@ -4,15 +4,15 @@
     <span class="esc">esc</span>
   </button>
   <div class="kpter-form-middle mdl-cell mdl-grid mdl-grid--no-spacing">
-    <h4>Add Board</h4>
+    <h4><%= t('community.board.actions.create') %></h4>
     <%= form_for(current_community, url: community_boards_path(current_community), method: :post) do |f| %>
       <%= f.fields_for :boards do |b| %>
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
           <%= b.text_field :name, class: "mdl-textfield__input", value: "", maxlength: 64, required: true %>
-          <%= b.label :name, class: "mdl-textfield__label" %>
+          <label class="mdl-textfield__label" for="community_boards_name"><%= t('activerecord.attributes.board.name') %></label>
         </div>
       <% end %>
-      <button class="mdl-button mdl-js-button mdl-button--colored float-right mdl-js-ripple-effect">Create</button>
+      <button class="mdl-button mdl-js-button mdl-button--colored float-right mdl-js-ripple-effect"><%= t('actions.create') %></button>
     <% end %>
   </div>
 </div>

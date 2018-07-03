@@ -2,25 +2,25 @@
   <div class="modal__container mdl-shadow--2dp" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
     <header class="modal__header">
       <h2 class="modal__title" id="modal-1-title">
-        Member List
+        <%= t("community.members_list.title", default: "members list") %>
       </h2>
       <button class="modal__close" aria-label="Close modal" data-micromodal-close></button>
     </header>
     <main class="modal__content" id="modal-1-content">
       <div class="mdl-list kpter-member-list">
         <% if members.nil? %>
-          Nobody is here
+          <%= t("community.members_list.nobody_is_here", default: "Nobody is here") %>
         <% else %>
           <% members.each_with_index do |cu, i| %>
             <div class="mdl-list__item mdl-list__item--two-line">
               <span class="mdl-list__item-primary-content">
                 <% if cu.status.joining? %>
                   <%= image_tag(avatar_url(cu.user), :class => "mdl-list__item-avatar", :alt => "#{cu.user.nickname}") %>
-                  <span><%= cu.user.nickname %><% if current_user == cu.user %><span class="joining-you">&nbsp;(you)</span><% end %></span>
+                  <span><%= cu.user.nickname %><% if current_user == cu.user %><span class="joining-you">&nbsp;(<%= t("community.members_list.you", default: "you") %>)</span><% end %></span>
                 <% else %>
                   <%= image_tag(avatar_url(cu.user), :class => "mdl-list__item-avatar inviting-avatar", :alt => "#{cu.user.nickname}") %>
                   <span class="inviting-text"><%= cu.user.nickname %></span>
-                  <span class="mdl-list__item-sub-title">(inviting)</span>
+                  <span class="mdl-list__item-sub-title">(<%= t("community.members_list.inviting", default: "inviting") %>)</span>
                 <% end %>
               </span>
               <% if current_user != cu.user %>
@@ -29,7 +29,7 @@
                 </button>
                 <ul class="mdl-menu mdl-js-menu mdl-menu--bottom-right kpter-menu" for="btn-<%= i %>">
                   <li class="mdl-menu__item">
-                    <%= link_to "Remove from here", community_path + "/remove?user_id=#{cu.user.id}", :method => :post, remote: true %>
+                    <%= link_to t("community.members_list.remove"), community_path + "/remove?user_id=#{cu.user.id}", :method => :post, remote: true %>
                   </li>
                 </ul>
               <% end %>

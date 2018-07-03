@@ -1,26 +1,41 @@
-# Files in the config/locales directory are used for internationalization
-# and are automatically loaded by Rails. If you want to use locales other
-# than English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t 'hello'
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t('hello') %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# To learn more, please read the Rails Internationalization guide
-# available at http://guides.rubyonrails.org/i18n.html.
-
 ja:
-  hello: "Hello world"
+  activerecord:
+    attributes:
+      user:
+        email: "メールアドレス"
+        unconfirmed_email: "未確認メールアドレス"
+        avatar: "アバター"
+        nickname: "ニックネーム"
+      board:
+        name: "ボード名"
+      community:
+        name: "コミュニティ名"
+      t_card:
+        title: "タイトル"
+        deadline: "期限"
+        assignee: "担当者"
+  sessions:
+    sign_in: "ログイン"
+    sign_out: "ログアウト"
+  registrations:
+    sign_up: "会員登録"
+    update_avatar_image: "アバター画像を設定しました"
+    agree_terms_html: "サインアップすることにより、KPTERサービスの%{terms_path}と%{privacy_path}に同意したことになります。"
+    settings:
+      title: "設定"
+      menus:
+        account:
+          title: "アカウント"
+          personal_information: "アカウント設定"
+          change_avatar_html: "アバター<br>設定"
+          change_password_notice: "パスワードを変更する場合は、以下に新しいパスワードを入力してください"
+          connect_social_account: "ソーシャル連携"
+          only_social_connect: "パスワードが設定されていない為、Googleアカウントの連携を解除することはできません。パスワードを設定後に解除いただけます。"
+          delete_account: "アカウント削除"
+          delete_account_button: "KPTERアカウントを削除"
+          delete_account_notice: "アカウントを削除することでご自身のデータは完全に削除され戻すことはできなくなります。"
+          delete:
+            do: "はい、KPTERアカウントを削除します"
   enumerize:
     kp_card:
       card_type:
@@ -30,17 +45,69 @@ ja:
       status:
         open: "Open"
         closed: "Closed"
-  activerecord:
-    errors:
-      models:
-        user:
-          attributes:
-            user_id:
-              taken: "え、もう入ってるのに？"
+  actions:
+    cancel: "キャンセル"
+    add: "追加"
+    create: "作成"
+    update: "更新"
+    delete: "削除"
   community:
-    invite:
-      success: "%{users}を招待しました"
-      failure: "招待できませんでした"
+    invitation:
+      success: "%{users} をコミュニティに招待しました"
+      failure: "コミュニティへの招待に失敗しました。問題が解消しない場合、お問い合わせくださいますようお願いいたします。"
+      accept: "ようこそ!"
+      decline: "招待を辞退しました"
+    update:
+      success: "コミュニティを更新しました"
+    created: "コミュニティを作成しました"
+    remove: "%{nickname} はこのコミュニティから削除されました"
+    destroyed: "コミュニティは完全に削除されました"
+    errors:
+      not_allowed: "このコミュニティは存在しないか参照する権限がありません"
+    board:
+      title: "ボード"
+      actions:
+        create: "ボード作成"
+        assign: "アサイン"
+    members_list:
+      title: "メンバーリスト"
+      nobody_is_here: "誰もいません"
+      you: "自分"
+      inviting: "招待中"
+      remove: "コミュニティから除名する"
+    invitable_users:
+      title: "%{community_name} に招待する"
+      actions:
+        invite: "招待"
+      select:
+        placeholder: "名前で検索"
+        too_short: "%{mimimum_input_length}文字以上入力してください"
+        searching: "検索中..."
+        not_found: "ユーザーは見つかりませんでした"
+    leave:
+      title: "%{community_name} から退出する"
+      body_html: "再度参加したい場合は参加メンバーに招待してもらう必要があります。<br>本当に %{community_name} から退出しますか?"
+      notice: "アサインされているタスクからは担当が外れます。"
+      i_will: "はい、このコミュニティから退出します"
+      success: "コミュニティから退出しました"
+    delete:
+      title: "%{community_name} 削除"
+      body: "本当に %{community_name} のコミュニティを削除しますか?"
+      notice1: "このコミュニティは二度と参照できなくなります"
+      notice2: "コミュニティ内のボードとタスクは全て削除されます"
+      notice3: "削除後はデータの復元はできません"
+      i_will: "はい、このコミュニティを削除します"
+    menus:
+      invite: "新しいメンバーを招待する"
+      edit: "コミュニティを編集する"
+      leave: "コミュニティから退出する"
+      delete: "コミュニティを削除する"
+    edit:
+      title: "コミュニティ編集"
+    well_balanced:
+      title: "タスクの偏り"
+      label:
+        others: "その他"
   datetime:
     distance_in_original_words:
       over_x_day: "%{year}年%{month}月%{day}日"
@@ -51,3 +118,63 @@ ja:
         one: "1分前"
         other: "%{minutes}分前"
       within_1_minute: "数秒前"
+  t_card:
+    edit:
+      title: "タスク編集"
+      deadline:
+        format: '${year}/${month}/${day}'
+    update:
+      success: "タスクを更新しました"
+      failure: "更新に失敗しました。問題が解消しない場合、お問い合わせくださいますようお願いいたします"
+    title: "タスク"
+    status:
+      open: "open"
+      close: "close"
+    list:
+      done: ""
+      task: "タスク"
+      assignee: "担当者"
+      deadline: "期限"
+  date:
+    formats:
+      default: ! '%-m/%-d/%Y'
+      long: ! '%a %-m/%-d/%Y'
+      short: ! '%-m/%-d'
+  social:
+    google:
+      sign_in: "Googleでログインしました"
+      connect: "Googleアカウントと連携しました"
+      disconnect: "Googleアカウントの連携を解除しましたt"
+    failure:
+      can_not_disconnect_social_provider: "ソーシャルアカウントの解除ができませんでした。"
+      already_associated: "%{email}で登録されている%{provider}アカウントはすでにKPTERに関連付けされています。"
+  terms:
+    label: "利用規約"
+  privacy_policy:
+    label: "プライバシーポリシー"
+  contact:
+    label: "お問い合わせ"
+  confirm:
+    title: "仮登録完了"
+    head: "認証メールを送信しました"
+    subhead1: "※まだ登録は完了していません"
+    subhead2:  "メールに記載されているURLにアクセスして登録完了手続きを行ってください。"
+    step1_html: "<strong>Step 1:</strong> メールチェック"
+    step2_html: "<strong>Step 2:</strong> リンククリック"
+    step3_html: "<strong>Step 3:</strong> 登録完了"
+    check_mail: "%{mailer}を確認"
+  mypage:
+    title: "マイページ"
+    uncompleted_tasks: "未完了のタスク"
+    got_you_likes: "イイね"
+    add_community: "コミュニティ追加"
+  date:
+    formats:
+      default: "%Y/%m/%d"
+      long: "%Y年%m月%d日(%a)"
+      short: "%m/%d"
+  errors:
+    messages:
+      exceeded_limit_size: "%{limit_size}未満でアップロードしてください。"
+      invalids:
+        email: "メールアドレスが正しく入力されていません"

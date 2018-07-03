@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
+  before_action :set_locale
   before_action :store_location, :configure_permitted_parameters, if: :devise_controller?
   after_action :store_location
 
@@ -37,6 +38,21 @@ class ApplicationController < ActionController::Base
   # See. https://github.com/plataformatec/devise/blob/3722aa62961720eafa5bb5ee6c99b76c26b6be3e/lib/devise/controllers/helpers.rb#L219-L230
   def after_sign_out_path_for(resource)
     new_user_session_path
+  end
+
+  # See. https://railsguides.jp/i18n.html
+  def set_locale
+    I18n.locale = extract_locale_from_subdomain || I18n.default_locale
+  end
+
+
+  # リクエストのサブドメインからロケールを取り出す (https://en.kpter.net:3000のような形式)
+  # この動作をローカルPCで行なうためには
+  #   127.0.0.1 en.localhost:3000
+  # /etc/hostsファイルに上のように記述する必要がある
+  def extract_locale_from_subdomain
+    parsed_locale = request.subdomains.first
+    I18n.available_locales.map(&:to_s).include?(parsed_locale) ? parsed_locale : nil
   end
 
   protected

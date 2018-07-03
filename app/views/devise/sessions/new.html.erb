@@ -1,14 +1,14 @@
 <% content_for :head_title do %>
-  Sign in
+  <%= t('sessions.sign_in', default: "Sign in") %>
 <% end %>
 <div class="kpter-form-middle mdl-cell mdl-grid mdl-grid--no-spacing">
-  <div class="mdl-typography--display-1-color-contrast"><%= t('.sign_in', default: "Sign in") %></div>
+  <div class="mdl-typography--display-1-color-contrast"><%= t('sessions.sign_in', default: "Sign in") %></div>
   <%= render partial: "devise/shared/error_messages", locals: {object: resource} %>
   <div class="social-connect-container">
     <ul class="social-connect-list">
       <li class="social-item">
         <%= link_to(user_google_oauth2_omniauth_authorize_path, class: "mdl-button mdl-js-button mdl-js-ripple-effect social-connect-button") do%>
-          <%= image_tag(asset_path("google-logo.svg"), class: "social-logo") %> <span class="social-text">Sign in with Google</span>
+          <%= image_tag(asset_path("google-logo.svg"), class: "social-logo") %><span class="social-text"><%= t('socials.google.sign_in', default: "Sign in with Google") %></span>
         <%end %>
       </li>
     </ul>
@@ -20,7 +20,7 @@
     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
       <%= f.email_field :email, class: "mdl-textfield__input", maxlength: 255, required: true %>
       <%= f.label :email, class: "mdl-textfield__label" %>
-      <span class="mdl-textfield__error">Invalid email</span>
+      <span class="mdl-textfield__error"><%= t('errors.messages.invalids.email', default: "Invalid email") %></span>
     </div>
     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
       <%= f.password_field :password, autocomplete: "off", class: "mdl-textfield__input", maxlength: 128, required: true %>
@@ -32,7 +32,7 @@
         <span class="kpter-checkbox-label"><%= t('.remember_me', :default => "Remember me") %></span>
       </label>
     <% end %>
-    <%= button_tag t('.sign_in', :default => "Sign in"), class: "mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect float-right" %>
+    <%= button_tag t('sessions.sign_in', :default => "Sign in"), class: "mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect float-right" %>
   <% end %>
   <%= render "devise/shared/links" %>
 </div>
