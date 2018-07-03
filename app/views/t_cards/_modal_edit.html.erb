@@ -2,7 +2,7 @@
   <div class="modal__container mdl-shadow--8dp" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
     <header class="modal__header">
       <h2 class="modal__title" id="modal-1-title">
-        Edit Task
+        <%= t('t_card.edit.title') %>
       </h2>
       <button class="modal__close" aria-label="Close modal" data-micromodal-close></button>
     </header>
@@ -33,7 +33,7 @@
             <%= f.label :assignee, class: "mdl-selectfield__label" %>
           </div>
           <div class="mdl-dialog__actions">
-            <button class="mdl-button mdl-js-button mdl-button--colored mdl-js-ripple-effect">Update</button>
+            <button class="mdl-button mdl-js-button mdl-button--colored mdl-js-ripple-effect"><%= t('actions.update') %></button>
           </div>
         <% end %>
       <% end %>

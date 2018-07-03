@@ -4,8 +4,21 @@ $(function () {
   // 招待可能ユーザーの検索
   $('.select2-user-multiple').select2({
     dropdownParent: $('.kpter-invitable-select'),
-    placeholder: "Search by name",
+    placeholder: "<%= t('community.invitable_users.select.placeholder') %>",
     minimumInputLength: 1,
+    language: {
+        inputTooShort: function(args) {
+          // args.maximum is the maximum allowed length
+          // args.input is the user-typed text
+          return "<%= t('community.invitable_users.select.too_short', {mimimum_input_length: 1}) %>";
+        },
+        noResults: function() {
+          return "<%= t('community.invitable_users.select.not_found') %>";
+        },
+        searching: function() {
+          return "<%= t('community.invitable_users.select.searching') %>";
+        }
+      },
     ajax: {
       url: "<%= community_path + '/invitable_users' %>",
       dataType: 'json',

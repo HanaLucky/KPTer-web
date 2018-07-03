@@ -6,12 +6,12 @@
   <% end %>
   <nav class="mdl-navigation">
     <%= link_to mypage_path, class: "mdl-navigation__link" do %>
-      <span class="<% if request.path_info == mypage_path %>mdl-color-text--primary-dark<% end %>">MyPage</span>
+      <span class="<% if request.path_info == mypage_path %>mdl-color-text--primary-dark<% end %>"><%= t('mypage.title') %></span>
     <% end %>
     <div class="kpter-drawer-separator"></div>
     <div class="kpter-nav-action">
       <a href class="dialog-button-new-community" onclick="visibleForm('community-form-container', 'create-community-name'); return false;">
-        <i class="material-icons md-18">add</i><span>Add community</span>
+        <i class="material-icons md-18">add</i><span><%= t('mypage.add_community') %></span>
       </a>
     </div>
     <div class="kpter-nav-action kpter-nav-form-content" id="community-form-container" style="display:none;">
@@ -19,10 +19,10 @@
         <input type="text" name="name" class="kpter-nav-form-input" id="create-community-name" maxlength="32" required="required" >
         <div class="kpter-nav-form-action">
           <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent kpter-nav-form-button mdl-js-ripple-effect">
-            Add community
+            <%= t('actions.add', default: 'Add') %>
           </button>
           <button class="mdl-button mdl-js-button kpter-nav-form-button kpter-close-button-text-color mdl-js-ripple-effect" onclick="hiddenForm('community-form-container', 'create-community-name');return false;">
-            Cancel
+            <%= t('actions.cancel', default: 'Cancel') %>
           </button>
         </div>
       <% end %>

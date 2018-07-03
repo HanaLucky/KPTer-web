@@ -1,5 +1,5 @@
 var chartTopOfAsignee = function (data) {
-  chartDoughnut('topOfAsignee', 'Are your tasks well-balanced?', data.labels, data.data);
+  chartDoughnut('topOfAsignee', data.title, data.labels, data.data);
 }
 
 $(function() {

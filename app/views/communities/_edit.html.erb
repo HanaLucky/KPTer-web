@@ -4,13 +4,13 @@
     <span class="esc">esc</span>
   </button>
   <div class="kpter-form-middle mdl-cell mdl-grid mdl-grid--no-spacing">
-    <h4>Edit Community</h4>
+    <h4><%= t('community.edit.title') %></h4>
     <%= form_for(current_community, data: { remote: true }) do |f| %>
       <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
         <%= f.text_field :name, class: "mdl-textfield__input", maxlength: 32, required: true %>
         <%= f.label :name, class: "mdl-textfield__label" %>
       </div>
-      <button class="mdl-button mdl-js-button mdl-button--colored float-right mdl-js-ripple-effect">Update</button>
+      <button class="mdl-button mdl-js-button mdl-button--colored float-right mdl-js-ripple-effect"><%= t('actions.update') %></button>
     <% end %>
   </div>
 </div>

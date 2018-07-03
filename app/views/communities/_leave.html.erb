@@ -3,16 +3,14 @@
     <i class="material-icons">close</i>
     <span class="esc">esc</span>
   </button>
-  <h4>Leave <%= current_community.name %></h4>
+  <h4><%= t('community.leave.title', {community_name: current_community.name}) %></h4>
   <%= form_tag("/communities/#{current_community.id}/leave", :method => :post) do |f| %>
     <div class="mdl-typography--body-1-color-contrast">
-      If you want to join again, you will need to be invited by the community members.<br>
-      Are you sure you want to leave <%= current_community.name %>?
+      <%= t('community.leave.body_html', {community_name: current_community.name}) %>
     </div>
     <ul class="notice">
-      <li>Assigned tasks will not be deleted.</li>
-      <li>The task that you are assigned will lose an assignee.</li>
+      <li><%= t('community.leave.notice') %></li>
     </ul>
-    <button class="mdl-button mdl-js-button mdl-button--accent float-right mdl-js-ripple-effect">Yes, Leave the community</button>
+    <button class="mdl-button mdl-js-button mdl-button--accent float-right mdl-js-ripple-effect"><%= t('community.leave.i_will') %></button>
   <% end %>
 </div>

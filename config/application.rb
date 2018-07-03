@@ -27,5 +27,9 @@ module Kpter
     # remember me enabled by default
     config.remember_me_enable_by_default = true
     config.x.settings = Rails.application.config_for :settings
+
+    # default locale
+    config.i18n.default_locale = :ja
+
   end
 end

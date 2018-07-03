@@ -1,5 +1,5 @@
 <% content_for :head_title do %>
-  MyPage
+  <%= t('mypage.title') %>
 <% end %>
 <% content_for :header_layout_type do %>
   mdl-layout--fixed-drawer
@@ -8,7 +8,7 @@
   <div class="mdl-cell mdl-cell--12-col mdl-cell--8-col-tablet mdl-cell--4-col-phone">
     <div class="kpter-sub-heading">
       <div class="kpter-sub-title">
-        <div class="mdl-typography--body-2-color-contrast">MyPage</div>
+        <div class="mdl-typography--body-2-color-contrast"><%= t('mypage.title') %></div>
       </div>
       <div class=“clarifix”></div>
     </div>
@@ -25,7 +25,7 @@
             </div>
             <div class="box-layout-text text-right">
               <div class="count" id="open-task-count"><%= number_with_delimiter(@all_tcards.count) %></div>
-              <span>Uncompleted Tasks</span>
+              <span><%= t('mypage.uncompleted_tasks') %></span>
             </div>
         </div>
       </div>
@@ -36,7 +36,7 @@
           </div>
           <div class="box-layout-text text-right">
             <div class="count"><%= number_with_delimiter(@like_count) %></div>
-            <span>Likes You Got</span>
+            <span><%= t('mypage.got_you_likes') %></span>
           </div>
         </div>
       </div>
