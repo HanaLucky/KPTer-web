@@ -69,6 +69,7 @@ App.board = App.cable.subscriptions.create { channel: "BoardChannel", board_id: 
 
     else if data['method'] is 'set_assignee'
       window.assignees[data['id']] = data['user_id']
+      $("#t_#{data['id']}-assign").addClass('mdl-color-text--light-green-900')
 
   create_kpcard: (card_type, title, board_id, x, y) ->
     @perform 'create_kpcard', card_type: card_type, title: title, board_id: board_id, x: x, y: y
