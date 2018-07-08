@@ -46,31 +46,43 @@ en:
       unconfirmed: You have to confirm your email address before continuing.
     mailer:
       confirmation_instructions:
-        action: Confirm my account
-        greeting: Welcome %{recipient}!
-        instruction: 'You can confirm your account email through the link below:'
-        subject: Confirmation instructions
+        subject: "[KPTER]Confirm your email preferences"
+        greeting: "Welcome %{recipient}!"
+        instruction_html: |
+          Thank you for signing up KPTER.<br><br>
+          You can confirm your account email through the link below:<br>
       email_changed:
-        greeting: Hello %{recipient}!
-        message: We're contacting you to notify you that your email is being changed to %{email}.
-        subject: Email Changed
+        greeting: "Hi %{recipient}"
+        message1_html: "You has requested a link to change your password, and you can accept this through the link below. "
+        message2_html: "requested email address<br><b>%{unconfirmed_email}</b>"
+        message3_html: "This mail sent current your email."
+        subject: "[KPTER]Confirm changing email"
       password_change:
-        greeting: Hello %{recipient}!
+        greeting: Hi %{recipient}!
         message: We're contacting you to notify you that your password has been changed.
-        subject: Password Changed
+        subject: "[KPTER]Password Changed"
       reset_password_instructions:
         action: Change my password
-        greeting: Hello %{recipient}!
+        greeting: Hi %{recipient}!
         instruction: Someone has requested a link to change your password, and you can do this through the link below.
         instruction_2: If you didn't request this, please ignore this email.
         instruction_3: Your password won't change until you access the link above and create a new one.
-        subject: Reset password instructions
+        instruction_4: Your password won't change until you access the link above and set a new password. If you did not request a password reset, please ignore this email or replay to let us know.
+        subject: "[KPTER]Reset password instructions"
       unlock_instructions:
         action: Unlock my account
         greeting: Hello %{recipient}!
         instruction: 'Click the link below to unlock your account:'
         message: Your account has been locked due to an excessive amount of unsuccessful sign in attempts.
-        subject: Unlock instructions
+        subject: "[KPTER]Unlock instructions"
+      ending_html: Please notify us immediately via the support link below if you are not the intended recipient.<br>
+      support_html: |
+        ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━<br>
+        Support<br>
+        <a href="https://form.run/@kpter-contact" target="_blank">https://form.run/@kpter-contact</a><br>
+        <br>
+        This email has been sent from a send-only address.<br>
+        Please do not reply to this email.<br>
     omniauth_callbacks:
       failure: Could not authenticate you from %{kind} because "%{reason}".
       success: Successfully authenticated from %{kind} account.

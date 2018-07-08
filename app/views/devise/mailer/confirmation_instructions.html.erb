@@ -1,6 +1,27 @@
-<p><%= t('.greeting', :recipient => @resource.nickname, :default => "Welcome #{@resource.nickname}!") %></p>
-
-<p><%= t('.instruction', :default => "You can confirm your account email through the link below:") %></p>
-
-<p><%= link_to t('.action', :default => "Confirm my account"),
-         confirmation_url(@resource, :confirmation_token => @token, locale: I18n.locale) %></p>
+<% if @resource.unconfirmed_email %>
+  <% # メールアドレス変更時はここの文章 %>
+  <p>
+    <%= t('devise.mailer.email_changed.greeting', :recipient => @resource.nickname) %>
+  </p>
+  <p>
+    <%= t('devise.mailer.email_changed.message1_html') %><br>
+  </p>
+  <p>
+    <%= t('devise.mailer.email_changed.message2_html', { unconfirmed_email: @resource.unconfirmed_email}) %><br>
+  </p>
+  <p>
+    <a href="<%= confirmation_url(@resource, :confirmation_token => @token, locale: I18n.locale) %>" target="_blank"><%= confirmation_url(@resource, :confirmation_token => @token, locale: I18n.locale) %></a>
+  </p>
+  <p>
+    <%= t('devise.mailer.email_changed.message3_html') %>
+  </p>
+<% else %>
+  <% # サインアップ時はここの文章 %>
+  <p>
+    <%= t('devise.mailer.confirmation_instructions.greeting', :recipient => @resource.nickname) %>
+  </p>
+  <p>
+    <%= t('devise.mailer.confirmation_instructions.instruction_html') %><br>
+    <a href="<%= confirmation_url(@resource, :confirmation_token => @token, locale: I18n.locale) %>" target="_blank"><%= confirmation_url(@resource, :confirmation_token => @token, locale: I18n.locale) %></a>
+  </p>
+<% end %>

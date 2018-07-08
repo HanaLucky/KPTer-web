@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
-  before_action :set_locale
+  before_action :set_locale, :set_mailer_host
   before_action :store_location, :configure_permitted_parameters, if: :devise_controller?
   after_action :store_location
 
@@ -66,5 +66,8 @@ class ApplicationController < ActionController::Base
     def render_403
       render file: Rails.root.join('public/403.html'), status: :forbidden, layout: false, content_type: 'text/html'
     end
-
+    # リクエストを受けたサーバーのドメインとポートをメールで参照するURLにする
+    def set_mailer_host
+      ActionMailer::Base.default_url_options[:host] = request.host_with_port
+    end
 end
