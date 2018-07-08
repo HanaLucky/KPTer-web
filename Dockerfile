@@ -6,4 +6,8 @@ ADD ./Gemfile Gemfile
 ADD ./Gemfile.lock Gemfile.lock
 RUN bundle install
 ADD . $APP_ROOT
+RUN mkdir -p tmp/sockets
 
+# for nginx
+VOLUME /KPTer-web/public
+VOLUME /KPTer-web/tmp
