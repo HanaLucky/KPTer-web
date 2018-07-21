@@ -16,12 +16,12 @@
   <div class="container">
     <div class="row feature">
       <div class="col-sm-6 feature-image">
-        <img src="http://via.placeholder.com/450x275" alt="img">
+        <%= image_tag("feature1.png", alt: t('welcome.feature_1.header')) %>
       </div>
       <div class="col-sm-6 feature-text">
         <header class="section-header text-left">
-          <h2>Online KPT</h2>
-          <p>You can find our code well organized, commented and readable. It uses minimal coding to reduce the size of template. Apart from that, you've access to SCSS and Grunt files to make your desire changes easily.</p>
+          <h2><%= t('welcome.feature_1.header') %></h2>
+          <p><%= t('welcome.feature_1.description') %></p>
         </header>
       </div>
     </div>
@@ -32,12 +32,12 @@
     <div class="row feature">
       <div class="col-sm-6 feature-text">
         <header class="section-header text-left">
-          <h2>Task Management</h2>
-          <p>Your template works on any device: desktop, tablet or mobile. It'll adjust the size and position of components based on the screen size of user.</p>
+          <h2><%= t('welcome.feature_2.header') %></h2>
+          <p><%= t('welcome.feature_2.description') %></p>
         </header>
       </div>
       <div class="col-sm-6 feature-image">
-        <img src="http://via.placeholder.com/450x275" alt="img">
+        <%= image_tag("feature2.png", alt: t('welcome.feature_2.header')) %>
       </div>
     </div>
   </div>
@@ -46,12 +46,12 @@
   <div class="container">
     <div class="row feature">
       <div class="col-sm-6 feature-image">
-        <img class="img-bordered" src="http://via.placeholder.com/450x275" alt="img">
+        <%= image_tag("feature3.png", alt: t('welcome.feature_3.header')) %>
       </div>
       <div class="col-sm-6 feature-text">
         <header class="section-header text-left">
-          <h2>Reduce Costs</h2>
-          <p>No more scribbled paper notes stuck all over your monitor, desk or fridge. All your notes are in one place online.</p>
+          <h2><%= t('welcome.feature_3.header') %></h2>
+          <p><%= t('welcome.feature_3.description') %></p>
         </header>
       </div>
     </div>
@@ -75,9 +75,7 @@
       </div>
       <div class="app-notice">
         <small class="text-gray">
-          Notice</br>
-          It's a stand-alone application.</br>
-          We are under improving the app to synchronize with the web.
+          <%= t('welcome.mobile.notice_html') %>
         </small>
       </div>
       <div class="app">
