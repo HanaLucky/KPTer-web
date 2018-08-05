@@ -173,6 +173,18 @@ en:
       default: "%m-%d-%Y"
       long: "%B %d, %Y"
       short: "%b %d"
+  welcome:
+    feature_1:
+      header: "Online KPT"
+      description: "KPTER enable you to share your problem with your team mates every-time everywhere as if you all are in the same space. Even if you work remotely, no problem. We can share the screen and try to find a solution for the problem."
+    feature_2:
+      header: "Share Work to Be Done"
+      description: "'Try' action which you choose for a solution for a problem is automatically recorded in the task list area and collected by community. Moreover, it visualize the number of tasks by person and then you can make sure whether it is too focused on a certain person to assign tasks from a glance. With KPTER, you can share tasks with your co-workers equally and get closer to the ideal team."
+    feature_3:
+      header: "Reduce Costs"
+      description: "You do not need to prepare stickies, pens, or even white boards anymore. Stickies and pens may be always lost, but such situations can also be separated with this. Time and expense of ordering equipment can be reduced :)"
+    mobile:
+      notice_html: "Notice</br>It's a stand-alone application.</br>We are under improving the app to synchronize with the web."
   errors:
     messages:
       exceeded_limit_size: "should be less than %{limit_size}"
