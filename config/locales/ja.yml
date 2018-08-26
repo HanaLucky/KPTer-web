@@ -110,7 +110,7 @@ ja:
         others: "その他"
   datetime:
     distance_in_original_words:
-      over_x_day: "%{year}年%{month}月%{day}日"
+      over_x_day: "%{year}年%{month}%{day}日"
       within_x_24_hours:
         one: "1時間前"
         other: "%{hours}時間前"
