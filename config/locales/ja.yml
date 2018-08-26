@@ -69,6 +69,7 @@ ja:
       actions:
         create: "ボード作成"
         assign: "アサイン"
+        back: "コミュニティページへ戻る"
     members_list:
       title: "メンバーリスト"
       nobody_is_here: "誰もいません"

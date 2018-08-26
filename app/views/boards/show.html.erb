@@ -5,7 +5,14 @@
   <link href="https://fonts.googleapis.com/earlyaccess/mplus1p.css" rel="stylesheet" />
   <div id="boardWrap" class="wrap"></div>
   <div class="tool-bar">
-    <a href="/communities/<%= @board.community.id %>" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--primary mdl-js-ripple-effect back" data-type="home" type="button"><i class="material-icons">arrow_back</i></a>
+    <div id="back">
+      <a href="/communities/<%= @board.community.id %>" class="mdl-button mdl-js-button mdl-button--icon mdl-color-text--primary mdl-js-ripple-effect back" data-type="home" type="button">
+        <i class="material-icons">arrow_back</i>
+      </a>
+    </div>
+    <span for="back" class="mdl-tooltip mdl-tooltip--top">
+      <%= t("community.board.actions.back", default: "back")%>
+    </span>
     <ul class="tool-bar-buttons">
       <li>
         <button class="mdl-button mdl-js-button mdl-color-text--primary tool-bar-button mdl-js-ripple-effect" data-type="keep"><b>Keep</b></button>

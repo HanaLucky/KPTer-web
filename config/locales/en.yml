@@ -69,6 +69,7 @@ en:
       actions:
         create: "Create Board"
         assign: "Assign"
+        back: "Back to community page"
     members_list:
       title: "Members List"
       nobody_is_here: "Nobody is here"
