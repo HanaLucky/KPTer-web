@@ -229,9 +229,14 @@ var visibleForm = function visibleForm(containerStyleId, inputStyleId) {
  * snackbarメッセージを表示する
  * - レンダリング中に呼び出しは動作保証しない
  * @param {String} notice メッセージ
+ * @param {String} timeout_val スナックバー表示時間(ms) 省略時、0.150秒 x 文字数
  */
-var showSnackbarMessage = function (notice) {
+var showSnackbarMessage = function (notice, timeout_val) {
   var snackbarContainer = document.querySelector('#notification');
-  var data = { message: notice };
+  var timeout = timeout_val || notice.length * 150;
+  var data = {
+    message: notice,
+    timeout: timeout
+  };
   snackbarContainer.MaterialSnackbar.showSnackbar(data);
 }

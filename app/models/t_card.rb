@@ -41,6 +41,7 @@ class TCard < ApplicationRecord
       # statusの値をひっくり返す
       @t_card.status = @t_card.status.open? ? TCard.status.closed : TCard.status.open
       @t_card.save
+      return @t_card
     end
   end
 end

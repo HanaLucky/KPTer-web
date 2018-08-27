@@ -109,21 +109,23 @@ class User < ApplicationRecord
   end
 
   def leave(community)
-    # leave community - delete from community_users entity
-    community_user = CommunityUser.find_by(
-      community_id: community.id,
-      user_id: self.id,
-    )
-    community_user.delete
+    ActiveRecord::Base.transaction do
+      # leave community - delete from community_users entity
+      community_user = CommunityUser.find_by(
+        community_id: community.id,
+        user_id: self.id,
+      )
+      community_user.delete
 
-    # remove the charge - delete from tcard_assignees entity
-    tcard_assignees = Community
-      .includes([:boards => [:t_cards => [:tcard_assignee => :user]]])
-      .references(:tcard_assignee => :user)
-      .where('communities.id = ? and tcard_assignees.user_id = ?', community.id, self.id)
-      .map{ |community| community.boards.map{ |board| board.t_cards.map{ |tcard| tcard.tcard_assignee } } }.flatten
+      # remove the charge - delete from tcard_assignees entity
+      tcard_assignees = Community
+        .includes([:boards => [:t_cards => [:tcard_assignee => :user]]])
+        .references(:tcard_assignee => :user)
+        .where('communities.id = ? and tcard_assignees.user_id = ?', community.id, self.id)
+        .map{ |community| community.boards.map{ |board| board.t_cards.map{ |tcard| tcard.tcard_assignee } } }.flatten
 
-    TcardAssignee.delete(tcard_assignees) unless tcard_assignees.nil?
+      TcardAssignee.delete(tcard_assignees) unless tcard_assignees.nil?
+    end
   end
 
   def allowed_to_display?(community)

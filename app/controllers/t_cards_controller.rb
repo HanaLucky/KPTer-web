@@ -3,7 +3,7 @@ class TCardsController < ApplicationController
 
   def edit
     @task = TCard.find(params[:id])
-    @community_users = @task.board.community.find_users
+    @community_users = @task.board.community.find_joining_users
     respond_to do |format|
       format.js { render template: "t_cards/_modal_edit", :locals => {:task => @task, :community_users => @community_users, chaindata: params[:chaindata]} }
     end
@@ -23,10 +23,14 @@ class TCardsController < ApplicationController
       end
     end
 
+    top_of_assignees = t_card.board.community.find_top_of_assignees
+    labels = top_of_assignees[:top_of_assignees].map{|ta| ta[:name]}
+    data = top_of_assignees[:top_of_assignees].map{|ta| ta[:count]}
+
     if t_card.update_attributes(t_card_params) then
       respond_to do |format|
         flash.now[:notice] = t('t_card.update.success')
-        format.js { render template: "t_cards/_t_card", :locals => {t_card: TCard.find(params[:id]), chaindata: params[:chaindata]} }
+        format.js { render template: "t_cards/_t_card", :locals => {t_card: TCard.find(params[:id]), title: t('community.well_balanced.title'), labels: labels.to_json.html_safe, data: data, chaindata: params[:chaindata]} }
       end
     else
       flash.now[:notice] = t('t_card.update.failure')
