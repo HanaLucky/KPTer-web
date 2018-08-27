@@ -96,4 +96,30 @@ class Community < ApplicationRecord
       self.delete
     end
   end
+
+  # {
+  # :top_of_assignees=>
+  #   [{:name=>"nickname-1", :count=>5},
+  #    {:name=>"nickname-2", :count=>4},
+  #    {:name=>"nickname-3", :count=>4},
+  #    {:name=>"nickname-4", :count=>4},
+  #    {:name=>"nickname-5", :count=>4},
+  #    {:name=>"others", :count=>22}]
+  # }
+  def find_top_of_assignees
+    top5 = Community.find(self.id).top_of_assignees.first(5)
+    others = Community.find(self.id).top_of_assignees.to_a.from(5)
+    top_of_assignees = Array.new
+    top5.each { |i, j|
+      data = { name: i, count: j }
+      top_of_assignees.push(data)
+    }
+
+    if others.length > 0
+      data = { name: t('community.well_balanced.label.others'), count: others.map{ |a| a[1] }.sum }
+      top_of_assignees.push(data)
+    end
+
+    Hash["top_of_assignees": top_of_assignees]
+  end
 end

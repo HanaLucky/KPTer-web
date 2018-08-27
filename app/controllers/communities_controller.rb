@@ -32,14 +32,15 @@ class CommunitiesController < ApplicationController
     @boards = Kaminari.paginate_array(all_boards).page(params[:page]).per(5)
     all_tcards = @community.find_tcards
     @t_cards = Kaminari.paginate_array(all_tcards).page(params[:page]).per(5)
-    @top_of_assignees = find_top_of_assignees(params[:id])
+    @top_of_assignees = @community.find_top_of_assignees
     @invitable_users = User.find_invitable_users(@community)
   end
 
   def toggle
     updated_tcard = TCard.update_status(params[:t_card_id])
 
-    top_of_assignees = find_top_of_assignees(params[:id])
+    community = Community.find_by(id: params[:id])
+    top_of_assignees = community.find_top_of_assignees
     labels = top_of_assignees[:top_of_assignees].map{|ta| ta[:name]}
     data = top_of_assignees[:top_of_assignees].map{|ta| ta[:count]}
 
@@ -173,31 +174,5 @@ class CommunitiesController < ApplicationController
       unless current_user.joining?(community)
         raise Forbidden
       end
-    end
-
-    # {
-    # :top_of_assignees=>
-    #   [{:name=>"nickname-1", :count=>5},
-    #    {:name=>"nickname-2", :count=>4},
-    #    {:name=>"nickname-3", :count=>4},
-    #    {:name=>"nickname-4", :count=>4},
-    #    {:name=>"nickname-5", :count=>4},
-    #    {:name=>"others", :count=>22}]
-    # }
-    def find_top_of_assignees(community_id)
-      top5 = Community.find(community_id).top_of_assignees.first(5)
-      others = Community.find(community_id).top_of_assignees.to_a.from(5)
-      top_of_assignees = Array.new
-      top5.each { |i, j|
-        data = { name: i, count: j }
-        top_of_assignees.push(data)
-      }
-
-      if others.length > 0
-        data = { name: t('community.well_balanced.label.others'), count: others.map{ |a| a[1] }.sum }
-        top_of_assignees.push(data)
-      end
-
-      Hash["top_of_assignees": top_of_assignees]
     end
 end

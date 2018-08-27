@@ -7,4 +7,11 @@ $(function () {
   <% if notice %>
     showSnackbarMessage("<%= notice %>");
   <% end %>
+
+  var data = {
+    title: "<%= title %>",
+    labels: <%= labels %>,
+    data: <%= data %>
+  };
+  <%= chaindata[:callback] %>(data);
 });
