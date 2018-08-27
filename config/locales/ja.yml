@@ -127,6 +127,9 @@ ja:
     update:
       success: "タスクを更新しました"
       failure: "更新に失敗しました。問題が解消しない場合、お問い合わせくださいますようお願いいたします"
+    toggle:
+      close: "タスクをクローズしました"
+      open: "タスクをオープンしました"
     title: "タスク"
     status:
       open: "open"

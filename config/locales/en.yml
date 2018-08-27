@@ -127,6 +127,9 @@ en:
     update:
       success: "The task was updated."
       failure: "Sorry...Something was wrong."
+    toggle:
+      close: "Closed the task."
+      open: "Opened the task."
     title: "Tasks"
     status:
       open: "open"

@@ -37,14 +37,16 @@ class CommunitiesController < ApplicationController
   end
 
   def toggle
-    TCard.update_status(params[:t_card_id])
+    updated_tcard = TCard.update_status(params[:t_card_id])
 
     top_of_assignees = find_top_of_assignees(params[:id])
     labels = top_of_assignees[:top_of_assignees].map{|ta| ta[:name]}
     data = top_of_assignees[:top_of_assignees].map{|ta| ta[:count]}
 
+    message = updated_tcard.status.open? ? t('t_card.toggle.open') : t('t_card.toggle.close')
+
     respond_to do |format|
-      format.json { render json: {title: t('community.well_balanced.title'), labels: labels, data: data}}
+      format.json { render json: {title: t('community.well_balanced.title'), labels: labels, data: data, message: message}}
     end
   end
 

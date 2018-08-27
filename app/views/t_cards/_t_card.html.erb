@@ -3,6 +3,9 @@
         <%= check_box_tag '', '', t_card.status.closed?, { 'data-id' => t_card.id, 'data-url' => url, :onclick=>
           "$.post($(this).data('url')+ '/tasks/' + $(this).data('id') + '/toggle/', function(data) {
             #{callback}(data);
+            if (data && data.message) {
+              showSnackbarMessage(data.message);
+            }
           });",
           id: "row[#{t_card.id}]", class: "mdl-checkbox__input"} %>
       </label>

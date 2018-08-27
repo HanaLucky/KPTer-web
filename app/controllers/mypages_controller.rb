@@ -13,13 +13,14 @@ class MypagesController < ApplicationController
     all_tcards = User.find_all_tcards_with_user_id(current_user.id)
     param_id = params[:id].to_i
     if param_id > 0 && all_tcards.map{ |tc| tc.id }.include?(param_id)
-      TCard.update_status(param_id)
+      updated_tcard = TCard.update_status(param_id)
     end
 
-    open_task_count = User.find_tcards_with_user_id(current_user.id, TCard.status.open).count.to_s(:delimited)
+    message = updated_tcard.status.open? ? t('t_card.toggle.open') : t('t_card.toggle.close')
 
+    open_task_count = User.find_tcards_with_user_id(current_user.id, TCard.status.open).count.to_s(:delimited)
     respond_to do |format|
-      format.json { render json: {open_task_count: open_task_count} }
+      format.json { render json: {open_task_count: open_task_count, message: message} }
     end
   end
 
