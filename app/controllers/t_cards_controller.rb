@@ -3,7 +3,7 @@ class TCardsController < ApplicationController
 
   def edit
     @task = TCard.find(params[:id])
-    @community_users = @task.board.community.find_users
+    @community_users = @task.board.community.find_joining_users
     respond_to do |format|
       format.js { render template: "t_cards/_modal_edit", :locals => {:task => @task, :community_users => @community_users, chaindata: params[:chaindata]} }
     end

@@ -13,7 +13,7 @@
   <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/css/pikaday.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/pikaday.min.js"></script>
-  <script src="https://unpkg.com/micromodal/dist/micromodal.min.js"></script> 
+  <script src="https://unpkg.com/micromodal/dist/micromodal.min.js"></script>
   <%= javascript_tag do %>
     window.kp_cards = <%= raw @board.kp_cards.to_json(include: [:likes, :owner]) %>;
     window.t_cards = <%= raw @board.t_cards.to_json(include: [:likes, :owner, :user]) %>;
@@ -30,10 +30,10 @@
   <div id="wrapper">
     <%= yield %>
   </div>
-  <!-- member list --> 
-  <div class="modal micromodal-slide" id="modal-button-member" aria-hidden="true"> 
-    <%= render :partial => 'members', :locals => {current_community: @board.community, members: @board.community.community_users}  %> 
-  </div> 
+  <!-- member list -->
+  <div class="modal micromodal-slide" id="modal-button-member" aria-hidden="true">
+    <%= render :partial => 'members', :locals => {current_community: @board.community, members: @members}  %> 
+  </div>
   <!-- /#wrapper -->
   <%= debug(params) if Rails.env.development? %>
   <%= javascript_include_tag 'cable' %>

@@ -40,6 +40,15 @@ class Community < ApplicationRecord
     .sort_by!{ |v| [v[:status].reverse, v[:updated_at]] }    # 参加した順(IDの昇順)
   end
 
+  def find_joining_users
+    Community
+    .joins(:community_users => :user)
+    .includes(:community_users => :user)
+    .where('communities.id = ? and community_users.status = ?', self.id, CommunityUser.status.joining)
+    .map{ |community| community.community_users}.flatten
+    .sort_by!{ |v| [v[:status].reverse, v[:updated_at]] }    # 参加した順(IDの昇順)
+  end
+
   def rest_in_place
     ActiveRecord::Base.transaction do
       tcard_assignees = Community
