@@ -29,7 +29,7 @@
                 </button>
                 <ul class="mdl-menu mdl-js-menu mdl-menu--bottom-right kpter-menu" for="btn-<%= i %>">
                   <li class="mdl-menu__item">
-                    <%= link_to t("community.members_list.remove"), community_path + "/remove?user_id=#{cu.user.id}", :method => :post, remote: true %>
+                    <%= link_to t("community.members_list.remove"), community_path + "/remove?user_id=#{cu.user.id}", :method => :post %>
                   </li>
                 </ul>
               <% end %>

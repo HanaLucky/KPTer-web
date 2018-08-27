@@ -133,14 +133,13 @@ class CommunitiesController < ApplicationController
   def remove
     community = Community.find(params[:id])
     user = User.find(params[:user_id])
-    community.withdraw(user)
+    user.leave(community)
 
     respond_to do |format|
       message = t('community.remove', nickname: user.nickname)
       format.js { flash.now[:notice] = message }
       format.html { redirect_to community, notice: message }
     end
-
   end
 
   def destroy
