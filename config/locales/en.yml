@@ -178,6 +178,9 @@ en:
       long: "%B %d, %Y"
       short: "%b %d"
   welcome:
+    head:
+      title: "KPTER: Empower your team and build trust, with online KPT"
+      description: "KPTER enable you to share your problem with your team mates every-time everywhere as if you all are in the same space. Even if you work remotely, no problem. We can share the screen and try to find a solution for the problem."
     feature_1:
       header: "Online KPT"
       description: "KPTER enable you to share your problem with your team mates every-time everywhere as if you all are in the same space. Even if you work remotely, no problem. We can share the screen and try to find a solution for the problem."
