@@ -55,6 +55,11 @@ class ApplicationController < ActionController::Base
     I18n.available_locales.map(&:to_s).include?(parsed_locale) ? parsed_locale : nil
   end
 
+  # 本番環境だけ変更
+  def default_url_options
+    Rails.env.production? ? { protocol: :https }.merge(super) : super
+  end
+  
   protected
     def configure_permitted_parameters
       # see. https://github.com/plataformatec/devise#strong-parameters
