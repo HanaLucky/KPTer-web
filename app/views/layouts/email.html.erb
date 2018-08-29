@@ -1,7 +1,7 @@
 <div style="background-color:#f4f4f4;width:100%;padding:10px 0px 10px 0px;font-family:'Hiragino Kaku Gothic Pro',Meiryo,Osaka,helvetica,arial,clean,sans-serif">
   <div style="margin:0px auto 0px auto;width:600px">
     <div style="text-align:center;padding:10px 0px 14px 0px">
-      <%= image_tag("app_icon.png", alt: "KPTER App", style: "border-radius: 9px; margin: 0 0 24px 0;") %>
+      <img src="<%= url_to_image("app_icon.png", host: "https://kpter.net") %>" alt="KPTER App" style="border-radius: 9px; margin: 0 0 24px 0;">
     </div>
     <div style="text-align:left;background-color:#ffffff;border:#d9d9d9 1px solid;color:#232323;font-size:14px;padding:2% 6% 2% 6%;">
       <%= yield %>
