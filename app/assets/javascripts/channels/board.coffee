@@ -332,6 +332,7 @@ App.board = App.cable.subscriptions.create { channel: "BoardChannel", board_id: 
     if card.likes
       for like in card.likes
         isLiked = current_user.id is like.user_id
+        break if isLiked
     else
       isLiked = false
 
@@ -362,6 +363,7 @@ App.board = App.cable.subscriptions.create { channel: "BoardChannel", board_id: 
     if card.likes
       for like in card.likes
         isLiked = current_user.id is like.user_id
+        break if isLiked
     else
       isLiked = false
 
